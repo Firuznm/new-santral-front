@@ -1,0 +1,84 @@
+body,
+html{
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	 font-family: "IBM Plex Sans", sans-serif;
+}
+/* site reset style css */
+a {
+    text-decoration: none;
+}
+li {
+    list-style-type: none;
+}
+ul, li, h6,p{
+	padding: 0;
+	margin: 0;
+}
+.container{
+	max-width: 1600px;
+	margin: 0 auto;
+	padding: 2rem 1rem;
+}
+
+/* home banners swiper slider style */
+.tallBannerSlider .swiper-pagination-bullet,
+.narrowTopBottomSlider .swiper-pagination-bullet {
+    background-color: rgb(238, 204, 12) !important;
+    width: 15px !important;
+    height: 15px !important;
+}
+.tallBannerSlider .swiper-pagination-horizontal{
+    position: absolute;
+    bottom: 70px !important;
+    left: 40% !important;
+    transform: rotate(90deg) !important;
+}
+
+.narrowTopBottomSlider .swiper-pagination-horizontal{
+    position: absolute;
+    bottom: 44px !important;
+    left: 47% !important;
+    transform: rotate(90deg) !important;
+}
+
+.sliderNextPrevBtn{
+    position: absolute;
+    bottom: 20px;
+    left: 80%;
+    z-index: 9;
+    display: flex;
+    gap: 1rem;
+}
+.sliderNextPrevBtn .nextBtn,
+.sliderNextPrevBtn .prevBtn
+{
+    border: 1px solid red;
+    border-radius: 100%;
+    padding: 20px 15px;
+    cursor: pointer;
+}
+.rightBottomPagination{
+    position: absolute;
+    bottom: 0;
+    left: 80% !important;
+    z-index: 9;
+    width: 50px !important;
+
+}
+.rightLeftPagination {
+    position: absolute;
+    bottom: 0;
+    left: 80% !important;
+    z-index: 9;
+    width: 50px !important;
+}
+.rightBottomPagination .swiper-pagination-bullet,
+.rightLeftPagination .swiper-pagination-bullet
+{
+    background-color: rgb(236, 229, 229) !important;
+    width: 20px !important;
+    height: 20px !important;
+    margin: 5px !important;
+}
