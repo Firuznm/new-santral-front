@@ -1,0 +1,67 @@
+#newComersSlider{
+    .categoresList {
+        position: relative;
+        margin: 0 auto;
+        color: black;
+        padding: 1rem 0;
+		height: 2.5rem; 
+        line-height: 2rem;
+        border-bottom: 1px solid #333;
+        .categoryNameSlider{
+            margin:0 30px;
+        .category {
+            width: auto !important;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.2rem 40px;
+			margin: 0 .1rem;
+            background: none;
+            font-weight: 400;
+            font-size: 1.2rem;
+            border: 1px solid #EBEBEB;
+            background-color: #EBEBEB;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.5s ease;
+            &:hover{
+                border: 1px solid gold;  
+            }
+            &.active{
+                background-color: rgb(255 210 63);
+                border: 1px solid gold;  
+            }
+        }
+    }
+    }
+    .categoryClickResultSlider{
+        position: relative;
+        margin: 40px 0;
+        background-color: #d9d9d9;
+    }
+}
+
+@media only screen and (max-width: 850px) {
+    #newComersSlider{
+        .categoresList {
+            .categoryNameSlider{
+            .category {
+                padding: 0.1rem 15px;
+                font-size: 1rem;
+            }
+        }
+        }
+        .categoryClickResultSlider{
+            position: relative;
+            margin: 40px 0;
+            background-color: #d9d9d9;
+            // padding: 40px 0;
+        }
+        .CategoryClickResult{
+            margin-top: 70px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+            gap: 1rem;
+        }
+    }
+}

@@ -1,7 +1,9 @@
 import BasketIcon from "../../assets/Icons/BasketIcon";
 import HeartIcon from "../../assets/Icons/HeartIcon";
 import santral from "../../Helpers/Helpers";
-import style from "./ProductCart.module.scss"
+import style from "./ProductCart.module.scss";
+import truck from "../../assets/Images/truck.png"
+import { Link } from "react-router-dom";
 
 
 export default function ProductCart({ data }) {
@@ -9,18 +11,39 @@ export default function ProductCart({ data }) {
     const testFunc = () => {
         console.log("basket btn click");
     } 
+    // console.log("data pr", data);
+  const PriceDifference= Number(data.oldPrice - data.price).toFixed(2)
+//   console.log("diff", PriceDifference);
+  
+    
   return (
       <div className={style.productCartWrapper}>
-          <span className={style.catdirilma}>catdirilma</span>
-          <span className={style.endirim}>-33%</span>
-          <a target="_blank" href="https://www.acehardware.com/">
+      {data.price > 50  && (
+  <div className={style.delivery}>
+    <img src={truck} className={style.truckImg} />
+    Mehsul Pulsuz catdirilir
+  </div>
+)}
+
+       {data.discountPercent > 0 && <span className={style.discount}>-{data.discountPercent}%</span>}
+
+          <Link to={`/product/${data.name}`}>
               <img className={style.productImg} src={`${santral.baseUrlImage}${data.thumbnail}`} />
-          </a>
+          </Link>
           <div className={style.productInfo}>
-              <a href="https://turbo.az/" className={style.productTitle}>
+              <Link to={`/product/${data.name}`} className={style.productTitle}>
                   {data.title}
-              </a>
-              <span className={style.productPrice}>  {Number(data.price).toFixed(2)} ₼</span>
+              </Link>
+
+            <div className={style.test}>
+              {PriceDifference > 0 ?  <span className={style.prPriceDifference}>- {PriceDifference} ₼</span> :<div style={{height:"40px"}}></div>}
+               {/* <span className={style.te}><img src={truck} alt="" /> Pulsuz Catdirilma</span> */}
+              </div>
+              <div className={style.prPricesWrapper}>
+              <span className={style.productPrice}>{Number(data.price).toFixed(2)} ₼</span>
+           {data.oldPrice > 0  && <span className={style.prPreviousPrice}>{Number(data.oldPrice).toFixed(2)} ₼</span>}   
+              </div>
+
               <div className={style.basketAndFavorit}>
                   <span onClick={() => testFunc()} className={style.productBasket}>
                       <BasketIcon color={"rgba(0, 0, 0, 0.87) "} /> Səbətə at

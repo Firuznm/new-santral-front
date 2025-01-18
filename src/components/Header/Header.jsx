@@ -28,9 +28,9 @@ export default function Header() {
             <div className={style.headerTopWrapper}>
                 <div style={{ paddingTop: 0, paddingBottom: 0 }} className="container">
                     <div className={style.headerTop}>
-                        <img className={style.logo} src={logo} alt="" />
+                       <a href="/"><img className={style.logo} src={logo} alt="" /></a>
                         <div className={style.headerPage}>
-                            <NavLink>Haqqımızda</NavLink>
+                            <NavLink to="about">Haqqımızda</NavLink>
                             <NavLink>Filiallar</NavLink>
                             <NavLink>Xəbərlər</NavLink>
                         </div>

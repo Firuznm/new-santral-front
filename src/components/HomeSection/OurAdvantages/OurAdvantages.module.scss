@@ -1,0 +1,36 @@
+#OurAdvantages{
+    .OurAdvantagesTitle{
+        background-color: #EEEEEE;
+        height: 250px;
+.sectionTitle{
+    font-size: 2.5rem;
+    font-weight: 700;
+    padding: 30px 0 0 20px;
+}
+    }
+    .OurAdvantagesCartWrapper{
+        margin-top: -13rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    .OurAdvantagesCart{
+        margin: 5rem 1rem.5rem;
+        background-color: white;
+        border-radius: 14px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+       
+        img{
+            margin: .4rem;
+            width: 100px;
+            height: 100px;
+        }
+        .title{
+         font-size: 1.1rem;
+         margin: .4rem;
+        }
+        .description{
+           padding: .2rem .5rem 1rem .5rem;
+            color: black;
+        }
+    }  
+}
+}

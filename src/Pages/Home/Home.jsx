@@ -11,7 +11,9 @@ import HomePartners from "../../components/HomeSection/HomeParners/HomePartners"
 import HomeNews from "../../components/HomeSection/HomeNews/HomeNews";
 import HomeBrands from "../../components/HomeSection/HomeBrands/HomeBrands";
 import HomeMainSlider from "../../components/HomeSection/HomeMainSlider/HomeMainSlider";
-import ProductCartNew from "../../components/ProductCartNew/ProductCartNew";
+import HomeNewComers from "../../components/HomeSection/HomeNewComers/HomeNewComers";
+import OurAdvantages from "../../components/HomeSection/OurAdvantages/OurAdvantages";
+// import ProductCartNew from "../../components/ProductCartNew/ProductCartNew";
 
 export default function Home() {
     const [homeBrandsData, setHomeBrandsData] = useState([]);
@@ -42,26 +44,24 @@ export default function Home() {
 
     // console.log("partners data=", homePartnersData);
     // console.log("brands =", homeBrandsData);
-    // console.log("categoryData-", categoryDatas);
+    console.log("categoryData-", categoryDatas);
     // console.log("homeBannerData-", homeBannersData);
     // console.log("news", homeNews);
-    console.log("seasonOffers-", homeSeasonOffersData[0]?.products);
+    // console.log("seasonOffers-", homeSeasonOffersData[0]?.products);
     
-    
-    
-   
     return (
         <> 
-            <HomeMainSlider/>
-            <HomeBanner />
-            <HomePartners PartnersData={homePartnersData} />
-            <HomeBrands brandsData={homeBrandsData} />
-            <HomeCategorySlider homeCategorySliderData={categoryDatas} />
+            {/* <HomeMainSlider/> */}
+            {/* <HomeBanner /> */}
+            {/* <HomePartners PartnersData={homePartnersData} /> */}
+          
+            {/* <HomeCategorySlider homeCategorySliderData={categoryDatas} /> */}
             {/* <HomeNews newsData={homeNews} /> */}
-
+            <HomeNewComers data={categoryDatas}/>
+            {/* <HomeBrands brandsData={homeBrandsData} /> */}
+            {/* <OurAdvantages/> */}
             {/* <HomeBanner reverse={"row-reverse"} /> */}
-            <ProductCartNew/>
-            <HomeSeasonOffers seasonOffersData={homeSeasonOffersData} />
+            {/* <HomeSeasonOffers seasonOffersData={homeSeasonOffersData} /> */}
         </>
     );
 }

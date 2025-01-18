@@ -1,10 +1,8 @@
 import style from "./HomeBrands.module.scss"
-import React, { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Grid} from "swiper/modules";
 import "swiper/css";
-import "swiper/css/grid";
 import "swiper/css/pagination";
+import { Pagination,Autoplay, } from 'swiper/modules';
 import santral from "../../../Helpers/Helpers";
 
 export default function HomeBrands({ brandsData }) {
@@ -13,16 +11,17 @@ export default function HomeBrands({ brandsData }) {
         <section id={style.HomeBrandsWrapper}>
             <div className="container">
                     <Swiper
-                        slidesPerView={5}
-                        grid={{
-                            rows: 2,
-                        }}
+                        slidesPerView={7}
                         // spaceBetween={30}
+                        autoplay={{
+                            delay: 1500,
+                          }}
                         pagination={{
                             clickable: true,
                         }} 
-                        modules={[Grid]}
-                        className={style.bransSlider}
+                         loop={true}
+                         modules={[Pagination,Autoplay]}
+                        className="bransSlider"
                     >
                         {brandsData?.map((brand) => (
                             <SwiperSlide key={brand.id}>

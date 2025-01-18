@@ -1,7 +1,6 @@
 import PrImg1 from "../assets/Images/image 9 (1).png"
 import PrImg2 from "../assets/Images/image 9 (2).png";
 import PrImg3 from "../assets/Images/image 9 (3).png";
-import PrImg4 from "../assets/Images/image 9.png";
 import categoryImg1 from "../assets/Images/catImg1.png"
 import categoryImg2 from "../assets/Images/catImg2.png";
 import categoryImg3 from "../assets/Images/catImg3.png";
@@ -15,7 +14,37 @@ import banner6 from "../assets/Images/banner6.jfif";
 import img1 from "../assets/Images/Commax.jpg";
 import img2 from "../assets/Images/Panasonic.jpg";
 import img3 from "../assets/Images/Saltanat.jpg";
+import img21 from "../assets/Images/cartTick.png";
+import img31 from "../assets/Images/truckFast.png";
+import img41 from "../assets/Images/convertCart.png";
 
+
+export const OurAdvantagesData=[
+    {
+        id:1,
+        img:"yoxdu",
+        title:"Rahatlıqla alın",
+        description:"xxx gün ərzində dəyişdirə və qaytara bilərsiniz"
+    },
+    {
+        id:2,
+        img:img21,
+        title:"Qapıda rəsmiləşdirmə",
+        description:"Nağd, hissə-hissə və ya qapıda ödəmə imkanı"
+    },
+{
+    id:3,
+    img:img31,
+    title:"Mağazadan Pulsuz Çatdırılma",
+    description:"30₼ və üstü sifarişlərdə  Bakı şəhəri ərazisinə ödənişsiz çatdırılma"
+},
+{
+    id:4,
+    img:img41,
+    title:"Bonus kartla daha çox alış veriş",
+    description:"Bonus karta yığılmış pullar ilə daha çox alış veriş etmək şansınız olacaq"
+}
+]
 
 export const mainSliderData = {
     leftData: [
@@ -265,4 +294,35 @@ export const bannerDatas = {
         ],
     },
 };
+
+export const prDetailsDataTest=[
+    {
+        id:1,
+        img:"https://cdn.santral.az/images/6fa6284c-ed39-11ec-ab0a-005056b06295.jpeg"
+    },
+    {
+        id:2,
+        img:"https://cdn.santral.az/images/d6b8fd79-eda9-11ee-a483-005056b06295.jpeg"
+    },
+    {
+        id:3,
+        img:"https://cdn.santral.az/images/3d9d82fa-9e70-11ee-9780-005056b06295.jpeg"
+    },
+    {
+        id:4,
+        img:"https://cdn.santral.az/images/3d9d82f8-9e70-11ee-9780-005056b06295.jpeg"
+    },
+    {
+        id:5,
+        img:"https://cdn.santral.az/images/dbbf6220-d535-11ee-a483-005056b06295.jpeg"
+    },
+    {
+        id:6,
+        img:"https://cdn.santral.az/images/ecfe5b38-e5fa-11e3-a868-000c29bb375f.jpeg"
+    },
+    {
+        id:7,
+        img:"https://cdn.santral.az/images/5689741e-f327-11ee-a483-005056b06295.jpeg"
+    }
+]
     

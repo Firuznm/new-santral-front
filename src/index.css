@@ -12,7 +12,7 @@ a {
 li {
     list-style-type: none;
 }
-ul, li, h6,p{
+ul, li, h6, h4, p{
 	padding: 0;
 	margin: 0;
 }
@@ -81,4 +81,112 @@ ul, li, h6,p{
     width: 20px !important;
     height: 20px !important;
     margin: 5px !important;
+}
+
+/* homeNewComers sliders style start */
+.home-category-button-prev{
+    cursor: pointer;
+    position: absolute;
+    right: 0px;
+    top: 16px;
+    z-index: 2;
+    width: 24px;
+    height: 41px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: transparent;
+}
+.home-category-button-next{
+    cursor: pointer;
+    position: absolute;
+    left: 0px;
+    top: 16px;
+    z-index: 2;
+    width: 24px;
+    height: 41px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: transparent;
+}
+.resultSlider{
+    height: 585px;
+} 
+.home-categoryResult-button-prev{
+    cursor: pointer;
+    position: absolute;
+    z-index: 9;
+    bottom: 390px;
+    right: 5px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(253, 133, 33, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.home-categoryResult-button-next{
+    cursor: pointer;
+    position: absolute;
+    z-index: 9;
+    bottom: 390px;
+    left: 5px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(253, 133, 33, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.resultSlider .swiper-slide{
+    margin: 0 14px;
+}
+
+/* home bransSlider   */
+.bransSlider .swiper-pagination-bullet{
+    margin-top: 20px;
+    width: 15px;
+    height: 15px;
+    opacity: 1;
+    background-color: black;
+    transition: 0.5s ease;
+}
+.bransSlider .swiper-pagination-bullet-active{
+    width: 40px;
+    border-radius: 14px;
+    background-color: rgb(255 210 63) !important;
+}
+
+
+.swiper-slide-thumb-active img{
+    border-color: red !important;
+}
+/* .swiper-wrapper{
+    width: 25%;
+    display: inline-flex !important;
+    flex-direction: column;
+    border: 1px solid gold;
+} */
+
+.icon-path {
+    fill: #000; 
+    fill-opacity: 0.38;
+    transition: fill 0.3s ease, fill-opacity 0.3s ease;
+  }
+  
+  .decrease:hover.icon-path,
+  .increase:hover.icon-path {
+    fill: red !important; 
+    fill-opacity: 1; 
+  }
+  
+@media only screen and (max-width: 850px) {
+    .resultSlider .swiper-slide-active{
+        display: flex;
+        justify-content: center;
+    }
 }
