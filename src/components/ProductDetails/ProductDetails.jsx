@@ -29,14 +29,28 @@ import CloseIcon from "../../assets/Icons/CloseIcon";
 
 
 export default function ProductDetails() {
-     const {name}= useParams()
+    const {name}= useParams();
+    const socialAreaRef = useRef(null); 
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
     const [relatedDatas, setRelatedDatas]= useState();
     const [prDetailsData, setPrDetailsData]= useState({});
+    const [showRelatedOrPrInfo, setShowRelatedOrPrInfo]= useState(true);
     const [prDetailsSocial, setPrDetailsSocial]= useState(false);
     const [oneClickBuyModal, setOneClickBuyModal]= useState(false);
-    const socialAreaRef = useRef(null); 
-
+    const [url, setUrl]= useState("")
+    console.log("data=", prDetailsData);
+    console.log("dataarr=", prDetailsData.parameters);
+    
+    
+   const handleState=()=>{
+    setShowRelatedOrPrInfo(!showRelatedOrPrInfo)
+   }
+    useEffect(()=>{
+     setUrl(window.location.href)
+    },[])
+    const copyFunc= ()=>{
+      navigator.clipboard.writeText(url)
+    }
     const handleBuyModal = ()=>{
            const modalSituations = !oneClickBuyModal;
            setOneClickBuyModal(modalSituations);
@@ -58,7 +72,6 @@ export default function ProductDetails() {
   };
 
   window.addEventListener('click', handleClickOutside);
-
 
    const getPrDetailsData= async(prName)=>{
 try {
@@ -91,17 +104,11 @@ try {
       }
     }, [prId]);
     
-
-// console.log("id=", prId);
-// console.log("pr details data=", prDetailsData);
-// console.log("related data=", relatedDatas);
   return (
     <section id={style.prDetailsWrapper}>
       <div className="container">
-
-
         <div onClick={handleBuyModal} className={`${style.modalWrapper}  ${oneClickBuyModal ? "" : style.closeModal}`}>
-        <div className={`${style.oneClickByModalArea}`}>
+        <div className={style.oneClickByModalArea}>
           <div className={style.modalHeaderAndCloseBtn}>
           <h6>1 kliklə məhsulu alın</h6>
           <span onClick={handleBuyModal}><CloseIcon /></span>
@@ -113,10 +120,6 @@ try {
         </div>
         
         </div>
-
-
-
-
         <div className={style.prImgAndPrInfo}>
                   <div className={style.prDetailsSlider}>
                       <Swiper
@@ -174,7 +177,7 @@ try {
                     <a className={style.prDetailsSocial} href="" target="_blank"><img src={whatsappImg} /> Whatsapp</a>
                     <a className={style.prDetailsSocial} href="" target="_blank"><img src={instagramImg} /> Instagram</a>
                     <a className={style.prDetailsSocial} href="" target="_blank"><img src={facebookImg} /> Facebook</a>
-                    <a className={style.prDetailsSocial} href="" target="_blank"><img src={copyImg} /> Linki Kopyala</a>
+                    <div onClick={copyFunc} className={style.prDetailsSocial} href="" target="_blank"><img src={copyImg} /> Linki Kopyala</div>
                   </div>
                   
                 </span>
@@ -251,41 +254,31 @@ try {
 
 
         <div className={style.similarPrAndFeaturesBtn}>
-         <button className={style.similarBtn}>Oxşar məhsullar</button>
-         <button className={style.featuresBtn}>Xüsusiyyətlər</button>
+         <button onClick={handleState} className={`${style.similarBtn} ${showRelatedOrPrInfo ? style.BtnActive : ""}`}>Oxşar məhsullar</button>
+        {prDetailsData.parameters && <button onClick={handleState} className={`${style.featuresBtn} ${showRelatedOrPrInfo ? "" : style.BtnActive}`}>Xüsusiyyətləri</button>}
         </div>
-        <div className={style.relatedProducts}>
+     { showRelatedOrPrInfo ? 
+         <div className={style.relatedProducts}>
           <ProductCartSlider data={relatedDatas}/>
         </div>
+        :
+        <div className={style.prMoreInfoWrapper}>
+           <h4 className={style.prInfoTitle}>{prDetailsData?.title}</h4>
+           <p className={style.prInfo}></p>
+           <div className={style.indicatorsWrapper}>
+            {
+              prDetailsData?.parameters?.map((indicator,i)=>(
+                <div key={i} className={style.prIndicator}>
+                <span className={style.param}>{indicator?.param.title}</span>
+                <span className={style.option}>{indicator?.option.title}</span>
+                </div>
+              ))
+            }
+           </div>
+      </div>
+         }
+   
      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 {/* <div className={style.paymentPriceWrapper}>
 

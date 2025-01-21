@@ -1,46 +1,52 @@
 import styles from "./HomeMainSlider.module.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "swiper/css/effect-fade";
-import { Pagination, Autoplay, Navigation, EffectFade } from "swiper/modules";
+import { Autoplay, Navigation, EffectFade } from "swiper/modules";
 import { mainSliderData } from "../../../MyDatas/MyDatas";
+import { Link } from "react-router-dom";
+import santral from "../../../Helpers/Helpers";
 
-export default function HomeMainSlider() {
+export default function HomeMainSlider({dataMainSlider,dataDiscounted}) {
+  const mainSliderDiscountRightData=dataDiscounted.slice(0 , Math.floor(dataDiscounted.length / 2))
+  const mainSliderDiscountLeftData=dataDiscounted.slice(Math.floor(dataDiscounted.length / 2))
+  
   return (
     <div id={styles.homeMainSliderWrapper}>
       <div className="container">
         <div className={styles.homeMainSlider}>
           <div className={styles.mainSliderLeft}>
-            <Slider
-              data={mainSliderData.leftData}
-              prevNavigation={"prevBtn"}
-              nextNavigation={"nextBtn"}
+            <MainSlider
+              data={dataMainSlider}
+              autoplayStyle={{ delay: 2000 }}
+              effectStyle="fade"
             />
           </div>
           <div className={styles.mainSliderRightWrapper}>
             <div className={styles.mainSliderRightTop}>
-              <Slider data={mainSliderData.rightTop} />
+              <MainSlider data={mainSliderData.rightTop} />
             </div>
             <div className={styles.mainSliderRightBottomWrapper}>
               <div className={styles.rightBottomLeft}>
-                <Slider
-                  data={mainSliderData.bottomLeft}
+                <MainSlider
+                  data={mainSliderDiscountLeftData}
                   paginationStyles="rightLeftPagination"
                   autoplayStyle={{ delay: 3000 }}
                   effectStyle="fade"
                 />
               </div>
               <div className={styles.rightBottomRight}>
-                <Slider
-                  data={mainSliderData.bottomRight}
+                <MainSlider
+                  data={mainSliderDiscountRightData}
                   paginationStyles="rightBottomPagination"
                   autoplayStyle={{ delay: 3000 }}
                   effectStyle="fade"
                 />
               </div>
             </div>
+
+            
           </div>
         </div>
       </div>
@@ -48,27 +54,14 @@ export default function HomeMainSlider() {
   );
 }
 
-export function Slider({ data, paginationStyles, autoplayStyle, effectStyle, prevNavigation, nextNavigation }) {
+export function MainSlider({ data,autoplayStyle, effectStyle }) {
   return (
     <>
-      <div className={paginationStyles}></div>
       <Swiper
         spaceBetween={20}
-        navigation={
-          prevNavigation && nextNavigation
-            ? {
-                prevEl: `.${prevNavigation}`,
-                nextEl: `.${nextNavigation}`,
-              }
-            : false
-        }
-        pagination={{
-          clickable: true,
-          el: `.${paginationStyles}`,
-        }}
         effect={effectStyle}
         autoplay={autoplayStyle}
-        modules={[Pagination, Autoplay, Navigation, EffectFade]}
+        modules={[Autoplay, Navigation, EffectFade]}
         className={styles.swiperMainSlider}
       >
         {data.map((item) => (
@@ -81,16 +74,16 @@ export function Slider({ data, paginationStyles, autoplayStyle, effectStyle, pre
                 allowFullScreen
               ></iframe>
             ) : (
-              <img src={item.image} alt="" />
+              <Link to={item?.product?.discountPercent > 0 ?  `/product/${item?.product?.name}` : item.route}> <img src={`${santral.baseUrlImage}${item.image}`}/>
+              {item?.product?.discountPercent > 0 && <span className={styles.prDiscountPercent}>{item?.product?.discountPercent}%</span>}
+                <div  className={styles.prInfo}>
+                  <h6 className={styles.prTitle}>{item.title}</h6>
+                  <div className={styles.prWrapper}></div>
+                </div>
+              </Link>
             )}
           </SwiperSlide>
         ))}
-        {prevNavigation && nextNavigation && (
-          <div className="sliderNextPrevBtn">
-            <div className="nextBtn">next</div>
-            <div className="prevBtn">prev</div>
-          </div>
-        )}
       </Swiper>
     </>
   );

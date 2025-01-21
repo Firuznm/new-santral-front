@@ -3,13 +3,13 @@
 		width: 100%;
 		top: 0;
 		left: 0;
-		position: absolute;
+		position: fixed;
 		z-index: 999;
 		background-color: rgba(0, 0, 0, 0.7  );
-		height: 100vh;
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		height: 100vh;
 	.oneClickByModalArea{
 		width: 200px;
 		background: #EFEFEF;
@@ -661,14 +661,14 @@
 		.featuresBtn{
 			padding: 15px 30px;
 			border-radius: 32px;
-			background: #FFD23F;
 			border: none;
 			margin-right: 1rem;
 			cursor: pointer;
+			transition: 0.5s ease;
 		}
-		.featuresBtn{
-			background: #EAEAEA;
-		}	
+	}
+	.BtnActive{
+		background: #FFD23F;
 	}
 	.relatedProducts{
 		position: relative;
@@ -676,5 +676,36 @@
 		padding: .2rem;
 		border: 1px solid #EAEAEA;
 		border-radius: 7px;
+	}
+	.prMoreInfoWrapper{
+		margin: 1rem auto;
+		padding: 1rem 2rem;
+		border: 1px solid #EAEAEA;
+		border-radius: 16px;
+		.prInfoTitle{
+			font-size: 1.5rem;
+			text-align: center;
+		}
+		.indicatorsWrapper{
+			margin: 1rem 0;
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(27rem, 1fr));
+			gap: 1rem 2rem;
+			.prIndicator{
+				padding: 0 .5rem;
+				border-bottom: 1px solid #EAEAEA;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				.param{
+					font-size: 1.2rem;
+					font-weight: 500;
+				}
+				.option{
+					font-style: 1rem;
+					font-style: italic;
+				}
+			}	
+		}
 	}
    } 

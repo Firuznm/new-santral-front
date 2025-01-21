@@ -7,13 +7,30 @@
   
       .swiperMainSlider {
         height: 100%;
-  
+        position: relative;
         video,
         iframe,   
         img {
           width: 100%;
           height: 100%;
           border-radius: 14px;
+        }
+        .prDiscountPercent{
+          position: absolute;
+          top: 0;
+          right: 0;
+          padding: 14px;
+          background: #F44336;
+          border-radius: 0 14px;
+          color: white;
+          font-weight: 500;
+        }
+        .prInfo{
+          width: 100%;
+          position: absolute;
+          bottom: 0;
+          background-color: aqua;
+          color: red;
         }
       }
   
@@ -22,17 +39,6 @@
         height: 99%;
         border-radius: 14px;
         position: relative;
-  
-        // .leftPagination {
-        //   position: absolute;
-        //   bottom: 20px;
-        //   left: 200px;
-        //   display: flex;
-        //   justify-content: center;
-        //   gap: 0.5rem;
-        //   z-index: 9;
-        //   background-color: red;
-        // }
       }
   
       .mainSliderRightWrapper {

@@ -16,17 +16,21 @@ import OurAdvantages from "../../components/HomeSection/OurAdvantages/OurAdvanta
 // import ProductCartNew from "../../components/ProductCartNew/ProductCartNew";
 
 export default function Home() {
+    const [homeDiscountedDatas, setHomeDiscountedDatas] = useState([]);
+    const [homeMainSliderDatas, setHomeMainSliderDatas]= useState([])
     const [homeBrandsData, setHomeBrandsData] = useState([]);
     const [homePartnersData, setHomePartnersData] = useState();
     const [categoryDatas, setCategoryDatas] = useState([]);
     const [homeBannersData, setHomeBannersData] = useState({});
     const [homeNews, setHomeNews] = useState([]);
     const [homeSeasonOffersData, setHomeSeasonOffersData]= useState([])
-
+   
 
     const getHomeAllData = async () => {
         try {
-            const [homePartnersData, homeBrandsData, categoryDatas, homeBannersData,homeNews,homeSeasonOffersData] = await Promise.all([santral.api().post(urls.homePartners), santral.api().post(urls.homeBrands), santral.api().post(urls.catalog), santral.api().post(urls.banners),santral.api().post(urls.news), santral.api().post(urls.homeSeasonOffers)]);
+            const [homeMainSlider,homeDiscountedDatas,homePartnersData, homeBrandsData, categoryDatas, homeBannersData,homeNews,homeSeasonOffersData] = await Promise.all([santral.api().post(urls.homeMainSlider),santral.api().post(urls.homeDiscounted),santral.api().post(urls.homePartners), santral.api().post(urls.homeBrands), santral.api().post(urls.catalog), santral.api().post(urls.banners),santral.api().post(urls.news), santral.api().post(urls.homeSeasonOffers)]);
+            setHomeMainSliderDatas(homeMainSlider.data.data)
+            setHomeDiscountedDatas(homeDiscountedDatas.data.data)
             setHomePartnersData(homePartnersData.data.data);
             setHomeBrandsData(homeBrandsData.data.data);
             setCategoryDatas(categoryDatas.data.data);
@@ -44,14 +48,16 @@ export default function Home() {
 
     // console.log("partners data=", homePartnersData);
     // console.log("brands =", homeBrandsData);
-    console.log("categoryData-", categoryDatas);
+    // console.log("categoryData-", categoryDatas);
+    console.log("main slider=", homeMainSliderDatas);
+    console.log("home banner=",homeDiscountedDatas);
     // console.log("homeBannerData-", homeBannersData);
     // console.log("news", homeNews);
     // console.log("seasonOffers-", homeSeasonOffersData[0]?.products);
     
     return (
         <> 
-            {/* <HomeMainSlider/> */}
+            <HomeMainSlider dataMainSlider={homeMainSliderDatas} dataDiscounted={homeDiscountedDatas}/>
             {/* <HomeBanner /> */}
             {/* <HomePartners PartnersData={homePartnersData} /> */}
           
