@@ -8,9 +8,10 @@ import ProductCart from '../ProductCart/ProductCart';
 import ArrowLeftIcon from '../../assets/Icons/ArrowLeftIcon';
 import ArrowRightIcon from '../../assets/Icons/ArrowRightIcon';
 import { useRef, useEffect } from 'react';
-
+  
 export default function ProductCartSlider({data}) {
     const swiperRef = useRef(null); 
+    // console.log("data slider=",data);
     
     useEffect(() => {
       if (swiperRef.current && swiperRef.current.swiper) {
@@ -30,10 +31,10 @@ export default function ProductCartSlider({data}) {
         loop={true}
         modules={[Navigation]}
         navigation={{
-            nextEl: ".home-categoryResult-button-prev",
-            prevEl: ".home-categoryResult-button-next",
-           
-          }}
+          nextEl: ".home-categorySliderAndDiscountPrSlider-button-prev",
+          prevEl: ".home-categorySliderAndDiscountPrSlider-button-next",
+         
+        }}
           breakpoints={{
             470: {
               slidesPerView: 1,
@@ -67,12 +68,12 @@ export default function ProductCartSlider({data}) {
             ))
         }
       </Swiper>
-      <div className="home-categoryResult-button-next">
-    <ArrowLeftIcon />
-    </div>
-      <div className="home-categoryResult-button-prev">
-                <ArrowRightIcon />
-    </div>
+     <div className="home-categorySliderAndDiscountPrSlider-button-next">
+                          <ArrowLeftIcon />
+                </div>
+                  <div className="home-categorySliderAndDiscountPrSlider-button-prev">
+                            <ArrowRightIcon />
+                </div>
     </>
   )
 }

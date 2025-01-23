@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import ArrowLeftIcon from "../../../assets/Icons/ArrowLeftIcon";
 import ArrowRightIcon from "../../../assets/Icons/ArrowRightIcon";
 import ProductCartSlider from "../../ProductCartSlider/ProductCartSlider";
+import SectionTitle from "../../SectionTitle/SectionTitle";
 
 export default function HomeNewComers({data}) {
     const [homeNewComersData, setHomeNewComersData]= useState([])
@@ -36,7 +37,7 @@ export default function HomeNewComers({data}) {
       
   return (
     <section id={style.newComersSlider}>
-        <div className="container">
+         <SectionTitle title={"Sizin üçün yeni gələnlər"}/> 
         <div className={style.categoresList}>
     <Swiper
     spaceBetween={"5px"}
@@ -70,61 +71,8 @@ export default function HomeNewComers({data}) {
 </div>
 
 <div className={style.categoryClickResultSlider}>
-{/* <Swiper
-        slidesPerView={4}
-        spaceBetween={10}
-        pagination={{
-          clickable: true,
-        }}
-        loop={true}
-        modules={[Navigation]}
-        navigation={{
-            nextEl: ".home-categoryResult-button-prev",
-            prevEl: ".home-categoryResult-button-next",
-           
-          }}
-          breakpoints={{
-            470: {
-              slidesPerView: 1,
-            },
-            670: {
-              slidesPerView: 2.1,
-            },
-            850: {
-              slidesPerView: 2.7,
-            },
-            1024: {
-              slidesPerView: 3.2,
-            },
-            1270: {
-              slidesPerView: 4.1,
-            },
-            1400: {
-              slidesPerView: 4.7,
-            },
-             1600: {
-              slidesPerView: 5,
-            },
-          }}
-        className="resultSlider"
-      >
-        {
-            homeNewComersData?.map(item=>(
-                <SwiperSlide key={item.id}>
-                 <ProductCart data={item}/>
-                </SwiperSlide>
-            ))
-        }
-      </Swiper>
-      <div className="home-categoryResult-button-next">
-    <ArrowLeftIcon />
-    </div>
-      <div className="home-categoryResult-button-prev">
-                <ArrowRightIcon />
-    </div> */}
    <ProductCartSlider data={homeNewComersData}/>
 </div>
-      </div>
     </section>
   )
 }

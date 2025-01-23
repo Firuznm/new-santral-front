@@ -35,8 +35,8 @@ export default function ProductCart({ data }) {
                   {data.title}
               </Link>
 
-            <div className={style.test}>
-              {PriceDifference > 0 ?  <span className={style.prPriceDifference}>- {PriceDifference} ₼</span> :<div style={{height:"40px"}}></div>}
+            <div className={style.discountPrice}>
+              {PriceDifference > 0 ?  <span className={style.prPriceDifference}>- {PriceDifference} ₼</span> :<div style={{height:"20px"}}></div>}
                {/* <span className={style.te}><img src={truck} alt="" /> Pulsuz Catdirilma</span> */}
               </div>
               <div className={style.prPricesWrapper}>

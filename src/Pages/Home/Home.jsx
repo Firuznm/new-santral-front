@@ -13,6 +13,7 @@ import HomeBrands from "../../components/HomeSection/HomeBrands/HomeBrands";
 import HomeMainSlider from "../../components/HomeSection/HomeMainSlider/HomeMainSlider";
 import HomeNewComers from "../../components/HomeSection/HomeNewComers/HomeNewComers";
 import OurAdvantages from "../../components/HomeSection/OurAdvantages/OurAdvantages";
+import HomeDiscountedProducts from "../../components/HomeSection/HomeDiscountedProducts/HomeDiscountedProducts";
 // import ProductCartNew from "../../components/ProductCartNew/ProductCartNew";
 
 export default function Home() {
@@ -49,15 +50,16 @@ export default function Home() {
     // console.log("partners data=", homePartnersData);
     // console.log("brands =", homeBrandsData);
     // console.log("categoryData-", categoryDatas);
-    console.log("main slider=", homeMainSliderDatas);
-    console.log("home banner=",homeDiscountedDatas);
+    // console.log("main slider=", homeMainSliderDatas);
+    // console.log("home banner=",homeDiscountedDatas);
     // console.log("homeBannerData-", homeBannersData);
     // console.log("news", homeNews);
     // console.log("seasonOffers-", homeSeasonOffersData[0]?.products);
     
     return (
-        <> 
-            <HomeMainSlider dataMainSlider={homeMainSliderDatas} dataDiscounted={homeDiscountedDatas}/>
+        <div className="container"> 
+            {/* <HomeMainSlider dataMainSlider={homeMainSliderDatas} dataDiscounted={homeDiscountedDatas}/> */}
+            <HomeDiscountedProducts discountData={homeDiscountedDatas}/>
             {/* <HomeBanner /> */}
             {/* <HomePartners PartnersData={homePartnersData} /> */}
           
@@ -67,7 +69,7 @@ export default function Home() {
             {/* <HomeBrands brandsData={homeBrandsData} /> */}
             {/* <OurAdvantages/> */}
             {/* <HomeBanner reverse={"row-reverse"} /> */}
-            {/* <HomeSeasonOffers seasonOffersData={homeSeasonOffersData} /> */}
-        </>
+            <HomeSeasonOffers seasonOffersData={homeSeasonOffersData} />
+        </div>
     );
 }

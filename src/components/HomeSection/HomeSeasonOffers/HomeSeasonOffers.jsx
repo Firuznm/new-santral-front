@@ -3,6 +3,7 @@ import style from "./HomeSeasonOffers.module.scss"
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import ProductCart from "../../ProductCart/ProductCart";
+import SectionTitle from "../../SectionTitle/SectionTitle";
 
 
 
@@ -11,7 +12,7 @@ export default function HomeSeasonOffers({ seasonOffersData }) {
     
     return (
         <section id={style.homeSeasonOffersWrapper}>
-            <div className="container">
+            <SectionTitle title={"Mövsüm təklifləri"}/>
                 <Swiper   
                     slidesPerView={4}
                     spaceBetween={30}
@@ -27,7 +28,6 @@ export default function HomeSeasonOffers({ seasonOffersData }) {
                         </SwiperSlide>
                     ))}
                 </Swiper>
-            </div>
         </section>
     );
 }

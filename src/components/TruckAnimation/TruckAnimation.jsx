@@ -21,7 +21,7 @@ export default function TruckAnimation() {
           alt="box"
         />
       </div> 
-      <span className="content">30₼ və üstü pulsuz catdirilma</span>
+      <span className="content">50₼ və üstü pulsuz catdirilma</span>
     </div>
   </div>
   )

@@ -60,7 +60,7 @@ export function MainSlider({ data,autoplayStyle, effectStyle }) {
       <Swiper
         spaceBetween={20}
         effect={effectStyle}
-        autoplay={autoplayStyle}
+        // autoplay={autoplayStyle}
         modules={[Autoplay, Navigation, EffectFade]}
         className={styles.swiperMainSlider}
       >
@@ -74,12 +74,20 @@ export function MainSlider({ data,autoplayStyle, effectStyle }) {
                 allowFullScreen
               ></iframe>
             ) : (
-              <Link to={item?.product?.discountPercent > 0 ?  `/product/${item?.product?.name}` : item.route}> <img src={`${santral.baseUrlImage}${item.image}`}/>
-              {item?.product?.discountPercent > 0 && <span className={styles.prDiscountPercent}>{item?.product?.discountPercent}%</span>}
+              <Link to={item?.product && item?.product?.discountPercent > 0 ?  `/product/${item?.product?.name}` : item.route}> <img src={`${santral.baseUrlImage}${item.image}`}/>
+              {item?.product && item?.product?.discountPercent > 0 && 
                 <div  className={styles.prInfo}>
+                    <span className={styles.prDiscountPercent}>{item?.product?.discountPercent}%</span>
                   <h6 className={styles.prTitle}>{item.title}</h6>
-                  <div className={styles.prWrapper}></div>
+                  <div className={styles.prPriceWrapper}>
+                    <span className={styles.price}>{item?.product?.price.toFixed(1)}</span>
+                    <span className={styles.oldPrice}>{item?.product?.oldPrice?.toFixed(1)}</span>
+                    <span className={styles.prDiscount}>
+                    {item?.product?.discount?.toFixed(1)}
+                    </span>
+                  </div>
                 </div>
+              }
               </Link>
             )}
           </SwiperSlide>

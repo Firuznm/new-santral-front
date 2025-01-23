@@ -16,11 +16,11 @@ import birbankKartImg from "../../assets/Images/birbank.png"
 import tamKartImg from "../../assets/Images/tamkart.jfif"
 import BasketIcon from "../../assets/Icons/BasketIcon";
 import HeaderPhoneIcon from "../../assets/Icons/HeaderPhoneIcon";
-import TruckAnimation from "../TruckAnimation/TruckAnimation";
+import TruckAnimation from "../../components/TruckAnimation/TruckAnimation";
 import santral from "../../Helpers/Helpers";
 import urls from "../../ApiUrls/Urls";
 import { prDetailsDataTest } from "../../MyDatas/MyDatas";
-import ProductCartSlider from "../ProductCartSlider/ProductCartSlider";
+import ProductCartSlider from "../../components/ProductCartSlider/ProductCartSlider";
 import whatsappImg from "../../assets/Images/whatsapp.png";
 import instagramImg from "../../assets/Images/instagram.png";
 import facebookImg from "../../assets/Images/facebook.png";
@@ -36,15 +36,27 @@ export default function ProductDetails() {
     const [prDetailsData, setPrDetailsData]= useState({});
     const [showRelatedOrPrInfo, setShowRelatedOrPrInfo]= useState(true);
     const [prDetailsSocial, setPrDetailsSocial]= useState(false);
+    const [showCreditMonthPayment, setShowCreditMonthPayment]= useState(true);
     const [oneClickBuyModal, setOneClickBuyModal]= useState(false);
     const [url, setUrl]= useState("")
     console.log("data=", prDetailsData);
-    console.log("dataarr=", prDetailsData.parameters);
+
+    const prPriceDifference = (prDetailsData.oldPrice - prDetailsData.price).toFixed(2);
+    const discountRate= (100 - (prDetailsData.price*100 / prDetailsData.oldPrice)).toFixed(0);
+    const threeMonths = prDetailsData.oldPrice > 0 ? (prDetailsData.oldPrice / 3).toFixed(2) : (prDetailsData.price / 3).toFixed(2);
+    const sixMonths = prDetailsData.oldPrice > 0 ? (prDetailsData.oldPrice / 6).toFixed(2) : (prDetailsData.price / 6).toFixed(2);
     
-    
-   const handleState=()=>{
+    const handleState=()=>{
     setShowRelatedOrPrInfo(!showRelatedOrPrInfo)
    }
+
+   const handleStateCreditMonth=()=>{
+      setShowCreditMonthPayment(!showCreditMonthPayment)
+   }
+
+   useEffect(()=>{
+    setShowCreditMonthPayment(true)
+   },[name])
     useEffect(()=>{
      setUrl(window.location.href)
     },[])
@@ -122,6 +134,7 @@ try {
         </div>
         <div className={style.prImgAndPrInfo}>
                   <div className={style.prDetailsSlider}>
+              {prDetailsData.oldPrice > 0 && <div className={style.discountRate}>-{discountRate}%</div>}  
                       <Swiper
                       style={{
                       '--swiper-navigation-color': 'green',
@@ -184,8 +197,8 @@ try {
               </div>
             </div>
             <div className={style.prAvailableAndPrCod}>
-              <span className={style.prAvailable}>Məhsul mövcuddur</span>
-              <span className={style.prCode}>Məhsulun Codu: FM2105-10TX881</span>
+              <span className={style.prAvailable}>Məhsul mövcuddur : {prDetailsData.stock}</span>
+             {prDetailsData.brandCode && <span className={style.prCode}>Məhsulun Codu:  <span className={style.code}>{prDetailsData.brandCode}</span></span>} 
             </div>
             <hr className={style.line}/>
             <div className={style.prCountAndPrice}>
@@ -195,9 +208,9 @@ try {
                 <span className={style.increase}><PlusIcon/></span>
               </div>
      <div className={style.priceWrapper}>
-      <span className={style.newPrice}>{prDetailsData.price} ₼</span>
-      <span className={style.prOldPrice}>657 ₼</span>
-      <span className={style.prDiscount}>-222 ₼</span>
+      <span className={style.newPrice}>{prDetailsData?.price?.toFixed(2)} ₼</span>
+    {prDetailsData?.oldPrice > 0  && <span className={style.prOldPrice}>{prDetailsData?.oldPrice?.toFixed(2)} ₼</span>}  
+    {prPriceDifference > 0 &&  <span className={style.prDiscount}>-{prPriceDifference} ₼</span>} 
       </div>
       </div>
       <hr className={style.line}/>
@@ -234,16 +247,16 @@ try {
       </div>
       <div className={style.paymentMonths}>
         <div>
-          <span className={style.month}>3ay</span>
-          <span className={style.month}>6ay</span>
+          <span onClick={handleStateCreditMonth} className={`${style.month} ${showCreditMonthPayment ? style.activeMonth : ""}`}>3ay</span>
+          <span onClick={handleStateCreditMonth} className={`${style.month} ${showCreditMonthPayment ? "" : style.activeMonth }`}>6ay</span>
         </div>
         <div className={style.payementResuslt}>
           Aylıq ödəniş
-         <span className={style.payment}>86 ₼</span>
+        <span className={style.payment}> {showCreditMonthPayment ? threeMonths : sixMonths} ₼</span>
         </div>
       </div>
       <div className={style.btnGroup}>
-        <button className={style.basketBtn}><BasketIcon color={"black"}/>Səbətə at</button>
+      <button className={style.basketBtn}><BasketIcon color={"black"}/>Səbətə at</button>
       <button onClick={handleBuyModal} className={style.oneClickByBtn}>icon Bir kliklə al</button>
       <button className={style.callBtn}><HeaderPhoneIcon/> Mənə zəng et</button>
       </div>
