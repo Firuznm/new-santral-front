@@ -38,6 +38,7 @@ export default function ProductDetails() {
     const [prDetailsSocial, setPrDetailsSocial]= useState(false);
     const [showCreditMonthPayment, setShowCreditMonthPayment]= useState(true);
     const [oneClickBuyModal, setOneClickBuyModal]= useState(false);
+    const [oneClickInput, setOneClickInput] = useState("")
     const [url, setUrl]= useState("")
     console.log("data=", prDetailsData);
 
@@ -46,6 +47,9 @@ export default function ProductDetails() {
     const threeMonths = prDetailsData.oldPrice > 0 ? (prDetailsData.oldPrice / 3).toFixed(2) : (prDetailsData.price / 3).toFixed(2);
     const sixMonths = prDetailsData.oldPrice > 0 ? (prDetailsData.oldPrice / 6).toFixed(2) : (prDetailsData.price / 6).toFixed(2);
     
+    const handlePhoneInputChange = ()=>{
+      setOneClickInput()
+    }
     const handleState=()=>{
     setShowRelatedOrPrInfo(!showRelatedOrPrInfo)
    }
@@ -149,7 +153,8 @@ try {
               {
                    prDetailsDataTest.map(item=>(
                       <SwiperSlide key={item.id}>
-                      <img src={`${santral.baseUrlImage}${prDetailsData.thumbnail}`} />
+                        <img src={item.img} alt="" />
+                      {/* <img src={`${santral.baseUrlImage}${prDetailsData.thumbnail}`} /> */}
                     </SwiperSlide>
                   ))
               }
@@ -162,17 +167,18 @@ try {
               freeMode={true}
               watchSlidesProgress={true}
               modules={[FreeMode, Navigation, Thumbs]}
-              className={style.sliderLittleImgWrapper}
+              className="sliderLittleImgWrapper"
             >
-              {/* {
-                prDetailsDataTest.map(item=>( */}
+              {
+                prDetailsDataTest.map(item=>(
                     <SwiperSlide
-                    //  key={item.id}
+                     key={item.id}
                     >
-                      <img src={`${santral.baseUrlImage}${prDetailsData.thumbnail}`}/>
+                      <img src={item.img} alt="" />
+                      {/* <img src={`${santral.baseUrlImage}${prDetailsData.thumbnail}`}/> */}
                     </SwiperSlide>
-                {/* ))
-              } */}
+                ))
+              }
                 </Swiper>
 
                       </div>

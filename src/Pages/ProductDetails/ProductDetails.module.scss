@@ -47,6 +47,8 @@
 			box-shadow: 0px 2px 79px 0px #0000001A;
 			padding: 10px;
 			border-radius: 7px;
+			display: flex;
+			flex-direction: row-reverse;
 			.discountRate{
 				position: absolute;
 				top: 15px;
@@ -61,9 +63,9 @@
 				z-index: 9;
 			}
 			.mySwiperSlider{
-			  width: 100%;
-			  aspect-ratio: 1/.5;
-			  border-radius: 7px;    
+			  width: 82%;
+			  border-radius: 7px; 
+			  height: 400px;   
 			  img{
 				width: 99%;
 				height: 99%;
@@ -72,19 +74,20 @@
 				border: 2px solid green;
 			  }
 			}
-			.sliderLittleImgWrapper{
-				margin-top: 14px;
-				border-radius: 7px;
-				img{
-					width: 97%;
-					aspect-ratio: 1/.5;
-					// height: 50px;
-					object-fit: contain;
-					border-radius: 7px;
-					cursor: pointer;
-					border: 2px solid green;
-				}
-			}
+			// .sliderLittleImgWrapper{
+			// 	margin-top: 14px;
+			// 	border-radius: 7px;
+			// 	width: 70px;
+			// 	img{
+			// 		width: 97%;
+			// 		aspect-ratio: 1/.5;
+			// 		// height: 50px;
+			// 		object-fit: contain;
+			// 		border-radius: 7px;
+			// 		cursor: pointer;
+			// 		border: 2px solid green;
+			// 	}
+			// }
 		}
     .prInfoWrapper{
 		position: relative;
