@@ -122,7 +122,7 @@ try {
     
   return (
     <section id={style.prDetailsWrapper}>
-      <div className="container">
+      <div style={{paddingTop:"1rem"}} className="container">
         <div onClick={handleBuyModal} className={`${style.modalWrapper}  ${oneClickBuyModal ? "" : style.closeModal}`}>
         <div className={style.oneClickByModalArea}>
           <div className={style.modalHeaderAndCloseBtn}>
@@ -134,11 +134,17 @@ try {
        <input type="number" />
        <button className={style.oneClickBuyBtn}>1 klikə al</button>
         </div>
-        
         </div>
+
+     
+
         <div className={style.prImgAndPrInfo}>
+        <div className={style.delivery}>
+            <TruckAnimation/>
+        </div>
                   <div className={style.prDetailsSlider}>
               {prDetailsData.oldPrice > 0 && <div className={style.discountRate}>-{discountRate}%</div>}  
+
                       <Swiper
                       style={{
                       '--swiper-navigation-color': 'green',
@@ -153,7 +159,7 @@ try {
               {
                    prDetailsDataTest.map(item=>(
                       <SwiperSlide key={item.id}>
-                        <img src={item.img} alt="" />
+                        <img className={style.sliderImg} src={item.img} alt="" />
                       {/* <img src={`${santral.baseUrlImage}${prDetailsData.thumbnail}`} /> */}
                     </SwiperSlide>
                   ))
@@ -183,9 +189,7 @@ try {
 
                       </div>
         <div className={style.prInfoWrapper}>
-          <div className={style.delivery}>
-            <TruckAnimation/>
-          </div>
+       
             <div className={style.prTitleAndFavoriteSocial}>
               <h4 className={style.prTitle}>{prDetailsData.title}</h4>
               <div className={style.favoriteSocial}>
@@ -203,7 +207,7 @@ try {
               </div>
             </div>
             <div className={style.prAvailableAndPrCod}>
-              <span className={style.prAvailable}>Məhsul mövcuddur : {prDetailsData.stock}</span>
+              <span className={style.prAvailable}>Məhsul mövcuddur : <span className={style.productCount}>{prDetailsData.stock}</span> </span>
              {prDetailsData.brandCode && <span className={style.prCode}>Məhsulun Codu:  <span className={style.code}>{prDetailsData.brandCode}</span></span>} 
             </div>
             <hr className={style.line}/>
@@ -264,10 +268,12 @@ try {
       <div className={style.btnGroup}>
       <button className={style.basketBtn}><BasketIcon color={"black"}/>Səbətə at</button>
       <button onClick={handleBuyModal} className={style.oneClickByBtn}>icon Bir kliklə al</button>
-      <button className={style.callBtn}><HeaderPhoneIcon/> Mənə zəng et</button>
+      <button className={style.callBtn}><HeaderPhoneIcon/> Zəng et</button>
       </div>
-      
-     
+   <div className={style.billboard}>
+    reklam panel
+   </div>
+
       </div>
         </div>
 

@@ -323,6 +323,18 @@ export const prDetailsDataTest=[
     {
         id:7,
         img:"https://cdn.santral.az/images/5689741e-f327-11ee-a483-005056b06295.jpeg"
-    }
+    },
+    // {
+    //     id:8,
+    //     img:"https://cdn.santral.az/images/3d9d82fa-9e70-11ee-9780-005056b06295.jpeg"
+    // },
+    // {
+    //     id:9,
+    //     img:"https://cdn.santral.az/images/3d9d82f8-9e70-11ee-9780-005056b06295.jpeg"
+    // },
+    // {
+    //     id:10,
+    //     img:"https://cdn.santral.az/images/dbbf6220-d535-11ee-a483-005056b06295.jpeg"
+    // },
 ]
     
