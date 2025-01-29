@@ -14,6 +14,7 @@ import HomeMainSlider from "../../components/HomeSection/HomeMainSlider/HomeMain
 import HomeNewComers from "../../components/HomeSection/HomeNewComers/HomeNewComers";
 import OurAdvantages from "../../components/HomeSection/OurAdvantages/OurAdvantages";
 import HomeDiscountedProducts from "../../components/HomeSection/HomeDiscountedProducts/HomeDiscountedProducts";
+import Input from "../../components/Input/Input";
 // import ProductCartNew from "../../components/ProductCartNew/ProductCartNew";
 
 export default function Home() {
@@ -69,6 +70,7 @@ export default function Home() {
             {/* <HomeBrands brandsData={homeBrandsData} /> */}
             {/* <OurAdvantages/> */}
             {/* <HomeBanner reverse={"row-reverse"} /> */}
+            <Input labelName={"Ad"} inputPlaceholder={"Ad"} inputType={"text"}/>
             <HomeSeasonOffers seasonOffersData={homeSeasonOffersData} />
         </div>
     );

@@ -36,15 +36,65 @@
 							margin-right: .5rem;
 						}
 					}
-					.enterBtn{
-						background-color: black;
-						color: white;
-						font-weight: 600;
-						padding: .5rem 1rem;
-						border-radius: 1rem;
-						margin: 0 1rem;
-						text-wrap: nowrap;
+					.headerEnter{
+						position: relative;
+						.headerEnterBtn{
+							cursor: pointer;
+							background-color: black;
+							color: white;
+							font-weight: 600;
+							padding: .5rem 1rem;
+							border-radius: 1rem;
+							margin: 0 1rem;
+							text-wrap: nowrap;
+						}
+						.enterArea{
+							position: absolute;
+							z-index: 2;
+							top: 40px;
+							right: 16px;
+							background-color: #FFFFFF;
+							padding: 5px 25px 20px 25px;
+							border-radius: 16px;
+							.enterAreaCloseBtn{
+								cursor: pointer;
+                                position: absolute;
+								top: 10px;
+								right: 20px;
+							}
+						.parolForgotten{
+							display: flex;
+							justify-content: end;
+							color: #00000099;
+							font-size: 14px;
+						}
+						.enterBtn{
+							display: flex;
+							justify-content: center;
+							align-items: center;
+							width: 100%;
+							margin: 14px 0;
+							background-color: #FFD23F;
+							border-radius: 2rem;
+							border: none;
+							cursor: pointer;
+							font-size: 1.2rem;
+							font-weight: 500;
+							padding: 14px 0;
+						}
+						.donotAccount{
+                        color: #00000099;
+						font-size: .9rem;
+						}
+						.LinkSignUp{
+							margin-left: 7px;
+							 font-weight: 700;
+						     border-bottom: 3px solid #FD8521;
+                             color: #FD8521;
+						}	
+						}
 					}
+					
 					.lang{
 						background-color: turquoise;
 					}

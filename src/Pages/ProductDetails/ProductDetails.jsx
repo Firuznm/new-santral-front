@@ -64,6 +64,7 @@ export default function ProductDetails() {
     useEffect(()=>{
      setUrl(window.location.href)
     },[])
+    
     const copyFunc= ()=>{
       navigator.clipboard.writeText(url)
     }
