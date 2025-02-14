@@ -1,0 +1,8 @@
+.myOrdersPage{
+    display: flex;
+    gap: 2rem;
+    .myOrdersContent{
+        width: calc(100% - 280px);
+        border: 2px solid turquoise;
+    }
+}

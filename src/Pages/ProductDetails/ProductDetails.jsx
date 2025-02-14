@@ -5,7 +5,7 @@ import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
-import { Autoplay, FreeMode, Navigation,Thumbs } from 'swiper/modules';
+import { Autoplay} from 'swiper/modules';
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import HeartIcon from "../../assets/Icons/HeartIcon";
@@ -26,33 +26,46 @@ import instagramImg from "../../assets/Images/instagram.png";
 import facebookImg from "../../assets/Images/facebook.png";
 import copyImg from "../../assets/Images/copy.png";
 import CloseIcon from "../../assets/Icons/CloseIcon";
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import PrDetailsPagePrImgSlider from "../../components/PrDetailsPagePrImgSlider/PrDetailsPagePrImgSlider";
+import PrDetailsPageSimilarPrAndPrFeatures from "../../components/PrDetailsPageSimilarPrAndPrFeatures/PrDetailsPageSimilarPrAndPrFeatures";
 
 
 export default function ProductDetails() {
     const {name}= useParams();
     const socialAreaRef = useRef(null); 
-    const [thumbsSwiper, setThumbsSwiper] = useState(null);
     const [relatedDatas, setRelatedDatas]= useState();
     const [prDetailsData, setPrDetailsData]= useState({});
-    const [showRelatedOrPrInfo, setShowRelatedOrPrInfo]= useState(true);
+  
     const [prDetailsSocial, setPrDetailsSocial]= useState(false);
     const [showCreditMonthPayment, setShowCreditMonthPayment]= useState(true);
     const [oneClickBuyModal, setOneClickBuyModal]= useState(false);
-    const [oneClickInput, setOneClickInput] = useState("")
     const [url, setUrl]= useState("")
-    console.log("data=", prDetailsData);
+
+
+
+   const {values,handleChange,handleSubmit,resetForm, errors}= useFormik({
+        initialValues: {
+          name: '',
+          phone:""
+        },
+        validationSchema:Yup.object().shape({
+            name:Yup.string().required("Adınızı daxil edin"),
+            phone:Yup.number().positive("Mənfi rəqəm olmaz !!!").integer("Tam rəqəm daxil edin").required("Nömrənizi daxil edin"),
+        }),
+        onSubmit: values => {
+          alert("istifadekinin melumatlari= " + JSON.stringify(values, null, 2));
+        resetForm()
+        },
+      });
 
     const prPriceDifference = (prDetailsData.oldPrice - prDetailsData.price).toFixed(2);
     const discountRate= (100 - (prDetailsData.price*100 / prDetailsData.oldPrice)).toFixed(0);
     const threeMonths = prDetailsData.oldPrice > 0 ? (prDetailsData.oldPrice / 3).toFixed(2) : (prDetailsData.price / 3).toFixed(2);
     const sixMonths = prDetailsData.oldPrice > 0 ? (prDetailsData.oldPrice / 6).toFixed(2) : (prDetailsData.price / 6).toFixed(2);
     
-    const handlePhoneInputChange = ()=>{
-      setOneClickInput()
-    }
-    const handleState=()=>{
-    setShowRelatedOrPrInfo(!showRelatedOrPrInfo)
-   }
+  
 
    const handleStateCreditMonth=()=>{
       setShowCreditMonthPayment(!showCreditMonthPayment)
@@ -124,73 +137,36 @@ try {
   return (
     <section id={style.prDetailsWrapper}>
       <div style={{paddingTop:"1rem"}} className="container">
-        <div onClick={handleBuyModal} className={`${style.modalWrapper}  ${oneClickBuyModal ? "" : style.closeModal}`}>
+       {/* bir kliklə al modali */}
+      <div onClick={handleBuyModal} className={`${style.overlayOneByModal}${oneClickBuyModal ? "" : style.hiddenOverlay}`}></div>
+   <div className={`${style.modalWrapper} ${oneClickBuyModal ? "" : style.closeModal}`}>
         <div className={style.oneClickByModalArea}>
           <div className={style.modalHeaderAndCloseBtn}>
-          <h6>1 kliklə məhsulu alın</h6>
+          <h6 className={style.title}>1 kliklə məhsulu alın</h6>
           <span onClick={handleBuyModal}><CloseIcon /></span>
           </div>
           <hr className={style.line}/>
+      <form onSubmit={handleSubmit}>
+          <label htmlFor="">Adınızı daxil edin</label>
+       <input className={style.oneClickInp} onChange={handleChange} name="name"  value={values.name} type="text" placeholder="Ad" />
+       <span className={style.errorMessage}>{errors.name}</span>
        <label htmlFor="">Nömrənizi daxil edin</label>
-       <input type="number" />
-       <button className={style.oneClickBuyBtn}>1 klikə al</button>
+       <input className={style.oneClickInp} onChange={handleChange} name="phone" value={values.phone} type="number" placeholder="phone"/>
+       <span className={style.errorMessage}>{errors.phone}</span>
+       <button className={style.oneClickBuyBtn}>Bir klikə al</button>
+       </form>
+
         </div>
         </div>
-
-     
-
         <div className={style.prImgAndPrInfo}>
+          {/* pulsuz catdirilma animasiyasi masinin hərəkəti */}
         <div className={style.delivery}>
             <TruckAnimation/>
         </div>
-                  <div className={style.prDetailsSlider}>
-              {prDetailsData.oldPrice > 0 && <div className={style.discountRate}>-{discountRate}%</div>}  
-
-                      <Swiper
-                      style={{
-                      '--swiper-navigation-color': 'green',
-                      }}
-                      loop={true}
-                      spaceBetween={10}
-                      navigation={true}
-                      thumbs={{ swiper: thumbsSwiper }}
-                      modules={[FreeMode, Navigation, Thumbs]}
-                      className={style.mySwiperSlider}
-            >
-              {
-                   prDetailsDataTest.map(item=>(
-                      <SwiperSlide key={item.id}>
-                        <img className={style.sliderImg} src={item.img} alt="" />
-                      {/* <img src={`${santral.baseUrlImage}${prDetailsData.thumbnail}`} /> */}
-                    </SwiperSlide>
-                  ))
-              }
-            </Swiper>
-            <Swiper
-              onSwiper={setThumbsSwiper}
-              loop={true}
-              spaceBetween={10}
-              slidesPerView={4}
-              freeMode={true}
-              watchSlidesProgress={true}
-              modules={[FreeMode, Navigation, Thumbs]}
-              className="sliderLittleImgWrapper"
-            >
-              {
-                prDetailsDataTest.map(item=>(
-                    <SwiperSlide
-                     key={item.id}
-                    >
-                      <img src={item.img} alt="" />
-                      {/* <img src={`${santral.baseUrlImage}${prDetailsData.thumbnail}`}/> */}
-                    </SwiperSlide>
-                ))
-              }
-                </Swiper>
-
-                      </div>
+        {/* məhsulun səkillərinin slider- i (sag tərəf) */}
+        <PrDetailsPagePrImgSlider data={prDetailsDataTest} prDetailsData={prDetailsData} discountRate={discountRate}/>
+       {/* məhsul haqqinda məlumatlar (sol tərəfdəki) */}
         <div className={style.prInfoWrapper}>
-       
             <div className={style.prTitleAndFavoriteSocial}>
               <h4 className={style.prTitle}>{prDetailsData.title}</h4>
               <div className={style.favoriteSocial}>
@@ -274,121 +250,10 @@ try {
    <div className={style.billboard}>
     reklam panel
    </div>
-
       </div>
         </div>
-
-
-        <div className={style.similarPrAndFeaturesBtn}>
-         <button onClick={handleState} className={`${style.similarBtn} ${showRelatedOrPrInfo ? style.BtnActive : ""}`}>Oxşar məhsullar</button>
-        {prDetailsData.parameters && <button onClick={handleState} className={`${style.featuresBtn} ${showRelatedOrPrInfo ? "" : style.BtnActive}`}>Xüsusiyyətləri</button>}
-        </div>
-     { showRelatedOrPrInfo ? 
-         <div className={style.relatedProducts}>
-          <ProductCartSlider data={relatedDatas}/>
-        </div>
-        :
-        <div className={style.prMoreInfoWrapper}>
-           <h4 className={style.prInfoTitle}>{prDetailsData?.title}</h4>
-           <p className={style.prInfo}></p>
-           <div className={style.indicatorsWrapper}>
-            {
-              prDetailsData?.parameters?.map((indicator,i)=>(
-                <div key={i} className={style.prIndicator}>
-                <span className={style.param}>{indicator?.param.title}</span>
-                <span className={style.option}>{indicator?.option.title}</span>
-                </div>
-              ))
-            }
-           </div>
-      </div>
-         }
-   
-     
-
-{/* <div className={style.paymentPriceWrapper}>
-
-          <div className={style.paymentCartWrapper}>
-
-          </div>
-          <div className={style.prCountPriceAndBasket}>
-            <div className={style.prCount}>
-            <span className={style.decrease}><MinusIcon/></span>
-                <span className={style.count}>1</span>
-                <span className={style.increase}><PlusIcon/></span>
-            </div>
-            <div className={style.prPrices}>
-              <span className={style.discountPrice}>-7733 ₼</span>
-              <div className={style.priceAndOldprice}>
-              <span className={style.price}>5955 ₼</span>
-              <span className={style.prOldPrice}>777₼</span>
-              </div>
-            </div>
-            <button className={style.basketBtn}><BasketIcon color={"black"}/> Səbətə at</button>
-          </div>
-
-          </div> */}
-            {/* <hr className={style.line}/>
-            <div className={style.prCountAndPrice}>
-              <div className={style.countWrapper}>
-                <span className={style.decrease}><MinusIcon/></span>
-                <span className={style.count}>199</span>
-                <span className={style.increase}><PlusIcon/></span>
-              </div>
-  <div className={style.priceWrapper}>
-      <span className={style.newPrice}>435 ₼</span>
-      <span className={style.oldPrice}>657 ₼</span>
-      <span className={style.prDiscount}>-222 ₼</span>
-       </div>
-   
-            </div>
-            <hr className={style.line}/>
-            <div className={style.creditAndPaymentCart}>
-             <div className={style.PaymentInfo}>
-                <h4 className={style.paymentTitle}>Hissəli alış kalkulyatoru</h4>
-                <p className={style.info}>Şərtlər məhsulun bugünki qiymətinə tətbiq olunur</p>
-             </div>
-             <div className={style.PaymentCart}>
-              <span className={style.BirKart}>
-                <img src={birbankKartImg}  />
-                <p>BirKart ilə 3 ay fiazsiz ödə</p>
-              </span>
-              <span className={style.TamKart}>
-                <img src={tamKartImg}   />
-                <p>TamKart ilə 6 ay fiazsiz ödə</p>
-              </span>
-             </div>
-            </div> */}
-            {/* <div className={style.paymentCalculateWrapper}>
-              <div className={style.paymentCarts}>
-              <p className={style.paymentCartInfo}>Şərtlər məhsulun bugünki qiymətinə tətbiq olunur</p>
-              <div className={style.buyCarts}>
-              <span className={style.BirKart}>
-                <img src={birbankKartImg}  />
-                <p>BirKart ilə 3 ay fiazsiz ödə</p>
-              </span>
-              <span className={style.TamKart}>
-                <img src={tamKartImg}   />
-                <p>TamKart ilə 6 ay fiazsiz ödə</p>
-              </span>
-             </div>
-              </div>
-              <div className={style.months}>
-                <span className={style.month}>3 ay</span>
-                <span className={style.month}>6 ay</span>
-              </div>
-              <hr className={style.horizontalLine}/>
-              <div className={style.calculateResult}>
-               Aylıq ödəniş
-               <span className={style.payment}>40.40 ₼</span> 
-              </div>
-            </div>
-            <div className={style.basketBtnAndBuyBtn}>
-           <button className={style.basketBtn}><BasketIcon color={"black"}/> Səbətə at</button>
-           <button className={style.buyBtn}>icon Bir kliklə al</button>
-           <a className={style.callBtn} href=""><HeaderPhoneIcon/> Zəng et</a>
-            </div> */}
-      
+        {/* oxşar məhsular və məhsulun xususiyyətləri */}
+       <PrDetailsPageSimilarPrAndPrFeatures prDetailsData={prDetailsData} relatedDatas={relatedDatas}/>
       </div>
     </section>
   )

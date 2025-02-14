@@ -1,5 +1,5 @@
 
-export default function ParolEye() {
+export default function ParolCloseEye() {
   return (
     <svg
     xmlns="http://www.w3.org/2000/svg"

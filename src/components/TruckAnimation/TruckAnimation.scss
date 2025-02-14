@@ -6,7 +6,7 @@
       align-items: center;
      
       .header-truckarea {
-        margin-top: 3px;
+        margin-top: -3px;
         width: 100%;
         overflow: hidden;
         .header-truckarea-image {
@@ -34,6 +34,7 @@
         }
       }
       .content{
+        margin-top: -3px;
         padding: 0 7px 5px 7px;
         border-radius: 5px;
        position: absolute;

@@ -6,39 +6,26 @@ import CatalogIcon from "../../assets/Icons/CatalogIcon";
 import SearchIcon from "../../assets/Icons/SearchIcon";
 import HeartIcon from "../../assets/Icons/HeartIcon";
 import BasketIcon from "../../assets/Icons/BasketIcon";
-import {  useState } from "react";
+import {  useEffect, useState } from "react";
 import Catalog from "../Catalog/Catalog";
-import Input from "../Input/Input";
-import CloseIcon from "../../assets/Icons/CloseIcon";
-import RightIcon from "../../assets/Icons/RightIcon";
+import EnterSiteHeader from "../../Authentication/EnterSiteHeader/EnterSiteHeader";
 
 
 export default function Header() {
-    const [showOpenArea, setShowOpenArea] = useState(false) 
-    const [showHiddenCatalog, setShowHiddenCatalog] = useState(false);
 
-    
-        const handleCloseOpenArea = () => {
-            setShowOpenArea(false);
+    const [showHiddenCatalog, setShowHiddenCatalog] = useState(false);
+    const [showOpenEnterSiteArea, setShowOpenEnterSiteArea] = useState(false) 
+   
+        const handleCloseOpenEnterSite = () => {
+            setShowOpenEnterSiteArea(false);
         };
     
-        window.addEventListener("click", handleCloseOpenArea);
- 
-
-    const enterInputData=[
-        {
-            id:1,
-            labelName:"E-mail",
-            placeholder:"E-mail daxil edin",
-            inputType:"email"
-        },
-        {
-            id:2,
-            labelName:"Şifrə",
-            placeholder:"****",
-            inputType:"password"
-        }
-    ]
+        useEffect(() => {
+            window.addEventListener("click", handleCloseOpenEnterSite);
+            return () => {
+              window.removeEventListener("click", handleCloseOpenEnterSite);
+            };
+          }, []);
 
     const onClickCatalogShowHidden = () => {
         const scrollSituation = !showHiddenCatalog;
@@ -50,6 +37,7 @@ export default function Header() {
           document.body.style.overflow = "auto"; 
         }
       };
+
 	return (
         <div className={style.headerWrapper}>
             <div className={style.headerTopWrapper}>
@@ -69,23 +57,13 @@ export default function Header() {
                             <button    
                             onClick={(e) => {
                               e.stopPropagation();
-                            setShowOpenArea(!showOpenArea);
+                            setShowOpenEnterSiteArea(!showOpenEnterSiteArea);
                                     }} 
                            className={style.headerEnterBtn}>Daxil ol</button>
-                           {showOpenArea && 
-                           <div className={style.enterArea} onClick={(e) => e.stopPropagation()}>
-                                 <span onClick={handleCloseOpenArea} className={style.enterAreaCloseBtn}><CloseIcon/></span>
-                               {
-                                enterInputData?.map(item=>(
-                                    <Input key={item.id} inputInfo={item}/>
-                                ))
-                               }
-                               <Link className={style.parolForgotten}>Şifrəni unutmusunuz?</Link>
-                               <button className={style.enterBtn}>Daxil ol <RightIcon/></button>
-                               <span className={style.donotAccount}>Hesabınız yoxdur?</span>
-                               <Link className={style.LinkSignUp}>Qeydiyyatdan keç</Link>
-                               </div>
-                               }
+
+{showOpenEnterSiteArea && <EnterSiteHeader handleCloseOpenEnterSite={handleCloseOpenEnterSite}/>}
+
+
                             </div>
                             <select className={style.lang} name="" id="">
                                 <option value="">Az</option>

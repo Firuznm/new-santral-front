@@ -1,0 +1,9 @@
+.myAddressesPageWrapper{
+    display: flex;
+    gap: 2rem;
+    .addresses{
+        width: calc(100% - 280px);
+        border: 1px solid red;
+    }
+
+}

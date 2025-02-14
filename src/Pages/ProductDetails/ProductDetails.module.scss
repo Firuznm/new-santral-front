@@ -1,19 +1,31 @@
 #prDetailsWrapper{
 	position: relative;
 	overflow: hidden;
-	.modalWrapper{
+	.overlayOneByModal{
+		cursor: pointer;
 		width: 100%;
-		top: 0;
-		left: 0;
+		height: 100vh;
 		position: fixed;
 		z-index: 999;
-		background-color: rgba(0, 0, 0, 0.7  );
+		top: 0;
+		left: 0;
+		background-color: rgba(255, 255, 255, 0.38);
+	}
+	.hiddenOverlay{
+		display: none;
+	}
+	.modalWrapper{
+		position: fixed; 
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		z-index: 9999; 
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		height: 100vh;
 	.oneClickByModalArea{
-		width: 200px;
+		width: 250px;
 		background: #EFEFEF;
 		padding: 1rem;
 		border-radius: 7px;
@@ -21,17 +33,42 @@
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
+			.title{
+				font-size: 1.4rem;
+				font-weight: 300;
+			}
 			svg{
+				margin-top: 6px;
 				cursor: pointer;
 			}
 		}
-		.oneClickBuyBtn{
-			margin-top: 1rem;
-            width: 100%;
-			padding: .5rem 0;
+	
+		.oneClickInp{
+			width: 90%;
+			margin-top: 5px;
+			border: none;
+			padding: 10px 5px;
+			background-color: transparent;
+			border: 1px solid #777777;
 			border-radius: 7px;
-			border: 1px solid #EAEAEA;
+			outline: none;
+		}
+		.errorMessage{
+        display: block;
+		font-size: .8rem;
+		font-weight: 300;
+		color: red;
+		font-style: italic;
+		margin-bottom: 5px;
+		}
+		.oneClickBuyBtn{
+            width: 100%;
+			padding: 10px 5px;
+			border-radius: 7px;
+			border: none;
 			cursor: pointer;
+			background-color: #FFD23F;
+			font-size: 1.2rem;
 		}
 	}
 	}
@@ -39,7 +76,9 @@
 		display: none;
 	}
 	.line{
-		margin: 1rem 0;
+		height: 1px;
+		background-color: #FFD23F;
+		border: none;
 	}
    .prImgAndPrInfo{
 	position: relative;
@@ -180,10 +219,8 @@
 			margin-top: .5rem;
 			display: flex;
 			justify-content: space-between;
-			// align-items: center;
 			.prAvailable{
 				font-size: 1.2rem;
-				// color: rgb(23 165 57);
 				color: black;
 				.productCount{
 					color: black;
@@ -367,57 +404,4 @@
 		}
 	}	
     }
-	.similarPrAndFeaturesBtn{
-		margin-top: 1rem;
-		.similarBtn,
-		.featuresBtn{
-			padding: 15px 30px;
-			border-radius: 32px;
-			border: none;
-			margin-right: 1rem;
-			cursor: pointer;
-			transition: 0.5s ease;
-		}
-	}
-	.BtnActive{
-		background: #FFD23F;
-	}
-	.relatedProducts{
-		position: relative;
-		margin: 1rem auto;
-		padding: .2rem;
-		border: 1px solid #EAEAEA;
-		border-radius: 7px;
-	}
-	.prMoreInfoWrapper{
-		margin: 1rem auto;
-		padding: 1rem 2rem;
-		border: 1px solid #EAEAEA;
-		border-radius: 16px;
-		.prInfoTitle{
-			font-size: 1.5rem;
-			text-align: center;
-		}
-		.indicatorsWrapper{
-			margin: 1rem 0;
-			display: grid;
-			grid-template-columns: repeat(auto-fill, minmax(27rem, 1fr));
-			gap: 1rem 2rem;
-			.prIndicator{
-				padding: 0 .5rem;
-				border-bottom: 1px solid #EAEAEA;
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-				.param{
-					font-size: 1.2rem;
-					font-weight: 500;
-				}
-				.option{
-					font-style: 1rem;
-					font-style: italic;
-				}
-			}	
-		}
-	}
    } 

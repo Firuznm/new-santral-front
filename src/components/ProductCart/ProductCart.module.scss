@@ -130,16 +130,17 @@
 			align-items: center;
 		}
 	.productBasket{
-     background-color: rgba(255, 210, 63, 1);
-	 color: rgba(0, 0, 0, 0.87);
-	 display: flex;
-	 justify-content: center;
-	 align-items: center;
-	 padding: .3rem 1.3rem;
-	 border-radius: 32px;
-	 cursor: pointer;
-	 transition: .7s ease;
-	 border: 1px solid rgba(255, 210, 63, 1);
+		background-color: rgb(255, 210, 63);
+		color: rgba(0, 0, 0, 0.87);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 0.6rem 1.3rem;
+		border-radius: 14px;
+		cursor: pointer;
+		transition: 0.7s ease;
+		border: 1px solid rgb(255, 210, 63);
+		width: 60%;
 	 svg{
 		display: inline-block;
 		margin-right: .7rem;
@@ -154,8 +155,14 @@
 		border-radius: 100%;
 		background-color: rgb(255 210 63);
 		transition: .5s ease;
+		border: 1px solid rgb(255 210 63);
 		&:hover{
-			background-color: rgba(255, 210, 63, 1);
+			background-color: white;
+			border: 1px solid rgb(255 210 63);
+			svg{
+			    fill:rgb(255 210 63) !important;
+				stroke: rgb(255 210 63) !important;
+			}
 		}
 	}
 }

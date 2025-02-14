@@ -1,0 +1,9 @@
+
+    .userPersonalInformationPage{
+      display: flex;
+      gap: 2rem;
+      .userInfoForm{
+        width: calc(100% - 280px);
+        border: 2px solid fuchsia;
+      }
+    }

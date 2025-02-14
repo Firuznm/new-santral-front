@@ -1,7 +1,11 @@
 .inputWrapper{
+    display: flex;
+    flex-direction: column;
     margin: 15px 0;
+    position: relative;
     label{
-     display: block;
+     display: flex;
+     width: 70%;
      font-size: 14px;
      color: #000000DE;
      margin-bottom: 5px;
@@ -21,4 +25,21 @@
             color: #00000061;
          }   
     }
+    .parolEye{
+        position: absolute;
+        right: 12px;
+        top: 40px;
+        cursor: pointer;
+        text-decoration: underline;
+    }
+    .errorMessage{
+        color: rgb(209, 9, 9);
+        text-align: start;
+    }
+}
+
+// number (telefon) inputun css
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	display: none;
 }

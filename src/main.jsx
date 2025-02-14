@@ -5,6 +5,12 @@ import Layouts from "./layouts/Layouts";
 import Home from "./Pages/Home/Home";
 import About from "./Pages/About/About";
 import ProductDetails from "./Pages/ProductDetails/ProductDetails";
+import ForgotYourPassword from "./Authentication/ForgotYourPassword/ForgotYourPassword";
+import Registration from "./Authentication/Registration/Registration";
+import UserPersonalInformation from "./Pages/UserPersonalInformation/UserPersonalInformation";
+import MyOrders from "./Pages/MyOrders/MyOrders";
+import ResetPassword from "./Pages/ResetPassword/ResetPassword";
+import MyAddresses from "./Pages/MyAddresses/MyAddresses";
 
 
 const router = createBrowserRouter([
@@ -20,6 +26,30 @@ const router = createBrowserRouter([
             {
                 path: "/product/:name",
                 element: <ProductDetails />,
+            },
+            {
+                path: "/forgot-password",
+                element: <ForgotYourPassword />,
+            },
+            {
+                path: "/registration",
+                element: <Registration />,
+            },
+            {
+                path: "/personal-information",
+                element: <UserPersonalInformation/>,
+            },
+            {
+                path: "/my-orders",
+                element: <MyOrders/>,
+            },
+            {
+                path: "/my-addresses",
+                element: <MyAddresses/>,
+            },
+            {
+                path: "/reset-password",
+                element: <ResetPassword/>,
             },
             {
                 path: "about",

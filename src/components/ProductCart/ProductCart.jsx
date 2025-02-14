@@ -49,7 +49,7 @@ export default function ProductCart({ data }) {
                       <BasketIcon color={"rgba(0, 0, 0, 0.87) "} /> Səbətə at
                   </span>
                   <span className={style.ProductFavorite}>
-                      <HeartIcon color={"rgba(0, 0, 0, 0.87"} />
+                      <HeartIcon color={"rgba(0, 0, 0, 0.87"}/>
                   </span>
               </div>
           </div>

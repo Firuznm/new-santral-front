@@ -15,6 +15,7 @@ import HomeNewComers from "../../components/HomeSection/HomeNewComers/HomeNewCom
 import OurAdvantages from "../../components/HomeSection/OurAdvantages/OurAdvantages";
 import HomeDiscountedProducts from "../../components/HomeSection/HomeDiscountedProducts/HomeDiscountedProducts";
 import Input from "../../components/Input/Input";
+import UserAccoundAndOtherDetailName from "../../components/UserAccoundAndOtherDetailName/UserAccoundAndOtherDetailName";
 // import ProductCartNew from "../../components/ProductCartNew/ProductCartNew";
 
 export default function Home() {
@@ -58,19 +59,18 @@ export default function Home() {
     // console.log("seasonOffers-", homeSeasonOffersData[0]?.products);
     
     return (
-        <div className="container"> 
+        <div className="container">
+            <UserAccoundAndOtherDetailName/> 
             {/* <HomeMainSlider dataMainSlider={homeMainSliderDatas} dataDiscounted={homeDiscountedDatas}/> */}
             <HomeDiscountedProducts discountData={homeDiscountedDatas}/>
             {/* <HomeBanner /> */}
             {/* <HomePartners PartnersData={homePartnersData} /> */}
-          
             {/* <HomeCategorySlider homeCategorySliderData={categoryDatas} /> */}
             {/* <HomeNews newsData={homeNews} /> */}
             <HomeNewComers data={categoryDatas}/>
             {/* <HomeBrands brandsData={homeBrandsData} /> */}
             {/* <OurAdvantages/> */}
             {/* <HomeBanner reverse={"row-reverse"} /> */}
-            <Input labelName={"Ad"} inputPlaceholder={"Ad"} inputType={"text"}/>
             <HomeSeasonOffers seasonOffersData={homeSeasonOffersData} />
         </div>
     );

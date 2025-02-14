@@ -23,7 +23,7 @@ export default function HomeDiscountedProducts({discountData}) {
                   pagination={{
                     clickable: true,
                   }}
-                  loop={true}
+                  // loop={true}
                   modules={[Navigation]}
                   navigation={{
                       nextEl: ".home-categorySliderAndDiscountPrSlider-button-prev",
