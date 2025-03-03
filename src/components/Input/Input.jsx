@@ -4,6 +4,7 @@ import ParolCloseEye from "../../assets/Icons/ParolCloseEye";
 import ParolOpenEye from "../../assets/Icons/ParolOpenEye";
 
 export default function Input({inputInfo,inpAreaWidth}) {
+  
    const [inputTypeChange, setInputTypeChange] = useState(true);
 
    const handleInputTypeChange= ()=>{

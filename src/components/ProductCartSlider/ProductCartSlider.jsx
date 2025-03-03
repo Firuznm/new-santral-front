@@ -13,6 +13,7 @@ export default function ProductCartSlider({data}) {
     const swiperRef = useRef(null); 
     // console.log("data slider=",data);
     
+    // category degisdiginde sliderin render olunmasi
     useEffect(() => {
       if (swiperRef.current && swiperRef.current.swiper) {
         swiperRef.current.swiper.slideTo(0); 
@@ -39,7 +40,7 @@ export default function ProductCartSlider({data}) {
             470: {
               slidesPerView: 1,
             },
-            670: {
+            670: {  
               slidesPerView: 2.1,
             },
             850: {

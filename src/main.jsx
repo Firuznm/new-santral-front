@@ -11,6 +11,9 @@ import UserPersonalInformation from "./Pages/UserPersonalInformation/UserPersona
 import MyOrders from "./Pages/MyOrders/MyOrders";
 import ResetPassword from "./Pages/ResetPassword/ResetPassword";
 import MyAddresses from "./Pages/MyAddresses/MyAddresses";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
+import Login from "./Authentication/Login/Login";
 
 
 const router = createBrowserRouter([
@@ -34,6 +37,10 @@ const router = createBrowserRouter([
             {
                 path: "/registration",
                 element: <Registration />,
+            },
+            {
+                path: "/login",
+                element: <Login />,
             },
             {
                 path: "/personal-information",
@@ -61,6 +68,7 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
+              <Provider store={store}>
                 <RouterProvider router={router} />
-    
+                </Provider>
 );

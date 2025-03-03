@@ -1,6 +1,3 @@
-import PrImg1 from "../assets/Images/image 9 (1).png"
-import PrImg2 from "../assets/Images/image 9 (2).png";
-import PrImg3 from "../assets/Images/image 9 (3).png";
 import categoryImg1 from "../assets/Images/catImg1.png"
 import categoryImg2 from "../assets/Images/catImg2.png";
 import categoryImg3 from "../assets/Images/catImg3.png";
@@ -17,7 +14,10 @@ import img3 from "../assets/Images/Saltanat.jpg";
 import img21 from "../assets/Images/cartTick.png";
 import img31 from "../assets/Images/truckFast.png";
 import img41 from "../assets/Images/convertCart.png";
+// -------------------------------------------------------------
 
+
+// -------------------------------------------------------------
 
 export const OurAdvantagesData=[
     {

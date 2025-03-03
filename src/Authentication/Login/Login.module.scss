@@ -1,0 +1,17 @@
+.loginPage{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  .loginArea{
+    width: 300px;
+    padding: 1rem;
+    border: 1px solid #EAEAEA;
+    border-radius: 14px;
+  .pageTitle{
+    font-size: 2rem;
+    text-align: center;
+  }
+  
+}
+}

@@ -1,8 +1,18 @@
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import style from "./UserAccoundAndOtherDetailName.module.scss"
+import { useDispatch } from "react-redux"
+import { logout } from "../../redux/userSlice";
 
 
 export default function UserAccoundAndOtherDetailName() {
+
+    const dispatch = useDispatch();
+   const navigate = useNavigate();
+
+    const handleLogout = () => {
+        dispatch(logout()); 
+        navigate("/")
+      };
 
   return (
 <div className={style.userAccoundAndOtherDetailName}>
@@ -18,7 +28,8 @@ export default function UserAccoundAndOtherDetailName() {
     <NavLink to="/reset-password" className={({ isActive }) => `${style.pageName} ${isActive ?  style.active : ''}`}>
         Şifrəni yenilə
     </NavLink>
-</div>
+    <span onClick={handleLogout} className={style.outside}>Cıxış Et</span>
+</div> 
 
 
   )

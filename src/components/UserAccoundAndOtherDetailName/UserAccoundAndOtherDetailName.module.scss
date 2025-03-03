@@ -6,7 +6,8 @@
     color: white;
     display: flex;
     flex-direction: column;
-    .pageName {
+    .pageName,
+    .outside {
         margin: .2rem 1rem;
         padding:.7rem 1rem;
         color: white;
@@ -24,4 +25,5 @@
             color: black;
         }
     }
+    
 }

@@ -15,7 +15,7 @@
 			margin-top: 10px;
 		}
 		.headerPage{
-		  width: calc(100% - 410px);
+		  width: calc(100% - 500px);
 		  display: flex;
 		  justify-content: space-around;
 					a{
@@ -47,6 +47,28 @@
 							border-radius: 1rem;
 							margin: 0 1rem;
 							text-wrap: nowrap;
+						}
+						.userHaveLogin{
+							position: relative;
+							display: flex;
+							align-items: center;
+							.cashmere{
+							    border: 1px solid #000000;
+								font-weight: 600;
+								padding: 0.3rem .7rem;
+								border-radius: 2rem;
+								margin: 0 1rem;
+								text-wrap: nowrap;
+							}
+							.PersonIcon{
+								cursor: pointer;
+							}
+							.headerUserInfoPage{
+								position: absolute;
+								top: 40px;
+								right: 0px;
+								z-index: 9;
+							}
 						}
 						.enterArea{
 							position: absolute;
@@ -102,6 +124,7 @@
 					}
 					
 					.lang{
+						margin-left: 1rem;
 						background-color: turquoise;
 					}
 				}

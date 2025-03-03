@@ -15,7 +15,6 @@ import HomeNewComers from "../../components/HomeSection/HomeNewComers/HomeNewCom
 import OurAdvantages from "../../components/HomeSection/OurAdvantages/OurAdvantages";
 import HomeDiscountedProducts from "../../components/HomeSection/HomeDiscountedProducts/HomeDiscountedProducts";
 import Input from "../../components/Input/Input";
-import UserAccoundAndOtherDetailName from "../../components/UserAccoundAndOtherDetailName/UserAccoundAndOtherDetailName";
 // import ProductCartNew from "../../components/ProductCartNew/ProductCartNew";
 
 export default function Home() {
@@ -60,7 +59,6 @@ export default function Home() {
     
     return (
         <div className="container">
-            <UserAccoundAndOtherDetailName/> 
             {/* <HomeMainSlider dataMainSlider={homeMainSliderDatas} dataDiscounted={homeDiscountedDatas}/> */}
             <HomeDiscountedProducts discountData={homeDiscountedDatas}/>
             {/* <HomeBanner /> */}

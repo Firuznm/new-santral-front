@@ -1,30 +1,57 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import Input from "../../components/Input/Input"
 import style from "./EnterSiteHeader.module.scss"
 import CloseIcon from "../../assets/Icons/CloseIcon"
-import { useFormik } from 'formik';
+import { useFormik } from 'formik'; 
 import * as Yup from 'yup';
 import Button from "../../components/Button/Button"
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/userSlice";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "sweetalert2";
 
-export default function EnterSiteHeader({handleCloseOpenEnterSite}) {
+export default function EnterSiteHeader({handleCloseOpenEnterSite,  setShowOpenEnterSiteArea}) {
 
- 
-      const {values,handleChange,handleSubmit,resetForm, errors}= useFormik({
+  const dispatch = useDispatch();
+  const navigate =useNavigate(); 
+   
+
+
+ const { values, handleChange, handleSubmit, resetForm, errors } = useFormik({
         initialValues: {
-          email: '',
-          password:""
+            email: '',
+            password: '',
         },
-        validationSchema:Yup.object().shape({
-            email:Yup.string().email("Doğru email unvanı daxil edin").required("Emila ünvanını doldurun"),
-            password:Yup.string().max(14,"Şifrə 5 sinvoldan cox ola bilməz").required("Şifrə xanasını doldurun")
+        validationSchema: Yup.object().shape({
+            email: Yup.string().email('Doğru email ünvanı daxil edin').required('Emila ünvanını doldurun'),
+            password: Yup.string().max(14, 'Şifrə 14 sinvoldan cox ola bilməz').required('Şifrə xanasını doldurun'),
+          
         }),
-        onSubmit: values => {
-          alert("istifadekinin melumatlari= " + JSON.stringify(values, null, 2));
-        resetForm()
+
+        onSubmit: async (values) => {
+            const result = await dispatch(login(values))
+            const MySwal = withReactContent(Swal);
+           
+            if (result.type == 'login/fulfilled') {
+            await	MySwal.fire({
+                    title: <strong>{'Daxil etdiyiniz məlumatlar göndərildi'}</strong>,
+                    html: <i>{'Təşəkkür edirik'}</i>,
+                    icon: 'success',
+                });
+                resetForm();
+                navigate("/");
+              handleCloseOpenEnterSite()
+            } else {
+         await MySwal.fire({
+                icon: "error",
+                title: "Xəta baş verdi !!!",
+                text: result.payload.errors['undefined'] || "Bilinməyən bir xəta",
+              });
+              setShowOpenEnterSiteArea(true);
+      }
+     
         },
-      });
-    
-      
+    });
     const enterInputData=[
         {
             id:1,
@@ -47,7 +74,6 @@ export default function EnterSiteHeader({handleCloseOpenEnterSite}) {
             handleChange:handleChange
         }
     ]
-
   return (
        <div className={style.enterArea} onClick={(e) => e.stopPropagation()}>
     <span onClick={handleCloseOpenEnterSite} className={style.enterAreaCloseBtn}><CloseIcon/></span>

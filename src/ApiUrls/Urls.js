@@ -10,7 +10,9 @@ const urls = {
     news: "/v1/blogs/published?page=1&lang=az",
     homeSeasonOffers: "/v1/sliders/producttab/published?page=1&lang=az",
     prDetails:(name)=>`/v1/routes/find?domain=santral_www&location=/az/products/${name}&lang=az`,
-    related:(id)=>`/v1/products/published?id=${id}&related=1&lang=az`
+    related:(id)=>`/v1/products/published?id=${id}&related=1&lang=az`,
+    register:"/v1/auth/signup",
+    login:"/v1/auth/login",
 };
 
 export default urls  
