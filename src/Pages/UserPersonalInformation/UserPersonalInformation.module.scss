@@ -2,8 +2,11 @@
     .userPersonalInformationPage{
       display: flex;
       gap: 2rem;
-      .userInfoForm{
+      .userInfo{
         width: calc(100% - 280px);
         border: 2px solid fuchsia;
+        .userInfoForm{
+        
+        }
       }
     }

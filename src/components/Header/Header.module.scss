@@ -64,10 +64,60 @@
 								cursor: pointer;
 							}
 							.headerUserInfoPage{
-								position: absolute;
-								top: 40px;
-								right: 0px;
-								z-index: 9;
+								 position: absolute;
+								 top: 40px;
+								 right: 0px;
+								 z-index: 9;
+								 background-color: #000000;
+								 border-radius: .7rem;
+								 padding: 12px 5px;
+								a{
+									display: block;
+									color: white;
+									margin: 1rem;
+									margin: .2rem 1rem;
+									padding:.7rem 1rem;
+									font-size: 1.25rem;
+									font-weight: 500;
+									cursor: pointer;
+									white-space: nowrap;
+									transition: 0.5s ease;
+									border-radius: 1.5rem;
+									&:hover {
+										background-color: #D9D9D9;
+										color: black;
+										border-radius: 1.5rem;
+									}
+								}
+								.active{
+									background-color: gold;
+									color: black; 
+									border-radius: 1.5rem;
+									&:hover{
+										background-color: gold;
+									   color: black; 
+									 
+									}
+
+								}
+								.outside{
+									display: block;
+									color: white;
+									margin: 1rem;
+									margin: .2rem 1rem;
+									padding:.7rem 1rem;
+									font-size: 1.25rem;
+									font-weight: 500;
+									cursor: pointer;
+									white-space: nowrap;
+									transition: 0.5s ease;
+									border-radius: 1.5rem;
+									&:hover {
+										background-color: #D9D9D9;
+										color: black;
+										border-radius: 1.5rem;
+									}
+								}
 							}
 						}
 						.enterArea{

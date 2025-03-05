@@ -1,6 +1,6 @@
 import style from "./Header.module.scss";
 import logo from "../../assets/logos/santralLogo.png";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import HeaderPhoneIcon from "../../assets/Icons/HeaderPhoneIcon";
 import CatalogIcon from "../../assets/Icons/CatalogIcon";
 import SearchIcon from "../../assets/Icons/SearchIcon";
@@ -8,23 +8,31 @@ import HeartIcon from "../../assets/Icons/HeartIcon";
 import BasketIcon from "../../assets/Icons/BasketIcon";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleShowEnterSiteArea } from "../../redux/userSlice"; 
+import {  logout, toggleShowEnterSiteArea } from "../../redux/userSlice"; 
 import Catalog from "../Catalog/Catalog";
 import EnterSiteHeader from "../../Authentication/EnterSiteHeader/EnterSiteHeader";
 import PersonIcon from "../../assets/Icons/PersonIcon";
-import UserAccoundAndOtherDetailName from "../UserAccoundAndOtherDetailName/UserAccoundAndOtherDetailName";
+
+
+
 
 export default function Header() {
-  const dispatch = useDispatch();
-  const { userToken, showOpenEnterSiteArea } = useSelector((state) => state.userInfo);
-  const isLogin = !!userToken; 
 
   const [showHiddenCatalog, setShowHiddenCatalog] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { userToken, showOpenEnterSiteArea, } = useSelector((state) => state.userInfo);
+  const isLogin = !!userToken; 
 
   const onClickCatalogShowHidden = () => {
     const scrollSituation = !showHiddenCatalog;
     setShowHiddenCatalog(scrollSituation);
     document.body.style.overflow = scrollSituation ? "hidden" : "auto";
+  };
+
+  const handleLogout = () => {
+    dispatch(logout()); 
+    navigate("/")
   };
 
   return (
@@ -53,9 +61,22 @@ export default function Header() {
                       <PersonIcon />
                     </span>
                     {showOpenEnterSiteArea && (
-                      <span className={style.headerUserInfoPage}>
-                        <UserAccoundAndOtherDetailName />
-                      </span>
+                      <div className={style.headerUserInfoPage}>
+                        {/* <UserAccoundAndOtherDetailName/> */}
+                       <NavLink  onClick={()=>dispatch(toggleShowEnterSiteArea())} to="/personal-information"  className={({ isActive }) => `${style.pageName} ${isActive ?  style.active : ''}`}>
+                           Şəxsi məlumatlar
+                       </NavLink>
+                       <NavLink onClick={()=>dispatch(toggleShowEnterSiteArea())}  to="/my-orders" className={({ isActive }) => `${style.pageName} ${isActive ? style.active : ''}`}>
+                           Sifarişlərim
+                       </NavLink>
+                       <NavLink onClick={()=>dispatch(toggleShowEnterSiteArea())} to="/my-addresses" className={({ isActive }) => `${style.pageName} ${isActive ?  style.active : ''}`}>
+                           Mənim ünvanlarım
+                       </NavLink>
+                       <NavLink onClick={()=>dispatch(toggleShowEnterSiteArea())} to="/reset-password" className={({ isActive }) => `${style.pageName} ${isActive ?  style.active : ''}`}>
+                           Şifrəni yenilə
+                       </NavLink>
+                       <span  onClick={handleLogout}  className={style.outside}>Cıxış Et</span>
+                      </div>
                     )}
                   </div>
                 ) : (

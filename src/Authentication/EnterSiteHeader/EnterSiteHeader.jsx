@@ -6,11 +6,11 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Button from "../../components/Button/Button"
 import { useDispatch } from "react-redux";
-import { login } from "../../redux/userSlice";
+import { login, toggleShowEnterSiteArea } from "../../redux/userSlice";
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
 
-export default function EnterSiteHeader({handleCloseOpenEnterSite,  setShowOpenEnterSiteArea}) {
+export default function EnterSiteHeader() {
 
   const dispatch = useDispatch();
   const navigate =useNavigate(); 
@@ -76,18 +76,18 @@ export default function EnterSiteHeader({handleCloseOpenEnterSite,  setShowOpenE
     ]
   return (
        <div className={style.enterArea} onClick={(e) => e.stopPropagation()}>
-    <span onClick={handleCloseOpenEnterSite} className={style.enterAreaCloseBtn}><CloseIcon/></span>
+    <span onClick={() => dispatch(toggleShowEnterSiteArea())} className={style.enterAreaCloseBtn}><CloseIcon/></span>
    <form onSubmit={handleSubmit}>
     {
     enterInputData?.map(item=>(
         <Input key={item.id} inputInfo={item}/>
     ))
     }
-    <Link to={"forgot-password"} onClick={handleCloseOpenEnterSite} className={style.parolForgotten}>Şifrəni unutmusunuz?</Link>
+    <Link to={"forgot-password"} onClick={() => dispatch(toggleShowEnterSiteArea())} className={style.parolForgotten}>Şifrəni unutmusunuz?</Link>
       <Button title={"Daxil ol"}/>
     </form>
     <span className={style.donotAccount}>Hesabınız yoxdur?</span>
-    <Link to={"registration"} onClick={handleCloseOpenEnterSite} className={style.LinkSignUp}>Qeydiyyatdan keç</Link>
+    <Link  to={"registration"} onClick={() => dispatch(toggleShowEnterSiteArea())} className={style.LinkSignUp}>Qeydiyyatdan keç</Link>
     </div>
   ) 
 }
