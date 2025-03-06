@@ -10,11 +10,16 @@ class santralSite {
             Accept: "application/json",
             "Content-Type": "application/json",
         };
-    }
+    } 
     api() {
+        const token = localStorage.getItem("token");
         return axios.create({
             baseURL: this.baseUrl,
-            headers: this.headers,
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: token ? `Bearer ${token}` : "",
+            },
         });
     }   
 }

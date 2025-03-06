@@ -13,6 +13,7 @@ const urls = {
     related:(id)=>`/v1/products/published?id=${id}&related=1&lang=az`,
     register:"/v1/auth/signup",
     login:"/v1/auth/login",
+    authMe:"/v1/auth/me",
 };
 
 export default urls  

@@ -15,15 +15,13 @@ export default function EnterSiteHeader() {
   const dispatch = useDispatch();
   const navigate =useNavigate(); 
    
-
-
  const { values, handleChange, handleSubmit, resetForm, errors } = useFormik({
         initialValues: {
-            email: '',
+            username: '',
             password: '',
         },
         validationSchema: Yup.object().shape({
-            email: Yup.string().email('Doğru email ünvanı daxil edin').required('Emila ünvanını doldurun'),
+            username: Yup.string().required('Adınızı daxil edin'),
             password: Yup.string().max(14, 'Şifrə 14 sinvoldan cox ola bilməz').required('Şifrə xanasını doldurun'),
           
         }),
@@ -40,27 +38,24 @@ export default function EnterSiteHeader() {
                 });
                 resetForm();
                 navigate("/");
-              handleCloseOpenEnterSite()
             } else {
          await MySwal.fire({
                 icon: "error",
                 title: "Xəta baş verdi !!!",
                 text: result.payload.errors['undefined'] || "Bilinməyən bir xəta",
               });
-              setShowOpenEnterSiteArea(true);
       }
-     
         },
     });
     const enterInputData=[
         {
             id:1,
-            name:"email",
-            labelName:"E-mail",
-            placeholder:"E-mail daxil edin",
-            inputType:"email",
-            value:values.email,
-            errorMessage:errors.email,
+            name:"username",
+            labelName:"Ad",
+            placeholder:"Adınızı daxil edin",
+            inputType:"text",
+            value:values.username,
+            errorMessage:errors.username,
             handleChange:handleChange
         },
         {

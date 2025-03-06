@@ -84,11 +84,13 @@ import urls from '../ApiUrls/Urls';
 
 const initialState = {
   user: {},
+  authMeUser:{},
   userToken: localStorage.getItem("token") || null,
   isError: null,
   showOpenEnterSiteArea: false,
 };
 
+// user register 
 export const register = createAsyncThunk(
   "register",
   async (data, { rejectWithValue }) => {
@@ -100,25 +102,40 @@ export const register = createAsyncThunk(
     }
   }
 );
-
+// user login
 export const login = createAsyncThunk(
   "login",
-  async (data, { rejectWithValue }) => {
+  async (data, { dispatch, rejectWithValue }) => {
     try {
       const resData = await santral.api().post(urls.login, JSON.stringify(data));
       localStorage.setItem("token", resData?.data?.access_token);
+      dispatch(authMe())
       return { user: resData.data, userToken: resData?.data?.access_token };
-
     } catch (isError) {
       return rejectWithValue(isError.response?.data || "Xəta var");
     }
   }
 );
-
+// user logout 
 export const logout = createAsyncThunk("user/logout", async () => {
   localStorage.removeItem("token");
   return null;
 });
+
+// user auth me
+export const authMe = createAsyncThunk(
+  "authMe",
+  async (_, { rejectWithValue }) => {
+    try {
+      const resData = await santral.api().get(urls.authMe);
+      return resData.data;
+    } catch (error) {
+      console.error(error);
+      return rejectWithValue(error.response?.data || "xeta var ");
+    }
+  }
+);
+
 
 export const userSlice = createSlice({
   name: 'user',
@@ -130,12 +147,14 @@ export const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+    // register
       .addCase(register.fulfilled, (state, actions) => {
         state.user = actions.payload;
       })
       .addCase(register.rejected, (state, actions) => {
         state.isError = actions.payload ?? actions.payload.isError;
       })
+      // login
       .addCase(login.fulfilled, (state, actions) => {
         state.user = actions.payload.user;
         state.userToken = actions.payload.userToken;
@@ -144,11 +163,19 @@ export const userSlice = createSlice({
       .addCase(login.rejected, (state, actions) => {
         state.isError = actions.payload ?? actions.payload.isError;
       })
+      // logout
       .addCase(logout.fulfilled, (state) => {
         state.user = {};
         state.userToken = null;
         state.showOpenEnterSiteArea = false; 
-      });
+      })
+      // authMe
+      .addCase(authMe.fulfilled, (state, actions) => {
+        state.authMeUser = actions.payload;
+      })
+      .addCase(authMe.rejected, (state, actions) => {
+        state.isError = actions.payload ?? actions.payload.isError;
+      })
   },
 });
 

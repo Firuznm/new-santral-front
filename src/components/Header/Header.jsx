@@ -6,9 +6,9 @@ import CatalogIcon from "../../assets/Icons/CatalogIcon";
 import SearchIcon from "../../assets/Icons/SearchIcon";
 import HeartIcon from "../../assets/Icons/HeartIcon";
 import BasketIcon from "../../assets/Icons/BasketIcon";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {  logout, toggleShowEnterSiteArea } from "../../redux/userSlice"; 
+import {  authMe, logout, toggleShowEnterSiteArea } from "../../redux/userSlice"; 
 import Catalog from "../Catalog/Catalog";
 import EnterSiteHeader from "../../Authentication/EnterSiteHeader/EnterSiteHeader";
 import PersonIcon from "../../assets/Icons/PersonIcon";
@@ -21,6 +21,7 @@ export default function Header() {
   const [showHiddenCatalog, setShowHiddenCatalog] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const {authMeUser} = useSelector(state=> state.userInfo);
   const { userToken, showOpenEnterSiteArea, } = useSelector((state) => state.userInfo);
   const isLogin = !!userToken; 
 
@@ -29,6 +30,13 @@ export default function Header() {
     setShowHiddenCatalog(scrollSituation);
     document.body.style.overflow = scrollSituation ? "hidden" : "auto";
   };
+
+  useEffect(() => {
+    if (userToken) {
+      dispatch(authMe());
+    }
+  }, [userToken, dispatch]);
+
 
   const handleLogout = () => {
     dispatch(logout()); 
@@ -56,13 +64,12 @@ export default function Header() {
               <div className={style.headerEnter}>
                 {isLogin ? (
                   <div className={style.userHaveLogin}>
-                    <span className={style.cashmere}>Keşbək:1.7₼</span>
+                    <span className={style.cashmere}>Keşbək : {authMeUser.cashback}₼</span>
                     <span onClick={() => dispatch(toggleShowEnterSiteArea())} className={style.PersonIcon}>
                       <PersonIcon />
                     </span>
                     {showOpenEnterSiteArea && (
                       <div className={style.headerUserInfoPage}>
-                        {/* <UserAccoundAndOtherDetailName/> */}
                        <NavLink  onClick={()=>dispatch(toggleShowEnterSiteArea())} to="/personal-information"  className={({ isActive }) => `${style.pageName} ${isActive ?  style.active : ''}`}>
                            Şəxsi məlumatlar
                        </NavLink>

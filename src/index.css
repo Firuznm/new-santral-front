@@ -22,7 +22,12 @@ ul,li,h1,h2,h3,h4,h5,h6, p{
 	margin: 0 auto;
 	padding: 2rem 1rem;
 }
-
+/* Seifeye daxil olduqda seifenin adinin style qlobalda  */
+.sectionTitle{
+    font-size: 2rem;
+    font-weight: 400;
+    color: #000000DE;
+}
 /* home banners swiper slider style */
 .tallBannerSlider .swiper-pagination-bullet,
 .narrowTopBottomSlider .swiper-pagination-bullet {

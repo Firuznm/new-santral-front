@@ -16,12 +16,12 @@ export default function Login() {
       const navigate =useNavigate(); 
        
      const { values, handleChange, handleSubmit, resetForm, errors } = useFormik({
-            initialValues: {
-                email: '',
-                password: '',
-            },
+        initialValues: {
+            username: '',
+            password: '',
+        },
             validationSchema: Yup.object().shape({
-                email: Yup.string().email('Doğru email ünvanı daxil edin').required('Emila ünvanını doldurun'),
+                username: Yup.string().email('Doğru email ünvanı daxil edin').required('Emila ünvanını doldurun'),
                 password: Yup.string().max(14, 'Şifrə 14 sinvoldan cox ola bilməz').required('Şifrə xanasını doldurun'),
             }),
     
@@ -49,26 +49,26 @@ export default function Login() {
 
         const loginInputData = 
          [
-                {
-                    id: 1,
-                    name: 'email',
-                    labelName: 'E-mail',
-                    placeholder: 'E-mail daxil edin',
-                    inputType: 'email',
-                    value: values.email,
-                    errorMessage: errors.email,
-                    handleChange: handleChange,
-                },
-                {
-                    id: 2,
-                    name: 'password',
-                    labelName: 'Şifrə',
-                    placeholder: 'Şifrə',
-                    inputType: 'password',
-                    value: values.password,
-                    errorMessage: errors.password,
-                    handleChange: handleChange,
-                },
+            {
+                id:1,
+                name:"username",
+                labelName:"Ad",
+                placeholder:"Adınızı daxil edin",
+                inputType:"text",
+                value:values.username,
+                errorMessage:errors.username,
+                handleChange:handleChange
+            },
+            {
+                id:2,
+                name:"password",
+                labelName:"Şifrə",
+                placeholder:"****",
+                inputType:"password",
+                value:values.password,
+                errorMessage:errors.password,
+                handleChange:handleChange
+            }
             ]
   return (
     <section className={styles.loginPage}>
