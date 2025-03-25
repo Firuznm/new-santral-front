@@ -1,9 +1,82 @@
-.myAddressesPageWrapper{
+.myAddressesPageWrapper {
+	display: flex;
+	gap: 4rem;
+	.modal{
+	position: fixed; 
     display: flex;
-    gap: 2rem;
-    .addresses{
-        width: calc(100% - 280px);
-        border: 1px solid red;
-    }
-
+    justify-content: center;
+    align-items: center;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+	}
+		.modalBgOverlay{
+			display: none;
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height:100%;
+			background-color: rgba(255, 255, 255, 0.38);
+			z-index: 99;
+			cursor: pointer;
+		}
+		.showOverlay {
+			display: block;
+		}
+		.modalAddressDelete{
+	position: fixed; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+	display: none;
+		}
+		.showModal{
+			display: flex;
+		}
+	.userAdersses {
+		width: 432px;
+		.userOneAddress {
+			margin: 1rem auto;
+			border: 1px solid #eaeaea;
+			background-color: #ffffff;
+			border-radius: 1rem;
+			padding: 1rem;
+			.title {
+				font-weight: 400;
+				font-size: 1rem;
+				color: #000000de;
+			}
+			.value {
+				font-weight: 500;
+				font-size: 1rem;
+				color: #000000de;
+				margin: 0.2rem 0 0.7rem;
+				display: inline-block;
+			}
+			.userNameSurnamePhoneCity {
+				display: flex;
+				justify-content: space-between;
+				.userNameCity {
+					width: 110px;
+				}
+				.icons {
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;
+					gap: 0.5rem;
+					.edit,
+					.delete{
+                    cursor: pointer;
+					}
+				}
+			}
+		}
+	}
 }

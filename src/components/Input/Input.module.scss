@@ -23,8 +23,29 @@
            }
         &::placeholder{
             color: #00000061;
-         }   
+         } 
+           option {
+    &:disabled {
+       color: #00000061!important;
     }
+  }
+// option:disabled {
+//     color: gold !important;
+//     background-color: green !important; /* Gri arka plan, isteğe bağlı */
+//   }  
+//     }
+//   option:first-child {
+//           background-color: #EBEBEB;
+//           color: red !important;
+//            &::placeholder{
+//            color: gold !important;
+//         }
+//     }
+
+//      option:disabled {
+//     color: gold !important;
+//     background-color: green !important; /* Gri arka plan, isteğe bağlı */
+        }
     .parolEye{
         position: absolute;
         right: 12px;

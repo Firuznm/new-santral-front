@@ -67,7 +67,7 @@ export default function Header() {
                     <span className={style.cashmere}>Keşbək : {authMeUser.cashback}₼</span>
                     <span onClick={() => dispatch(toggleShowEnterSiteArea())} className={style.PersonIcon}>
                       <PersonIcon />
-                    </span>
+                    </span> 
                     {showOpenEnterSiteArea && (
                       <div className={style.headerUserInfoPage}>
                        <NavLink  onClick={()=>dispatch(toggleShowEnterSiteArea())} to="/personal-information"  className={({ isActive }) => `${style.pageName} ${isActive ?  style.active : ''}`}>
@@ -79,7 +79,7 @@ export default function Header() {
                        <NavLink onClick={()=>dispatch(toggleShowEnterSiteArea())} to="/my-addresses" className={({ isActive }) => `${style.pageName} ${isActive ?  style.active : ''}`}>
                            Mənim ünvanlarım
                        </NavLink>
-                       <NavLink onClick={()=>dispatch(toggleShowEnterSiteArea())} to="/reset-password" className={({ isActive }) => `${style.pageName} ${isActive ?  style.active : ''}`}>
+                       <NavLink onClick={()=>dispatch(toggleShowEnterSiteArea())} to="/change-password" className={({ isActive }) => `${style.pageName} ${isActive ?  style.active : ''}`}>
                            Şifrəni yenilə
                        </NavLink>
                        <span  onClick={handleLogout}  className={style.outside}>Cıxış Et</span>
@@ -117,7 +117,7 @@ export default function Header() {
             </div>
             <div onClick={onClickCatalogShowHidden} className={`${style.catalogArea} ${showHiddenCatalog ? style.noneOverlay : ""}`}>
               {showHiddenCatalog && <Catalog />}
-            </div>
+            </div> 
 
             <div className={style.SearchWrapper}>
               <SearchIcon />

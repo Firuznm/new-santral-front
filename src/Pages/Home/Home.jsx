@@ -59,7 +59,7 @@ export default function Home() {
     
     return (
         <div className="container">
-            {/* <HomeMainSlider dataMainSlider={homeMainSliderDatas} dataDiscounted={homeDiscountedDatas}/> */}
+            <HomeMainSlider dataMainSlider={homeMainSliderDatas} dataDiscounted={homeDiscountedDatas}/>
             <HomeDiscountedProducts discountData={homeDiscountedDatas}/>
             {/* <HomeBanner /> */}
             {/* <HomePartners PartnersData={homePartnersData} /> */}

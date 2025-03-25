@@ -2,13 +2,13 @@ import { useFormik } from 'formik';
 import Input from '../../components/Input/Input';
 import style from './Registration.module.scss';
 import * as Yup from 'yup';
-import Button from '../../components/Button/Button';
 import { useDispatch } from 'react-redux';
 import { register } from '../../redux/userSlice';
 // import sweetalert2
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { useNavigate } from 'react-router-dom';
+import ButtonAndArrow from '../../components/ButtonAndArrow/ButtonAndArrow';
 
 export default function Registration() {
     const navigate = useNavigate();
@@ -57,33 +57,6 @@ export default function Registration() {
 			    text: result.payload.errors['undefined'] || "Bilinməyən bir xəta",
 			  });
       }
-     
-			// await dispatch(register(values)).unwrap();
-			// try {
-
-			// } catch (error) {
-			//   const MySwal = withReactContent(Swal);
-			
-			// }
-			// dispatch(register(values))
-			//   .unwrap()
-			//   .then(() => {
-			//     const MySwal = withReactContent(Swal);
-			//     MySwal.fire({
-			//       title: <strong>{"Daxil etdiyiniz məlumatlar göndərildi"}</strong>,
-			//       html: <i>{"Təşəkkür edirik"}</i>,
-			//       icon: "success",
-			//     });
-			//   })
-			//   .catch((error) => {
-			//     console.log("Caught error:", error);
-			//     const MySwal = withReactContent(Swal);
-			//     MySwal.fire({
-			//       icon: "error",
-			//       title: "Xəta baş verdi !!!",
-			//       text: error?.message || "Bilinməyən bir xəta",
-			//     });
-			//   });
 		},
 	});
 // Register componentinde istifade olunan inputlarin veziyyetleri ucun yazilmis data. Bu datani input componetinə props olaraq gonderirem
@@ -131,6 +104,7 @@ export default function Registration() {
 				errorMessage: errors.phone,
 				handleChange: handleChange,
 			},
+			
 		],
 		passwordConfirmPassword: [
 			{
@@ -178,7 +152,7 @@ export default function Registration() {
 							<Input key={inputData.id} inpAreaWidth={'50%'} inputInfo={inputData} />
 						))}
 					</div>
-					<Button title={'Qeydiyyatdan keç'} />
+					<ButtonAndArrow title={'Qeydiyyatdan keç'} />
 				</form>
 			</div>
 		</div>

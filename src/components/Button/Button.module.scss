@@ -1,14 +1,12 @@
 .button{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin: 35px 0 15px;
-    background-color: #FFD23F;
-    border-radius: 2rem;
-    border: none;
-    cursor: pointer;
-    font-size: 1.2rem;
-    font-weight: 500;
-    padding: 14px 0;
+       display: block;
+            margin-left: auto;
+            background-color: #FFD23F;
+            color: #000000DE;
+            font-weight: 500;
+            font-size: 1rem;
+            border: none;
+            border-radius: 2rem;
+            padding: 1rem 4rem;
+            cursor: pointer;
 }

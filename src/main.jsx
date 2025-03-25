@@ -9,11 +9,11 @@ import ForgotYourPassword from "./Authentication/ForgotYourPassword/ForgotYourPa
 import Registration from "./Authentication/Registration/Registration";
 import UserPersonalInformation from "./Pages/UserPersonalInformation/UserPersonalInformation";
 import MyOrders from "./Pages/MyOrders/MyOrders";
-import ResetPassword from "./Pages/ResetPassword/ResetPassword";
 import MyAddresses from "./Pages/MyAddresses/MyAddresses";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import Login from "./Authentication/Login/Login";
+import ChangePassword from "./Pages/ChangePassword/ChangePassword";
 
 
 const router = createBrowserRouter([
@@ -55,8 +55,8 @@ const router = createBrowserRouter([
                 element: <MyAddresses/>,
             },
             {
-                path: "/reset-password",
-                element: <ResetPassword/>,
+                path: "/change-password",
+                element: <ChangePassword/>,
             },
             {
                 path: "about",

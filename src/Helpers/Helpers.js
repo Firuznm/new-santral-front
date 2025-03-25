@@ -1,27 +1,40 @@
-import axios from "axios";
-
+import axios from 'axios';
 
 class santralSite {
-    constructor() {
-		// (this.lng = localStorage.getItem("lang") || "az"),
-		this.baseUrl = "https://api.santral.az";
-        this.baseUrlImage = "https://cdn.santral.az/images/";
-        this.headers = {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-        };
-    } 
-    api() {
-        const token = localStorage.getItem("token");
-        return axios.create({
-            baseURL: this.baseUrl,
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-                Authorization: token ? `Bearer ${token}` : "",
-            },
-        });
-    }   
+	constructor() {
+		this.baseUrl = 'https://api.santral.az';
+		this.baseUrlImage = 'https://cdn.santral.az/images/';
+		this.headers = {
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+		};
+
+		this.apiClient = axios.create({
+			baseURL: this.baseUrl,
+			headers: this.headers,
+		});
+
+		this.apiClient.interceptors.response.use(
+			(response) => response, 
+			(error) => {
+				if (error.response?.status === 401 || error.response?.data?.error === 'Invalid Token') {
+					localStorage.removeItem('token'); 
+					window.location.href = '/login'; 
+				}
+				return Promise.reject(error);
+			},
+		);
+	}
+
+	api() {
+		const token = localStorage.getItem('token');
+		if (token) {
+			this.apiClient.defaults.headers['Authorization'] = `Bearer ${token}`;
+		} else {
+			delete this.apiClient.defaults.headers['Authorization'];
+		}
+		return this.apiClient;
+	}
 }
 
 const santral = new santralSite();

@@ -1,0 +1,10 @@
+.UserAddressAddForm{
+    width: calc(100% - 780px);
+    .userNameSurname{
+        display: flex;
+        justify-content: space-between;
+    }
+    .userPhoneCityAddress{
+        margin-top: -8px;
+    }
+}

@@ -337,4 +337,36 @@ export const prDetailsDataTest=[
     //     img:"https://cdn.santral.az/images/dbbf6220-d535-11ee-a483-005056b06295.jpeg"
     // },
 ]
+
+// sil
+// export const myOrdersData = [
+// 	{
+// 		id: 1242,
+// 		title: 'MP010008-01B BLACK SARZLI MASA LAMPASI DONGGUAN',
+// 		date: '13 okt 2023 11:37:21',
+// 		price: '114',
+// 		count: 3,
+// 	},
+// 	{
+// 		id: 2,
+// 		title: 'CDV-43M BLUE MONITOR COMMAX',
+// 		date: '3 mart 2024 09:14:09',
+// 		price: '357',
+// 		count: 2,
+// 	},
+// 	{
+// 		id: 3,
+// 		title: 'MT2038-01M GOLD SARZLI MASA LAMPASI DONGGUAN',
+// 		date: '17 noyabr 2024 05:48:22',
+// 		price: '271',
+// 		count: 5,
+// 	},
+// 	{
+// 		id: 4,
+// 		title: 'FY-065ZX TABLE 1000X730 WITH 4 CHAIRS SHENZHEN FENGYUAN BAG MEBELI',
+// 		date: '22 mart 2025 02:55:40',
+// 		price: '799',
+// 		count: 4,
+// 	},
+// ];
     

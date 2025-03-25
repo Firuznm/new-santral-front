@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import Input from "../../components/Input/Input";
 import style from "./ForgotYourPassword.module.scss"
 import * as Yup from 'yup';
-import Button from "../../components/Button/Button";
+import ButtonAndArrow from "../../components/ButtonAndArrow/ButtonAndArrow";
 
 export default function ForgotYourPassword() {
 
@@ -38,7 +38,7 @@ export default function ForgotYourPassword() {
       <p className={style.pageWarning}>Yeni şifrə almaq üçün mailnizi daxil edin. Yeni şifrəniz mail hesabına göndəriləcək</p>
       <form onSubmit={handleSubmit}>
       <Input key={ForgotYourPasswordInpData.id} inputInfo={ForgotYourPasswordInpData}/>
-      <Button title={"Göndər"}/>
+      <ButtonAndArrow title={"Göndər"}/>
       </form>
     </div>
     </div>

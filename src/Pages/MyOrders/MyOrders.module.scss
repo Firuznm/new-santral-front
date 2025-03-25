@@ -1,8 +1,241 @@
-.myOrdersPage{
-    display: flex;
-    gap: 2rem;
-    .myOrdersContent{
-        width: calc(100% - 280px);
-        border: 2px solid turquoise;
-    }
+.myOrdersPage {
+	display: flex;
+	gap: 2rem;
+	background-color: rgba(255, 254, 250, 1);
+	.myOrdersContentWrapper {
+		width: calc(100% - 280px);
+		.pageHeader {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			.pageTitleAndSearchInp {
+				display: flex;
+				justify-content: space-between;
+				width: calc(100% - 255px);
+				.search {
+					display: flex;
+					align-items: center;
+					padding: 0.5rem 1rem;
+					border: 1px solid rgba(239, 237, 237, 1);
+					border-radius: 8px;
+					background-color: rgba(255, 255, 255, 1);
+					input {
+						border: none;
+						padding-left: 5px;
+						font-size: 1.02rem;
+						&:focus {
+							outline: none;
+							border: none;
+						}
+						&::placeholder {
+							font-size: 1rem;
+						}
+					}
+				}
+			}
+			.selects {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				width: 253px;
+				select {
+					padding: 0.7rem 0.8rem;
+					border: 1px solid rgba(239, 237, 237, 1);
+					border-radius: 8px;
+					background-color: rgba(255, 255, 255, 1);
+					font-size: 1.02rem;
+					&:focus {
+						outline: none;
+					}
+				}
+
+				.status {
+					margin: 0 1rem;
+				}
+			}
+		}
+		.tableWrapper {
+			margin: 3rem auto 1rem;
+			table {
+				border-collapse: separate;
+				border-spacing: 0;
+				width: 100%;
+				border: 1px solid #dddddd;
+				border-bottom: none;
+				border-radius: 10px;
+			}
+			tr {
+				display: flex;
+			}
+			th {
+				height: 46px;
+				padding: 8px 0;
+				font-size: 12px;
+				font-weight: 600;
+				color: rgba(31, 31, 31, 1);
+				background-color: rgba(234, 234, 234, 1);
+				display: flex;
+				align-items: center;
+			}
+			td {
+				padding: 8px 0;
+				border-bottom: 1px solid #dddddd;
+				font-size: 14px;
+				font-weight: 500;
+				display: flex;
+				align-items: center;
+			}
+
+			table tr:first-child .prId {
+				border-top-left-radius: 10px;
+			}
+			table tr:first-child .prStatus {
+				border-top-right-radius: 10px;
+			}
+			table tr:last-child .prStatus {
+				border-bottom-right-radius: 10px;
+			}
+			table tr:last-child .prId {
+				border-bottom-left-radius: 10px;
+			}
+			.prNamePriceWrapper {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				row-gap: 0.5rem;
+				.prImgNamePrice {
+					display: flex;
+					.prNameAndImg {
+						display: flex;
+						align-items: center;
+						justify-content: flex-start;
+						.prImg {
+							width: 36px;
+							height: 36px;
+							object-fit: cover;
+							border: 1px solid red;
+							border-radius: 7px;
+							margin-right: 7px;
+						}
+						.prName {
+							width: 90%;
+							display: -webkit-box;
+							-webkit-box-orient: vertical;
+							-webkit-line-clamp: 2;
+							overflow: hidden;
+							white-space: normal;
+							word-break: break-all;
+						}
+					}
+				}
+			}
+
+			.prId {
+				flex: 0.5;
+				width: 50px;
+				padding-left: 10px;
+			}
+			.prNameAndImg {
+				flex: 2;
+				width: 310px;
+				display: flex;
+				justify-content:center;
+			}
+			.prPrice,
+			.prTotal,
+			.prPayment {
+				flex: 0.7;
+				width: 100px;
+				display: flex;
+				align-items: center;
+			}
+			.prDate {
+				flex: 1.2;
+				width: 135px;
+			}
+			.prStatus {
+				flex: 1.5;
+				width: 200px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+
+			.statusBtn {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				white-space: nowrap;
+				background-color: rgba(255, 210, 63, 1);
+				border-radius: 2rem;
+				padding: 9px 10px;
+				width: 150px;
+				margin-right: 10px;
+			}
+		}
+	}
+}
+// my orders page responsive
+@media only screen and (max-width: 1024px) {
+	.myOrdersPage {
+		flex-direction: column;
+		.myOrdersContentWrapper {
+			width: 100%;
+			.tableWrapper {
+				margin: 3rem auto 1rem;
+				overflow-x: scroll;
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 750px) {
+	.myOrdersPage {
+		flex-direction: column;
+		.myOrdersContentWrapper {
+			width: 100%;
+			.pageHeader {
+				flex-direction: column;
+				.pageTitleAndSearchInp {
+					margin-bottom: 1rem;
+					width: 100%;
+					.search {
+						display: flex;
+						align-items: center;
+						padding: 0.5rem 1rem;
+						border: 1px solid rgba(239, 237, 237, 1);
+						border-radius: 8px;
+						background-color: rgba(255, 255, 255, 1);
+						input {
+							border: none;
+							padding-left: 5px;
+							font-size: 1.02rem;
+							&:focus {
+								outline: none;
+								border: none;
+							}
+							&::placeholder {
+								font-size: 1rem;
+							}
+						}
+					}
+				}
+				.selects {
+					display: flex;
+					justify-content: initial;
+					align-items: center;
+					width: 100%;
+					select {
+						padding: 0.7rem 0.8rem;
+						border-radius: 8px;
+						font-size: 1.02rem;
+					}
+
+					.status {
+						margin: 0 1rem 0 0;
+					}
+				}
+			}
+		}
+	}
 }
