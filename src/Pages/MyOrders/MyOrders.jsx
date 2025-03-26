@@ -23,6 +23,35 @@ export default function MyOrders() {
 	}, []);
 	console.log('my order page data=', myOrdersPageData);
 
+const [sortConfig, setSortConfig] = useState({ key: '', order: 'asc' });
+
+const handleSort = (type) => {
+	const sortedData = [...myOrdersPageData.data];
+
+	const newOrder =
+		sortConfig.key === type && sortConfig.order === 'asc' ? 'desc' : 'asc';
+
+	sortedData.sort((a, b) => {
+		let valueA, valueB;
+
+		if (type === 'price') {
+			valueA = a.products?.[0]?.price || 0;
+			valueB = b.products?.[0]?.price || 0;
+		} else if (type === 'total') {
+			valueA = a.total?.total || 0;
+			valueB = b.total?.total || 0;
+		} else if (type === 'date') {
+			valueA = new Date(a.createdAt).getTime();
+			valueB = new Date(b.createdAt).getTime();
+		}
+		return newOrder === 'asc' ? valueA - valueB : valueB - valueA;
+	});
+	setSortConfig({ key: type, order: newOrder });
+	setMyOrdersPageData({ ...myOrdersPageData, data: sortedData });
+};
+
+
+
 	return (
 		<div className="container">
 			<div className={style.myOrdersPage}>
@@ -67,13 +96,22 @@ export default function MyOrders() {
 										Məhsulun adı və Şəkli
 									</th>
 
-									<th className={style.prPrice}>
+									<th
+										onClick={() => handleSort('price')}
+										className={style.prPrice}
+									>
 										Qiymət <DownUpIcon />
 									</th>
-									<th className={style.prTotal}>
+									<th
+										onClick={() => handleSort('total')}
+										className={style.prTotal}
+									>
 										Cəmi <DownUpIcon />
 									</th>
-									<th className={style.prDate}>
+									<th
+										onClick={() => handleSort('date')}
+										className={style.prDate}
+									>
 										Tarix <DownUpIcon />
 									</th>
 									<th className={style.prPayment}>Ödəniş üsulu</th>

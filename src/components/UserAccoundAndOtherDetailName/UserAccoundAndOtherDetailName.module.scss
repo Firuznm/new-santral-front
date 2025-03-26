@@ -1,8 +1,11 @@
 .userAccoundAndOtherDetailName{
+    position: sticky;
+    top: 200px;
+    left: 0;
     width: 280px;
     height: 270px;
     padding: 1rem 0;
-    background-color: #232323;
+    background-color: #232323;  
     border-radius: 1rem;
     color: white;
     display: flex;

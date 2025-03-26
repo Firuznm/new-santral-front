@@ -1,9 +1,9 @@
 .myOrdersPage {
 	display: flex;
 	gap: 2rem;
-	background-color: rgba(255, 254, 250, 1);
+	background-color: rgba(255, 254, 250, 1); 
 	.myOrdersContentWrapper {
-		width: calc(100% - 280px);
+		width: calc(100% - 300px);
 		.pageHeader {
 			display: flex;
 			justify-content: space-between;
