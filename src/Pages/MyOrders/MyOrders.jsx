@@ -23,39 +23,39 @@ export default function MyOrders() {
 	}, []);
 	console.log('my order page data=', myOrdersPageData);
 
-const [sortConfig, setSortConfig] = useState({ key: '', order: 'asc' });
+	const [sortConfig, setSortConfig] = useState({ key: '', order: 'asc' });
 
-const handleSort = (type) => {
-	const sortedData = [...myOrdersPageData.data];
+	const handleSort = (type) => {
+		const sortedData = [...myOrdersPageData.data];
 
-	const newOrder =
-		sortConfig.key === type && sortConfig.order === 'asc' ? 'desc' : 'asc';
+		const newOrder =
+			sortConfig.key === type && sortConfig.order === 'asc' ? 'desc' : 'asc';
 
-	sortedData.sort((a, b) => {
-		let valueA, valueB;
+		sortedData.sort((a, b) => {
+			let valueA, valueB;
 
-		if (type === 'price') {
-			valueA = a.products?.[0]?.price || 0;
-			valueB = b.products?.[0]?.price || 0;
-		} else if (type === 'total') {
-			valueA = a.total?.total || 0;
-			valueB = b.total?.total || 0;
-		} else if (type === 'date') {
-			valueA = new Date(a.createdAt).getTime();
-			valueB = new Date(b.createdAt).getTime();
-		}
-		return newOrder === 'asc' ? valueA - valueB : valueB - valueA;
-	});
-	setSortConfig({ key: type, order: newOrder });
-	setMyOrdersPageData({ ...myOrdersPageData, data: sortedData });
-};
-
-
+			if (type === 'price') {
+				valueA = a.products?.[0]?.price || 0;
+				valueB = b.products?.[0]?.price || 0;
+			} else if (type === 'total') {
+				valueA = a.total?.total || 0;
+				valueB = b.total?.total || 0;
+			} else if (type === 'date') {
+				valueA = new Date(a.createdAt).getTime();
+				valueB = new Date(b.createdAt).getTime();
+			}
+			return newOrder === 'asc' ? valueA - valueB : valueB - valueA;
+		});
+		setSortConfig({ key: type, order: newOrder });
+		setMyOrdersPageData({ ...myOrdersPageData, data: sortedData });
+	};
 
 	return (
 		<div className="container">
 			<div className={style.myOrdersPage}>
-				<UserAccoundAndOtherDetailName />
+				<div className={style.compUserAccoundAndOtherDetailName}>
+					<UserAccoundAndOtherDetailName />
+				</div>
 				<div className={style.myOrdersContentWrapper}>
 					<div className={style.pageHeader}>
 						<div className={style.pageTitleAndSearchInp}>
@@ -74,16 +74,20 @@ const handleSort = (type) => {
 						</div>
 						<div className={style.selects}>
 							<select className={style.status} name="" id="">
-								<option value="test1">Status 1</option>
-								<option value="test2">Status 2</option>
-								<option value="test3">Status 3</option>
-								<option value="test4">Status 4</option>
+								<option value="">Ödəniş üsulu</option>
+								<option value="cash">cash</option>
+								<option value="card">card</option>
 							</select>
 
 							<select name="" id="">
-								<option value="payment1">Online</option>
-								<option value="payment2">Cart</option>
-								<option value="payment3">Payment</option>
+								<option value="">Status</option>
+								<option value="waiting_payment">waiting_payment</option>
+								<option value="new">new</option>
+								<option value="canceled">canceled</option>
+								<option value="new">new</option>
+								<option value="new">new</option>
+
+								<option value="delivered">delivered</option>
 							</select>
 						</div>
 					</div>
@@ -91,73 +95,83 @@ const handleSort = (type) => {
 						<table>
 							<thead>
 								<tr>
-									<th className={style.prId}>Satış</th>
-									<th className={style.prNameAndImg}>
+									<th className={style.headerPrId}>Satış</th>
+									<th className={style.headerPrNameAndImg}>
 										Məhsulun adı və Şəkli
 									</th>
-
 									<th
 										onClick={() => handleSort('price')}
-										className={style.prPrice}
+										className={style.headerPrPrice}
 									>
 										Qiymət <DownUpIcon />
 									</th>
 									<th
 										onClick={() => handleSort('total')}
-										className={style.prTotal}
+										className={style.headerPrTotal}
 									>
 										Cəmi <DownUpIcon />
 									</th>
 									<th
 										onClick={() => handleSort('date')}
-										className={style.prDate}
+										className={style.headerPrDate}
 									>
 										Tarix <DownUpIcon />
 									</th>
-									<th className={style.prPayment}>Ödəniş üsulu</th>
-									<th className={style.prStatus}>Status</th>
+									<th className={style.headerPrPayment}>
+										Ödəniş üsulu
+									</th>
+									<th className={style.headerPrStatus}>Status</th>
 								</tr>
 							</thead>
 							<tbody>
 								{myOrdersPageData?.data?.map((item) => (
 									<tr key={item.id}>
-										<td className={style.prId}>{item.id}</td>
-										<td className={style.prNamePriceWrapper}>
+										<td className={style.bodyPrId}>{item.id}</td>
+										<td className={style.bodyPrNamePriceWrapper}>
 											{item?.products?.map((product) => (
 												<div
 													key={product.id}
-													className={style.prImgNamePrice}
+													className={style.bodyPrImgNamePrice}
 												>
-													<div className={style.prNameAndImg}>
+													<div
+														className={style.bodyPrNameAndImg}
+													>
 														{product.image && (
 															<img
 																src={`${santral.baseUrlImage}${product.image}`}
-																className={style.prImg}
+																className={
+																	style.bodyPrImg
+																}
 															/>
 														)}
-														<div className={style.prName}>
+														<div className={style.bodyPrName}>
 															{product?.title}
 														</div>
 													</div>
-													<span className={style.prPrice}>
+													<span className={style.bodyPrPrice}>
 														{product.price.toFixed(2)} ₼
 													</span>
 												</div>
 											))}
 										</td>
-										<td className={style.prTotal}>
+										<td className={style.bodyPrTotal}>
 											{item?.total?.total.toFixed(2)} ₼
 										</td>
-										<td className={style.prDate}>
+										<td className={style.bodyPrDate}>
 											{moment(`${item.createdAt}`).format(
-												'DD.MM.YYYY/HH:mm:ss',
+												'DD.MM.YYYY',
+											)}
+											<br />
+											{moment(`${item.createdAt}`).format(
+												'HH:mm:ss',
 											)}
 										</td>
-										<td className={style.prPayment}>
+
+										<td className={style.bodyPrPayment}>
 											{item.payment.type}
 										</td>
-										<td className={style.prStatus}>
-											<span className={style.statusBtn}>
+										<td className={style.bodyPrStatus}>
+											<span className={style.bodyPrstatusBtn}>
 												{item.status}
 											</span>
 										</td>

@@ -1,10 +1,11 @@
 .myOrdersPage {
 	display: flex;
 	gap: 2rem;
-	background-color: rgba(255, 254, 250, 1); 
+	background-color: rgba(255, 254, 250, 1);
 	.myOrdersContentWrapper {
-		width: calc(100% - 300px);
+		width: 902px;
 		.pageHeader {
+			width: 812px;
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
@@ -62,7 +63,9 @@
 				width: 100%;
 				border: 1px solid #dddddd;
 				border-bottom: none;
-				border-radius: 10px;
+			}
+			thead {
+				background-color: rgba(234, 234, 234, 1);
 			}
 			tr {
 				display: flex;
@@ -85,31 +88,19 @@
 				display: flex;
 				align-items: center;
 			}
-
-			table tr:first-child .prId {
-				border-top-left-radius: 10px;
-			}
-			table tr:first-child .prStatus {
-				border-top-right-radius: 10px;
-			}
-			table tr:last-child .prStatus {
-				border-bottom-right-radius: 10px;
-			}
-			table tr:last-child .prId {
-				border-bottom-left-radius: 10px;
-			}
-			.prNamePriceWrapper {
+			.bodyPrNamePriceWrapper {
 				display: flex;
 				flex-direction: column;
 				justify-content: center;
 				row-gap: 0.5rem;
-				.prImgNamePrice {
+				.bodyPrImgNamePrice {
 					display: flex;
-					.prNameAndImg {
+					align-items: center;
+					.bodyPrNameAndImg {
 						display: flex;
 						align-items: center;
 						justify-content: flex-start;
-						.prImg {
+						.bodyPrImg {
 							width: 36px;
 							height: 36px;
 							object-fit: cover;
@@ -117,8 +108,8 @@
 							border-radius: 7px;
 							margin-right: 7px;
 						}
-						.prName {
-							width: 90%;
+						.bodyPrName {
+							padding-right: 10px;
 							display: -webkit-box;
 							-webkit-box-orient: vertical;
 							-webkit-line-clamp: 2;
@@ -129,39 +120,42 @@
 					}
 				}
 			}
-
-			.prId {
-				flex: 0.5;
+			.headerPrId,
+			.bodyPrId {
 				width: 50px;
 				padding-left: 10px;
 			}
-			.prNameAndImg {
-				flex: 2;
-				width: 310px;
+			.headerPrNameAndImg,
+			.bodyPrNameAndImg {
+				width: 250px;
+				justify-content: center;
+			}
+			.headerPrPrice,
+			.bodyPrPrice,
+			.headerPrTotal,
+			.bodyPrTotal,
+			.headerPrDate,
+			.bodyPrDate {
+				width: 120px;
 				display: flex;
-				justify-content:center;
+				justify-content: center;
 			}
-			.prPrice,
-			.prTotal,
-			.prPayment {
-				flex: 0.7;
-				width: 100px;
+			.headerPrPayment,
+			.bodyPrPayment {
+				width: 80px;
 				display: flex;
-				align-items: center;
+				justify-content: center;
 			}
-			.prDate {
-				flex: 1.2;
-				width: 135px;
-			}
-			.prStatus {
-				flex: 1.5;
-				width: 200px;
+			.headerPrStatus,
+			.bodyPrStatus {
+				width: 150px;
 				display: flex;
 				justify-content: center;
 				align-items: center;
 			}
 
-			.statusBtn {
+			.bodyPrstatusBtn {
+				width: 150px;
 				display: flex;
 				justify-content: center;
 				align-items: center;
@@ -169,20 +163,22 @@
 				background-color: rgba(255, 210, 63, 1);
 				border-radius: 2rem;
 				padding: 9px 10px;
-				width: 150px;
+
 				margin-right: 10px;
 			}
 		}
 	}
 }
 // my orders page responsive
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 1300px) {
 	.myOrdersPage {
 		flex-direction: column;
+		.compUserAccoundAndOtherDetailName {
+			display: none;
+		}
 		.myOrdersContentWrapper {
-			width: 100%;
 			.tableWrapper {
-				margin: 3rem auto 1rem;
+				margin: 1rem auto;
 				overflow-x: scroll;
 			}
 		}
@@ -196,16 +192,16 @@
 			width: 100%;
 			.pageHeader {
 				flex-direction: column;
+				align-items: inherit;
+				width: 100%;
 				.pageTitleAndSearchInp {
+					display: flex;
+					flex-direction: column;
 					margin-bottom: 1rem;
 					width: 100%;
 					.search {
-						display: flex;
-						align-items: center;
-						padding: 0.5rem 1rem;
-						border: 1px solid rgba(239, 237, 237, 1);
-						border-radius: 8px;
-						background-color: rgba(255, 255, 255, 1);
+						width: 250px;
+						margin-top: 10px;
 						input {
 							border: none;
 							padding-left: 5px;
@@ -222,9 +218,8 @@
 				}
 				.selects {
 					display: flex;
-					justify-content: initial;
 					align-items: center;
-					width: 100%;
+					width: 280px;
 					select {
 						padding: 0.7rem 0.8rem;
 						border-radius: 8px;
