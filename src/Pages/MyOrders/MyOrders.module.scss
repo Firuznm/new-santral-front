@@ -88,6 +88,11 @@
 				display: flex;
 				align-items: center;
 			}
+			.headerPrPrice,
+			.headerPrTotal,
+			.headerPrDate {
+				cursor: pointer;
+			}
 			.bodyPrNamePriceWrapper {
 				display: flex;
 				flex-direction: column;
@@ -139,7 +144,9 @@
 				width: 120px;
 				display: flex;
 				justify-content: center;
+				text-align: center;
 			}
+
 			.headerPrPayment,
 			.bodyPrPayment {
 				width: 80px;

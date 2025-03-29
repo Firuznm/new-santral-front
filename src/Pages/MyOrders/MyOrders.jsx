@@ -1,53 +1,78 @@
-import UserAccoundAndOtherDetailName from '../../components/UserAccoundAndOtherDetailName/UserAccoundAndOtherDetailName';
-import style from './MyOrders.module.scss';
-import MyOrdersSearchIcon from '../../assets/Icons/MyOrdersSearchIcon';
-import DownUpIcon from '../../assets/Icons/DownUpIcon';
 import { useEffect, useState } from 'react';
+import moment from 'moment';
 import santral from '../../Helpers/Helpers';
 import urls from '../../ApiUrls/Urls';
-import moment from 'moment';
+import style from './MyOrders.module.scss';
+import UserAccoundAndOtherDetailName from '../../components/UserAccoundAndOtherDetailName/UserAccoundAndOtherDetailName';
+import MyOrdersSearchIcon from '../../assets/Icons/MyOrdersSearchIcon';
+import DownUpIcon from '../../assets/Icons/DownUpIcon';
 
 export default function MyOrders() {
-	const [myOrdersPageData, setMyOrdersPageData] = useState();
+	const [allOrders, setAllOrders] = useState([]); 
+	const [filteredOrders, setFilteredOrders] = useState([]); 
+	const [selectedPayment, setSelectedPayment] = useState('');
+	const [selectedStatus, setSelectedStatus] = useState('');
+	const [searchTerm, setSearchTerm] = useState('');
+	const [sortConfig, setSortConfig] = useState({ key: '', order: 'asc' });
 
 	const getMyOrdersPageData = async () => {
 		try {
 			const resData = await santral.api().post(urls.myOrdersPage);
-			setMyOrdersPageData(resData.data);
+			setAllOrders(resData.data?.data || []);
+			setFilteredOrders(resData.data?.data || []);
 		} catch (error) {
 			console.log('my orders page', error);
 		}
 	};
+
 	useEffect(() => {
 		getMyOrdersPageData();
 	}, []);
-	console.log('my order page data=', myOrdersPageData);
 
-	const [sortConfig, setSortConfig] = useState({ key: '', order: 'asc' });
-
-	const handleSort = (type) => {
-		const sortedData = [...myOrdersPageData.data];
-
-		const newOrder =
-			sortConfig.key === type && sortConfig.order === 'asc' ? 'desc' : 'asc';
-
-		sortedData.sort((a, b) => {
-			let valueA, valueB;
-
-			if (type === 'price') {
-				valueA = a.products?.[0]?.price || 0;
-				valueB = b.products?.[0]?.price || 0;
-			} else if (type === 'total') {
-				valueA = a.total?.total || 0;
-				valueB = b.total?.total || 0;
-			} else if (type === 'date') {
-				valueA = new Date(a.createdAt).getTime();
-				valueB = new Date(b.createdAt).getTime();
-			}
-			return newOrder === 'asc' ? valueA - valueB : valueB - valueA;
+	// Filtr, axtarış və sıralama 
+	useEffect(() => {
+		let filteredData = allOrders.filter((order) => {
+			const matchesPayment =
+				selectedPayment === '' || order.payment.type === selectedPayment;
+			const matchesStatus =
+				selectedStatus === '' || order.status === selectedStatus;
+			const matchesSearch =
+				searchTerm === '' ||
+				order.products.some(
+					(product) =>
+						product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+						String(order.id).includes(searchTerm),
+				);
+			return matchesPayment && matchesStatus && matchesSearch;
 		});
-		setSortConfig({ key: type, order: newOrder });
-		setMyOrdersPageData({ ...myOrdersPageData, data: sortedData });
+
+		// Sıralama
+		if (sortConfig.key) {
+			filteredData = [...filteredData].sort((a, b) => {
+				let valueA, valueB;
+				if (sortConfig.key === 'price') {
+					valueA = a.products?.[0]?.price || 0;
+					valueB = b.products?.[0]?.price || 0;
+				} else if (sortConfig.key === 'total') {
+					valueA = a.total?.total || 0;
+					valueB = b.total?.total || 0;
+				} else if (sortConfig.key === 'date') {
+					valueA = new Date(a.createdAt).getTime();
+					valueB = new Date(b.createdAt).getTime();
+				}
+				return sortConfig.order === 'asc' ? valueA - valueB : valueB - valueA;
+			});
+		}
+
+		setFilteredOrders(filteredData);
+	}, [selectedPayment, selectedStatus, searchTerm, sortConfig, allOrders]);
+
+	// **Sıralama tərtibi dəyişmə funksiyası**
+	const handleSort = (type) => {
+		setSortConfig((prev) => ({
+			key: type,
+			order: prev.key === type && prev.order === 'asc' ? 'desc' : 'asc',
+		}));
 	};
 
 	return (
@@ -69,24 +94,30 @@ export default function MyOrders() {
 									id="myOrderSearch"
 									placeholder="Məhsulun adı və ya nömrəsi"
 									className={style.myOrderSearch}
+									value={searchTerm}
+									onChange={(e) => setSearchTerm(e.target.value)}
 								/>
 							</div>
 						</div>
 						<div className={style.selects}>
-							<select className={style.status} name="" id="">
+							<select
+								className={style.status}
+								value={selectedPayment}
+								onChange={(e) => setSelectedPayment(e.target.value)}
+							>
 								<option value="">Ödəniş üsulu</option>
 								<option value="cash">cash</option>
 								<option value="card">card</option>
 							</select>
 
-							<select name="" id="">
+							<select
+								value={selectedStatus}
+								onChange={(e) => setSelectedStatus(e.target.value)}
+							>
 								<option value="">Status</option>
 								<option value="waiting_payment">waiting_payment</option>
 								<option value="new">new</option>
 								<option value="canceled">canceled</option>
-								<option value="new">new</option>
-								<option value="new">new</option>
-
 								<option value="delivered">delivered</option>
 							</select>
 						</div>
@@ -124,7 +155,7 @@ export default function MyOrders() {
 								</tr>
 							</thead>
 							<tbody>
-								{myOrdersPageData?.data?.map((item) => (
+								{filteredOrders.map((item) => (
 									<tr key={item.id}>
 										<td className={style.bodyPrId}>{item.id}</td>
 										<td className={style.bodyPrNamePriceWrapper}>
@@ -158,15 +189,10 @@ export default function MyOrders() {
 											{item?.total?.total.toFixed(2)} ₼
 										</td>
 										<td className={style.bodyPrDate}>
-											{moment(`${item.createdAt}`).format(
-												'DD.MM.YYYY',
-											)}
-											<br />
-											{moment(`${item.createdAt}`).format(
-												'HH:mm:ss',
+											{moment(item.createdAt).format(
+												'DD.MM.YYYY HH:mm:ss',
 											)}
 										</td>
-
 										<td className={style.bodyPrPayment}>
 											{item.payment.type}
 										</td>
