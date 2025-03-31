@@ -6,32 +6,44 @@ import style from './MyOrders.module.scss';
 import UserAccoundAndOtherDetailName from '../../components/UserAccoundAndOtherDetailName/UserAccoundAndOtherDetailName';
 import MyOrdersSearchIcon from '../../assets/Icons/MyOrdersSearchIcon';
 import DownUpIcon from '../../assets/Icons/DownUpIcon';
+import { useSearchParams } from 'react-router-dom';
+import ReactPaginate from 'react-paginate';
 
 export default function MyOrders() {
-	const [allOrders, setAllOrders] = useState([]); 
-	const [filteredOrders, setFilteredOrders] = useState([]); 
+	const [allOrders, setAllOrders] = useState({});
+	const [filteredOrders, setFilteredOrders] = useState([]);
 	const [selectedPayment, setSelectedPayment] = useState('');
 	const [selectedStatus, setSelectedStatus] = useState('');
 	const [searchTerm, setSearchTerm] = useState('');
 	const [sortConfig, setSortConfig] = useState({ key: '', order: 'asc' });
 
-	const getMyOrdersPageData = async () => {
+	const [searchParams, setSearchParams] = useSearchParams();
+	const currentPage = Number(searchParams.get('page')) || 1;
+	const pageCount = allOrders?.pagination?.pages;
+
+	const getMyOrdersPageData = async (currentPage = 1) => {
 		try {
-			const resData = await santral.api().post(urls.myOrdersPage);
-			setAllOrders(resData.data?.data || []);
+			const resData = await santral.api().post(urls.myOrdersPage(currentPage));
+			setAllOrders(resData.data || {});
 			setFilteredOrders(resData.data?.data || []);
 		} catch (error) {
 			console.log('my orders page', error);
 		}
 	};
 
-	useEffect(() => {
-		getMyOrdersPageData();
-	}, []);
+	const handlePageClick = (event) => {
+		const newPage = event.selected + 1;
+		setSearchParams({ page: newPage });
+		window.scrollTo({ top: 0, behavior: 'smooth' });
+	};
 
-	// Filtr, axtarış və sıralama 
 	useEffect(() => {
-		let filteredData = allOrders.filter((order) => {
+		getMyOrdersPageData(currentPage);
+	}, [currentPage]);
+
+	// Filtr, axtarış və sıralama
+	useEffect(() => {
+		let filteredData = allOrders?.data?.filter((order) => {
 			const matchesPayment =
 				selectedPayment === '' || order.payment.type === selectedPayment;
 			const matchesStatus =
@@ -65,7 +77,7 @@ export default function MyOrders() {
 		}
 
 		setFilteredOrders(filteredData);
-	}, [selectedPayment, selectedStatus, searchTerm, sortConfig, allOrders]);
+	}, [selectedPayment, selectedStatus, searchTerm, sortConfig, allOrders?.data]);
 
 	// **Sıralama tərtibi dəyişmə funksiyası**
 	const handleSort = (type) => {
@@ -154,58 +166,93 @@ export default function MyOrders() {
 									<th className={style.headerPrStatus}>Status</th>
 								</tr>
 							</thead>
-							<tbody>
-								{filteredOrders.map((item) => (
-									<tr key={item.id}>
-										<td className={style.bodyPrId}>{item.id}</td>
-										<td className={style.bodyPrNamePriceWrapper}>
-											{item?.products?.map((product) => (
-												<div
-													key={product.id}
-													className={style.bodyPrImgNamePrice}
-												>
+							{filteredOrders?.length > 1 ? (
+								<tbody>
+									{filteredOrders?.map((item) => (
+										<tr key={item.id}>
+											<td className={style.bodyPrId}>{item.id}</td>
+											<td className={style.bodyPrNamePriceWrapper}>
+												{item?.products?.map((product) => (
 													<div
-														className={style.bodyPrNameAndImg}
+														key={product.id}
+														className={
+															style.bodyPrImgNamePrice
+														}
 													>
-														{product.image && (
-															<img
-																src={`${santral.baseUrlImage}${product.image}`}
+														<div
+															className={
+																style.bodyPrNameAndImg
+															}
+														>
+															{product.image && (
+																<img
+																	src={`${santral.baseUrlImage}${product.image}`}
+																	className={
+																		style.bodyPrImg
+																	}
+																/>
+															)}
+															<div
 																className={
-																	style.bodyPrImg
+																	style.bodyPrName
 																}
-															/>
-														)}
-														<div className={style.bodyPrName}>
-															{product?.title}
+															>
+																{product?.title}
+															</div>
 														</div>
+														<span
+															className={style.bodyPrPrice}
+														>
+															{product.price.toFixed(2)} ₼
+														</span>
 													</div>
-													<span className={style.bodyPrPrice}>
-														{product.price.toFixed(2)} ₼
-													</span>
-												</div>
-											))}
-										</td>
-										<td className={style.bodyPrTotal}>
-											{item?.total?.total.toFixed(2)} ₼
-										</td>
-										<td className={style.bodyPrDate}>
-											{moment(item.createdAt).format(
-												'DD.MM.YYYY HH:mm:ss',
-											)}
-										</td>
-										<td className={style.bodyPrPayment}>
-											{item.payment.type}
-										</td>
-										<td className={style.bodyPrStatus}>
-											<span className={style.bodyPrstatusBtn}>
-												{item.status}
-											</span>
+												))}
+											</td>
+											<td className={style.bodyPrTotal}>
+												{item?.total?.total.toFixed(2)} ₼
+											</td>
+											<td className={style.bodyPrDate}>
+												{moment(item.createdAt).format(
+													'DD.MM.YYYY HH:mm:ss',
+												)}
+											</td>
+											<td className={style.bodyPrPayment}>
+												{item.payment.type}
+											</td>
+											<td className={style.bodyPrStatus}>
+												<span className={style.bodyPrstatusBtn}>
+													{item.status}
+												</span>
+											</td>
+										</tr>
+									))}
+								</tbody>
+							) : (
+								<tbody>
+									<tr>
+										<td className={style.searchResultNoProduct}>
+										{currentPage}-ci səhifədə axtarışınıza uygun məhsul tapılmadı
 										</td>
 									</tr>
-								))}
-							</tbody>
+								</tbody>
+							)}
 						</table>
 					</div>
+
+					{filteredOrders?.length > 1 && (
+						<ReactPaginate
+							className={'productsPagination'}
+							breakLabel="..."
+							nextLabel=">"
+							previousLabel="<"
+							onPageChange={handlePageClick}
+							containerClassName={'pagination'}
+							pageCount={pageCount}
+							forcePage={currentPage - 1}
+							pageRangeDisplayed={2}
+							marginPagesDisplayed={2}
+						/>
+					)}
 				</div>
 			</div>
 		</div>

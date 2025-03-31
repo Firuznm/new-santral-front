@@ -22,7 +22,56 @@ ul,li,h1,h2,h3,h4,h5,h6, p{
 	margin: 0 auto;
 	padding: 2rem 1rem;
 }
-/* Seifeye daxil olduqda seifenin adinin style qlobalda  */
+/* react pagination style */
+.productsPagination{
+    display: flex;
+    justify-content: center;
+}
+.productsPagination>li{
+    margin: 0 2px;
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+    color: black;
+    border: 1px solid rgba(234, 234, 234, 1);
+   transition: .5s ease;
+   cursor: pointer;
+}
+.productsPagination>li>a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+}
+li.break{
+    border: none;
+}
+li.previous,li.next{
+background-color: rgba(234, 234, 234, 1);
+margin-bottom: 10px;
+}
+li.selected{
+    background-color: rgba(255, 210, 63, 1);
+    border: 1px solid rgba(255, 210, 63, 1);
+}
+.productsPagination>li:hover{
+    background-color: rgba(255, 249, 209, 1);
+    border-color: rgba(255, 210, 63, 1);
+}
+ /* react pagination responsive */
+@media only screen and (max-width: 750px) {
+.productsPagination>li{
+    width: 23px;
+    height: 23px;
+}
+.productsPagination>li>a{
+    width: 23px;
+    height: 23px;
+}
+}
+
+/* Seifeye daxil olduqda seifenin adinin style globalda  */
 .sectionTitle{
     font-size: 2rem;
     font-weight: 400;

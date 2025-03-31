@@ -19,7 +19,7 @@ const urls = {
 	userAddressCreate: "/v1/customers/address/create",
 	userAddressData: "/v1/customers/address/",
 	deletedUserAddress: (id) => `/v1/customers/address/delete/${id}`,
-	myOrdersPage:"/v1/orders/history?page=1&lang=az"
+	myOrdersPage:(pageNum)=>`/v1/orders/history?page=${pageNum}&lang=az`
 };
 
 export default urls  
