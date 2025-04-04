@@ -26,13 +26,11 @@ export default function MyAddresses() {
 			console.log(error);
 		}
 	};
-
 	useEffect(() => {
 		getAddressData();
 	}, []);
-
-// istifadekinin unvanini silmek
-const deleteUserAddress = async (id) => {
+    // istifadekinin unvanini silmek
+   const deleteUserAddress = async (id) => {
 	try {
 		const resData = await santral.api().delete(urls.deletedUserAddress(id));
 		if (resData && resData.data === true) {
@@ -99,7 +97,7 @@ const deleteUserAddress = async (id) => {
 									<span className={style.value}>
 										{cityOptions[address.city]}
 									</span>
-								</div>
+								</div> 
 								<div className={style.userSurnamePhone}>
 									<h6 className={style.title}>Soyad</h6>
 									<span className={style.value}>
@@ -142,7 +140,7 @@ const deleteUserAddress = async (id) => {
 						</div>
 					))}
 				</div>
-				<UserAddressAdd getAddressData={getAddressData} />
+				<UserAddressAdd getAddressData={getAddressData} /> 
 			</div>
 		</div>
 	);

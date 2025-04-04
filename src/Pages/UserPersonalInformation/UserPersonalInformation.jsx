@@ -48,7 +48,7 @@ export default function UserPersonalInformation() {
 						icon: 'success',
 					});
 		  } catch (error) {
-			console.log(error);
+			console.log(error);  
 		  }
 		},
 	});

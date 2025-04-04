@@ -19,7 +19,11 @@ const urls = {
 	userAddressCreate: "/v1/customers/address/create",
 	userAddressData: "/v1/customers/address/",
 	deletedUserAddress: (id) => `/v1/customers/address/delete/${id}`,
-	myOrdersPage:(pageNum)=>`/v1/orders/history?page=${pageNum}&lang=az`
+	myOrdersPage: (pageNum) => `/v1/orders/history?page=${pageNum}&lang=az`,
+	changePassword: "/v1/auth/changepassword",  //-- qosulmuyub
+	categoryDetailsFilter:(id)=> `/v1/products/mobile?filters=1&category=${id}&lang=az`,
+	categoryDetails:(id)=> `/v1/products/mobile?category=${id}&limit=18&page=1&sort=az&search=&lang=az`,
+	categorySlug:(slug)=>`/v1/routes/find?domain=santral_www&location=/${slug}`,
 };
-
+  
 export default urls  

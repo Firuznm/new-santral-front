@@ -14,57 +14,61 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import Login from "./Authentication/Login/Login";
 import ChangePassword from "./Pages/ChangePassword/ChangePassword";
+import CategoryAndSubcategoryDetails from "./components/CategoryAndSubcategoryDetails/CategoryAndSubcategoryDetails";
 
 
 const router = createBrowserRouter([
-    {
-        path: "/",
-        element: <Layouts />,
+	{
+		path: '/',
+		element: <Layouts />,
 
-        children: [
-            {
-                path: "/",
-                element: <Home />,
-            },
-            {
-                path: "/product/:name",
-                element: <ProductDetails />,
-            },
-            {
-                path: "/forgot-password",
-                element: <ForgotYourPassword />,
-            },
-            {
-                path: "/registration",
-                element: <Registration />,
-            },
-            {
-                path: "/login",
-                element: <Login />,
-            },
-            {
-                path: "/personal-information",
-                element: <UserPersonalInformation/>,
-            },
-            {
-                path: "/my-orders",
-                element: <MyOrders/>,
-            },
-            {
-                path: "/my-addresses",
-                element: <MyAddresses/>,
-            },
-            {
-                path: "/change-password",
-                element: <ChangePassword/>,
-            },
-            {
-                path: "about",
-                element: <About />,
-            },
-    
-        ],
-    },
+		children: [
+			{
+				path: '/',
+				element: <Home />,
+			},
+			{
+				path: '/product/:name',
+				element: <ProductDetails />,
+			},
+			{
+				path: '/forgot-password',
+				element: <ForgotYourPassword />,
+			},
+			{
+				path: '/registration',
+				element: <Registration />,
+			},
+			{
+				path: '/login',
+				element: <Login />,
+			},
+			{
+				path: '/personal-information',
+				element: <UserPersonalInformation />,
+			},
+			{
+				path: '/my-orders',
+				element: <MyOrders />,
+			},
+			{
+				path: '/my-addresses',
+				element: <MyAddresses />,
+			},
+			{
+				path: '/change-password',
+				element: <ChangePassword />,
+			},
+			{
+				path: 'about',
+				element: <About />,
+			},
+			{
+				path: '/*',
+				element: <CategoryAndSubcategoryDetails/>,
+			},
+		],
+	},
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

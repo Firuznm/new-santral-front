@@ -7,17 +7,16 @@ import CloseIcon from '../../assets/Icons/CloseIcon';
 import { useState } from 'react';
 
 export default function ModalUserAddressUpdate({ selectedAddress, closeModal,del}) {
-   const[test, setTest]= useState(true)
+   const[deleteNoDelete, setDeleteNoDelete]= useState(true)
 
-	const onClick = () => {
-		 setTest(!test)
+	const onClickDeleteAndNoDelete = () => {
+		setDeleteNoDelete(!deleteNoDelete)
 	}
 	
 	const handleDelete = async () => {
-		// Silme işlemini gerçekleştirme
+		// Silir
 		await del(selectedAddress.id);
-
-		// Silme işlemi başarılıysa modalı kapat
+		// Silib modali baglayir
 		closeModal();
 	};
 
@@ -100,16 +99,14 @@ export default function ModalUserAddressUpdate({ selectedAddress, closeModal,del
 			},
 		],
 	};
-    
-
 	return (
 		<div>
-			{test ? (
+			{deleteNoDelete ? (
 				<div className={style.UserAddressAddForm}>
 					<span onClick={closeModal} className={style.closeIcon}>
 						<CloseIcon />
 					</span>
-					<h3 className="sectionTitle">Ünvana düzəliş et əlavə et</h3>
+					<h3 className="sectionTitle">Ünvana düzəliş etib əlavə edin</h3>
 					<p>Dəyişikliyi yadda saxlaya və ya ünvanı silə bilərsiniz</p>
 
 					<form onSubmit={handleSubmit}>
@@ -131,7 +128,7 @@ export default function ModalUserAddressUpdate({ selectedAddress, closeModal,del
 						</div>
 						<div className={style.btnList}>
 							<button
-								onClick={onClick}
+								onClick={onClickDeleteAndNoDelete}
 								type="button"
 								className={style.deleteBtn}
 							>
@@ -147,7 +144,7 @@ export default function ModalUserAddressUpdate({ selectedAddress, closeModal,del
 							<h3 className="sectionTitle">Ünvan silinsin?</h3>
 							<p>Ünvanınız silinəcək. Bu əməliyyatı etmək istədiyinizə əminsiniz?</p>
 							<div className={style.btnList}>
-								<button onClick={onClick} className={style.noBtn}>
+								<button onClick={onClickDeleteAndNoDelete} className={style.noBtn}>
 									Xeyr
 								</button>
 								<button onClick={handleDelete} className={style.yesBtn}>

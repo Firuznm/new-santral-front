@@ -1,5 +1,8 @@
 .UserAddressAddForm{
     width: calc(100% - 780px);
+    height: 484px;
+    position: sticky;
+    top: 190px;
     .userNameSurname{
         display: flex;
         justify-content: space-between;

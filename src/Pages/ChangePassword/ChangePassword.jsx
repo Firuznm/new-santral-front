@@ -4,62 +4,83 @@ import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
+import santral from "../../Helpers/Helpers";
+import urls from "../../ApiUrls/Urls";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 export default function ChangePassword() {
+	const navigate = useNavigate();
     
-        const { values, handleChange, handleSubmit, resetForm, errors } = useFormik({
+        const { values, handleChange, handleSubmit,resetForm,errors } = useFormik({
 			initialValues: {
-				oldPassword: '',
-				newPassword: '',
-				confirmNewPassword: '',
+				current: '',
+				password: '',
+				password2: '',
 			},
 			validationSchema: Yup.object().shape({
-				oldPassword: Yup.string()
+				current: Yup.string()
 					.max(14, 'Şifrə 14 sinvoldan cox ola bilməz')
 					.required('Köhnə şifrə xanasını doldurun'),
-				newPassword: Yup.string()
+				password: Yup.string()
 					.max(14, 'Şifrə 14 sinvoldan cox ola bilməz')
 					.required('Yeni şifrə xanasını doldurun'),
-				confirmNewPassword: Yup.string()
+				password2: Yup.string()
 					.required('Təkrar yeni şifrə xanasını doldurun')
-					.oneOf([Yup.ref('newPassword', Yup.newPassword)], 'Şifrələr eyni deyil'),
+					.oneOf([Yup.ref('password2', Yup.password2)], 'Şifrələr eyni deyil'),
 			}),
 
-			onSubmit: (values) => {
-                console.log('values=', values);
-                resetForm()
-            },
-            
+			onSubmit: async (values) => {
+				try {
+					await santral.api().post(urls.changePassword, JSON.stringify(values));
+					const MySwal = withReactContent(Swal);
+					MySwal.fire({
+						title: <strong>{'Şifrəniz dəyişdirildi'}</strong>,
+						html: <i>{'Təşəkkür edirik'}</i>,
+						icon: 'success',
+					});
+				} catch (error) {
+					console.log(error);
+					Swal.fire({
+						icon: 'error',
+						title: 'Oops...',
+						text: 'Şifrə dəyişdirilmədi !!!',
+					});
+				}
+				resetForm();
+				navigate("/")
+			},
 		});
     const changePasswordInputsData = [
 		{
 			id: 1,
-			name: 'oldPassword',
+			name: 'current',
 			labelName: 'Cari şifrə',
 			placeholder: '******',
 			inputType: 'password',
-			value: values.oldPassword,
-			errorMessage: errors.oldPassword,
+			value: values.current,
+			errorMessage: errors.current,
 			handleChange: handleChange,
 		},
 		{
 			id: 2,
-			name: 'newPassword',
+			name: 'password',
 			labelName: 'Şifrə',
 			placeholder: '******',
 			inputType: 'password',
-			value: values.newPassword,
-			errorMessage: errors.newPassword,
+			value: values.password,
+			errorMessage: errors.password,
 			handleChange: handleChange,
 		},
 		{
 			id: 3,
-			name: 'confirmNewPassword',
+			name: 'password2',
 			labelName: 'Yeni şifrə təkrar',
 			placeholder: '******',
 			inputType: 'password',
-			value: values.confirmNewPassword,
-			errorMessage: errors.confirmNewPassword,
+			value: values.password2,
+			errorMessage: errors.password2,
 			handleChange: handleChange,
 		},
 	];

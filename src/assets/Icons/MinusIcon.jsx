@@ -12,7 +12,7 @@ export default function MinusIcon() {
           className="icon-path"
           d="M17 2H1c-.547 0-1-.453-1-1s.453-1 1-1h16c.547 0 1 .453 1 1s-.453 1-1 1"
         ></path>
-      </svg>
+      </svg> 
     );
   }
   

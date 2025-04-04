@@ -60,19 +60,20 @@ export function MainSlider({ data,autoplayStyle, effectStyle }) {
       <Swiper
         spaceBetween={20}
         effect={effectStyle}
-        // autoplay={autoplayStyle}
+        autoplay={autoplayStyle}
         modules={[Autoplay, Navigation, EffectFade]}
         className={styles.swiperMainSlider}
       >
         {data.map((item) => (
           <SwiperSlide key={item.id}>
             {item.video ? (
-              <iframe
-                src={`${item.video}?autoplay=1&mute=1&loop=1&playlist=${item.video.split("/").pop()}`}
-                title="YouTube Video"
-                allow="autoplay; fullscreen; picture-in-picture"
-                allowFullScreen
-              ></iframe>
+            <img src={item.video} alt="" />
+              // <iframe
+              //   src={`${item.video}?autoplay=1&mute=1&loop=1&playlist=${item.video.split("/").pop()}`}
+              //   title="YouTube Video"
+              //   allow="autoplay; fullscreen; picture-in-picture"
+              //   allowFullScreen
+              // ></iframe>
             ) : (
               <Link to={item?.product && item?.product?.discountPercent > 0 ?  `/product/${item?.product?.name}` : item.route}> <img src={`${santral.baseUrlImage}${item.image}`}/>
               {item?.product && item?.product?.discountPercent > 0 && 

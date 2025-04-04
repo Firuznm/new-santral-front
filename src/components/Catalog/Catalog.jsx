@@ -19,23 +19,30 @@ export default function Catalog() {
     };
     getCategoryDatas();
   }, []);
+
+  console.log("cato=", catalogData);
+  
     
   const renderCategories = (category) => (
-    <li key={category.id} className={styles.categoryName}>
-      <Link to={category.route}>{category.title}</Link>
+		<Link to={category.route} key={category.id} className={styles.categoryName}>
+			<span className={styles.title}>{category.title}</span>
 
-      {category.children?.length > 0 && (
-          <>
-          <span className={styles.arrow}><IsBigIcon /></span>
-          <div className={styles.subCategoryWrapper}>
-          <ul className={styles.subCategory}>
-            <span className={styles.subCategoryHeaderTitle}>{category.title}</span>
-          {category.children.map(renderCategories)}
-            </ul>
-            </div>
-          </>
-      )}
-    </li>
+			{category.children?.length > 0 && (
+				<>
+					<span className={styles.arrow}>
+						<IsBigIcon />
+					</span>
+					<div className={styles.subCategoryWrapper}>
+						<ul className={styles.subCategory}>
+							<span className={styles.subCategoryHeaderTitle}>
+								{category.title}
+							</span>
+							{category.children.map(renderCategories)}
+						</ul>
+					</div>
+				</>
+			)}
+		</Link>
   );
 
   return (
