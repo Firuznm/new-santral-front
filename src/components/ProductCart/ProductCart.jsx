@@ -11,7 +11,7 @@ export default function ProductCart({ data }) {
     const testFunc = () => {
         console.log("basket btn click");
     } 
-    // console.log("data pr", data);
+    // console.log("data pr", data);  
   const PriceDifference= Number(data.oldPrice - data.price).toFixed(2)
 //   console.log("diff", PriceDifference);
   
@@ -21,7 +21,7 @@ export default function ProductCart({ data }) {
       {data.price > 50  && (
   <div className={style.delivery}>
     <img src={truck} className={style.truckImg} />
-    Mehsul Pulsuz catdirilir
+    Məhsul Pulsuz Catdırılır
   </div>
 )}
 
@@ -36,7 +36,7 @@ export default function ProductCart({ data }) {
               </Link>
 
             <div className={style.discountPrice}>
-              {PriceDifference > 0 ?  <span className={style.prPriceDifference}>- {PriceDifference} ₼</span> :<div style={{height:"20px"}}></div>}
+              {PriceDifference > 0 ?  <span className={style.prPriceDifference}>- {PriceDifference} ₼</span> :<div style={{height:"40px"}}></div>}
                {/* <span className={style.te}><img src={truck} alt="" /> Pulsuz Catdirilma</span> */}
               </div>
               <div className={style.prPricesWrapper}>

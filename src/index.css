@@ -181,7 +181,7 @@ li.selected{
     display: flex;
     justify-content: end;
     align-items: center;
-    background-color: rgba(245, 245, 245, 1);
+   background-color: rgb(255, 210, 63);
 }
 .home-categorySliderAndDiscountPrSlider-button-next{
     cursor: pointer;
@@ -197,7 +197,7 @@ li.selected{
     border-bottom-right-radius: 100px;
     display: flex;
     align-items: center;
-    background-color: rgba(245, 245, 245, 1);
+     background-color: rgb(255, 210, 63);
 }
 
 
@@ -238,7 +238,9 @@ li.selected{
     fill: red !important; 
     fill-opacity: 1; 
   }
-  
+/* .homeCategoryPartnersSlider .swiper-slide-active{
+    margin-left: -26px;
+  } */
 @media only screen and (max-width: 850px) {
     .resultSlider .swiper-slide-active{
         display: flex;

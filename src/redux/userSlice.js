@@ -3,14 +3,29 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import santral from '../Helpers/Helpers';
 import urls from '../ApiUrls/Urls';
 
+
 const initialState = {
   user: {},
-  authMeUser:{},
+  authMeUser: {},
+  catalogDatas:[],
   userToken: localStorage.getItem("token") || null,
   isError: null,
   showOpenEnterSiteArea: false,
 };
 
+console.log("redux activ oldu");
+
+export const getAllCatalogDatas = createAsyncThunk(
+  "categoryData",
+  async (_, { rejectWithValue }) => {
+    try {
+      const res = await santral.api().post(urls.catalog);
+      return res.data.data
+    } catch (isError) {
+       return rejectWithValue(isError.response?.data || "Xəta var");
+    }
+  }
+)
 
 // user register 
 export const register = createAsyncThunk(
@@ -74,6 +89,13 @@ export const userSlice = createSlice({
         state.user = actions.payload;
       })
       .addCase(register.rejected, (state, actions) => {
+        state.isError = actions.payload ?? actions.payload.isError;
+      })
+      // category
+      .addCase(getAllCatalogDatas.fulfilled, (state, actions) => {
+        state.catalogDatas = actions.payload;
+      })
+      .addCase(getAllCatalogDatas.rejected, (state, actions) => {
         state.isError = actions.payload ?? actions.payload.isError;
       })
       // login

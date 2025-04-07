@@ -32,7 +32,7 @@ export default function CategoryAndSubcategoryDetails() {
 	useEffect(() => {
 		getCategoryDetailsDatas();
 	}, [slug]);
-	// console.log('filter data=', categoryDetailsFilterDatas);
+	console.log('filter data=', categoryDetailsFilterDatas);
 	// console.log("detail=", categoryDetailsData);
 	// console.log("slug=", categorySlugData);
     const [visibleIndicators, setVisibleIndicators] = useState({});
@@ -78,7 +78,7 @@ export default function CategoryAndSubcategoryDetails() {
 						<div className={style.filterAreaWrapper}>
 							<div
 								className={`${style.filterArea} ${
-									categoryDetailsFilterDatas.length > 9
+									categoryDetailsFilterDatas.length > 10
 										? style.scrollHeight
 										: ''
 								}`}
@@ -101,32 +101,43 @@ export default function CategoryAndSubcategoryDetails() {
 											</span>
 										</div>
 										{visibleIndicators[item.id] && (
-											<div className={style.categoryIndicators}>
-												<span style={{ display: 'block' }}>
-													test 1
-												</span>
-												<span style={{ display: 'block' }}>
-													test 2
-												</span>
-												<span style={{ display: 'block' }}>
-													test 3
-												</span>
-											</div>
+												<div
+													className={`${
+														style.categoryIndicators
+													} ${
+														item?.options?.length > 5
+															? style.optionsScroll
+															: ''
+													}`}
+												>
+													{item?.options.map((option) => (
+														<div
+															key={option.id}
+															className={
+																style.inpCheckboxWrapper
+															}
+														>
+															<input
+																type="checkbox"
+																id={option.id}
+															/>
+															<label htmlFor={option.id}>
+																{option.title}
+															</label>
+															<span
+																className={
+																	style.optionCount
+																}
+															>
+																({option.count})
+															</span>
+														</div>
+													))}
+												</div>
+											
 										)}
 									</div>
 								))}
-								{/* <div className={style.inpCheckboxWrapper}>
-								<input type="checkbox" id="1" />
-								<label htmlFor="1">Brend</label>
-							</div>
-							<div className={style.inpCheckboxWrapper}>
-								<input type="checkbox" id="2" />
-								<label htmlFor="2">olcu</label>
-							</div>
-							<div className={style.inpCheckboxWrapper}>
-								<input type="checkbox" id="3" />
-								<label htmlFor="3">reng</label>
-							</div> */}
 							</div>
 						</div>
 						<div className={style.productsArea}>

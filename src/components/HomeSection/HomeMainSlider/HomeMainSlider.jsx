@@ -14,7 +14,6 @@ export default function HomeMainSlider({dataMainSlider,dataDiscounted}) {
   
   return (
     <div id={styles.homeMainSliderWrapper}>
-      <div className="container">
         <div className={styles.homeMainSlider}>
           <div className={styles.mainSliderLeft}>
             <MainSlider
@@ -50,7 +49,6 @@ export default function HomeMainSlider({dataMainSlider,dataDiscounted}) {
           </div>
         </div>
       </div>
-    </div>
   );
 }
 

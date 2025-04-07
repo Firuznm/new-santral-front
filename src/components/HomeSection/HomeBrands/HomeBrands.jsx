@@ -9,9 +9,9 @@ export default function HomeBrands({ brandsData }) {
 	
     return (
         <section id={style.HomeBrandsWrapper}>
-            <div className="container">
+            <div className="container">  
                     <Swiper
-                        slidesPerView={7}
+                        slidesPerView={6}
                         // spaceBetween={30}
                         autoplay={{
                             delay: 1500,

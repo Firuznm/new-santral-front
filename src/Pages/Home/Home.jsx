@@ -58,18 +58,22 @@ export default function Home() {
     // console.log("seasonOffers-", homeSeasonOffersData[0]?.products);
     
     return (
-        <div className="container">
-            <HomeMainSlider dataMainSlider={homeMainSliderDatas} dataDiscounted={homeDiscountedDatas}/>
-            <HomeDiscountedProducts discountData={homeDiscountedDatas}/>
-            {/* <HomeBanner /> */}
-            {/* <HomePartners PartnersData={homePartnersData} /> */}
-            {/* <HomeCategorySlider homeCategorySliderData={categoryDatas} /> */}
-            {/* <HomeNews newsData={homeNews} /> */}
-            <HomeNewComers data={categoryDatas}/>
-            {/* <HomeBrands brandsData={homeBrandsData} /> */}
-            {/* <OurAdvantages/> */}
-            {/* <HomeBanner reverse={"row-reverse"} /> */}
-            <HomeSeasonOffers seasonOffersData={homeSeasonOffersData} />
-        </div>
-    );
+		<div className="container">
+			<HomeMainSlider
+				dataMainSlider={homeMainSliderDatas}
+				dataDiscounted={homeDiscountedDatas}
+			/>
+			<HomeDiscountedProducts discountData={homeDiscountedDatas} />
+			{/* <HomeBanner /> */}
+
+			<HomeCategorySlider homeCategorySliderData={categoryDatas} />
+			{/* <HomeNews newsData={homeNews} /> */}
+			<HomeNewComers data={categoryDatas} />
+			<HomeBrands brandsData={homeBrandsData} />
+			<OurAdvantages />
+			<HomeBanner reverse={'row-reverse'} />
+			<HomeSeasonOffers seasonOffersData={homeSeasonOffersData} />
+			<HomePartners PartnersData={homePartnersData} />
+		</div>
+	);
 }
