@@ -1,0 +1,286 @@
+#hederWrapper {
+	position: sticky;
+	top: 0;
+	left: 0;
+	z-index: 99;
+	.headerTop {
+		background-color: rgba(255, 210, 63, 1);
+		padding: 7px 0 2px;
+		.headerTopContent {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			.santralLogo {
+				width: 170px;
+			}
+			.headerTopCatalog{
+			
+			}
+			.SearchWrapper {
+				border: 1px solid rgba(0, 0, 0, 0.38);
+				width: 25%;
+				margin: 0 1rem;
+				display: flex;
+				justify-content: start;
+				align-items: center;
+				padding: 0.6rem 0.8rem;
+				border-radius: 2rem;
+				background-color: rgba(255, 255, 255, 0.9);
+				svg {
+					margin-right: 0.3rem;
+				}
+				input {
+					outline: none;
+					border: none;
+					width: 90%;
+					background-color: transparent;
+					&::placeholder {
+						color: rgba(0, 0, 0, 0.38);
+					}
+					&::-webkit-input-placeholder {
+						color: rgba(0, 0, 0, 0.38);
+					}
+					&:-moz-placeholder {
+						color: rgba(0, 0, 0, 0.38);
+					}
+					&::-moz-placeholder {
+						color: rgba(0, 0, 0, 0.38);
+					}
+					&:-ms-input-placeholder {
+						color: rgba(0, 0, 0, 0.38);
+					}
+				}
+			}
+			.freeDelivery {
+				border: 1px solid green;
+				width: 300px;
+			}
+			.shortPhone {
+				font-size: 1.2rem;
+				font-weight: 500;
+				display: inline-flex;
+				align-items: center;
+				color: rgba(0, 0, 0, 0.87);
+				svg {
+					display: inline-block;
+					margin-right: 0.5rem;
+				}
+			}
+			.headerEnter {
+				position: relative;
+				.headerEnterBtn {
+					cursor: pointer;
+					color: rgba(0, 0, 0, 0.6);
+					font-weight: 600;
+					padding: 0.5rem;
+					border-radius: 2rem;
+					margin: 0 1rem;
+					text-wrap: nowrap;
+					height: 45px;
+					width: 95px;
+					border: none;
+				}
+				.userHaveLogin {
+					position: relative;
+					display: flex;
+					align-items: center;
+					.cashmere {
+						border: 1px solid #000000;
+						font-weight: 600;
+						padding: 0.3rem 0.7rem;
+						border-radius: 2rem;
+						margin: 0 1rem;
+						text-wrap: nowrap;
+					}
+					.PersonIcon {
+						cursor: pointer;
+					}
+					.headerUserInfoPage {
+						position: absolute;
+						top: 48px;
+						right: 17px;
+						z-index: 9;
+						background-color: #000000;
+						border-radius: 0.7rem;
+						padding: 12px 5px;
+						a {
+							display: block;
+							color: white;
+							margin: 1rem;
+							margin: 0.2rem 1rem;
+							padding: 0.7rem 1rem;
+							font-size: 1.25rem;
+							font-weight: 500;
+							cursor: pointer;
+							white-space: nowrap;
+							transition: 0.5s ease;
+							border-radius: 1.5rem;
+							&:hover {
+								background-color: #d9d9d9;
+								color: black;
+								border-radius: 1.5rem;
+							}
+						}
+						.active {
+							background-color: gold;
+							color: black;
+							border-radius: 1.5rem;
+							&:hover {
+								background-color: gold;
+								color: black;
+							}
+						}
+						.outside {
+							display: block;
+							color: white;
+							margin: 1rem;
+							margin: 0.2rem 1rem;
+							padding: 0.7rem 1rem;
+							font-size: 1.25rem;
+							font-weight: 500;
+							cursor: pointer;
+							white-space: nowrap;
+							transition: 0.5s ease;
+							border-radius: 1.5rem;
+							&:hover {
+								background-color: #d9d9d9;
+								color: black;
+								border-radius: 1.5rem;
+							}
+						}
+					}
+				}
+				.enterAreaCloseBtn {
+					width: 30px;
+					height: 30px;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					cursor: pointer;
+					position: absolute;
+					top: 10px;
+					right: 20px;
+					z-index: 9;
+				}
+				.parolForgotten {
+					display: flex;
+					justify-content: end;
+					color: #00000099;
+					font-size: 14px;
+				}
+				.enterBtn {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					width: 100%;
+					margin: 14px 0;
+					background-color: #ffd23f;
+					border-radius: 2rem;
+					border: none;
+					cursor: pointer;
+					font-size: 1.2rem;
+					font-weight: 500;
+					padding: 14px 0;
+				}
+				.donotAccount {
+					color: #00000099;
+					font-size: 0.9rem;
+				}
+				.LinkSignUp {
+					margin-left: 7px;
+					font-weight: 700;
+					border-bottom: 3px solid #fd8521;
+					color: #fd8521;
+				}
+			}
+			.basketWishList {
+				width: 7rem;
+				margin-right: 14px;
+				display: flex;
+				justify-content: space-between;
+				a {
+					position: relative;
+					padding: 0.7rem;
+					background-color: rgba(35, 35, 35, 1);
+					border-radius: 100%;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+				}
+				.wishListCount,
+				.basketCount {
+					position: absolute;
+					top: -10px;
+					right: -16px;
+					padding: 0.3rem;
+					border-radius: 100%;
+					background-color: rgba(245, 245, 245, 1);
+					color: black;
+				}
+			}
+			.lang {
+				margin-left: 1rem;
+				background-color: turquoise;
+			}
+		}
+	}
+	.headerBottom {
+		background-color: rgba(35, 35, 35, 1);
+		color: white;
+		transition: all 0.5s ease;
+		.headerBottomContent {
+			opacity: 1;
+			pointer-events: all;
+			height: 45px;
+			padding-bottom: 5px;
+			display: flex;
+			align-items: center;
+			.catalog {
+				display: flex;
+				align-items: center;
+				border: 1px solid rgba(255, 255, 255, 0.38);
+				background-color: rgba(35, 35, 35, 1);
+				border-radius: 16px;
+				padding: 0.4rem 0.8rem;
+				width: 10rem;
+				font-size: 1.25rem;
+				cursor: pointer;
+				svg {
+					margin-right: 0.5rem;
+				}
+			}
+			.catalogArea {
+				position: absolute;
+				top: 0;
+				left: 0;
+				background-color: rgba(255, 255, 255, 0.38);
+				width: 100%;
+				height: 100vh;
+				z-index: 5;
+				display: none;
+			}
+			.noneOverlay {
+				display: block;
+			}
+			.headerPage {
+				display: flex;
+				margin-left: 7rem;
+				a {
+					color: white;
+					margin: 0 1.4rem;
+					padding: 0.5rem;
+				}
+			}
+		}
+	}
+	.noHeaderBottom {
+		opacity: 0;
+		display: none;
+		pointer-events: none;
+	}
+}
+@media only screen and (max-width: 950px) {
+	.headerWrapper {
+		display: none;
+	}
+}

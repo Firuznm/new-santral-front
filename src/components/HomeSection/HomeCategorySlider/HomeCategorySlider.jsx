@@ -5,7 +5,7 @@ export default function HomeCategorySlider({ homeCategorySliderData }) {
     return (
 		<section id={style.homeCategory}>
 			<HomeCategoryPartnersSlider
-				cartNumber={8}
+				cartNumber={7}
 				sliderCartHeight={'220px'}
                 imgHeight={'116px'}
                 imgWidth={"116px"}

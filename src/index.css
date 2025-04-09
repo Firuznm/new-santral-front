@@ -199,7 +199,12 @@ li.selected{
     align-items: center;
      background-color: rgb(255, 210, 63);
 }
-
+.home-categorySliderAndDiscountPrSlider-button-next>svg{
+    margin-left: 7px;
+}
+.home-categorySliderAndDiscountPrSlider-button-prev>svg{
+  margin-right: 7px;
+}
 
 /* home bransSlider   */
 .bransSlider .swiper-pagination-bullet{

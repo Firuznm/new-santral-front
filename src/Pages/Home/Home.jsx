@@ -4,7 +4,7 @@ import ProductCart from "../../components/ProductCart/ProductCart";
 import HomeSeasonOffers from "../../components/HomeSection/HomeSeasonOffers/HomeSeasonOffers";
 import HomeBanner from "../../components/HomeSection/HomeBanner/HomeBanner";
 import santral from "../../Helpers/Helpers";
-import urls from "../../ApiUrls/Urls";
+import urls from "../../ApiUrls/Urls";  
 import { bannerDatas } from "../../MyDatas/MyDatas";
 import NewsCart from "../../components/NewsCart/NewsCart";
 import HomePartners from "../../components/HomeSection/HomeParners/HomePartners";
@@ -48,7 +48,7 @@ export default function Home() {
         getHomeAllData();
     }, []);
 
-    // console.log("partners data=", homePartnersData);
+    console.log("partners data=", homePartnersData);
     // console.log("brands =", homeBrandsData);
     // console.log("categoryData-", categoryDatas);
     // console.log("main slider=", homeMainSliderDatas);
@@ -64,7 +64,7 @@ export default function Home() {
 				dataDiscounted={homeDiscountedDatas}
 			/>
 			<HomeDiscountedProducts discountData={homeDiscountedDatas} />
-			{/* <HomeBanner /> */}
+			{/* <HomeBanner /> */} 
 
 			<HomeCategorySlider homeCategorySliderData={categoryDatas} />
 			{/* <HomeNews newsData={homeNews} /> */}

@@ -98,7 +98,7 @@ export default function Header() {
                   </div>
                 )}
               </div>
-
+  
               <select className={style.lang} name="" id="">
                 <option value="">Az</option>
                 <option value="">En</option>
