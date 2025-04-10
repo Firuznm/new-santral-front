@@ -1,4 +1,4 @@
-import style from "./HeaderNew.module.scss"
+import style from './HeaderNew.module.scss';
 import santralLogo from '../../assets/logos/santralLogo.png';
 import HeaderPhoneIcon from '../../assets/Icons/HeaderPhoneIcon';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,51 +9,53 @@ import PersonIcon from '../../assets/Icons/PersonIcon';
 import EnterSiteHeader from '../../Authentication/EnterSiteHeader/EnterSiteHeader';
 import HeartIcon from '../../assets/Icons/HeartIcon';
 import BasketIcon from '../../assets/Icons/BasketIcon';
-import SearchIcon from "../../assets/Icons/SearchIcon";
-import CatalogIcon from "../../assets/Icons/CatalogIcon";
-import Catalog from "../Catalog/Catalog";
+import SearchIcon from '../../assets/Icons/SearchIcon';
+import CatalogIcon from '../../assets/Icons/CatalogIcon';
+import Catalog from '../Catalog/Catalog';
+import HeaderFreeDeliverySlider from '../HeaderFreeDeliverySlider/HeaderFreeDeliverySlider';
 
 export default function HeaderNew() {
 	const [showHiddenCatalog, setShowHiddenCatalog] = useState(false);
-   const [scrollHeaderChange, setScrollHeaderChange] = useState(true);
+	const [scrollHeaderChange, setScrollHeaderChange] = useState(true);
 	const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const { authMeUser } = useSelector((state) => state.userInfo);
-    const { userToken, showOpenEnterSiteArea } = useSelector((state) => state.userInfo);
-    const isLogin = !!userToken;
+	const navigate = useNavigate();
+	const { authMeUser } = useSelector((state) => state.userInfo);
+	const { userToken, showOpenEnterSiteArea } = useSelector((state) => state.userInfo);
+	const isLogin = !!userToken;
 
-    const onClickCatalogShowHidden = () => {
-        const scrollSituation = !showHiddenCatalog;
-        setShowHiddenCatalog(scrollSituation);
-        document.body.style.overflow = scrollSituation ? 'hidden' : 'auto';
-    };
+	const onClickCatalogShowHidden = () => {
+		const scrollSituation = !showHiddenCatalog;
+		setShowHiddenCatalog(scrollSituation);
+		document.body.style.overflow = scrollSituation ? 'hidden' : 'auto';
+	};
 
-		const handleScroll = () => {
-			if (window.scrollY > 10) {
-				setScrollHeaderChange(false);
-			} else {
-				setScrollHeaderChange(true);
-			}
-		};
+	const handleScroll = () => {
+		if (window.scrollY > 10) {
+			setScrollHeaderChange(false);
+		} else {
+			setScrollHeaderChange(true);
+		}
+	};
 
-		window.addEventListener('scroll', handleScroll);
+	window.addEventListener('scroll', handleScroll);
 
-		
+	useEffect(() => {
+		if (userToken) {
+			dispatch(authMe());
+		}
+	}, [userToken, dispatch]);
 
-    useEffect(() => {
-        if (userToken) {
-            dispatch(authMe());
-        }
-    }, [userToken, dispatch]);
-
-    const handleLogout = () => {
-        dispatch(logout());
-        navigate('/');
-    };
-    return (
+	const handleLogout = () => {
+		dispatch(logout());
+		navigate('/');
+	};
+	return (
 		<div id={style.hederWrapper}>
 			<div className={style.headerTop}>
-				<div style={{ paddingTop: 0, paddingBottom: 0 }} className="container">
+				<div
+					style={{ paddingTop: 0, paddingBottom: '5px' }}
+					className="container"
+				>
 					<div className={style.headerTopContent}>
 						<a href="/">
 							{scrollHeaderChange ? (
@@ -63,7 +65,7 @@ export default function HeaderNew() {
 									alt=""
 								/>
 							) : (
-								<span>S-LOGO</span>
+								<span>S</span>
 							)}
 						</a>
 						{scrollHeaderChange ? (
@@ -72,13 +74,13 @@ export default function HeaderNew() {
 							<div className={style.headerTopCatalog}>
 								<div
 									onClick={onClickCatalogShowHidden}
-									className={style.catalog}
+									className={style.scrollTopCatalog}
 								>
 									<CatalogIcon /> Kataloq
 								</div>
 								<div
 									onClick={onClickCatalogShowHidden}
-									className={`${style.catalogArea} ${
+									className={`${style.catalogScrollTopArea} ${
 										showHiddenCatalog ? style.noneOverlay : ''
 									}`}
 								>
@@ -94,10 +96,8 @@ export default function HeaderNew() {
 								placeholder="25000 müxtəlif məhsul içindən axtarın"
 							/>
 						</label>
-
-						<div className={style.freeDelivery}>
-							50 manatdan yuxarı pulsuz çatdırılma
-						</div>
+						<HeaderFreeDeliverySlider/>
+					
 						<a className={style.shortPhone} href="tel:1410">
 							<HeaderPhoneIcon />
 							1410

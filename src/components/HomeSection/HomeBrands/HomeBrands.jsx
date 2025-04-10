@@ -11,11 +11,12 @@ export default function HomeBrands({ brandsData }) {
         <section id={style.HomeBrandsWrapper}>
             <div className="container">  
                     <Swiper
-                        slidesPerView={6}
+                    slidesPerView={6}
+                    speed={3000}
                         // spaceBetween={30}
-                        autoplay={{
-                            delay: 1500,
-                          }}
+                        // autoplay={{
+                        //     delay: 1500,
+                        //   }}
                         pagination={{
                             clickable: true,
                         }} 

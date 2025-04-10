@@ -63,7 +63,6 @@
 	   font-size: 1.2rem;
 	   background-color:rgba(245, 245, 245, 1);
 	.productTitle{
-		// height: 45px;
       	display: -webkit-box;
 		-webkit-box-orient: vertical;
 		-webkit-line-clamp: 1;
@@ -89,24 +88,6 @@
 			color: white;
 			border-radius: 5px;
 		  }
-		//   .te{
-		// 	margin-top: 10px;
-		// 	width: calc(100% - 150px);
-		// 	white-space: nowrap;
-		// 	background-color:rgba(253, 133, 33, 1);
-		// 	height: 20px;
-		// 	padding: 5px;	
-		// 	display: flex;
-		// 	align-items: center;
-		// 	border-radius: 5px;
-		// 	color: white;
-		// 	font-size: .8rem;
-		// 	img{
-		// 		width: 30px;
-		// 		height: 20px;
-		// 		margin-right: 10px;
-		// 	}
-		//   }
 		}
 		.prPricesWrapper{
 			.productPrice{
