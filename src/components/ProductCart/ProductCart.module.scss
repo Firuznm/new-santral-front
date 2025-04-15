@@ -133,6 +133,12 @@
 		background-color: white;
 	 }
 	}
+	.isBasket{
+		background-color: green;
+		&:hover{
+			background-color: green;
+		}
+	}
 	.ProductFavorite{
 	    padding: 13px 13px 7px 12px;
 		cursor: pointer;

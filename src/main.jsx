@@ -15,6 +15,7 @@ import { store } from "./redux/store";
 import Login from "./Authentication/Login/Login";
 import ChangePassword from "./Pages/ChangePassword/ChangePassword";
 import CategoryAndSubcategoryDetails from "./components/CategoryAndSubcategoryDetails/CategoryAndSubcategoryDetails";
+import Basket from "./Pages/Basket/Basket";
 
 
 const router = createBrowserRouter([
@@ -64,8 +65,12 @@ const router = createBrowserRouter([
 				element: <About />,
 			},
 			{
+				path: 'basket',
+				element: <Basket />,
+			},
+			{
 				path: '/*',
-				element: <CategoryAndSubcategoryDetails/>,
+				element: <CategoryAndSubcategoryDetails />,
 			},
 		],
 	},

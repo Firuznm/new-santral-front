@@ -22,8 +22,10 @@ export default function HeaderNew() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const { authMeUser } = useSelector((state) => state.userInfo);
+	const {baskets} = useSelector(state => state.basketData)
 	const { userToken, showOpenEnterSiteArea } = useSelector((state) => state.userInfo);
 	const isLogin = !!userToken;
+    // console.log('header basket=', baskets);
 
 	const onClickCatalogShowHidden = () => {
 		const scrollSituation = !showHiddenCatalog;
@@ -52,7 +54,7 @@ export default function HeaderNew() {
 		navigate('/');
 	};
 
-	console.log("data user=", authMeUser);
+	// console.log("data user=", authMeUser);
 	
 	return (
 		<div id={style.hederWrapper}>
@@ -126,7 +128,10 @@ export default function HeaderNew() {
 											className={style.defaultUserImg}
 										>
 											{authMeUser?.photo ? (
-												<img src={`${santral.baseUrlImage}${authMeUser?.photo}`} alt="" />
+												<img
+													src={`${santral.baseUrlImage}${authMeUser?.photo}`}
+													alt=""
+												/>
 											) : (
 												<img src={defaultUserImg} alt="" />
 											)}
@@ -222,9 +227,11 @@ export default function HeaderNew() {
 									<HeartIcon />
 									<span className={style.wishListCount}>14</span>
 								</Link>
-								<Link className={style.basket}>
+								<Link to={"/basket"} className={style.basket}>
 									<BasketIcon />
-									<span className={style.basketCount}>18</span>
+									<span className={style.basketCount}>
+										{baskets?.length}
+									</span>
 								</Link>
 							</div>
 							<select className={style.lang} name="" id="">

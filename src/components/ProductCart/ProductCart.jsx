@@ -1,17 +1,29 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { addToBasket } from '../../redux/BasketSlice';
+import { useNavigate, Link } from 'react-router-dom';
 import BasketIcon from '../../assets/Icons/BasketIcon';
 import HeartIcon from '../../assets/Icons/HeartIcon';
+import truck from '../../assets/Images/truck.png';
 import santral from '../../Helpers/Helpers';
 import style from './ProductCart.module.scss';
-import truck from '../../assets/Images/truck.png';
-import { Link } from 'react-router-dom';
 
 export default function ProductCart({ data }) {
-	const testFunc = () => {
-		console.log('basket btn click');
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
+	const {baskets} = useSelector((state) => state.basketData);
+
+	const isInBasket = baskets.some((item) => item.id === data.id);
+
+	const handleAddToBasket = () => {
+		if (isInBasket) {
+			navigate('/basket'); 
+			return;
+		}
+		dispatch(addToBasket(data));
 	};
-	// console.log("data pr", data);
-	const PriceDifference = Number(data.oldPrice - data.price).toFixed(2);
-	//   console.log("diff", PriceDifference);
+
+	const priceDifference = (data.oldPrice - data.price).toFixed(2);
 
 	return (
 		<div className={style.productCartWrapper}>
@@ -32,37 +44,20 @@ export default function ProductCart({ data }) {
 					src={`${santral.baseUrlImage}${data.thumbnail}`}
 				/>
 			</Link>
-			<div
-				className={style.productInfo}
-			>
-				<Link
-					to={`/product/${data.name}`}
-					style={
-						PriceDifference > 0
-							? {}
-							: {
-									WebkitLineClamp: 2,
-									marginBottom: '1rem',
-							  }
-					}
-					className={style.productTitle}
-				>
+
+			<div className={style.productInfo}>
+				<Link to={`/product/${data.name}`} className={style.productTitle}>
 					{data.title}
 				</Link>
 
-				<div className={style.discountPrice}>
-					{
-						PriceDifference > 0 && (
-							// ? (
-							<span className={style.prPriceDifference}>
-								- {PriceDifference} ₼
-							</span>
-						)
-						// ) : (
-						// 	<div style={{ display:"none" }}></div>
-						// )
-					}
-				</div>
+				{priceDifference > 0 && (
+					<div className={style.discountPrice}>
+						<span className={style.prPriceDifference}>
+							- {priceDifference} ₼
+						</span>
+					</div>
+				)}
+
 				<div className={style.prPricesWrapper}>
 					<span className={style.productPrice}>
 						{Number(data.price).toFixed(2)} ₼
@@ -75,11 +70,18 @@ export default function ProductCart({ data }) {
 				</div>
 
 				<div className={style.basketAndFavorit}>
-					<span onClick={() => testFunc()} className={style.productBasket}>
-						<BasketIcon color={'rgba(0, 0, 0, 0.87) '} /> Səbətə at
+					<span
+						onClick={handleAddToBasket}
+						className={`${style.productBasket} ${
+							isInBasket ? style.isBasket : ''
+						}`}
+					>
+						<BasketIcon color="rgba(0, 0, 0, 0.87)" />
+						{isInBasket ? 'Səbətdədir' : 'Səbətə at'}
 					</span>
+
 					<span className={style.ProductFavorite}>
-						<HeartIcon color={'rgba(0, 0, 0, 0.87'} />
+						<HeartIcon color="rgba(0, 0, 0, 0.87)" />
 					</span>
 				</div>
 			</div>

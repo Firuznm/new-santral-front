@@ -13,7 +13,6 @@ const initialState = {
   showOpenEnterSiteArea: false,
 };
 
-console.log("redux activ oldu");
 
 export const getAllCatalogDatas = createAsyncThunk(
   "categoryData",

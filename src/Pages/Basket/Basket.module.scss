@@ -1,0 +1,113 @@
+#Basket {
+	.basketContent {
+		display: flex;
+		gap: 1rem;
+		.basketContentLeft {
+			width: calc(100% - 400px);
+			border: 1px solid rgba(234, 234, 234, 1);
+			border-radius: 1rem;
+			padding: 0.5rem 1rem 2rem;
+			.basketLeftHeader {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-bottom: 2rem;
+				.allBasketPrDelete {
+					display: flex;
+					align-items: center;
+					padding: 10px 15px;
+					cursor: pointer;
+					border-radius: 2rem;
+					color: rgba(244, 67, 54, 1);
+					background-color: rgba(253, 219, 216, 1);
+					svg {
+						margin-right: 7px;
+					}
+				}
+			}
+			.basketPrList {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				border: 1px solid rgba(234, 234, 234, 1);
+				border-radius: 1rem;
+				padding: 0.5rem 1rem;
+				// margin: 1rem 0;
+				.basketPrImg {
+					width: 80px;
+					height: 80px;
+					border-radius: 0.5rem;
+					object-fit: contain;
+					border: 1px solid rgba(234, 234, 234, 1);
+				}
+				.basketPrTitle {
+					width: calc(100% - 350px);
+                    text-align: center;
+					display: -webkit-box;
+					-webkit-box-orient: vertical;
+					-webkit-line-clamp: 2;
+					overflow: hidden;
+				}
+				.quantityPriceDelete {
+					width: 240px;
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					gap: 10px;
+					.prCountWrapper {
+						width: 80px;
+						height: 25px;
+						display: flex;
+						justify-content: space-between;
+						align-items: center;
+						border: 1px solid #eaeaea;
+						padding: 10px 5px;
+						border-radius: 50px;
+						.decrease,
+						.increase {
+							width: 25px;
+							height: 25px;
+							display: flex;
+							justify-content: center;
+							align-items: center;
+							border-radius: 50%;
+							cursor: pointer;
+							transition: 0.5s ease;
+							&:hover {
+								background: #ffd23f;
+							}
+						}
+					}
+					.oldAndNewprice {
+						display: flex;
+						flex-direction: column;
+						.oldPrice {
+							font-size: 1rem;
+							color: #00000061;
+							text-decoration: line-through;
+							text-decoration-color: #00000061;
+						}
+						.newPrice {
+							font-size: 1.2rem;
+							font-weight: 500;
+							color: rgba(253, 133, 33, 1);
+						}
+					}
+				}
+			}
+		
+		}
+	}
+	.basketContentRight {
+		width: 400px;
+		height: 400px;
+		border: 1px solid rgba(234, 234, 234, 1);
+		border-radius: 1rem;
+	}
+    	.freeBasket {
+				color: red;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+			}
+}

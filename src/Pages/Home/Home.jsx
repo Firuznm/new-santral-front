@@ -15,6 +15,7 @@ import HomeNewComers from "../../components/HomeSection/HomeNewComers/HomeNewCom
 import OurAdvantages from "../../components/HomeSection/OurAdvantages/OurAdvantages";
 import HomeDiscountedProducts from "../../components/HomeSection/HomeDiscountedProducts/HomeDiscountedProducts";
 import Input from "../../components/Input/Input";
+import { useSelector } from "react-redux";
 // import ProductCartNew from "../../components/ProductCartNew/ProductCartNew";
 
 export default function Home() {
@@ -48,7 +49,7 @@ export default function Home() {
         getHomeAllData();
     }, []);
 
-    console.log("partners data=", homePartnersData);
+    // console.log("partners data=", homePartnersData);
     // console.log("brands =", homeBrandsData);
     // console.log("categoryData-", categoryDatas);
     // console.log("main slider=", homeMainSliderDatas);
@@ -56,7 +57,11 @@ export default function Home() {
     // console.log("homeBannerData-", homeBannersData);
     // console.log("news", homeNews);
     // console.log("seasonOffers-", homeSeasonOffersData[0]?.products);
-    
+
+    // const baskets = useSelector(state => state.baskets)
+
+//  const { baskets } = useSelector((state) => state.basketData);
+//  console.log('home basket=', baskets);
     return (
 		<div className="container">
 			<HomeMainSlider

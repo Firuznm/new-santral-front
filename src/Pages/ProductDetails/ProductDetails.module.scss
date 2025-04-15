@@ -392,10 +392,17 @@
 			.basketBtn{
 				background-color: #ffc505;
 			}	
+			.prInBasket{
+			background-color: green;
+			&:hover{
+				background-color: green;
+			}
+		}
 			.callBtn{
              font-size: 1rem;
 			}
 		}
+		
 		.billboard{
 			margin: 1rem 0;
 			height: 125px;
