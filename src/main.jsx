@@ -16,6 +16,7 @@ import Login from "./Authentication/Login/Login";
 import ChangePassword from "./Pages/ChangePassword/ChangePassword";
 import CategoryAndSubcategoryDetails from "./components/CategoryAndSubcategoryDetails/CategoryAndSubcategoryDetails";
 import Basket from "./Pages/Basket/Basket";
+import { BasketContextProvider } from "./Context/BasketContext";
 
 
 const router = createBrowserRouter([
@@ -76,8 +77,10 @@ const router = createBrowserRouter([
 	},
 ]);
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-              <Provider store={store}>
-                <RouterProvider router={router} />
-                </Provider>
+ReactDOM.createRoot(document.getElementById('root')).render(
+	<Provider store={store}>
+		<BasketContextProvider>
+			<RouterProvider router={router} />
+		</BasketContextProvider>
+	</Provider>,
 );

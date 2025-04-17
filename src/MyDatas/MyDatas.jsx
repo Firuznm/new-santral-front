@@ -23,7 +23,6 @@ import mainSliderLeft1 from "../assets/Images/mainSliderLeft1.jfif"
 import mainSliderLeft2 from '../assets/Images/mainSliderLeft2.jfif';
 // -------------------------------------------------------------
 
-
 // -------------------------------------------------------------
 
 export const OurAdvantagesData=[

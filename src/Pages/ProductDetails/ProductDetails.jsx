@@ -49,7 +49,7 @@ export default function ProductDetails() {
 
 	const prInBasket = baskets.some((item) => item.id === prDetailsData.id);
 
-	const decrement = () => {
+	const decrement = () => { 
 		if (quantity > 1) {
 			setQuantity(quantity - 1);
 		}

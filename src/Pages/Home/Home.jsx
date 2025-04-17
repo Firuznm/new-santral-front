@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  {  useEffect, useState } from "react";
 import HomeCategorySlider from "../../components/HomeSection/HomeCategorySlider/HomeCategorySlider";
 import ProductCart from "../../components/ProductCart/ProductCart";
 import HomeSeasonOffers from "../../components/HomeSection/HomeSeasonOffers/HomeSeasonOffers";
@@ -26,7 +26,9 @@ export default function Home() {
     const [categoryDatas, setCategoryDatas] = useState([]);
     const [homeBannersData, setHomeBannersData] = useState({});
     const [homeNews, setHomeNews] = useState([]);
-    const [homeSeasonOffersData, setHomeSeasonOffersData]= useState([])
+    const [homeSeasonOffersData, setHomeSeasonOffersData] = useState([])
+
+
    
 
     const getHomeAllData = async () => {
