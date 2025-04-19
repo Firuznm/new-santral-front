@@ -7,8 +7,10 @@ import MinusIcon from '../../assets/Icons/MinusIcon';
 import santral from '../../Helpers/Helpers';
 import BasketPrNamePriceTotal from '../../components/BasketPrNamePriceTotal/BasketPrNamePriceTotal';
 import { clearBaskets, decrementQuantity, incrementQuantity, removeFromCart } from '../../redux/BasketSlice';
+import { useNavigate } from 'react-router-dom';
 
 export default function Basket() {
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const { baskets } = useSelector((state) => state.basketData);
 
@@ -20,7 +22,7 @@ export default function Basket() {
 		dispatch(decrementQuantity({ id }));
 	};
 
-	console.log("basket page =", baskets);
+	// console.log("basket page =", baskets);
 	
 	return (
 		<section id={style.Basket}>
@@ -29,7 +31,7 @@ export default function Basket() {
 					<div className={style.basketContent}>
 						<div className={style.basketContentLeft}>
 							<div className={style.basketLeftHeader}>
-								<h3 className="sectionTitle">Səbət</h3>
+								<h3 className="sectionMiniTitle">Səbət</h3>
 								<div
 									onClick={() => dispatch(clearBaskets())}
 									className={style.allBasketPrDelete}
@@ -48,10 +50,15 @@ export default function Basket() {
 										<h5 className={style.basketPrTitle}>
 											{item.title}
 										</h5>
-											<span className={`${style.alert} ${item.stock === item.quantity ? style.showAlert : ""}`}>
-												Stokdaki mehsul sayi: {`${item.stock}`}
-											</span>
-										
+										<span
+											className={`${style.alert} ${
+												item.stock === item.quantity
+													? style.showAlert
+													: ''
+											}`}
+										>
+											Məhsulun stok sayi : {`${item.stock}`} ədəd
+										</span>
 									</div>
 									<div className={style.quantityPriceDelete}>
 										<div className={style.prCountWrapper}>
@@ -72,16 +79,14 @@ export default function Basket() {
 											</span>
 										</div>
 										<div className={style.oldAndNewprice}>
-											{item.oldPrice !== 0 && (
+											{item.oldPrice != 0 && (
 												<span className={style.oldPrice}>
-													{item.quantity *
-														item.oldPrice.toFixed(2)}
-													₼
+													{item.quantity * item.oldPrice}₼
 												</span>
 											)}
 
 											<span className={style.newPrice}>
-												{item.quantity * item.price.toFixed(2)}₼
+												{item.quantity * item.price}₼
 											</span>
 										</div>
 										<span
@@ -96,11 +101,11 @@ export default function Basket() {
 								</div>
 							))}
 						</div>
-						<div className={style.basketContentRight}>
-							<div className={style.content}>
-								<BasketPrNamePriceTotal baskets={baskets} />
-							</div>
-						</div>
+
+						<BasketPrNamePriceTotal
+							onclick={() => navigate('/order-confirm')}
+							title={'Sifarişi rəsmiləşdir'}
+						/>
 					</div>
 				) : (
 					<div className={style.freeBasket}>Səbətdə məhsul yoxdu</div>

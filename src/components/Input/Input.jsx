@@ -16,7 +16,7 @@ export default function Input({ inputInfo, inpAreaWidth }) {
 
 			{inputInfo?.inputType === 'select' ? (
 				<select
-					className={style.inpComponent}
+					className={style.inpComponent}  
 					name={inputInfo?.name}
 					value={inputInfo?.value}
 					onChange={inputInfo?.handleChange}

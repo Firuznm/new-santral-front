@@ -90,7 +90,7 @@ export default function UserPersonalInformation() {
 				errorMessage: errors.firstname,
 				handleChange: handleChange,
 			},
-			{
+			{ 
 				id: 2,
 				name: 'lastname',
 				labelName: 'Soyad',
@@ -129,7 +129,7 @@ export default function UserPersonalInformation() {
 			<div className={style.userPersonalInformationPage}>
 				<UserAccoundAndOtherDetailName />
 				<div className={style.userInfo}>
-					<h3 className="sectionTitle">Şəxsi məlumatlar</h3>
+					<h3 className="sectionMiniTitle">Şəxsi məlumatlar</h3>
 					<form onSubmit={handleSubmit} className={style.userInfoForm}>
 						<label htmlFor="imgAddInp" className={style.userPhotoAddWrapper}>
 							<img

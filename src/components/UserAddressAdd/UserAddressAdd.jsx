@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import style from './UserAddressAdd.module.scss';
 import santral from '../../Helpers/Helpers';
 import urls from '../../ApiUrls/Urls';
-import { cityOptions } from '../../constants';
+import { cityOptions } from '../../constants'; 
 
 export default function UserAddressAdd({ getAddressData }) {
 	const { values, handleChange, handleSubmit, resetForm, errors } = useFormik({
@@ -93,7 +93,7 @@ export default function UserAddressAdd({ getAddressData }) {
 
 	return (
 		<div className={style.UserAddressAddForm}>
-			<h3 className="sectionTitle">Yeni ünvan əlavə et</h3>
+			<h3 className="sectionMiniTitle">Yeni ünvan əlavə et</h3>
 			<form onSubmit={handleSubmit}>
 				<div className={style.userNameSurname}>
 					{userAddressFormInputData.nameSurname.map((inputData) => (

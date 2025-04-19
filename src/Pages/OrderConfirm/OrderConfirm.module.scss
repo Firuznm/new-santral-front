@@ -1,0 +1,33 @@
+.OrderConfirmPage {
+	display: flex;
+	justify-content: space-between;
+	.formGroup {
+		width: calc(100% - 450px);
+		 border: 1px solid rgba(234, 234, 234, 1);
+		 padding: 1rem;
+		.userNameSurname,
+		.phoneEmail,
+		.cityAddress {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+		textarea {
+            width: 90%;
+			resize: none;
+			outline: none;
+			border: none;
+			border: 1px solid #00000061;
+			background-color: #ebebeb;
+			border-radius: 16px;
+			padding: 17px 45px 17px 10px;
+			font-size: 1.2rem;
+			&:focus {
+				border: 1px solid #ffd23f;
+			}
+			&::placeholder {
+				color: #00000061;
+			}
+		}
+	}
+}

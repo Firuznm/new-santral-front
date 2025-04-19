@@ -96,7 +96,7 @@ export default function MyOrders() {
 				<div className={style.myOrdersContentWrapper}>
 					<div className={style.pageHeader}>
 						<div className={style.pageTitleAndSearchInp}>
-							<h3 className="sectionTitle">Sifarişlərim</h3>
+							<h3 className="sectionMiniTitle">Sifarişlərim</h3>
 							<div className={style.search}>
 								<label htmlFor="myOrderSearch">
 									<MyOrdersSearchIcon />

@@ -227,7 +227,7 @@ export default function HeaderNew() {
 									<HeartIcon />
 									<span className={style.wishListCount}>14</span>
 								</Link>
-								<Link to={"/basket"} className={style.basket}>
+								<Link to={'/basket'} className={style.basket}>
 									<BasketIcon />
 									<span className={style.basketCount}>
 										{baskets?.length}
@@ -264,7 +264,7 @@ export default function HeaderNew() {
 						</div>
 						<div className={style.headerPage}>
 							<NavLink to="/about">Haqqımızda</NavLink>
-							<NavLink to="/branchs">Filiallar</NavLink>
+							<NavLink to="/branches">Filiallar</NavLink>
 							<NavLink to="/news">Xəbərlər</NavLink>
 							<NavLink to="/projects">Layihələr</NavLink>
 						</div>

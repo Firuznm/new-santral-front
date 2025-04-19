@@ -27,7 +27,7 @@ export default function MyAddresses() {
 		}
 	};
 	useEffect(() => {
-		getAddressData();
+		getAddressData(); 
 	}, []);
     // istifadekinin unvanini silmek
    const deleteUserAddress = async (id) => {
@@ -38,10 +38,10 @@ export default function MyAddresses() {
 				setShowHiddenDeleteModal(false);
 				setDeleteAddressId(null);
 		} else {
-			console.error('Adres silinmedi!!!');
+			console.error('Adress silinmedi!!!');
 		}
 	} catch (error) {
-		console.error('Adres silinmede xeta var', error);
+		console.error('Adress silinmede xeta var', error);
 	}
 	};
 	// edit etdikde modal acilir ve hemen adresin melumatlari inputa dolur
@@ -84,7 +84,7 @@ export default function MyAddresses() {
 
 				<UserAccoundAndOtherDetailName />
 				<div className={style.userAdersses}>
-					<h3 className="sectionTitle">Mənim ünvanlarım</h3>
+					<h3 className="sectionMiniTitle">Mənim ünvanlarım</h3>
 					{userAddressData?.map((address) => (
 						<div key={address.id} className={style.userOneAddress}>
 							<div className={style.userNameSurnamePhoneCity}>

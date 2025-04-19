@@ -113,18 +113,6 @@
 			}
 		}
 	}
-	.basketContentRight {
-		position: relative;
-
-		.content {
-			position: sticky;
-			top: 90px;
-			height: auto;
-			width: 370px;
-			border: 1px solid rgba(234, 234, 234, 1);
-			border-radius: 1rem;
-		}
-	}
 	.freeBasket {
 		color: red;
 		display: flex;

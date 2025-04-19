@@ -1,24 +1,33 @@
-.basketPrNamePriceTotal {
-	padding: 0.5rem;
-	.header {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		border-bottom: 1px solid rgba(234, 234, 234, 1);
-		padding-bottom: 0.5rem;
-		.title,
-		.basketCount {
-			font-size: 1.2rem;
-			font-weight: 600;
-			color: rgba(0, 0, 0, 0.87);
+.wrapperBasketContent{
+	position: relative;
+.basketContentList {
+	position: sticky;
+	top: 90px;
+	height: auto;
+	width: 370px;
+	border: 1px solid rgba(234, 234, 234, 1);
+	border-radius: 1rem;
+	.basketPrNamePriceTotal {
+		padding: 0.5rem;
+		.header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			border-bottom: 1px solid rgba(234, 234, 234, 1);
+			padding-bottom: 0.5rem;
+			.title,
+			.basketCount {
+				font-size: 1.2rem;
+				font-weight: 600;
+				color: rgba(0, 0, 0, 0.87);
+			}
 		}
-	}
-	.prNameOldpriceNewprice {
-		height: 200px;
-		margin-bottom: 1rem;
-		padding-right: 10px;
-		overflow-y: scroll;
-				&::-webkit-scrollbar {
+		.prNameOldpriceNewprice {
+			height: 200px;
+			margin-bottom: 1rem;
+			padding-right: 10px;
+			overflow-y: scroll;
+			&::-webkit-scrollbar {
 				width: 2px;
 			}
 
@@ -31,95 +40,84 @@
 				background: white;
 				border-radius: 1rem;
 			}
-		.namePriceOldPrice {
+			.namePriceOldPrice {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 10px 0;
+				border-bottom: 1px solid rgba(234, 234, 234, 1);
+				.titleQuantity {
+					display: flex;
+					flex-direction: column;
+				}
+				.prName {
+					width: 240px;
+					padding-right: 12px;
+					font-size: 14px;
+					font-weight: 400;
+					color: rgba(0, 0, 0, 0.87);
+					display: -webkit-box;
+					-webkit-box-orient: vertical;
+					-webkit-line-clamp: 2;
+					overflow: hidden;
+				}
+				.prQuantity {
+					margin-top: 4px;
+					font-size: 12px;
+					color: rgb(167, 165, 165);
+				}
+				.oldpriceNewprice {
+					display: flex;
+					flex-direction: column;
+					.oldprice {
+						color: rgba(0, 0, 0, 0.38);
+						text-decoration: line-through;
+						text-decoration-color: rgba(0, 0, 0, 0.38);
+					}
+					.newprice {
+						color: rgba(253, 133, 33, 1);
+						font-weight: 500;
+					}
+				}
+			}
+		}
+		.allPrice {
+			border-top: 1px solid rgba(234, 234, 234, 1);
+			padding-top: 10px;
+		}
+		.discountPrice {
+			padding: 5px 0 10px;
+		}
+		.amountPayEnd {
+			border-top: 1px solid rgba(234, 234, 234, 1);
+			border-bottom: 1px solid rgba(234, 234, 234, 1);
+			padding: 10px 0;
+		}
+		.allPrice,
+		.discountPrice,
+		.amountPayEnd {
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-			padding: 10px 0;
-			border-bottom: 1px solid rgba(234, 234, 234, 1);
-			.titleQuantity {
-				display: flex;
-				flex-direction: column;
-			}
-			.prName {
-				width: 240px;
-				padding-right: 12px;
-				font-size: 14px;
-				font-weight: 400;
+			.value {
+				font-weight: 700;
 				color: rgba(0, 0, 0, 0.87);
-				display: -webkit-box;
-				-webkit-box-orient: vertical;
-				-webkit-line-clamp: 2;
-				overflow: hidden;
 			}
-			.prQuantity {
-				margin-top: 4px;
-				font-size: 12px;
-				color: rgb(167, 165, 165);
-			}
-			.oldpriceNewprice {
-				display: flex;
-				flex-direction: column;
-				.oldprice {
-					color: rgba(0, 0, 0, 0.38);
-					text-decoration: line-through;
-					text-decoration-color: rgba(0, 0, 0, 0.38);
-				}
-				.newprice {
-					color: rgba(253, 133, 33, 1);
-					font-weight: 500;
-				}
+		}
+		.ordersInfo {
+			margin: 1rem 0;
+			font-size: 14px;
+		}
+		.appGooglePay {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			img {
+				width: 155px;
+				height: 55px;
+				object-fit: contain;
+				border-radius: 8px;
 			}
 		}
 	}
-	.allPrice {
-		border-top: 1px solid rgba(234, 234, 234, 1);
-		padding-top: 10px;
-	}
-	.discountPrice {
-		padding: 5px 0 10px;
-	}
-	.amountPayEnd {
-		border-top: 1px solid rgba(234, 234, 234, 1);
-		border-bottom: 1px solid rgba(234, 234, 234, 1);
-		padding: 10px 0;
-	}
-	.allPrice,
-	.discountPrice,
-	.amountPayEnd {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		.value {
-			font-weight: 700;
-			color: rgba(0, 0, 0, 0.87);
-		}
-	}
-	.ordersInfo {
-		margin: 1rem 0;
-		font-size: 14px;
-	}
-	.appGooglePay {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		img {
-			width: 155px;
-			height: 55px;
-			object-fit: contain;
-			border-radius: 8px;
-		}
-	}
-	.confirmOrder {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		background-color: rgba(255, 210, 63, 1);
-		color: rgba(0, 0, 0, 0.87);
-		padding: 10px 20px;
-		margin: 1rem 0;
-		border-radius: 2rem;
-		font-weight: 500;
-		font-size: 1rem;
-	}
-}
+}}

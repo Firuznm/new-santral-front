@@ -90,7 +90,7 @@ export default function ChangePassword() {
 			<div className={style.changePasswordPage}>
 				<UserAccoundAndOtherDetailName />
 				<div className={style.changePasswordForm}>
-					<h3 className="sectionTitle">Şifrəni dəyiş</h3>
+					<h3 className="sectionMiniTitle">Şifrəni dəyiş</h3>
 					<form onSubmit={handleSubmit}>
 						{changePasswordInputsData.map((inputData) => (
 							<Input key={inputData.id} inputInfo={inputData} />

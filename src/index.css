@@ -72,7 +72,7 @@ li.selected{
 }
 
 /* Seifeye daxil olduqda seifenin adinin style globalda  */
-.sectionTitle{
+.sectionMiniTitle{
     font-size: 2rem;
     font-weight: 400;
     color: #000000DE;

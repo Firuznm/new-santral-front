@@ -17,6 +17,11 @@ import ChangePassword from "./Pages/ChangePassword/ChangePassword";
 import CategoryAndSubcategoryDetails from "./components/CategoryAndSubcategoryDetails/CategoryAndSubcategoryDetails";
 import Basket from "./Pages/Basket/Basket";
 import { BasketContextProvider } from "./Context/BasketContext";
+import OrderConfirm from "./Pages/OrderConfirm/OrderConfirm";
+import Branches from "./Pages/Branches/Branches";
+import News from "./Pages/News/News";
+import Projects from "./Pages/Projects/Projects";
+import OrderSuccessfull from "./Pages/OrderSuccessfull/OrderSuccessfull";
 
 
 const router = createBrowserRouter([
@@ -28,6 +33,22 @@ const router = createBrowserRouter([
 			{
 				path: '/',
 				element: <Home />,
+			},
+			{
+				path: 'about',
+				element: <About />,
+			},
+			{
+				path: 'branches',
+				element: <Branches />,
+			},
+			{
+				path: 'news',
+				element: <News />,
+			},
+			{
+				path: 'projects',
+				element: <Projects />,
 			},
 			{
 				path: '/product/:name',
@@ -61,13 +82,18 @@ const router = createBrowserRouter([
 				path: '/change-password',
 				element: <ChangePassword />,
 			},
-			{
-				path: 'about',
-				element: <About />,
-			},
+
 			{
 				path: 'basket',
 				element: <Basket />,
+			},
+			{
+				path: 'order-confirm',
+				element: <OrderConfirm />,
+			},
+			{
+				path: 'order-success',
+				element: <OrderSuccessfull />,
 			},
 			{
 				path: '/*',
