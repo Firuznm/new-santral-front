@@ -45,16 +45,16 @@ export default function ProductDetails() {
 	const [showCreditMonthPayment, setShowCreditMonthPayment] = useState(true);
 	const [oneClickBuyModal, setOneClickBuyModal] = useState(false);
 	const [url, setUrl] = useState('');
-	const { baskets } = useSelector((store) => store.basketData);
+	const { localBaskets } = useSelector((store) => store.basketData);
 
-	const prInBasket = baskets.some((item) => item.id === prDetailsData.id);
+	const prInBasket = localBaskets.some((item) => item.id === prDetailsData.id);
 
 	const decrement = () => { 
 		if (quantity > 1) {
 			setQuantity(quantity - 1);
 		}
 	};
-
+ 
 	const increment = () => {
 		if (quantity < prDetailsData?.stock) {
 			setQuantity(quantity + 1);

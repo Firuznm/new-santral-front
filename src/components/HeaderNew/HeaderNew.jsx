@@ -1,8 +1,8 @@
 import style from './HeaderNew.module.scss';
 import santralLogo from '../../assets/logos/santralLogo.png';
-import santralMiniLogo from "../../assets/logos/santralMiniLogo.png"
+import santralMiniLogo from '../../assets/logos/santralMiniLogo.png';
 import HeaderPhoneIcon from '../../assets/Icons/HeaderPhoneIcon';
-import defaultUserImg from "../../assets/Images/dafaultUserImg.png"
+import defaultUserImg from '../../assets/Images/dafaultUserImg.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
@@ -13,7 +13,7 @@ import BasketIcon from '../../assets/Icons/BasketIcon';
 import SearchIcon from '../../assets/Icons/SearchIcon';
 import CatalogIcon from '../../assets/Icons/CatalogIcon';
 import Catalog from '../Catalog/Catalog';
-import HeaderFreeDeliverySlider from '../HeaderFreeDeliverySlider/HeaderFreeDeliverySlider';
+// import HeaderFreeDeliverySlider from '../HeaderFreeDeliverySlider/HeaderFreeDeliverySlider';
 import santral from '../../Helpers/Helpers';
 
 export default function HeaderNew() {
@@ -21,11 +21,13 @@ export default function HeaderNew() {
 	const [scrollHeaderChange, setScrollHeaderChange] = useState(true);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const { authMeUser } = useSelector((state) => state.userInfo);
-	const {baskets} = useSelector(state => state.basketData)
-	const { userToken, showOpenEnterSiteArea } = useSelector((state) => state.userInfo);
-	const isLogin = !!userToken;
-    // console.log('header basket=', baskets);
+	const { localBaskets, apiBaskets } = useSelector((state) => state.basketData);
+
+	const {
+		authMeUser,
+		showOpenEnterSiteArea,
+		isLogin,
+	} = useSelector((state) => state.userInfo);
 
 	const onClickCatalogShowHidden = () => {
 		const scrollSituation = !showHiddenCatalog;
@@ -44,18 +46,16 @@ export default function HeaderNew() {
 	window.addEventListener('scroll', handleScroll);
 
 	useEffect(() => {
-		if (userToken) {
+		if (isLogin) {
 			dispatch(authMe());
 		}
-	}, [userToken, dispatch]);
+	}, [isLogin, dispatch]);
 
 	const handleLogout = () => {
 		dispatch(logout());
 		navigate('/');
 	};
 
-	// console.log("data user=", authMeUser);
-	
 	return (
 		<div id={style.hederWrapper}>
 			{/* BASDA REKLAM UCUN YER OLACAQ */}
@@ -230,7 +230,7 @@ export default function HeaderNew() {
 								<Link to={'/basket'} className={style.basket}>
 									<BasketIcon />
 									<span className={style.basketCount}>
-										{baskets?.length}
+										{isLogin ? apiBaskets?.length : localBaskets?.length}
 									</span>
 								</Link>
 							</div>

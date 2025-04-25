@@ -6,13 +6,26 @@ import urls from '../ApiUrls/Urls';
 
 const initialState = {
   user: {},
-  authMeUser: {},
-  catalogDatas:[],
+  authMeUser:{},
+  catalogDatas: [],
   userToken: localStorage.getItem("token") || null,
+  isLogin: !!localStorage.getItem("token"),
   isError: null,
   showOpenEnterSiteArea: false,
 };
 
+// const authMeUser = {}; 
+
+// const initialState = {
+//   user: {},
+//   authMeUser,
+//   catalogDatas: [],
+//   userToken: localStorage.getItem("token") || null,
+//   isLogin: !!localStorage.getItem("token"),
+//   bpUser: authMeUser?.position === "bp_user",
+//   isError: null,
+//   showOpenEnterSiteArea: false,
+// };
 
 export const getAllCatalogDatas = createAsyncThunk(
   "categoryData",
@@ -38,25 +51,6 @@ export const register = createAsyncThunk(
     }
   }
 );
-// user login
-export const login = createAsyncThunk(
-  "login",
-  async (data, { dispatch, rejectWithValue }) => {
-    try {
-      const resData = await santral.api().post(urls.login, JSON.stringify(data));
-      localStorage.setItem("token", resData?.data?.access_token);
-      dispatch(authMe())
-      return { user: resData.data, userToken: resData?.data?.access_token };
-    } catch (isError) {
-      return rejectWithValue(isError.response?.data || "Xəta var");
-    }
-  }
-);
-// user logout 
-export const logout = createAsyncThunk("user/logout", async () => {
-  localStorage.removeItem("token");
-  return null;
-});
 
 // user auth me
 export const authMe = createAsyncThunk(
@@ -71,6 +65,27 @@ export const authMe = createAsyncThunk(
     }
   }
 );
+
+// user login
+export const login = createAsyncThunk(
+  "login",
+  async (data, { dispatch, rejectWithValue }) => {
+    try {
+      const resData = await santral.api().post(urls.login, JSON.stringify(data));
+      localStorage.setItem("token", resData?.data?.access_token);
+      dispatch(authMe())
+      return { user: resData.data, userToken: resData?.data?.access_token};
+    } catch (isError) {
+      return rejectWithValue(isError.response?.data || "Xəta var");
+    }
+  }
+);
+ 
+// user logout 
+export const logout = createAsyncThunk("user/logout", async () => {
+  localStorage.removeItem("token");
+  return null;
+});
 
 
 export const userSlice = createSlice({
@@ -101,6 +116,7 @@ export const userSlice = createSlice({
       .addCase(login.fulfilled, (state, actions) => {
         state.user = actions.payload.user;
         state.userToken = actions.payload.userToken;
+        state.isLogin = true;
         state.showOpenEnterSiteArea = false
       })
       .addCase(login.rejected, (state, actions) => {
@@ -110,6 +126,7 @@ export const userSlice = createSlice({
       .addCase(logout.fulfilled, (state) => {
         state.user = {};
         state.userToken = null;
+         state.isLogin = false;
         state.showOpenEnterSiteArea = false; 
       })
       // authMe
@@ -119,7 +136,8 @@ export const userSlice = createSlice({
       .addCase(authMe.rejected, (state, actions) => {
         state.isError = actions.payload ?? actions.payload.isError;
         state.user = {};
-			state.userToken = null;
+        state.userToken = null;
+        state.isLogin = false;
 			localStorage.removeItem('token'); 
 			window.location.href = '/login'; 
       })

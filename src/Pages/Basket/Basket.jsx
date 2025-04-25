@@ -6,40 +6,83 @@ import PlusIcon from '../../assets/Icons/PlusIcon';
 import MinusIcon from '../../assets/Icons/MinusIcon';
 import santral from '../../Helpers/Helpers';
 import BasketPrNamePriceTotal from '../../components/BasketPrNamePriceTotal/BasketPrNamePriceTotal';
-import { clearBaskets, decrementQuantity, incrementQuantity, removeFromCart } from '../../redux/BasketSlice';
+import { clearBaskets, decrementCount,  GetAllApiBaskets,  incrementCount, removeFromCart } from '../../redux/BasketSlice';
 import { useNavigate } from 'react-router-dom';
+import urls from '../../ApiUrls/Urls';
+import { useEffect } from 'react';
 
 export default function Basket() {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	const { baskets } = useSelector((state) => state.basketData);
-
-	const handleIncrement = (id) => {
-		dispatch(incrementQuantity({ id }));
-	};
-
-	const handleDecrement = (id) => {
-		dispatch(decrementQuantity({ id }));
-	};
-
-	// console.log("basket page =", baskets);
+	const { localBaskets, apiBaskets } = useSelector((state) => state.basketData);
+	const { isLogin } = useSelector(state => state.userInfo)
 	
+	const FuncApiBasketAllClear = async () => {
+		 try {
+			 await santral.api().post(urls.apiBasketAllClear)
+			  dispatch(GetAllApiBaskets());
+		 } catch (error) {
+			console.log(error);
+		 }
+	}  
+	
+const FuncApiRemoveBasketProduct = async (id) => {
+	try {
+		await santral.api().post(urls.apiRemoveBasketProduct, { product: id });
+		  dispatch(GetAllApiBaskets())
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+
+	useEffect(() => {
+		dispatch(GetAllApiBaskets());
+	}, []);
+
+	const handleIncrement = async (id) => {
+		if (isLogin) {
+			await santral.api().post(urls.apiBasketInc, { product: id })
+				dispatch(GetAllApiBaskets());
+		} else {
+			dispatch(incrementCount({ id }));
+		}
+	};
+
+	const handleDecrement = async (id) => {
+		if (isLogin) {
+			await santral.api().post(urls.apiBasketDec, { product: id })
+				dispatch(GetAllApiBaskets());
+		}
+		else {
+			dispatch(decrementCount({ id }));
+		}
+	};
+
+
+
+const isBasketNotEmpty = isLogin ? apiBaskets?.length > 0 : localBaskets?.length > 0;
+
 	return (
 		<section id={style.Basket}>
 			<div className="container">
-				{baskets?.length > 0 ? (
+				{isBasketNotEmpty ? (
 					<div className={style.basketContent}>
 						<div className={style.basketContentLeft}>
 							<div className={style.basketLeftHeader}>
 								<h3 className="sectionMiniTitle">Səbət</h3>
 								<div
-									onClick={() => dispatch(clearBaskets())}
+									onClick={
+										isLogin
+											? FuncApiBasketAllClear
+											: () => dispatch(clearBaskets())
+									}
 									className={style.allBasketPrDelete}
 								>
 									<TrashIconBasket /> Hamısını sil
 								</div>
 							</div>
-							{baskets?.map((item) => (
+							{(isLogin ? apiBaskets : localBaskets)?.map((item) => (
 								<div key={item.id} className={style.basketPrList}>
 									<img
 										className={style.basketPrImg}
@@ -52,7 +95,7 @@ export default function Basket() {
 										</h5>
 										<span
 											className={`${style.alert} ${
-												item.stock === item.quantity
+												item.stock === item.count
 													? style.showAlert
 													: ''
 											}`}
@@ -69,7 +112,7 @@ export default function Basket() {
 												<MinusIcon />
 											</span>
 											<span className={style.count}>
-												{item.quantity}
+												{item.count}
 											</span>
 											<span
 												onClick={() => handleIncrement(item.id)}
@@ -81,17 +124,26 @@ export default function Basket() {
 										<div className={style.oldAndNewprice}>
 											{item.oldPrice != 0 && (
 												<span className={style.oldPrice}>
-													{item.quantity * item.oldPrice}₼
+													{(item.count * item.oldPrice).toFixed(
+														2,
+													)}
+													₼
 												</span>
 											)}
 
 											<span className={style.newPrice}>
-												{item.quantity * item.price}₼
+												{(item.count * item.price).toFixed(2)}₼
 											</span>
 										</div>
 										<span
 											onClick={() =>
-												dispatch(removeFromCart({ id: item.id }))
+												isLogin
+													? FuncApiRemoveBasketProduct(item.id)
+													: dispatch(
+															removeFromCart({
+																id: item.id,
+															}),
+													  )
 											}
 											className={style.deleteIcon}
 										>

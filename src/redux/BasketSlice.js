@@ -1,4 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import santral from '../Helpers/Helpers';
+import urls from '../ApiUrls/Urls';
 
 const basketFromLocalStorage = () => {
   let basket = localStorage.getItem("basket");
@@ -14,78 +16,118 @@ const storeInLocalStorage = (data) => {
 };
 
 const initialState = {
-  baskets: basketFromLocalStorage(),
+  localBaskets: basketFromLocalStorage(),
+  apiBaskets:[]
 };
 
+export const apiAddToBasket = createAsyncThunk(
+  'basket/apiAddToBasket',
+  async ({ productId, count }, { rejectWithValue }) => {
+    try {
+      const resData = await santral.api().post(urls.apiAddToBasket, {
+        product: productId,
+        count: count || 1,
+      });
+      return resData.data;
+    } catch (error) {
+      return rejectWithValue(error?.response?.data || error.message);
+    }
+  }
+);
+
+export const GetAllApiBaskets = createAsyncThunk(
+  'basket/ApiBaskets',
+  async (_, { rejectWithValue }) => {
+    try {
+      const res = await santral.api().post(urls.apiGetAllBasket);
+      return res.data.data;
+    } catch (error) {
+      return rejectWithValue(error?.response?.data || error.message);
+    }
+  }
+);
+
+
+
 export const basketSlice = createSlice({
-  name: 'baskets',
+  name: 'localBaskets',
   initialState,
   reducers: {
     addToBasket: (state, action) => {
-      const quantityToAdd = Number(action.payload.quantity) || 1;
-      const isItemBasket = state.baskets.find(item => item.id === action.payload.id);
+      const quantityToAdd = Number(action.payload.count) || 1;
+      const isItemBasket = state.localBaskets.find(item => item.id === action.payload.id);
 
       if (isItemBasket) {
-        const updatedBasket = state.baskets.map(item => {
+        const updatedBasket = state.localBaskets.map(item => {
           if (item.id === action.payload.id) {
             return {
               ...item,
-              quantity: item.quantity + quantityToAdd,
+              count: item.count + quantityToAdd,
             };
           }
           return item;
         });
 
-        state.baskets = updatedBasket;
-        storeInLocalStorage(state.baskets);
+        state.localBaskets = updatedBasket;
+        storeInLocalStorage(state.localBaskets);
       } else {
         const newItem = {
           ...action.payload,
-          quantity: quantityToAdd,
+          count: quantityToAdd,
         };
 
-        state.baskets.push(newItem);
-        storeInLocalStorage(state.baskets);
+        state.localBaskets.push(newItem);
+        storeInLocalStorage(state.localBaskets);
       }
     },
 
-    incrementQuantity: (state, action) => {
-      const updatedBasket = state.baskets.map(item => {
-        if (item.id === action.payload.id && item.quantity < item.stock) {
-          return { ...item, quantity: item.quantity + 1 };
+    incrementCount: (state, action) => {
+      const updatedBasket = state.localBaskets.map(item => {
+        if (item.id === action.payload.id && item.count < item.stock) {
+          return { ...item, count: item.count + 1 };
         }
         return item;
       });
 
-      state.baskets = updatedBasket;
-      storeInLocalStorage(state.baskets);
+      state.localBaskets = updatedBasket;
+      storeInLocalStorage(state.localBaskets);
     },
 
-    decrementQuantity: (state, action) => {
-      const updatedBasket = state.baskets.map(item => {
-        if (item.id === action.payload.id && item.quantity > 1) {
-          return { ...item, quantity: item.quantity - 1 };
+    decrementCount: (state, action) => {
+      const updatedBasket = state.localBaskets.map(item => {
+        if (item.id === action.payload.id && item.count > 1) {
+          return { ...item, count: item.count - 1 };
         }
         return item;
       });
 
-      state.baskets = updatedBasket;
-      storeInLocalStorage(state.baskets);
+      state.localBaskets = updatedBasket;
+      storeInLocalStorage(state.localBaskets);
     },
 
     removeFromCart: (state, action) => {
-      const updatedBasket = state.baskets.filter(item => item.id != action.payload.id);
-      state.baskets = updatedBasket;
-      storeInLocalStorage(state.baskets)
+      const updatedBasket = state.localBaskets.filter(item => item.id != action.payload.id);
+      state.localBaskets = updatedBasket;
+      storeInLocalStorage(state.localBaskets)
     },
 
     clearBaskets: (state) => {
-      state.baskets = []
-      storeInLocalStorage(state.baskets)
+      state.localBaskets = []
+      storeInLocalStorage(state.localBaskets)
     }
+
+  },  
+    extraReducers: (builder) => {
+    builder
+       .addCase(GetAllApiBaskets.fulfilled, (state, action) => {
+        state.apiBaskets = action.payload;
+      })
+      .addCase(GetAllApiBaskets.rejected, (state, action) => {
+        state.error = action.payload;
+      });
   },
 });
 
-export const { addToBasket, incrementQuantity, decrementQuantity, removeFromCart, clearBaskets } = basketSlice.actions;
+export const { addToBasket, incrementCount, decrementCount, removeFromCart, clearBaskets } = basketSlice.actions;
 
 export default basketSlice.reducer;

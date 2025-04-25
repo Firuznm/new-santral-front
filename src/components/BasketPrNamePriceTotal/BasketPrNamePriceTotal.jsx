@@ -6,14 +6,19 @@ import ButtonAndArrow from '../ButtonAndArrow/ButtonAndArrow';
 
 export default function BasketPrNamePriceTotal({ onclick,title }) {
 
+	const { localBaskets, apiBaskets } = useSelector((state) => state.basketData);
+	const { isLogin, authMeUser } = useSelector((state) => state.userInfo);
 
-	const {baskets} = useSelector(state => state.basketData)
+	console.log("api basket=", apiBaskets);
+    console.log('api basket=', authMeUser);
+	
+		
    
-	const allPrice = baskets?.reduce((acm, item) => {
-		return (acm += item.price * item.quantity);
+	const allPrice = (isLogin ? apiBaskets : localBaskets)?.reduce((acm, item) => {
+		return (acm += item.price * item.count);
 	}, 0);
 
-	const discountPrice = baskets?.reduce((acm, item) => {
+	const discountPrice = (isLogin ? apiBaskets : localBaskets)?.reduce((acm, item) => {
 		return (acm += item.oldPrice);
 	}, 0);
 
@@ -25,24 +30,24 @@ export default function BasketPrNamePriceTotal({ onclick,title }) {
 				<div className={style.basketPrNamePriceTotal}>
 					<div className={style.header}>
 						<h5 className={style.title}>Məhsul:</h5>
-						<span className={style.basketCount}>{baskets?.length}</span>
+						<span className={style.basketCount}>{isLogin ? apiBaskets?.length : localBaskets?.length}</span>
 					</div>
 					<div className={style.prNameOldpriceNewprice}>
-						{baskets?.map((item) => (
+						{(isLogin ? apiBaskets : localBaskets)?.map((item) => (
 							<div key={item.id} className={style.namePriceOldPrice}>
 								<div className={style.titleQuantity}>
 									<h4 className={style.prName}>{item.title} </h4>
 									<span className={style.prQuantity}>
-										{item.quantity} ədəd
+										{item.count} ədəd
 									</span>
 								</div>
 								<div className={style.oldpriceNewprice}>
 									{item?.oldPrice != 0 && (
 										<span className={style.oldprice}>
-											{item?.oldPrice}₼
+											{item?.oldPrice.toFixed(2)}₼
 										</span>
 									)}
-									<span className={style.newprice}>{item?.price}₼</span>
+									<span className={style.newprice}>{item?.price.toFixed(2)}₼</span>
 								</div>
 							</div>
 						))}
@@ -50,18 +55,18 @@ export default function BasketPrNamePriceTotal({ onclick,title }) {
 					{discountPrice != 0 && (
 						<div className={style.allPrice}>
 							<span className={style.key}>Ümumi məbləğ:</span>
-							<span className={style.value}>{allPrice}₼</span>
+							<span className={style.value}>{allPrice.toFixed(2)}₼</span>
 						</div>
 					)}
 					{discountPrice != 0 && (
 						<div className={style.discountPrice}>
 							<span className={style.key}>Endirim:</span>
-							<span className={style.value}>{discountPrice}₼</span>
+							<span className={style.value}>{discountPrice.toFixed(2)}₼</span>
 						</div>
 					)}
 					<div className={style.amountPayEnd}>
 						<span className={style.key}>Yekun məbləğ:</span>
-						<span className={style.value}>{amountPayEnd}₼</span>
+						<span className={style.value}>{amountPayEnd.toFixed(2)}₼</span>
 					</div>
 					<p className={style.ordersInfo}>
 						Çatdırılma məsafədən asılı olaraq 2-8 azn məbləğində dəyişir.

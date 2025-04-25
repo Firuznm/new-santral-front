@@ -14,11 +14,11 @@ import img3 from "../assets/Images/Saltanat.jpg";
 import img21 from "../assets/Images/cartTick.png";
 import img31 from "../assets/Images/truckFast.png";
 import img41 from "../assets/Images/convertCart.png";
-import mainSliderTopRightGift from "../assets/Images/Comp-1_1.gif"
+// import mainSliderTopRightGift from "../assets/Images/Comp-1_1.gif"
 import banner41 from "../assets/Images/banner41.jpg"
 import banner21 from "../assets/Images/banner21.jpg"
-import mainSliderBottomRight from "../assets/Images/rightBottomRight.jpg"
-import mainsSliderBottomLeft from "../assets/Images/mainSliderBottomLeft.jpg"
+// import mainSliderBottomRight from "../assets/Images/rightBottomRight.jpg"
+// import mainsSliderBottomLeft from "../assets/Images/mainSliderBottomLeft.jpg"
 import mainSliderLeft1 from "../assets/Images/mainSliderLeft1.jfif"
 import mainSliderLeft2 from '../assets/Images/mainSliderLeft2.jfif';
 // -------------------------------------------------------------
@@ -52,58 +52,68 @@ export const OurAdvantagesData=[
 }
 ]
 
-export const mainSliderData = {
-    leftData: [
-        {
-            id: 1,
-            image:mainSliderLeft1
+export const mainSliderLeftData = [
+	{
+		id: 1,
+		img: mainSliderLeft1,
+	},
+	{
+		id: 2,
+		img: mainSliderLeft2,
+	},
+];
+// export const mainSliderData = {
+//     leftData: [
+//         {
+//             id: 1,
+//             image:mainSliderLeft1
     
-        },
-        // {
-        //     id: 2,
-        //     video:"https://www.youtube.com/embed/kU0axitqhxM",
-        // },
-        {
-            id: 3,
-            image:mainSliderLeft2,
-        },
-    ],
-    rightTop: [
-            {
-                id: 4,
-               video : mainSliderTopRightGift
+//         },
+//         // {
+//         //     id: 2,
+//         //     video:"https://www.youtube.com/embed/kU0axitqhxM",
+//         // },
+//         {
+//             id: 3,
+//             image:mainSliderLeft2,
+//         },
+//     ],
+//     rightTop: [
+//             {
+//                 id: 4,
+//                video : mainSliderTopRightGift
         
-            },
-            // {
-            //     id: 5,
-            //     video:"https://www.youtube.com/embed/kU0axitqhxM",
-            // },
-            {
-                id: 6,
-                image:img2,
-            },
-        ], 
-    bottomLeft: [
-        // {
-        //     id: 7,
-        //     image:img3
-        // },
-        {
-            id: 8,
-            image:mainsSliderBottomLeft
-        },
-    ], 
-    bottomRight: [
-        // {
-        //     id: 9,
-        //     image:img1
-        // },
-        {
-            id: 10,
-            image:mainSliderBottomRight
-        }
-    ]
-}
+//             },
+//             // {
+//             //     id: 5,
+//             //     video:"https://www.youtube.com/embed/kU0axitqhxM",
+//             // },
+//             {
+//                 id: 6,
+//                 image:img2,
+//             },
+//         ], 
+//     bottomLeft: [
+//         // {
+//         //     id: 7,
+//         //     image:img3
+//         // },
+//         {
+//             id: 8,
+//             image:mainsSliderBottomLeft
+//         },
+//     ], 
+//     bottomRight: [
+//         // {
+//         //     id: 9,
+//         //     image:img1
+//         // },
+//         {
+//             id: 10,
+//             image:mainSliderBottomRight
+//         }
+//     ]
+// }
 
 export const categoryName = [
     {

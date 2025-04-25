@@ -16,7 +16,6 @@ import Login from "./Authentication/Login/Login";
 import ChangePassword from "./Pages/ChangePassword/ChangePassword";
 import CategoryAndSubcategoryDetails from "./components/CategoryAndSubcategoryDetails/CategoryAndSubcategoryDetails";
 import Basket from "./Pages/Basket/Basket";
-import { BasketContextProvider } from "./Context/BasketContext";
 import OrderConfirm from "./Pages/OrderConfirm/OrderConfirm";
 import Branches from "./Pages/Branches/Branches";
 import News from "./Pages/News/News";
@@ -105,8 +104,6 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
 	<Provider store={store}>
-		<BasketContextProvider>
 			<RouterProvider router={router} />
-		</BasketContextProvider>
 	</Provider>,
 );
