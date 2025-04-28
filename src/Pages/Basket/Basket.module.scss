@@ -56,9 +56,9 @@
 						opacity: 0;
 						color: red;
 					}
-					.showAlert{
-              opacity: 1;
-			  transition: 1s ease;
+					.showAlert {
+						opacity: 1;
+						transition: 1s ease;
 					}
 				}
 				.quantityPriceDelete {
@@ -100,10 +100,20 @@
 							text-decoration: line-through;
 							text-decoration-color: #00000061;
 						}
-						.newPrice {
-							font-size: 1.2rem;
-							font-weight: 500;
-							color: rgba(253, 133, 33, 1);
+						.bpPriceWrapper {
+							display: flex;
+							flex-direction: column;
+							.Originprice {
+								font-size: 1rem;
+								color: #00000061;
+								text-decoration: line-through;
+								text-decoration-color: #00000061;
+							}
+							.bpPrice {
+								font-size: 1.2rem;
+								font-weight: 500;
+								color: rgba(253, 133, 33, 1);
+							}
 						}
 					}
 					.deleteIcon {

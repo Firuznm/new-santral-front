@@ -6,7 +6,13 @@ import PlusIcon from '../../assets/Icons/PlusIcon';
 import MinusIcon from '../../assets/Icons/MinusIcon';
 import santral from '../../Helpers/Helpers';
 import BasketPrNamePriceTotal from '../../components/BasketPrNamePriceTotal/BasketPrNamePriceTotal';
-import { clearBaskets, decrementCount,  GetAllApiBaskets,  incrementCount, removeFromCart } from '../../redux/BasketSlice';
+import {
+	clearBaskets,
+	decrementCount,
+	GetAllApiBaskets,
+	incrementCount,
+	removeFromCart,
+} from '../../redux/BasketSlice';
 import { useNavigate } from 'react-router-dom';
 import urls from '../../ApiUrls/Urls';
 import { useEffect } from 'react';
@@ -15,26 +21,29 @@ export default function Basket() {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const { localBaskets, apiBaskets } = useSelector((state) => state.basketData);
-	const { isLogin } = useSelector(state => state.userInfo)
-	
-	const FuncApiBasketAllClear = async () => {
-		 try {
-			 await santral.api().post(urls.apiBasketAllClear)
-			  dispatch(GetAllApiBaskets());
-		 } catch (error) {
-			console.log(error);
-		 }
-	}  
-	
-const FuncApiRemoveBasketProduct = async (id) => {
-	try {
-		await santral.api().post(urls.apiRemoveBasketProduct, { product: id });
-		  dispatch(GetAllApiBaskets())
-	} catch (error) {
-		console.log(error);
-	}
-};
+	const { isLogin, bpUser } = useSelector((state) => state.userInfo);
+	// const bpUser = authMeUser.position === 'bp_user';
 
+     console.log("test=", bpUser);
+	 
+
+	const FuncApiBasketAllClear = async () => {
+		try {
+			await santral.api().post(urls.apiBasketAllClear);
+			dispatch(GetAllApiBaskets());
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	const FuncApiRemoveBasketProduct = async (id) => {
+		try {
+			await santral.api().post(urls.apiRemoveBasketProduct, { product: id });
+			dispatch(GetAllApiBaskets());
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	useEffect(() => {
 		dispatch(GetAllApiBaskets());
@@ -42,8 +51,8 @@ const FuncApiRemoveBasketProduct = async (id) => {
 
 	const handleIncrement = async (id) => {
 		if (isLogin) {
-			await santral.api().post(urls.apiBasketInc, { product: id })
-				dispatch(GetAllApiBaskets());
+			await santral.api().post(urls.apiBasketInc, { product: id });
+			dispatch(GetAllApiBaskets());
 		} else {
 			dispatch(incrementCount({ id }));
 		}
@@ -51,17 +60,15 @@ const FuncApiRemoveBasketProduct = async (id) => {
 
 	const handleDecrement = async (id) => {
 		if (isLogin) {
-			await santral.api().post(urls.apiBasketDec, { product: id })
-				dispatch(GetAllApiBaskets());
-		}
-		else {
+			await santral.api().post(urls.apiBasketDec, { product: id });
+			dispatch(GetAllApiBaskets());
+		} else {
 			dispatch(decrementCount({ id }));
 		}
 	};
 
 
-
-const isBasketNotEmpty = isLogin ? apiBaskets?.length > 0 : localBaskets?.length > 0;
+	const isBasketNotEmpty = isLogin ? apiBaskets?.length > 0 : localBaskets?.length > 0;
 
 	return (
 		<section id={style.Basket}>
@@ -122,7 +129,11 @@ const isBasketNotEmpty = isLogin ? apiBaskets?.length > 0 : localBaskets?.length
 											</span>
 										</div>
 										<div className={style.oldAndNewprice}>
-											{item.oldPrice != 0 && (
+											{item.oldPrice === 0 ? (
+												<span className={style.oldPrice}>
+													{item.price.toFixed(2)}₼
+												</span>
+											) : (
 												<span className={style.oldPrice}>
 													{(item.count * item.oldPrice).toFixed(
 														2,
@@ -131,9 +142,46 @@ const isBasketNotEmpty = isLogin ? apiBaskets?.length > 0 : localBaskets?.length
 												</span>
 											)}
 
-											<span className={style.newPrice}>
-												{(item.count * item.price).toFixed(2)}₼
-											</span>
+											{bpUser ? (
+												<div className={style.bpPriceWrapper}>
+													<span className={style.bpPrice}>
+														bp:{item.bp_total?.toFixed(2)}
+													</span>
+												</div>
+											) : (
+												<div className={style.price}>
+													{(isLogin
+														? item.total
+														: item.price * item.count
+													).toFixed(2)}
+												</div>
+											)}
+											{/* {!bpUser && (
+												<div className={style.price}>
+													{(isLogin
+														? item.total
+														: item.price * item.count
+													).toFixed(2)}
+												</div>
+											)}
+											{bpUser && (
+												<div className={style.bpPriceWrapper}>
+													<span
+														style={{
+															display: 'block',
+															textDecoration: 'underline',
+														}}
+													>
+														bp:
+														{(
+															item.price * item.count
+														).toFixed(2)}
+													</span>
+													<span>
+														bp:{item.bp_total?.toFixed(2)}
+													</span>
+												</div>
+											)} */}
 										</div>
 										<span
 											onClick={() =>

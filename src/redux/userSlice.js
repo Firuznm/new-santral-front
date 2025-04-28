@@ -10,22 +10,12 @@ const initialState = {
   catalogDatas: [],
   userToken: localStorage.getItem("token") || null,
   isLogin: !!localStorage.getItem("token"),
+  bpUser: false,
   isError: null,
   showOpenEnterSiteArea: false,
 };
 
-// const authMeUser = {}; 
 
-// const initialState = {
-//   user: {},
-//   authMeUser,
-//   catalogDatas: [],
-//   userToken: localStorage.getItem("token") || null,
-//   isLogin: !!localStorage.getItem("token"),
-//   bpUser: authMeUser?.position === "bp_user",
-//   isError: null,
-//   showOpenEnterSiteArea: false,
-// };
 
 export const getAllCatalogDatas = createAsyncThunk(
   "categoryData",
@@ -132,6 +122,7 @@ export const userSlice = createSlice({
       // authMe
       .addCase(authMe.fulfilled, (state, actions) => {
         state.authMeUser = actions.payload;
+        state.bpUser = actions.payload.position === 'bp_user';
       })
       .addCase(authMe.rejected, (state, actions) => {
         state.isError = actions.payload ?? actions.payload.isError;
