@@ -22,11 +22,12 @@ export default function Basket() {
 	const dispatch = useDispatch();
 	const { localBaskets, apiBaskets } = useSelector((state) => state.basketData);
 	const { isLogin, bpUser } = useSelector((state) => state.userInfo);
-	// const bpUser = authMeUser.position === 'bp_user';
 
-     console.log("test=", bpUser);
+	console.log("islogin=", isLogin);
+	console.log('bpuser=', bpUser);
+	 console.log("api basket=", apiBaskets);
 	 
-	 
+	
 
 	const FuncApiBasketAllClear = async () => {
 		try {
@@ -130,59 +131,43 @@ export default function Basket() {
 											</span>
 										</div>
 										<div className={style.oldAndNewprice}>
-											{item.oldPrice === 0 ? (
-												<span className={style.oldPrice}>
-													{item.price.toFixed(2)}₼
-												</span>
+											{bpUser ? (
+												<div className={style.bpPriceWrapper}>
+													{item.oldPrice !== 0 ? (
+														<span className={style.oldPrice}>
+															{(
+																item.count * item.oldPrice
+															).toFixed(2)}
+															₼
+														</span>
+													) : (
+														<span className={style.oldPrice}>
+															{(
+																item.count * item.price
+															).toFixed(2)}
+															₼
+														</span>
+													)}
+													<span className={style.bpPrice}>
+														{item.bp_total?.toFixed(2)}
+													</span>
+												</div>
 											) : (
+												<div className={style.price}>
+													{item.oldPrice !== 0 && (
 												<span className={style.oldPrice}>
 													{(item.count * item.oldPrice).toFixed(
 														2,
 													)}
 													₼
 												</span>
-											)}
-
-											{bpUser ? (
-												<div className={style.bpPriceWrapper}>
-													<span className={style.bpPrice}>
-														bp:{item.bp_total?.toFixed(2)}
-													</span>
-												</div>
-											) : (
-												<div className={style.price}>
+											)} <br />
 													{(isLogin
 														? item.total
 														: item.price * item.count
 													).toFixed(2)}
 												</div>
 											)}
-											{/* {!bpUser && (
-												<div className={style.price}>
-													{(isLogin
-														? item.total
-														: item.price * item.count
-													).toFixed(2)}
-												</div>
-											)}
-											{bpUser && (
-												<div className={style.bpPriceWrapper}>
-													<span
-														style={{
-															display: 'block',
-															textDecoration: 'underline',
-														}}
-													>
-														bp:
-														{(
-															item.price * item.count
-														).toFixed(2)}
-													</span>
-													<span>
-														bp:{item.bp_total?.toFixed(2)}
-													</span>
-												</div>
-											)} */}
 										</div>
 										<span
 											onClick={() =>

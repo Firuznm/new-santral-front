@@ -29,6 +29,7 @@ export default function HeaderNew() {
 		isLogin,
 	} = useSelector((state) => state.userInfo);
 
+
 	const onClickCatalogShowHidden = () => {
 		const scrollSituation = !showHiddenCatalog;
 		setShowHiddenCatalog(scrollSituation);

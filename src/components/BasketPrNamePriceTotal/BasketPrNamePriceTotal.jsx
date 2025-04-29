@@ -7,12 +7,8 @@ import ButtonAndArrow from '../ButtonAndArrow/ButtonAndArrow';
 export default function BasketPrNamePriceTotal({ onclick,title }) {
 
 	const { localBaskets, apiBaskets } = useSelector((state) => state.basketData);
-	const { isLogin, authMeUser } = useSelector((state) => state.userInfo);
+	const { isLogin} = useSelector((state) => state.userInfo);
 
-	console.log("api basket=", apiBaskets);
-    console.log('api basket=', authMeUser);
-	
-		
    
 	const allPrice = (isLogin ? apiBaskets : localBaskets)?.reduce((acm, item) => {
 		return (acm += item.price * item.count);
