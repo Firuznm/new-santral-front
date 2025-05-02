@@ -22,7 +22,6 @@ import News from "./Pages/News/News";
 import Projects from "./Pages/Projects/Projects";
 import OrderSuccessfull from "./Pages/OrderSuccessfull/OrderSuccessfull";
 
-
 const router = createBrowserRouter([
 	{
 		path: '/',
@@ -107,3 +106,4 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 			<RouterProvider router={router} />
 	</Provider>,
 );
+ 

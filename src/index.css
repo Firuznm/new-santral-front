@@ -170,7 +170,7 @@ li.selected{
     cursor: pointer;
     position: absolute;
     z-index: 9;
-    bottom: 310px;
+    bottom: 210px;
     right: 0;
     width: 44px;
     height: 60px;
@@ -187,7 +187,7 @@ li.selected{
     cursor: pointer;
     position: absolute;
     z-index: 9;
-    bottom: 310px;
+    bottom: 210px;
     left: 0;
     width: 44px;
     height: 60px;

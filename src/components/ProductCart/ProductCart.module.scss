@@ -1,160 +1,353 @@
-.productCartWrapper{
-	margin-bottom: 20px;
-	// background-color:rgba(245, 245, 245, 1);
+// .productCartWrapper{
+// 	margin-bottom: 20px;
+// 	width: 300px;
+// 	border-radius: 10px;
+// 	overflow: hidden;
+// 	transition: .5s ease;
+// 	position: relative;
+// 	border: 1px solid #D9D9D9;
+// 	.delivery{
+// 		display: flex;
+// 		justify-content: center;
+// 		align-items: center;
+// 		position: absolute;
+// 		top: 0;
+// 		left: 0;
+// 		z-index: 1;
+// 		width: 300px;
+// 		height: 20px;
+// 			background-color: rgb(255, 210, 63);
+// 		color: rgba(0, 0, 0, 0.87);
+
+// 		.truckImg{
+// 			width: 30px;
+// 			height: 20px;
+// 			margin-right: 20px;
+// 		}
+// 	}
+// 	.discount{
+// 		position: absolute;
+// 		top: 50px;
+// 		right: 5px;
+// 		width: 70px;
+// 		height: 55px;
+// 		background: rgb(239 68 68);
+// 		color: white;
+// 		border-radius:14px;
+// 		display: flex;
+// 		justify-content: center;
+// 		align-items: center;
+// 		z-index: 1;
+// 		font-weight: 500;
+// 		font-size: 1.4rem;
+// 	}
+// 	&:hover{
+// 		box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+// 		.productImg{
+// 			transform: scale(1.1);
+// 		}
+// 	}
+// 	.productImg{
+// 	   padding-top: 20px;
+//        width: 300px;
+// 	   height: 300px;
+// 	   object-fit: contain;
+// 	   border-radius: 10px 10px 0 0;
+// 		transition: .5s;
+// 	}
+// 	.productInfo{
+// 		padding:.7rem;
+// 	   font-size: 1.2rem;
+// 	   background-color:rgba(245, 245, 245, 1);
+// 	.productTitle{
+//       	display: -webkit-box;
+// 		-webkit-box-orient: vertical;
+// 		-webkit-line-clamp: 1;
+// 		overflow: hidden;
+// 		color: rgba(0, 0, 0, 0.87);
+// 		line-height: 1.4rem;
+// 		font-weight: 600;
+// 		}
+// 		.discountPrice{
+// 			display: flex;
+// 			justify-content: space-between;
+// 			align-items: center;
+// 		.prPriceDifference{
+// 			margin-top: 10px;
+// 			display: flex;
+// 			justify-content: center;
+// 			align-items: center;
+// 			width: 120px;
+// 			height: 20px;
+// 			background: rgb(239 68 68);
+// 			font-weight: 600;
+// 			padding: 5px;
+// 			color: white;
+// 			border-radius: 5px;
+// 		  }
+// 		}
+// 		.prPricesWrapper{
+// 			.productPrice{
+// 				color: rgba(253, 133, 33, 1);
+// 				 margin: .5rem 0;
+// 				 display: inline-block;
+// 				font-weight: 700;
+// 				font-size: 1.5rem;
+// 				}
+// 				.prPreviousPrice{
+// 					margin-left: 20px;
+// 					color: black;
+// 					text-decoration: line-through;
+// 					text-decoration-color: rgb(239 68 68);
+// 					display: inline-flex;
+// 					justify-content: center;
+// 					font-weight: 500;
+// 				}
+// 		}
+
+// 	.basketAndFavorit{
+// 			display: flex;
+// 			justify-content: space-between;
+// 			align-items: center;
+// 		}
+// 	.productBasket{
+// 		background-color: rgb(255, 210, 63);
+// 		color: rgba(0, 0, 0, 0.87);
+// 		display: flex;
+// 		justify-content: center;
+// 		align-items: center;
+// 		padding: 0.6rem 1.3rem;
+// 		border-radius: 14px;
+// 		cursor: pointer;
+// 		transition: 0.7s ease;
+// 		border: 1px solid rgb(255, 210, 63);
+// 		width: 60%;
+// 	 svg{
+// 		display: inline-block;
+// 		margin-right: .7rem;
+// 	 }
+// 	 &:hover{
+// 		background-color: white;
+// 	 }
+// 	}
+// 	.isBasket{
+// 		background-color: green;
+// 		border: 1px solid green;
+// 		&:hover{
+// 			background-color: green;
+// 		}
+// 	}
+// 	.ProductFavorite{
+// 	    padding: 13px 13px 7px 12px;
+// 		cursor: pointer;
+// 		border-radius: 100%;
+// 		background-color: rgb(255 210 63);
+// 		transition: .5s ease;
+// 		border: 1px solid rgb(255 210 63);
+// 		&:hover{
+// 			background-color: white;
+// 			border: 1px solid rgb(255 210 63);
+// 			svg{
+// 			    fill:rgb(255 210 63) !important;
+// 				stroke: rgb(255 210 63) !important;
+// 			}
+// 		}
+// 	}
+// }
+// }
+
+// product cart new style
+.productCartWrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	width: 300px;
-	border-radius: 10px;
-	overflow: hidden;
-	transition: .5s ease;
+	height: 430px;
+	// background-color: rgba(255, 251, 236, 1);
+	border-radius: 20px;
+	border: 1px solid rgba(0, 0, 0, 0.18);
 	position: relative;
-	border: 1px solid #D9D9D9;
-	.delivery{
+
+	.delivery {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		position: absolute;
-		top: 0;
-		left: 0;
-		z-index: 1;
-		width: 300px;
-		height: 20px;
-		// background-color:rgba(253, 133, 33, 1);
-		// color: white;
-			background-color: rgb(255, 210, 63);
-		color: rgba(0, 0, 0, 0.87);
-	     
-		.truckImg{
-			width: 30px;
+		width: 100%;
+		background-color: rgba(255, 211, 63, 1);
+		color: black;
+		font-size: 12px;
+		font-weight: 400;
+		border-top-right-radius: 20px;
+		border-top-left-radius: 20px;
+		svg {
+			margin-left: 10px;
 			height: 20px;
-			margin-right: 20px;
 		}
 	}
-	.discount{
-		position: absolute;
-		top: 50px;
-		right: 5px;
-		width: 70px;
-		height: 55px;
-		background: rgb(239 68 68);
-		color: white;
-		border-radius:14px;
+	.heartIcon {
 		display: flex;
-		justify-content: center;
 		align-items: center;
-		z-index: 1;
-		font-weight: 500;
-		font-size: 1.4rem;
+		justify-content: center;
+		cursor: pointer;
+		position: absolute;
+		top: 33px;
+		right: 11px;
+		width: 35px;
+		height: 35px;
+		background-color: rgba(255, 211, 63, 1);
+		border-radius: 9px;
 	}
-	&:hover{
-		box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
-		.productImg{
-			transform: scale(1.1);
+	.prPercent {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: absolute;
+		top: 33px;
+		left: 11px;
+		width: 60px;
+		height: 38px;
+		border-radius: 9px;
+		background-color: rgba(255, 63, 63, 1);
+		color: white;
+		font-weight: 600;
+	}
+	.prImg {
+		display: block;
+		width: 300px;
+		height: 300px;
+		img {
+			background-color: white;
+			width: 100%;
+			height: 100%;
 		}
 	}
-	.productImg{
-	   padding-top: 20px;
-       width: 300px;
-	   height: 300px;
-	   object-fit: contain;
-	   border-radius: 10px 10px 0 0;
-		transition: .5s;
+	.noDelivery {
+		display: block;
+		margin-top: 22px;
+		width: 260px;
+		height: 305px;
+		border-radius: 30px;
+		img {
+			background-color: white;
+			width: 100%;
+			height: 100%;
+			border-radius: 30px;
+		}
 	}
-	.productInfo{
-		padding:.7rem;
-	   font-size: 1.2rem;
-	   background-color:rgba(245, 245, 245, 1);
-	.productTitle{
-      	display: -webkit-box;
+	.prTitle {
+		width: 260px;
+		margin: 10px auto;
+		font-size: 1.2rem;
+		font-weight: 500;
+		line-height: 1.4rem;
+		display: -webkit-box;
 		-webkit-box-orient: vertical;
 		-webkit-line-clamp: 1;
 		overflow: hidden;
-		color: rgba(0, 0, 0, 0.87);
-		line-height: 1.4rem;
-		font-weight: 600;
-		}
-		.discountPrice{
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-		.prPriceDifference{
-			margin-top: 10px;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			width: 120px;
-			height: 20px;	
-			background: rgb(239 68 68);
-			font-weight: 600;
-			padding: 5px;
-			color: white;
-			border-radius: 5px;
-		  }
-		}
-		.prPricesWrapper{
-			.productPrice{
-				color: rgba(253, 133, 33, 1);
-				 margin: .5rem 0;
-				 display: inline-block;
-				font-weight: 700;
-				font-size: 1.5rem;
-				}
-				.prPreviousPrice{
-					margin-left: 20px;
-					color: black;
-					text-decoration: line-through;
-					text-decoration-color: rgb(239 68 68);
-					display: inline-flex;
-					justify-content: center;
-					font-weight: 500;
-				}
-		}	
-
-	.basketAndFavorit{
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-		}
-	.productBasket{
-		background-color: rgb(255, 210, 63);
-		color: rgba(0, 0, 0, 0.87);
+		color: rgba(0, 0, 0, 1);
+	}
+	.bpPrigeImgDiscountPrice {
+		width: 100%;
 		display: flex;
-		justify-content: center;
-		align-items: center;
-		padding: 0.6rem 1.3rem;
-		border-radius: 14px;
-		cursor: pointer;
-		transition: 0.7s ease;
-		border: 1px solid rgb(255, 210, 63);
-		width: 60%;
-	 svg{
-		display: inline-block;
-		margin-right: .7rem;
-	 }
-	 &:hover{
-		background-color: white;
-	 }
-	}
-	.isBasket{
-		background-color: green;
-		border: 1px solid green;
-		&:hover{
-			background-color: green;
+		justify-content: flex-start;
+		align-items: flex-start;
+		.bpPriceImg {
+			width: 75px;
+			height: 25px;
+			border-radius: 7px;
+			background-color: rgb(185, 240, 21);
+			object-fit: contain;
+			padding: 0 5px;
+			margin: 0 15px;
+		}
+		.discountPercent {
+			margin: 0 15px;
+			padding: 3px 9px;
+			border-radius: 9px;
+			font-weight: 700;
+			font-size: 14px;
+			color: white;
+			background-color: rgb(255, 63, 63);
 		}
 	}
-	.ProductFavorite{
-	    padding: 13px 13px 7px 12px;
-		cursor: pointer;
-		border-radius: 100%;
-		background-color: rgb(255 210 63);
-		transition: .5s ease;
-		border: 1px solid rgb(255 210 63);
-		&:hover{
-			background-color: white;
-			border: 1px solid rgb(255 210 63);
-			svg{
-			    fill:rgb(255 210 63) !important;
-				stroke: rgb(255 210 63) !important;
+	.priceBasket {
+		width: 270px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		.bpPriceWrapper {
+			display: flex;
+			flex-direction: column;
+			.bpPriceImg {
+				height: 20px;
+			}
+			.withBPoldPrice {
+				color: rgba(0, 0, 0, 0.18);
+				text-decoration: line-through;
+				text-decoration-color: rgb(239 68 68);
+				font-size: 1.2rem;
+				font-weight: 500;
+			}
+			.BPprice {
+				color: rgba(253, 133, 33, 1);
+				margin-top: -6px;
+				font-size: 1.2rem;
+				font-weight: 500;
 			}
 		}
+		.priceDiscountPrice {
+			display: flex;
+			flex-direction: column;
+			.oldPrice {
+				color: rgba(0, 0, 0, 0.18);
+				text-decoration: line-through;
+				text-decoration-color: rgb(239 68 68);
+				font-size: 1.2rem;
+				font-weight: 500;
+			}
+			.price {
+				display: block;
+				color: rgba(253, 133, 33, 1);
+				margin-top: -6px;
+				font-size: 1.2rem;
+				font-weight: 500;
+			}
+		}
+		// .bpPriceImg {
+		// 	width: 60px;
+		// 	height: 33px;
+		// 	border-radius: 7px;
+		// 	background-color: rgb(185, 240, 21);
+		// 	object-fit: contain;
+		// 	padding: 0 5px;
+		// 	margin: 0 5px;
+		// }
+		// .discountPercent {
+		// 	padding: 9px 5px;
+		// 	border-radius: 9px;
+		// 	font-weight: 500;
+		// 	font-size: 12px;
+		// 	color: white;
+		// 	background-color: rgba(255, 63, 63, 1);
+		// }
+		.basket {
+			width: 112px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background-color: rgba(255, 211, 63, 1);
+			color: white;
+			padding: 7px 10px;
+			font-weight: 500;
+			border-radius: 9px;
+			cursor: pointer;
+			svg {
+				margin-left: 3px;
+			}
+		}
+		.prBasket {
+			background-color: rgb(49, 48, 48);
+			// background-color: rgba(2, 174, 3, 1);
+		}
 	}
-}
 }

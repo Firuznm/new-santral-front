@@ -23,11 +23,6 @@ export default function Basket() {
 	const { localBaskets, apiBaskets } = useSelector((state) => state.basketData);
 	const { isLogin, bpUser } = useSelector((state) => state.userInfo);
 
-	console.log("islogin=", isLogin);
-	console.log('bpuser=', bpUser);
-	 console.log("api basket=", apiBaskets);
-	 
-	
 
 	const FuncApiBasketAllClear = async () => {
 		try {
@@ -49,7 +44,7 @@ export default function Basket() {
 
 	useEffect(() => {
 		dispatch(GetAllApiBaskets());
-	}, []);
+	}, [isLogin]);
 
 	const handleIncrement = async (id) => {
 		if (isLogin) {
@@ -130,45 +125,51 @@ export default function Basket() {
 												<PlusIcon />
 											</span>
 										</div>
-										<div className={style.oldAndNewprice}>
+										<div className={style.oldAndNewpriceAndBPprice}>
 											{bpUser ? (
-												<div className={style.bpPriceWrapper}>
-													{item.oldPrice !== 0 ? (
-														<span className={style.oldPrice}>
-															{(
-																item.count * item.oldPrice
-															).toFixed(2)}
-															₼
-														</span>
-													) : (
-														<span className={style.oldPrice}>
-															{(
-																item.count * item.price
-															).toFixed(2)}
-															₼
-														</span>
-													)}
-													<span className={style.bpPrice}>
-														{item.bp_total?.toFixed(2)}
-													</span>
-												</div>
-											) : (
-												<div className={style.price}>
-													{item.oldPrice !== 0 && (
-												<span className={style.oldPrice}>
-													{(item.count * item.oldPrice).toFixed(
-														2,
-													)}
-													₼
-												</span>
-											)} <br />
-													{(isLogin
-														? item.total
-														: item.price * item.count
-													).toFixed(2)}
-												</div>
-											)}
-										</div>
+												// login olub ve user-in rolu BPuser olduqda 
+							<div className={style.bpPriceWrapper}>
+								{item.oldPrice !== 0 ? (
+									<span className={style.oldPrice}>
+										{(
+											item.count * item.oldPrice
+										).toFixed(2)}
+										₼
+									</span>
+								) : (
+									<span
+										className={style.noOldPrice}
+									>
+										{(
+											item.count * item.price
+										).toFixed(2)}
+										₼
+									</span>
+								)}
+								<span className={style.bpPrice}>
+									{item.bp_total?.toFixed(2)}
+								</span>
+							</div>
+						) : (
+							// bura mehsulun endirime dusubse evvelki qiymetini gosterir
+							<div className={style.priceOldPrice}>
+								{item.oldPrice !== 0 && (
+									<span className={style.oldPrice}>
+										{(
+											item.count * item.oldPrice
+										).toFixed(2)}
+										₼
+									</span>
+								)}
+								<span className={style.price}>
+									{(isLogin
+										? item.total
+										: item.price * item.count
+									).toFixed(2)}
+								</span>
+							</div>
+						)}
+					</div>
 										<span
 											onClick={() =>
 												isLogin

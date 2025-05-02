@@ -54,7 +54,7 @@ export const authMe = createAsyncThunk(
       return rejectWithValue(error.response?.data || "xeta var ");
     }
   }
-);
+);   
 
 // user login
 export const login = createAsyncThunk(
@@ -116,7 +116,8 @@ export const userSlice = createSlice({
       .addCase(logout.fulfilled, (state) => {
         state.user = {};
         state.userToken = null;
-         state.isLogin = false;
+        state.isLogin = false;
+        state.bpUser = false;
         state.showOpenEnterSiteArea = false; 
       })
       // authMe

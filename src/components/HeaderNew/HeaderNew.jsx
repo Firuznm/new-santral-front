@@ -29,6 +29,7 @@ export default function HeaderNew() {
 		isLogin,
 	} = useSelector((state) => state.userInfo);
 
+console.log("auth me user=", authMeUser);
 
 	const onClickCatalogShowHidden = () => {
 		const scrollSituation = !showHiddenCatalog;
@@ -51,6 +52,8 @@ export default function HeaderNew() {
 			dispatch(authMe());
 		}
 	}, [isLogin, dispatch]);
+
+	
 
 	const handleLogout = () => {
 		dispatch(logout());
