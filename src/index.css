@@ -4,6 +4,7 @@ html{
 	margin: 0;
 	box-sizing: border-box;
 	 font-family: "IBM Plex Sans", sans-serif;
+     height: 200vh;
 }
 /* site reset style css */
 a {
@@ -220,7 +221,21 @@ li.selected{
     border-radius: 14px;
     background-color: rgb(255 210 63) !important;
 }
-
+@media only screen and (max-width: 550px) {
+    .bransSlider .swiper-pagination-bullet{
+    margin-top: 20px;
+    width: 7px;
+    height: 7px;
+}
+.bransSlider .swiper-pagination-bullet-active{
+    width: 20px;
+    border-radius: 14px;
+}
+	.bransSlider .swiper-slide-active{
+		display: flex !important;
+		justify-content: center !important;
+	}
+}
 
 .swiper-slide-thumb-active img{
     border-color: red !important;
@@ -287,3 +302,5 @@ li.selected{
 .sliderLittleImgWrapper .swiper-slide-active{
     border: 1px solid green;
 }		  */
+
+

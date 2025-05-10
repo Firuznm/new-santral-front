@@ -99,47 +99,53 @@
 // 	);
 // }
 
-
 // product cart new cart
 
-import { Link, useNavigate } from "react-router-dom";
-import DeliveryCar from "../../assets/Icons/DeliveryCar";
+import { Link, useNavigate } from 'react-router-dom';
+import DeliveryCar from '../../assets/Icons/DeliveryCar';
 import BasketIcon from '../../assets/Icons/BasketIcon';
 import HeartIcon from '../../assets/Icons/HeartIcon';
-import santral from "../../Helpers/Helpers";
-import style from "./ProductCart.module.scss"
-import BasketIconBlack from "../../assets/Icons/BasketIconBlack";
-import { useDispatch, useSelector } from "react-redux";
-import { addToBasket, apiAddToBasket, GetAllApiBaskets } from "../../redux/BasketSlice";
-import bpPriceImg from "../../assets/Images/bpQiymeti.png"
+import santral from '../../Helpers/Helpers';
+import style from './ProductCart.module.scss';
+import BasketIconBlack from '../../assets/Icons/BasketIconBlack';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToBasket, apiAddToBasket, GetAllApiBaskets } from '../../redux/BasketSlice';
+import bpPriceImg from '../../assets/Images/bpQiymeti.png';
+import { toggleFavoriteItem } from '../../redux/FavoriteItemsSlice';
+import FullRedHeartIcon from '../../assets/Icons/FullRedHeartIcon';
+import { useEffect } from 'react';
 
 export default function ProductCart({ data }) {
-	console.log('pr cart data=', data);
-	const navigate = useNavigate();
-	const dispatch= useDispatch()
-	const { localBaskets, apiBaskets } = useSelector((state) => state.basketData);
-	const { isLogin, bpUser } = useSelector((state) => state.userInfo);
+	// console.log("pr data=", data);
+
 	
-	const prInLocalBasket = localBaskets.some(product => product.id === data.id);
-	const prInApiBasket = apiBaskets?.some(product => product.id === data.id);
+	const dispatch = useDispatch();   
+	const navigate = useNavigate();
+	const { isLogin, bpUser } = useSelector((state) => state.userInfo);
+	const { localBaskets, apiBaskets } = useSelector((state) => state.basketData);
+	const { favoriteItemsList } = useSelector((state) => state.favoriteItemsData);
+
+	const isFavorite = favoriteItemsList.some((fav) => fav.id === data.id);
+	const prInLocalBasket = localBaskets.some((product) => product.id === data.id);
+	const prInApiBasket = apiBaskets?.some((product) => product.id === data.id);
 	const prIsInBasket = isLogin ? prInApiBasket : prInLocalBasket;
-
-
+	console.log("bp-user=", bpUser);
+	
 	const addToPrBasket = async () => {
 		if (prIsInBasket) {
 			navigate('/basket');
 			return;
 		}
-				if (isLogin) {
-					await dispatch(
-						apiAddToBasket({ productId: data.id, count: data.count || 1 }),
-					).unwrap();
-					await dispatch(GetAllApiBaskets()).unwrap();
-				} else {
-					dispatch(addToBasket(data));
-				}
-	}
-  
+		if (isLogin) {
+			await dispatch(
+				apiAddToBasket({ productId: data.id, count: data.count || 1 }),
+			).unwrap();
+			await dispatch(GetAllApiBaskets()).unwrap();
+		} else {
+			dispatch(addToBasket(data));
+		}
+	};
+
 	const discountPercent = data.oldPrice - data.price;
 
 	return (
@@ -149,16 +155,28 @@ export default function ProductCart({ data }) {
 					MƏHSUL PULSUZ ÇATDIRILIR <DeliveryCar />
 				</div>
 			)}
-			<span className={style.heartIcon}>
-				<HeartIcon color={'black'} />
+
+			<span
+				onClick={() => dispatch(toggleFavoriteItem(data))}
+				className={`${style.heartIcon} ${
+					isFavorite ? style.prInFavoriteItems : ''
+				}`}
+			>
+				{isFavorite ? <FullRedHeartIcon /> : <HeartIcon color={'black'} />}
 			</span>
-			{data.discountPercent !== 0 && (
-				<span className={style.prPercent}>{data.discountPercent}%</span>
+
+			{data?.discountPercent !== 0 && (
+				<span className={style.prPercent}>{data?.discountPercent}%</span>
 			)}
-			<Link className={`${data.price > 50 ? style.prImg : style.noDelivery}`}>
+			<Link
+				to={`/product/${data.name}`}
+				className={`${data.price > 50 ? style.prImg : style.noDelivery}`}
+			>
 				<img src={`${santral.baseUrlImage}${data.thumbnail}`} alt="" />
 			</Link>
-			<Link className={style.prTitle}>{data.title}</Link>
+			<Link to={`/product/${data.name}`} className={style.prTitle}>
+				{data.title}
+			</Link>
 			<div className={style.bpPrigeImgDiscountPrice}>
 				{bpUser ? (
 					<img className={style.bpPriceImg} src={bpPriceImg} alt="" />
@@ -184,29 +202,20 @@ export default function ProductCart({ data }) {
 								{data?.price?.toFixed(2)}₼
 							</span>
 						)}
-						<span className={style.BPprice}>{data?.bp_price.toFixed(2)}₼</span>
+						<span className={style.BPprice}>
+							{data?.bp_price?.toFixed(2)}₼
+						</span>
 					</div>
 				) : (
 					<div className={style.priceDiscountPrice}>
 						{data.oldPrice !== 0 && (
 							<span className={style.oldPrice}>
-								{data.oldPrice.toFixed(2)}₼
+								{data?.oldPrice?.toFixed(2)}₼
 							</span>
 						)}
-						<span className={style.price}>{data.price.toFixed(2)}₼</span>
+						<span className={style.price}>{data?.price?.toFixed(2)}₼</span>
 					</div>
 				)}
-				{/* {bpUser ? (
-					<img className={style.bpPrice} src={bpPriceImg} alt="" />
-				) : (
-					<div className={style.discountPercentWrapper}>
-						{discountPercent > 0 && (
-							<span className={style.discountPercent}>
-								-{discountPercent.toFixed(2)}₼
-							</span>
-						)}
-					</div>
-				)} */}
 				<div
 					onClick={addToPrBasket}
 					className={`${style.basket} ${prIsInBasket ? style.prBasket : ''}`}
@@ -218,4 +227,3 @@ export default function ProductCart({ data }) {
 		</div>
 	);
 }
-

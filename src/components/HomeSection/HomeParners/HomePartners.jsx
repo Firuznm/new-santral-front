@@ -7,11 +7,11 @@ export default function HomePartners({PartnersData}) {
 		<div id={style.HomeParenresWrapper}>
 			<HomeCategoryPartnersSlider
 				sliderCartHeight={'220px'}
-				cartNumber={7}
-				imgHeight={'142px'}
-				imgWidth={'142px'}
+				cartNumber={1}
+				imgHeight={'130px'}
+				imgWidth={'130px'}
 				data={PartnersData}
-			/>
+			/>  
 		</div>
   );
 }

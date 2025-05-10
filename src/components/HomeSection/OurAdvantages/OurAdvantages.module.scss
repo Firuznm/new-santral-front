@@ -1,36 +1,107 @@
-#OurAdvantages{
-    .OurAdvantagesTitle{
-        background-color: #EEEEEE;
-        height: 250px;
-.sectionTitle{
-    font-size: 2.5rem;
-    font-weight: 700;
-    padding: 30px 0 0 20px;
+#OurAdvantages {
+	position: relative;
+	height: 300px;
+	
+	.OurAdvantagesTitle {
+		background-color: #eeeeee;
+		height: 200px;
+		padding-left: 20px;
+		border-radius: 14px;
+	}
+	.OurAdvantagesCartWrapper {
+		position: absolute;
+		top: 0;
+		display: flex;
+		justify-content: space-between;
+		.OurAdvantagesCart {
+			width: 22%;
+			margin: 5rem 1rem.5rem;
+			background-color: white;
+			border-radius: 14px;
+			box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+				rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
+			img {
+				margin: 0.4rem;
+				width: 70px;
+				height: 70px;
+			}
+			.titleDescription{
+			.title {
+				font-size: 15px;
+				margin: 0.4rem;
+			}
+			.description {
+				padding: 0.2rem 0.5rem 1rem 0.5rem;
+				color: black;
+				font-size: 14px;
+			}
+		}
+		}
+	}
 }
-    }
-    .OurAdvantagesCartWrapper{
-        margin-top: -13rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
-    .OurAdvantagesCart{
-        margin: 5rem 1rem.5rem;
-        background-color: white;
-        border-radius: 14px;
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-       
-        img{
-            margin: .4rem;
-            width: 100px;
-            height: 100px;
-        }
-        .title{
-         font-size: 1.1rem;
-         margin: .4rem;
-        }
-        .description{
-           padding: .2rem .5rem 1rem .5rem;
-            color: black;
-        }
-    }  
+
+// homeOurAdvantages  section slider responsive
+@media screen and (max-width: 870px) {
+	#OurAdvantages {
+		height: 410px;
+		.OurAdvantagesTitle {
+			height: 410px;
+		}
+		.OurAdvantagesCartWrapper {
+			flex-wrap: wrap;
+			.OurAdvantagesCart {
+				width: 43%;
+				margin: 3rem 1rem.5rem;
+				img {
+					width: 50px;
+					height: 50px;
+				}
+				.title {
+					font-size: 12px;
+				}
+				.description {
+					font-size: 12px;
+				}
+			}
+			.OurAdvantagesCart:nth-child(3),
+			.OurAdvantagesCart:nth-child(4) {
+			margin-top: 10px;
+			}
+		}
+	}
 }
+
+@media screen and (max-width: 490px) {
+	#OurAdvantages {
+		height: 450px;
+		.OurAdvantagesTitle {
+			height: 450px;
+		}
+		.OurAdvantagesCartWrapper {
+			flex-wrap: wrap;
+			.OurAdvantagesCart {
+				width: 100%;
+				margin: 3rem 1rem.5rem;
+				display: flex;
+				img {
+					width: 50px;
+					height: 50px;
+				}
+				.titleDescription{
+					display: flex;
+					flex-direction: column;
+				.title {
+					font-size: 12px;
+					margin-bottom: 0;
+				}
+			
+			}}
+			.OurAdvantagesCart:nth-child(2),
+			.OurAdvantagesCart:nth-child(3),
+			.OurAdvantagesCart:nth-child(4) {
+			margin-top: 10px;
+			}
+		}
+	}
 }

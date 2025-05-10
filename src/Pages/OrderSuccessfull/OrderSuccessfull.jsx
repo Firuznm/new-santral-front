@@ -1,8 +1,12 @@
 import style from "./OrderSuccessfull.module.scss"
 import successFullImg from "../../assets/Images/successfullImg.png"
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function OrderSuccessfull() {
+    
+	const { isLogin } = useSelector((state) => state.userInfo);
+
   return (
 		<div className={style.orderSuccessfull}>
 			<img className={style.successFullImg} src={successFullImg} alt="" />
@@ -12,13 +16,18 @@ export default function OrderSuccessfull() {
 				Sifarişinizin rəsmiləşdirilməsi üçün sizinnlə əlaqə saxlanılacaqdır
 			</p>
 
-			<div className={style.pageUrl}>
+			<div
+				style={isLogin ? {} : { justifyContent: 'center' }}
+				className={style.pageUrl}
+			>
 				<Link className={style.urlHome} to="/">
 					Əsas səhifə
 				</Link>
-				<Link className={style.urrMyOrders} to="/my-orders">
-					Sifarişlərim
-				</Link>
+				{isLogin && (
+					<Link className={style.urlMyOrders} to="/my-orders">
+						Sifarişlərim
+					</Link>
+				)}
 			</div>
 		</div>
   );

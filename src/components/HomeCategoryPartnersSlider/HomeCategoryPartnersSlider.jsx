@@ -18,6 +18,26 @@ export default function HomeCategoryPartnersSlider({ data, cartNumber, imgHeight
 					      delay: 2000,
 					      disableOnInteraction: false,
 					}}
+					breakpoints={{
+						300: {
+							slidesPerView: 2,
+						},
+						600: {
+							slidesPerView: 3,
+						},
+						750: {
+							slidesPerView: 4,
+						},
+						900: {
+							slidesPerView: 5,
+						},
+						1050: {
+							slidesPerView: 6,
+						},
+						1200: {
+							slidesPerView: 7,
+						},
+					}}
 					speed={2000}
 					loop={true}
 					pagination={{
@@ -39,7 +59,7 @@ export default function HomeCategoryPartnersSlider({ data, cartNumber, imgHeight
 							>
 								<img
 									className={style.category_ParnersCoverImg}
-									style={{ height: imgHeight, width:imgWidth }}
+									style={{ height: imgHeight, width: imgWidth }}
 									src={`${santral.baseUrlImage}${
 										categoryParners.cover
 											? categoryParners.cover

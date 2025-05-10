@@ -1,0 +1,300 @@
+.mobileHeaderWrapper {
+	height: 40px;
+	background-color: rgba(255, 210, 63, 1);
+	padding: 7px 0 2px;
+	.headerMobileTop {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		.mobileLogo {
+			height: 31px;
+			img {
+				height: 100%;
+			}
+		}
+		.enterSiteAreaHamburgerMenu {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			.headerEnter {
+				position: relative;
+				.headerEnterBtn {
+					cursor: pointer;
+					color: rgba(0, 0, 0, 0.6);
+					font-weight: 500;
+					font-size: 1.2rem;
+					padding: 0.5rem;
+					border-radius: 2rem;
+					// margin: 0 1rem;
+					text-wrap: nowrap;
+					height: 35px;
+					width: 120px;
+					border: none;
+				}
+				.userHaveLogin {
+					position: relative;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+
+					.cashback {
+						border: 1px solid #000000;
+						font-weight: 500;
+						padding: 0.2rem 0.4rem;
+						border-radius: 2rem;
+						margin: 0 10px;
+						text-wrap: nowrap;
+					}
+					.defaultUserImg {
+						cursor: pointer;
+						width: 30px;
+						height: 30px;
+						background-color: rgba(255, 255, 255, 1);
+						border: 1px solid #000000;
+						border-radius: 100%;
+						img {
+							width: 100%;
+							height: 100%;
+							object-fit: cover;
+							border-radius: 100%;
+						}
+					}
+					.headerUserInfoPage {
+						position: absolute;
+						top: 40px;
+						right: -7px;
+						z-index: 9;
+						background-color: #000000;
+						border-radius: 0.7rem;
+						padding: 12px 5px;
+						a {
+							display: block;
+							color: white;
+							margin: 1rem;
+							margin: 0.2rem 1rem;
+							padding: 0.7rem 1rem;
+							font-size: 1.25rem;
+							font-weight: 500;
+							cursor: pointer;
+							white-space: nowrap;
+							transition: 0.5s ease;
+							border-radius: 1.5rem;
+							&:hover {
+								background-color: #d9d9d9;
+								color: black;
+								border-radius: 1.5rem;
+							}
+						}
+						.active {
+							background-color: gold;
+							color: black;
+							border-radius: 1.5rem;
+							&:hover {
+								background-color: gold;
+								color: black;
+							}
+						}
+						.outside {
+							display: block;
+							color: white;
+							margin: 1rem;
+							margin: 0.2rem 1rem;
+							padding: 0.7rem 1rem;
+							font-size: 1.25rem;
+							font-weight: 500;
+							cursor: pointer;
+							white-space: nowrap;
+							transition: 0.5s ease;
+							border-radius: 1.5rem;
+							&:hover {
+								background-color: #d9d9d9;
+								color: black;
+								border-radius: 1.5rem;
+							}
+						}
+					}
+				}
+				.enterAreaCloseBtn {
+					width: 30px;
+					height: 30px;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					cursor: pointer;
+					position: absolute;
+					top: 10px;
+					right: 20px;
+					z-index: 9;
+				}
+				.parolForgotten {
+					display: flex;
+					justify-content: end;
+					color: #00000099;
+					font-size: 14px;
+				}
+				.enterBtn {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					width: 100%;
+					margin: 14px 0;
+					background-color: #ffd23f;
+					border-radius: 2rem;
+					border: none;
+					cursor: pointer;
+					font-size: 1rem;
+					font-weight: 400;
+					padding: 14px 0;
+					border: 1px solid red;
+				}
+				.donotAccount {
+					color: #00000099;
+					font-size: 0.9rem;
+				}
+				.LinkSignUp {
+					margin-left: 7px;
+					font-weight: 700;
+					border-bottom: 3px solid #fd8521;
+					color: #fd8521;
+				}
+			}
+			.hamburgerMenu {
+				margin-top: 4px;
+			}
+		}
+	}
+	.mobileHeaderBottom {
+		height: 40px;
+		background-color: black;
+		padding: 9px 0 0 0;
+		.catalogSearchArea {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			gap: 15px;
+			.mobileCatalog {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: white;
+				border: 1px solid white;
+				border-radius: 1rem;
+				padding: 3px 7px;
+				width: 100px;
+
+				svg {
+					margin-right: 5px;
+				}
+			}
+			.SearchWrapper {
+				width: calc(100% - 100px);
+				border: 1px solid rgba(0, 0, 0, 0.38);
+				display: flex;
+				justify-content: start;
+				align-items: center;
+				padding: 1px 3px;
+				border-radius: 2rem;
+				background-color: rgba(255, 255, 255, 0.9);
+				// svg {
+				// 	width: 5px;
+				// }
+
+				input {
+					outline: none;
+					border: none;
+					background-color: transparent;
+					width: 100%;
+					font-size: 16px;
+					&::placeholder{
+						font-size: 10px;
+					}
+				}
+			}
+		}
+	}
+	.hamburgerMenu {
+	position: fixed;
+	z-index: 5;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: rgba(255, 210, 63, 1);
+	color: #fff;
+	transition: 0.5s ease-in-out;
+	overflow-y: auto;
+		&.noMenu {
+			right: -100%;
+		}
+		.hamburgerMenuHeader {
+			display: flex;
+			justify-content: space-between;
+			margin-bottom: 1rem;
+			.shortPhone {
+				color: rgba(0, 0, 0, 0.87);
+				font-size: 1.3rem;
+				display: flex;
+				align-items: center;
+				svg {
+					margin-right: 10px;
+				}
+			}
+			.langAndCloseBtn {
+				display: flex;
+				align-items: center;
+				.lang {
+					margin-right: 10px;
+				}
+			}
+		}
+		.pages {
+			display: flex;
+			flex-direction: column;
+			padding: 7px 0;  
+			.pageName {
+				font-size: 1rem;
+				border-bottom: 1px solid rgba(0, 0, 0, 0.47);
+				color: rgba(0, 0, 0, 0.87);
+				padding-bottom: 15px;
+				margin: 10px 0;
+			}
+					.active {
+					color: green;
+				}
+		}
+	}
+
+	.footerBottomFixedMenu {
+		width: 100%;
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		background-color: #333232;
+		border-radius: 12px;
+		padding: 10px 0;
+		.bottomContent {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			.wishList,
+			.basket {
+				position: relative;
+				.wishListCount,
+				.basketCount {
+					position: absolute;
+					top: -17px;
+					right: -15px;
+					background-color: #fd8521;
+					color: white;
+					width: 25px;
+					height: 25px;
+					border-radius: 100%;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					font-size: 12px;
+				}
+			}
+		}
+	}
+}

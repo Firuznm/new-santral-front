@@ -90,7 +90,7 @@ export default function UserAddressAdd({ getAddressData }) {
 			},
 		],
 	};
-
+  
 	return (
 		<div className={style.UserAddressAddForm}>
 			<h3 className="sectionMiniTitle">Yeni ünvan əlavə et</h3>

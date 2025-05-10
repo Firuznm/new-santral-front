@@ -6,6 +6,7 @@ import ScrollToTop from '../components/ScrollToTop/ScrollToTop'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { GetAllApiBaskets } from '../redux/BasketSlice';
+import { authMe } from '../redux/userSlice';
 
 
 
@@ -18,6 +19,14 @@ export default function Layouts() {
 				dispatch(GetAllApiBaskets());
 			}
 		}, [isLogin]);
+	
+	
+	useEffect(() => {
+		if (localStorage.getItem('token')) {
+			dispatch(authMe());
+		}
+	}, []);
+
 	
   return (
 	  <>

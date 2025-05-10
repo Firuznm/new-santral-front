@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 import HomeCategorySlider from '../../components/HomeSection/HomeCategorySlider/HomeCategorySlider';
-import ProductCart from '../../components/ProductCart/ProductCart';
+// import ProductCart from '../../components/ProductCart/ProductCart';
 import HomeSeasonOffers from '../../components/HomeSection/HomeSeasonOffers/HomeSeasonOffers';
 import HomeBanner from '../../components/HomeSection/HomeBanner/HomeBanner';
 import santral from '../../Helpers/Helpers';
 import urls from '../../ApiUrls/Urls';
-import { bannerDatas } from '../../MyDatas/MyDatas';
 import NewsCart from '../../components/NewsCart/NewsCart';
 import HomePartners from '../../components/HomeSection/HomeParners/HomePartners';
 import HomeNews from '../../components/HomeSection/HomeNews/HomeNews';
@@ -73,26 +72,24 @@ export default function Home() {
 	// console.log("home banner=",homeDiscountedDatas);
 	// console.log("homeBannerData-", homeBannersData);
 	// console.log("news", homeNews);
-	// console.log("seasonOffers-", homeSeasonOffersData[0]?.products);
-
+	// console.log("seasonOffers-", homeSeasonOffersData);
 	// const baskets = useSelector(state => state.baskets)
-
 	//  const { baskets } = useSelector((state) => state.basketData);
 	//  console.log('home basket=', baskets);
 	return (
 		<div className="container">
 			<HomeMainSlider />
 			<HomeDiscountedProducts discountData={homeDiscountedDatas} />
-			{/* <HomeBanner /> */}
+			<HomeBanner data={homeBannersData} />
 
 			<HomeCategorySlider homeCategorySliderData={categoryDatas} />
 			{/* <HomeNews newsData={homeNews} /> */}
 			<HomeNewComers data={categoryDatas} />
 			<HomeBrands brandsData={homeBrandsData} />
-			<OurAdvantages />
-			<HomeBanner reverse={'row-reverse'} />
-			<HomeSeasonOffers seasonOffersData={homeSeasonOffersData} />
 			<HomePartners PartnersData={homePartnersData} />
+			<HomeNewComers data={categoryDatas} />
+			<OurAdvantages />
+			<HomeSeasonOffers seasonOffersData={homeSeasonOffersData} />
 		</div>
 	);
 }

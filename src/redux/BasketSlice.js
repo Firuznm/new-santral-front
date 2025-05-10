@@ -8,7 +8,7 @@ const basketFromLocalStorage = () => {
     return JSON.parse(basket);
   } else {
     return [];
-  }
+  }   
 };
 
 const storeInLocalStorage = (data) => {
@@ -19,7 +19,7 @@ const initialState = {
   localBaskets: basketFromLocalStorage(),
   apiBaskets:[]
 };
-
+ 
 export const apiAddToBasket = createAsyncThunk(
   'basket/apiAddToBasket',
   async ({ productId, count }, { rejectWithValue }) => {

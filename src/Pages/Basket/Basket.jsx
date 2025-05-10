@@ -43,8 +43,10 @@ export default function Basket() {
 	};
 
 	useEffect(() => {
-		dispatch(GetAllApiBaskets());
-	}, [isLogin]);
+		if (isLogin) {
+			dispatch(GetAllApiBaskets());
+		}
+	}, [isLogin, dispatch]);
 
 	const handleIncrement = async (id) => {
 		if (isLogin) {

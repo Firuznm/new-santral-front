@@ -21,60 +21,51 @@ export default function ProductCartSlider({data}) {
     }, [data]);
   
   return (
-    <>
-      <Swiper
-        ref={swiperRef}
-        slidesPerView={4}
-        spaceBetween={10}
-        pagination={{
-          clickable: true,
-        }}
-        loop={true}
-        modules={[Navigation]}
-        navigation={{
-          nextEl: ".home-categorySliderAndDiscountPrSlider-button-prev",
-          prevEl: ".home-categorySliderAndDiscountPrSlider-button-next",
-         
-        }}
-          breakpoints={{
-            470: {
-              slidesPerView: 1,
-            },
-            670: {  
-              slidesPerView: 2.1,
-            },
-            850: {
-              slidesPerView: 2.7,
-            },
-            1024: {
-              slidesPerView: 3.2,
-            },
-            1270: {
-              slidesPerView: 4.1,
-            },
-            1400: {
-              slidesPerView: 4.7,
-            },
-             1600: {
-              slidesPerView: 5,
-            },
-          }}
-        className="resultSlider"
-      >
-        {
-            data?.map(item=>(
-                <SwiperSlide key={item.id}>
-                 <ProductCart data={item}/>
-                </SwiperSlide>
-            ))
-        }
-      </Swiper>
-     <div className="home-categorySliderAndDiscountPrSlider-button-next">
-                          <ArrowLeftIcon />
-                </div>
-                  <div className="home-categorySliderAndDiscountPrSlider-button-prev">
-                            <ArrowRightIcon />
-                </div>
-    </>
-  )
+		<>
+			<Swiper
+				ref={swiperRef}
+				slidesPerView={4}
+				spaceBetween={10}
+				pagination={{
+					clickable: true,
+				}}
+				loop={true}
+				modules={[Navigation]}
+				navigation={{
+					nextEl: '.home-categorySliderAndDiscountPrSlider-button-prev',
+					prevEl: '.home-categorySliderAndDiscountPrSlider-button-next',
+				}}
+				breakpoints={{
+					300: {
+						slidesPerView: 1,
+					},
+					620: {
+						slidesPerView: 2,
+					},
+					930: {
+						slidesPerView: 3,
+					},
+					1240: {
+						slidesPerView: 4,
+					},
+					1550: {
+						slidesPerView: 5,
+					},
+				}}
+				className="resultSlider"
+			>
+				{data?.map((item) => (
+					<SwiperSlide key={item.id}>
+						<ProductCart data={item} />
+					</SwiperSlide>
+				))}
+			</Swiper>
+			<div className="home-categorySliderAndDiscountPrSlider-button-next">
+				<ArrowLeftIcon />
+			</div>
+			<div className="home-categorySliderAndDiscountPrSlider-button-prev">
+				<ArrowRightIcon />
+			</div>
+		</>
+  );
 }

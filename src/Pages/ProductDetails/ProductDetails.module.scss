@@ -161,11 +161,11 @@
 				  cursor: pointer;
 				  transition: 0.5s ease;
 				}
+			.prInFavoriteList{
+					background-color: rgba(253, 219, 216, 1);
+				}
 				.btnActive{
 					background: #FFD23F !important;
-				}
-				.favorite:hover{
-					background-color: gold;
 				}
 				.socialWrapper{
 					position: relative;
@@ -214,6 +214,7 @@
 				
 				}  
 			}	
+				
 		}
 		.prAvailableAndPrCod{
 			margin-top: .5rem;

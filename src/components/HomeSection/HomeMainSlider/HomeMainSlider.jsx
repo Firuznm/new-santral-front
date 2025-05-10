@@ -17,10 +17,10 @@ export default function HomeMainSlider() {
 			<div className={styles.mainSlider}>
 				<Swiper
 					spaceBetween={20}
-					effect={'fade'}
-					autoplay={{
-						delay: 1500,
-					}}
+					effect={'fade'} 
+					// autoplay={{
+					// 	delay: 1500,
+					// }}
 					modules={[Autoplay, Navigation, EffectFade]}
 					className={styles.mainSliderLeft}
 				>

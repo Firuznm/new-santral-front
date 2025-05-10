@@ -21,6 +21,7 @@ import Branches from "./Pages/Branches/Branches";
 import News from "./Pages/News/News";
 import Projects from "./Pages/Projects/Projects";
 import OrderSuccessfull from "./Pages/OrderSuccessfull/OrderSuccessfull";
+import FavoriteItems from "./Pages/FavoriteItems/FavoriteItems";
 
 const router = createBrowserRouter([
 	{
@@ -80,7 +81,10 @@ const router = createBrowserRouter([
 				path: '/change-password',
 				element: <ChangePassword />,
 			},
-
+			{
+				path: 'favorite-items',
+				element: <FavoriteItems/>,
+			},
 			{
 				path: 'basket',
 				element: <Basket />,

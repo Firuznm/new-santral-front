@@ -208,122 +208,122 @@ export const homeSeasonOffersDatas = [
     },
 ];
 
-export const bannerDatas = {
-	topBanner: {
-		topLeft: [
-			// {
-			// 	id: 1,
-			// 	route: '/',
-			// 	img: banner1,
-			// 	title: 'Mebel',
-			// 	description:
-			// 		' Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus sint enim quod, quae itaque ex, rerum aut non pariatur id totam iste at molestiae nemo excepturi, tempore laudantium optio aperiam?',
-			// },
-			{
-				id: 2,
-				route: '/',
-				// img: banner4,
-				img: banner41,
-				title: 'Bag mebelleri',
-				description:
-					' Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus sint enim quod, quae itaque ex, rerum aut non pariatur id totam iste at molestiae nemo excepturi, tempore laudantium optio aperiam?',
-			},
-		],
-		rightTop: [
-			{
-				id: 1,
-				route: '/',
-                // img: banner2,
-                img :banner21,
-				title: 'Isiqlandirma',
-				description:
-					' Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus sint enim quod, quae itaque ex, rerum aut non pariatur id totam iste at molestiae nemo excepturi, tempore laudantium optio aperiam?',
-			},
-			// {
-			// 	id: 2,
-			// 	route: '/',
-			// 	img: banner5,
-			// 	title: 'Electrik mallari',
-			// 	description:
-			// 		' Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus sint enim quod, quae itaque ex, rerum aut non pariatur id totam iste at molestiae nemo excepturi, tempore laudantium optio aperiam?',
-			// },
-		],
-		rightBottom: [
-			{
-				id: 1,
-				route: '/',
-				img: banner3,
-				title: 'Seramika & Santexnika',
-				description:
-					' Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus sint enim quod, quae itaque ex, rerum aut',
-			},
-			{
-				id: 2,
-				route: '/',
-				img: banner6,
-				title: 'Electrik mallari',
-				description:
-					' Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus sint enim quod, quae itaque ex, rerum aut non pariatur id totam iste at molestiae nemo excepturi, tempore laudantium optio aperiam?',
-			},
-		],
-	},
-	bottomBanner: {
-		bottomRight: [
-			{
-				id: 1,
-				route: '/',
-				img: banner4,
-				title: 'insaat mallari',
-				description:
-					' Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus sint enim quod, quae itaque ex, rerum aut non pariatur id totam iste at molestiae nemo excepturi, tempore laudantium optio aperiam?',
-			},
-			{
-				id: 2,
-				route: '/',
-				img: banner1,
-				title: 'Havalandirma sistemleri',
-				description:
-					' Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus sint enim quod, quae itaque ex, rerum aut non pariatur id totam iste at molestiae nemo excepturi, tempore laudantium optio aperiam?',
-			},
-		],
-		leftTop: [
-			{
-				id: 1,
-				route: '/',
-				img: banner5,
-				title: 'Kabel ve aksesuarlari',
-				description:
-					' Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus sint enim quod, quae itaque ex, rerum aut non pariatur id totam iste at molestiae nemo excepturi, tempore laudantium optio aperiam?',
-			},
-			{
-				id: 2,
-				route: '/',
-				img: banner2,
-				title: 'Qizdiricilar',
-				description:
-					' Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus sint enim quod, quae itaque ex, rerum aut non pariatur id totam iste at molestiae nemo excepturi, tempore laudantium optio aperiam?',
-			},
-		],
-		leftBottom: [
-			{
-				id: 1,
-				route: '/',
-				img: banner6,
-				title: 'Tikinti avadabliqlari',
-				description:
-					' Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus sint enim quod, quae itaque ex, rerum aut',
-			},
-			{
-				id: 2,
-				route: '/',
-				img: banner3,
-				title: 'Electrik mallari',
-				description:
-					' Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus sint enim quod, quae itaque ex, rerum aut non pariatur id totam iste at molestiae nemo excepturi, tempore laudantium optio aperiam?',
-			},
-		],
-	},
-};
+// export const bannerDatas = {
+// 	topBanner: {
+// 		topLeft: [
+// 			// {
+// 			// 	id: 1,
+// 			// 	route: '/',
+// 			// 	img: banner1,
+// 			// 	title: 'Mebel',
+// 			// 	description:
+// 			// 		' Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus sint enim quod, quae itaque ex, rerum aut non pariatur id totam iste at molestiae nemo excepturi, tempore laudantium optio aperiam?',
+// 			// },
+// 			{
+// 				id: 2,
+// 				route: '/',
+// 				// img: banner4,
+// 				img: banner41,
+// 				title: 'Bag mebelleri',
+// 				description:
+// 					' Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus sint enim quod, quae itaque ex, rerum aut non pariatur id totam iste at molestiae nemo excepturi, tempore laudantium optio aperiam?',
+// 			},
+// 		],
+// 		rightTop: [
+// 			{
+// 				id: 1,
+// 				route: '/',
+//                 // img: banner2,
+//                 img :banner21,
+// 				title: 'Isiqlandirma',
+// 				description:
+// 					' Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus sint enim quod, quae itaque ex, rerum aut non pariatur id totam iste at molestiae nemo excepturi, tempore laudantium optio aperiam?',
+// 			},
+// 			// {
+// 			// 	id: 2,
+// 			// 	route: '/',
+// 			// 	img: banner5,
+// 			// 	title: 'Electrik mallari',
+// 			// 	description:
+// 			// 		' Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus sint enim quod, quae itaque ex, rerum aut non pariatur id totam iste at molestiae nemo excepturi, tempore laudantium optio aperiam?',
+// 			// },
+// 		],
+// 		rightBottom: [
+// 			{
+// 				id: 1,
+// 				route: '/',
+// 				img: banner3,
+// 				title: 'Seramika & Santexnika',
+// 				description:
+// 					' Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus sint enim quod, quae itaque ex, rerum aut',
+// 			},
+// 			{
+// 				id: 2,
+// 				route: '/',
+// 				img: banner6,
+// 				title: 'Electrik mallari',
+// 				description:
+// 					' Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus sint enim quod, quae itaque ex, rerum aut non pariatur id totam iste at molestiae nemo excepturi, tempore laudantium optio aperiam?',
+// 			},
+// 		],
+// 	},
+// 	bottomBanner: {
+// 		bottomRight: [
+// 			{
+// 				id: 1,
+// 				route: '/',
+// 				img: banner4,
+// 				title: 'insaat mallari',
+// 				description:
+// 					' Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus sint enim quod, quae itaque ex, rerum aut non pariatur id totam iste at molestiae nemo excepturi, tempore laudantium optio aperiam?',
+// 			},
+// 			{
+// 				id: 2,
+// 				route: '/',
+// 				img: banner1,
+// 				title: 'Havalandirma sistemleri',
+// 				description:
+// 					' Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus sint enim quod, quae itaque ex, rerum aut non pariatur id totam iste at molestiae nemo excepturi, tempore laudantium optio aperiam?',
+// 			},
+// 		],
+// 		leftTop: [
+// 			{
+// 				id: 1,
+// 				route: '/',
+// 				img: banner5,
+// 				title: 'Kabel ve aksesuarlari',
+// 				description:
+// 					' Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus sint enim quod, quae itaque ex, rerum aut non pariatur id totam iste at molestiae nemo excepturi, tempore laudantium optio aperiam?',
+// 			},
+// 			{
+// 				id: 2,
+// 				route: '/',
+// 				img: banner2,
+// 				title: 'Qizdiricilar',
+// 				description:
+// 					' Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus sint enim quod, quae itaque ex, rerum aut non pariatur id totam iste at molestiae nemo excepturi, tempore laudantium optio aperiam?',
+// 			},
+// 		],
+// 		leftBottom: [
+// 			{
+// 				id: 1,
+// 				route: '/',
+// 				img: banner6,
+// 				title: 'Tikinti avadabliqlari',
+// 				description:
+// 					' Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus sint enim quod, quae itaque ex, rerum aut',
+// 			},
+// 			{
+// 				id: 2,
+// 				route: '/',
+// 				img: banner3,
+// 				title: 'Electrik mallari',
+// 				description:
+// 					' Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus sint enim quod, quae itaque ex, rerum aut non pariatur id totam iste at molestiae nemo excepturi, tempore laudantium optio aperiam?',
+// 			},
+// 		],
+// 	},
+// };
 
 export const prDetailsDataTest=[
     {

@@ -49,7 +49,7 @@ export default function HomeNewComers({data}) {
        pagination={{
            clickable: true,
        }}
-       className={style.categoryNameSlider}
+       className={style.categoryNameSlider}  
        modules={[Navigation]}
     > 
         {data?.map(category => (
@@ -71,7 +71,7 @@ export default function HomeNewComers({data}) {
 </div>
 
 <div className={style.categoryClickResultSlider}>
-   <ProductCartSlider data={homeNewComersData}/>
+   <ProductCartSlider data={homeNewComersData}/> 
 </div>
     </section>
   )

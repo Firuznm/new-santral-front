@@ -40,3 +40,13 @@ font-size: .9rem;
      color: #FD8521;
 }	
 }
+
+
+// enterArea responsive
+@media only screen and (max-width: 770px) {
+    .enterArea{
+        top: 40px;
+        right: -10px;
+        width: 240px;
+}
+}

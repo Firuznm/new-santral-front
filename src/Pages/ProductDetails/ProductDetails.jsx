@@ -32,6 +32,8 @@ import PrDetailsPagePrImgSlider from '../../components/PrDetailsPagePrImgSlider/
 import PrDetailsPageSimilarPrAndPrFeatures from '../../components/PrDetailsPageSimilarPrAndPrFeatures/PrDetailsPageSimilarPrAndPrFeatures';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToBasket } from '../../redux/BasketSlice';
+import { toggleFavoriteItem } from '../../redux/FavoriteItemsSlice';
+import FullRedHeartIcon from '../../assets/Icons/FullRedHeartIcon';
 
 export default function ProductDetails() {
 	const { name } = useParams();
@@ -46,28 +48,29 @@ export default function ProductDetails() {
 	const [oneClickBuyModal, setOneClickBuyModal] = useState(false);
 	const [url, setUrl] = useState('');
 	const { localBaskets } = useSelector((store) => store.basketData);
+	const { favoriteItemsList } = useSelector((state) => state.favoriteItemsData);
 
+	const isFavorite = favoriteItemsList.some((fav) => fav.id === prDetailsData.id);
 	const prInBasket = localBaskets.some((item) => item.id === prDetailsData.id);
 
-	const decrement = () => { 
+	const decrement = () => {
 		if (quantity > 1) {
 			setQuantity(quantity - 1);
 		}
 	};
- 
+
 	const increment = () => {
 		if (quantity < prDetailsData?.stock) {
 			setQuantity(quantity + 1);
 		}
 	};
 
- 
 	const handlePrAddBasket = () => {
-    if (prInBasket) {
-      navigate("/basket");
-      return
-    }
-    dispatch(addToBasket({...prDetailsData, quantity}))
+		if (prInBasket) {
+			navigate('/basket');
+			return;
+		}
+		dispatch(addToBasket({ ...prDetailsData, quantity }));
 	};
 
 	const { values, handleChange, handleSubmit, resetForm, errors } = useFormik({
@@ -97,6 +100,7 @@ export default function ProductDetails() {
 		prDetailsData.oldPrice > 0
 			? (prDetailsData.oldPrice / 3).toFixed(2)
 			: (prDetailsData.price / 3).toFixed(2);
+
 	const sixMonths =
 		prDetailsData.oldPrice > 0
 			? (prDetailsData.oldPrice / 6).toFixed(2)
@@ -109,6 +113,7 @@ export default function ProductDetails() {
 	useEffect(() => {
 		setShowCreditMonthPayment(true);
 	}, [name]);
+
 	useEffect(() => {
 		setUrl(window.location.href);
 	}, []);
@@ -168,6 +173,8 @@ export default function ProductDetails() {
 			getRelatedData(prId);
 		}
 	}, [prId]);
+	console.log("pr details data=", prDetailsData);
+	
 
 	return (
 		<section id={style.prDetailsWrapper}>
@@ -233,8 +240,17 @@ export default function ProductDetails() {
 						<div className={style.prTitleAndFavoriteSocial}>
 							<h4 className={style.prTitle}>{prDetailsData.title}</h4>
 							<div className={style.favoriteSocial}>
-								<span className={style.favorite}>
-									<HeartIcon color={'black'} />
+								<span
+									onClick={() =>
+										dispatch(toggleFavoriteItem(prDetailsData))
+									}
+									className={`${style.favorite} ${isFavorite ? style.prInFavoriteList : ""}`}
+								>
+									{isFavorite ? (
+										<FullRedHeartIcon />
+									) : (
+										<HeartIcon color={'black'} />
+									)}
 								</span>
 								<span
 									ref={socialAreaRef}
@@ -391,7 +407,6 @@ export default function ProductDetails() {
 							<div className={style.payementResuslt}>
 								Aylıq ödəniş
 								<span className={style.payment}>
-									{' '}
 									{showCreditMonthPayment ? threeMonths : sixMonths} ₼
 								</span>
 							</div>

@@ -6,14 +6,27 @@ import SectionTitle from "../../components/SectionTitle/SectionTitle";
 import { cityOptions } from "../../constants";
 import style from "./OrderConfirm.module.scss"
 
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { clearBaskets } from "../../redux/BasketSlice";
+import { clearBaskets, GetAllApiBaskets } from "../../redux/BasketSlice";
+import santral from "../../Helpers/Helpers";
+import urls from "../../ApiUrls/Urls";
 
 export default function OrderConfirm() {
 	const navigate = useNavigate();
-	const { baskets } = useSelector(state => state.basketData);
-	const dispatch = useDispatch()
+	const {isLogin} = useSelector(state=> state.userInfo)
+	const { localBaskets, apiBaskets } = useSelector((state) => state.basketData);
+	
+	const dispatch = useDispatch();
+
+		const FuncApiBasketAllClear = async () => {
+			try {
+				await santral.api().post(urls.apiBasketAllClear);
+				dispatch(GetAllApiBaskets());
+			} catch (error) {
+				console.log(error);
+			}
+		};
 	const { values, handleChange, handleSubmit, resetForm, errors } = useFormik({
 		initialValues: {
 			firstname: '',
@@ -37,8 +50,14 @@ export default function OrderConfirm() {
 
 		onSubmit: async (values) => {
 			console.log('order confirm data=', values);
-            console.log("basket data=", baskets);
-			dispatch(clearBaskets())
+		
+			if (isLogin) {
+				console.log("api basket data", apiBaskets);
+				FuncApiBasketAllClear();
+			} else {
+				console.log('local basket data=', localBaskets);
+					dispatch(clearBaskets());
+			}
 			resetForm();
 			navigate('/order-success');
 		},
@@ -115,18 +134,18 @@ export default function OrderConfirm() {
 			value: values.message,
 			handleChange: handleChange,
 		},
-	};
+	}; 
 	
   return (
 		<div className="container">
+			<SectionTitle
+				marginTop={'0'}
+				marginBottom={'0'}
+				title={'Sifarişin rəsmiləşdirilməsi'}
+			/>
 			<div className={style.OrderConfirmPage}>
 				<div className={style.formGroup}>
-					<SectionTitle
-						marginTop={'0'}
-						marginBottom={'0'}
-						title={'Sifarişin rəsmiləşdirilməsi'}
-					/>
-					<h3 className="sectionMiniTitle">Səbət</h3>
+					<h3 className="sectionMiniTitle">Yeni ünvan əlavə et</h3>
 					<form onSubmit={handleSubmit}>
 						<div className={style.userNameSurname}>
 							{orderConfirmFormInputData.nameSurname.map((inputData) => (
@@ -166,9 +185,21 @@ export default function OrderConfirm() {
 							onChange={handleChange}
 						></textarea>
 					</form>
+					<h5 className={style.paymet}>Ödəniş üsulu *</h5>
+					<div className={style.btnList}>
+						<Link className={style.doorPayment} to="/">
+							Nağd
+						</Link>
+						<Link className={style.onlinePaymet} to="/">
+							Onlayn
+						</Link>
+					</div>
 				</div>
 
-				<BasketPrNamePriceTotal onclick={handleSubmit } title={"Sifarisi tamamla"}/>
+				<BasketPrNamePriceTotal
+					onclick={handleSubmit}
+					title={'Sifarisi tamamla'}
+				/>
 			</div>
 		</div>
   );

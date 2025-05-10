@@ -15,7 +15,7 @@ const initialState = {
   showOpenEnterSiteArea: false,
 };
 
-
+   
 
 export const getAllCatalogDatas = createAsyncThunk(
   "categoryData",
@@ -63,7 +63,7 @@ export const login = createAsyncThunk(
     try {
       const resData = await santral.api().post(urls.login, JSON.stringify(data));
       localStorage.setItem("token", resData?.data?.access_token);
-      dispatch(authMe())
+      dispatch(authMe());
       return { user: resData.data, userToken: resData?.data?.access_token};
     } catch (isError) {
       return rejectWithValue(isError.response?.data || "Xəta var");

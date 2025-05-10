@@ -5,12 +5,12 @@ export default function HomeCategorySlider({ homeCategorySliderData }) {
     return (
 		<section id={style.homeCategory}>
 			<HomeCategoryPartnersSlider
-				cartNumber={7}
-				sliderCartHeight={'220px'}
+				cartNumber={1}
+				sliderCartHeight={'170px'}
                 imgHeight={'116px'}
                 imgWidth={"116px"}
 				data={homeCategorySliderData}
 			/>
 		</section>
 	);
-}
+}   

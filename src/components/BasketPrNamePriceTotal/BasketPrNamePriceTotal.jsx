@@ -4,13 +4,22 @@ import googlePay from '../../assets/Images/Google Pay Button.png';
 import { useSelector } from 'react-redux';
 import ButtonAndArrow from '../ButtonAndArrow/ButtonAndArrow';
 import bpPriceImg from "../../assets/Images/bpQiymeti.png"
+import { useState } from 'react';
 
 export default function BasketPrNamePriceTotal({ onclick, title }) {
+	  const [isChecked, setIsChecked] = useState(false);
 	const { localBaskets, apiBaskets } = useSelector((state) => state.basketData);
-	const { isLogin, bpUser } = useSelector((state) => state.userInfo);
+	const { isLogin, bpUser, authMeUser } = useSelector((state) => state.userInfo);
+	
+	  const handleCheckboxChange = (e) => {
+			setIsChecked(e.target.checked);
+		};
 
-	console.log('api basket', apiBaskets);
-	console.log('local baskets=', localBaskets);
+	// console.log('api basket', apiBaskets);
+	// console.log('local baskets=', localBaskets);
+	// console.log("login=", isLogin);
+	// console.log("bpUser=", bpUser);
+	
 
 	const allPrice = (isLogin ? apiBaskets : localBaskets)?.reduce((acm, item) => {
 		const priceToUse = item.oldPrice === 0 ? item.price : item.oldPrice;
@@ -30,11 +39,11 @@ export default function BasketPrNamePriceTotal({ onclick, title }) {
 
 	const discountBPprice = allPrice - BPprice;
 
-	console.log('allprice=', allPrice);
-	console.log('discount price=', discountPrice);
-	console.log('discount price=', Price);
-	console.log('discount bp price=', discountBPprice);
-	console.log('bpPrice= ', BPprice);
+	// console.log('allprice=', allPrice);
+	// console.log('discount price=', discountPrice);
+	// console.log('discount price=', Price);
+	// console.log('discount bp price=', discountBPprice);
+	// console.log('bpPrice= ', BPprice);
 
 	return (
 		<div className={style.wrapperBasketContent}>
@@ -110,9 +119,16 @@ export default function BasketPrNamePriceTotal({ onclick, title }) {
 							{(bpUser ? discountBPprice : discountPrice).toFixed(2)}₼
 						</span>
 					</div>
-
+					{isChecked && <div className={style.paymendCashback}>
+						<span className={style.key}>Cashback:</span>
+						<span className={style.value}>{authMeUser?.cashback}₼</span>
+					</div>}
 					<div className={style.amountPayEnd}>
-						{bpUser ? <img className={style.bpPriceImg} src={bpPriceImg} alt="" />:<span className={style.key}>Yekun məbləğ:</span>}
+						{bpUser ? (
+							<img className={style.bpPriceImg} src={bpPriceImg} alt="" />
+						) : (
+							<span className={style.key}>Yekun məbləğ:</span>
+						)}
 						<span className={style.value}>
 							{(bpUser ? BPprice : amountPayEnd).toFixed(2)}₼
 						</span>
@@ -124,7 +140,19 @@ export default function BasketPrNamePriceTotal({ onclick, title }) {
 						bilərsiniz. Hər uğurlu sifarişdə(1₼ və üzəri) sifariş məbləğinin
 						1%-i qədər cashback qazanın.
 					</p>
-
+					{isLogin && !bpUser && (
+						<div className={style.cashback}>
+							<input
+								checked={isChecked}
+								onChange={handleCheckboxChange}
+								type="checkbox"
+								id="cashback"
+							/>
+							<label htmlFor="cashback">
+								Cashbackdən istifadə et:  {authMeUser?.cashback}₼
+							</label>
+						</div>
+					)}
 					<div className={style.appGooglePay}>
 						<a
 							target="_blank"

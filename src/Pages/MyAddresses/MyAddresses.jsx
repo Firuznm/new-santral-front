@@ -19,7 +19,7 @@ export default function MyAddresses() {
 	
 	// istifadekinin daxil etdiyi unvanlar getirib istifadekiye gostermek
 	const getAddressData = async () => {
-		try {
+		try { 
 			const resData = await santral.api().post(urls.userAddressData);
 			setUserAddressData(resData.data.data);
 		} catch (error) {
