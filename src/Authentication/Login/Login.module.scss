@@ -2,9 +2,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 80vh;
+   height: 100vh;
   .loginArea{
-    width: 300px;
+    width: 400px;
     padding: 1rem;
     border: 1px solid #EAEAEA;
     border-radius: 14px;
@@ -12,6 +12,15 @@
     font-size: 2rem;
     text-align: center;
   }
-  
 }
+}
+
+
+// login  responsive
+@media only screen and (max-width: 750px) {
+  .loginPage{
+    .loginArea{
+      width: 270px;
+  }
+  }
 }

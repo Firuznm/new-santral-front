@@ -1,9 +1,9 @@
-import { useFormik } from "formik";
+ import { useFormik } from "formik";
 import Input from "../../components/Input/Input";
 import style from "./ForgotYourPassword.module.scss"
 import * as Yup from 'yup';
 import ButtonAndArrow from "../../components/ButtonAndArrow/ButtonAndArrow";
-
+  
 export default function ForgotYourPassword() {
 
        const {values,handleChange,handleSubmit,resetForm, errors}= useFormik({

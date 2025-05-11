@@ -20,12 +20,14 @@
 	.footerTop {
 		display: flex;
 		justify-content: space-between;
-
+		flex-wrap: wrap;
 		.logoSocial {
 			display: flex;
 			align-items: center;
 			flex: 1.5;
-
+             img{
+				width: 180px;
+			 }  
 			.social {
 				display: flex;
 				margin-left: 2rem;
@@ -59,10 +61,8 @@
 			}
 
 			.santralShortInfo {
-				display: -webkit-box;
-				-webkit-box-orient: vertical;
-				-webkit-line-clamp: 2;
-				overflow: hidden;
+			  font-size: 14px;
+			  color: rgb(189, 184, 184);
 			}
 		}
 	}
@@ -89,6 +89,9 @@
 		.footerPage,
 		.footerForCustomer {
 			flex: 1;
+			.active{
+				color:rgba(255, 210, 63, 1);
+			}
 		}
 
 		.footerCategoryWrapper {
@@ -102,7 +105,6 @@
 
 		.footerContact {
 			width: 15rem;
-
 			a {
 				text-wrap: wrap;
 				display: flex;
@@ -119,13 +121,13 @@
 				display: flex;
 				.masterCartImg,
 			    .visaCartImg{
-				height: 2rem;
+				height: 18px;
 				object-fit: cover;
 				}
 				.imgLine{
 	    border: none;
 		background-color: rgb(234, 234, 234);
-		height: 32px;
+		height: 18px;
 		width: 2px;
 		margin: 0 8px;
 				}
@@ -150,5 +152,48 @@
 		width: 95px;
 		height: 12px;
 		pointer-events: none;
+	}
+}
+
+// footer responsive
+@media only screen and (max-width: 750px) {
+	.footerWrapper {
+		.footerTop {
+			flex-direction: column;
+			.logoSocial {
+				margin-bottom: 1rem;
+				justify-content: space-between;
+				align-items: center;
+			
+				 img{
+					width: 140px;
+				 }  
+				.social {
+					margin-left: .5rem;
+					a {
+						padding: .4rem;
+						margin-right: .4rem;
+					}
+				}
+			}
+	
+			.shortInfoWrapper {
+				display: flex;
+				align-items: end;
+				flex: 1;
+	
+				span {
+					text-wrap: nowrap;
+					margin-bottom: 16px;
+					margin-right: 14px;
+				}
+			}
+		}
+	
+		.footerBottom {
+			.footerCategoryWrapper {
+	             display: none;
+			}
+		}
 	}
 }

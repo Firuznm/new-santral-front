@@ -113,7 +113,7 @@ import { addToBasket, apiAddToBasket, GetAllApiBaskets } from '../../redux/Baske
 import bpPriceImg from '../../assets/Images/bpQiymeti.png';
 import { toggleFavoriteItem } from '../../redux/FavoriteItemsSlice';
 import FullRedHeartIcon from '../../assets/Icons/FullRedHeartIcon';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 
 export default function ProductCart({ data }) {
 	// console.log("pr data=", data);
@@ -129,7 +129,7 @@ export default function ProductCart({ data }) {
 	const prInLocalBasket = localBaskets.some((product) => product.id === data.id);
 	const prInApiBasket = apiBaskets?.some((product) => product.id === data.id);
 	const prIsInBasket = isLogin ? prInApiBasket : prInLocalBasket;
-	console.log("bp-user=", bpUser);
+	// console.log("bp-user=", bpUser);
 	
 	const addToPrBasket = async () => {
 		if (prIsInBasket) {

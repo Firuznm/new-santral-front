@@ -320,10 +320,14 @@
 		.headerPage {
 			display: flex;
 			margin-left: 7rem;
-			a {
+			.pageName {
 				color: white;
 				margin: 0 1.4rem;
 				padding: 0.5rem;
+			
+				&.active {
+					color: rgba(255, 210, 63, 1);
+				}
 			}
 		}
 	}
@@ -341,7 +345,7 @@
 	#hederWrapper {
 		.headerTop {
 			.headerTopContent {
-				.headerTopLeft {
+				.headerTopLeft { 
 					.santralLogo {
 						width: 120px;
 						height: 34px;
@@ -550,11 +554,6 @@
 				.headerPage {
 					display: flex;
 					margin-left: 7rem;
-					a {
-						color: white;
-						margin: 0 1.4rem;
-						padding: 0.5rem;
-					}
 				}
 			}
 		}

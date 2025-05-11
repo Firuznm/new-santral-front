@@ -9,7 +9,7 @@ export default function Input({ inputInfo, inpAreaWidth }) {
 	const handleInputTypeChange = () => {
 		setInputTypeChange(!inputTypeChange);
 	};
-	
+	 
 	return (
 		<div style={{ width: inpAreaWidth }} className={style.inputWrapper}>
 			<label htmlFor={inputInfo.labelName}>{inputInfo?.labelName}</label>
@@ -31,7 +31,7 @@ export default function Input({ inputInfo, inpAreaWidth }) {
 					})}
 				</select>
 			) : (
-				<input
+				<input 
 					className={style.inpComponent}
 					name={inputInfo?.name}
 					id={inputInfo.labelName}

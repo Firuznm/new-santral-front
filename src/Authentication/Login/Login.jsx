@@ -67,7 +67,7 @@ export default function Login() {
 				handleChange: handleChange,
 			},
 		];
-  return (
+  return ( 
     <section className={styles.loginPage}>
      <div className={styles.loginArea}>
         <h2 className={styles.pageTitle}>Daxil olun</h2>

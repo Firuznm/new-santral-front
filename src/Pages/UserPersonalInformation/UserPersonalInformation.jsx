@@ -30,7 +30,7 @@ export default function UserPersonalInformation() {
 			lastname: authMeUser?.lastname || '',
 			email: authMeUser?.email || '',
 			phone: authMeUser?.phone || '',
-		},
+		}, 
 		enableReinitialize: true,
 		validationSchema: Yup.object().shape({
 			firstname: Yup.string().required('Adınızı daxil edin'),

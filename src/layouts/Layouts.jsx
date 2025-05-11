@@ -18,7 +18,7 @@ export default function Layouts() {
 			if (isLogin) {
 				dispatch(GetAllApiBaskets());
 			}
-		}, [isLogin]);
+		}, [isLogin]);  
 	
 	
 	useEffect(() => {
@@ -34,7 +34,7 @@ export default function Layouts() {
 		<HeaderNew/>
 		  <Outlet />
 		  <ScrollToTop/>
-		  {/* <Footer/> */}
+		  <Footer/>
 	</>
   )
 }

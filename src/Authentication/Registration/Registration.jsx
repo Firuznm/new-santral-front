@@ -140,7 +140,7 @@ export default function Registration() {
 				<form onSubmit={handleSubmit}>
 					<div className={style.nameSurnameInput}>
 						{registrationInputData?.nameSurname?.map((inputData) => (
-							<Input key={inputData.id} inputInfo={inputData} inpAreaWidth={'50%'} />
+							<Input key={inputData.id} inputInfo={inputData}  />
 						))}
 					</div>
 					{registrationInputData?.emailNumber?.map((inputData) => (
@@ -149,7 +149,7 @@ export default function Registration() {
 
 					<div className={style.passwordConfirmPassword}>
 						{registrationInputData?.passwordConfirmPassword?.map((inputData) => (
-							<Input key={inputData.id} inpAreaWidth={'50%'} inputInfo={inputData} />
+							<Input key={inputData.id}  inputInfo={inputData} />
 						))}
 					</div>
 					<ButtonAndArrow title={'Qeydiyyatdan keç'} />

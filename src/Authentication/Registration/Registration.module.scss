@@ -1,32 +1,54 @@
-.registrationPage{
-    .registrationArea{
-        text-align: center;
-    border: 1px solid #EAEAEA;
-    border-radius: 1rem;
-    width: 650px;
-    margin: 2rem auto;
-    padding: 1rem;
-    .PageTitle{
-        color: #000000DE;
-        font-size: 3rem;
-        font-weight: 600;
-    }
-    .pageWarning{
-        margin-bottom: -7px;
-        padding: 1rem 2rem;
-    }
-    
-    .nameSurnameInput{
-        margin-bottom: -15px;
-    }
-    .passwordConfirmPassword{
-        margin-top: -15px;
-    }
-        .nameSurnameInput,
-        .passwordConfirmPassword{
-            display: flex;
-           column-gap: 1rem;
+.registrationPage {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+	.registrationArea {
+		text-align: center;
+		border: 1px solid #eaeaea;
+		border-radius: 1rem;
+		width: 650px;
+		margin: 2rem auto;
+		padding: 1rem;
+ 
+		.PageTitle {
+			color: #000000de;
+			font-size: 3rem;
+			font-weight: 600;
+		}
+		.pageWarning {
+			margin-bottom: -7px;
+			padding: 1rem 2rem;
+		}
+
+		.nameSurnameInput,
+		.passwordConfirmPassword {
+			display: flex;
+            justify-content: space-between;
+			column-gap: 10px;
+		}
+	}
+}
+
+
+// registrationPage  responsive
+@media only screen and (max-width: 800px) {
+    .registrationPage {
+        padding: 10px;
+        margin-top: 20px;
+        .registrationArea {
+            width: auto;
+            .PageTitle {
+                font-size: 1.2rem;
+            }
+            .pageWarning {
+                padding: 0;
+                margin: 10px 0 5px;
+            }
+            .nameSurnameInput,
+            .passwordConfirmPassword {
+             flex-direction: column;
+            }
         }
     }
-  
 }

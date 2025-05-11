@@ -1,6 +1,6 @@
 .userAccoundAndOtherDetailName{
     position: sticky;
-    top: 190px;
+    top: 60px;
     left: 0;
     min-width: 280px;
     height: 270px;
@@ -30,4 +30,12 @@
         }
     }
     
+}
+
+
+// userAccoundAndOtherDetailName responsive
+@media only screen and (max-width: 650px) {
+    .userAccoundAndOtherDetailName{
+  display: none;        
+    }
 }
