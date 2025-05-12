@@ -74,10 +74,17 @@ li.selected{
 
 /* Seifeye daxil olduqda seifenin adinin style globalda  */
 .sectionMiniTitle{
-    font-size: 2rem;
+    font-size: 27px;
+    line-height: 27px;
     font-weight: 400;
     color: #000000DE;
 }
+/* @media screen and (max-width: 900px){
+    .sectionMiniTitle{
+        font-size: 1.4rem;
+        line-height: 1.5rem;
+    }
+} */
 /* home banners swiper slider style */
 .tallBannerSlider .swiper-pagination-bullet,
 .narrowTopBottomSlider .swiper-pagination-bullet {

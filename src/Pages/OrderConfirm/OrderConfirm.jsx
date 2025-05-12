@@ -10,7 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearBaskets, GetAllApiBaskets } from "../../redux/BasketSlice";
 import santral from "../../Helpers/Helpers";
-import urls from "../../ApiUrls/Urls";
+import urls from "../../ApiUrls/Urls";   
 
 export default function OrderConfirm() {
 	const navigate = useNavigate();
@@ -139,7 +139,7 @@ export default function OrderConfirm() {
   return (
 		<div className="container">
 			<SectionTitle
-				marginTop={'0'}
+				// marginTop={'0'}
 				marginBottom={'0'}
 				title={'Sifarişin rəsmiləşdirilməsi'}
 			/>
@@ -152,7 +152,6 @@ export default function OrderConfirm() {
 								<Input
 									key={inputData.id}
 									inputInfo={inputData}
-									inpAreaWidth={'48%'}
 								/>
 							))}
 						</div>
@@ -160,7 +159,6 @@ export default function OrderConfirm() {
 							{orderConfirmFormInputData.phoneEmail.map((inputData) => (
 								<Input
 									key={inputData.id}
-									inpAreaWidth={'48%'}
 									inputInfo={inputData}
 								/>
 							))}
@@ -170,7 +168,6 @@ export default function OrderConfirm() {
 							{orderConfirmFormInputData.cityAddress.map((inputData) => (
 								<Input
 									key={inputData.id}
-									inpAreaWidth={'48%'}
 									inputInfo={inputData}
 								/>
 							))}

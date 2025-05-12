@@ -90,24 +90,27 @@ export default function Basket() {
 							</div>
 							{(isLogin ? apiBaskets : localBaskets)?.map((item) => (
 								<div key={item.id} className={style.basketPrList}>
-									<img
-										className={style.basketPrImg}
-										src={`${santral.baseUrlImage}${item.thumbnail}`}
-									/>
+									<div className={style.prImgAndTitle}>
+										<img
+											className={style.basketPrImg}
+											src={`${santral.baseUrlImage}${item.thumbnail}`}
+										/>
 
-									<div className={style.prTitleAndAlert}>
-										<h5 className={style.basketPrTitle}>
-											{item.title}
-										</h5>
-										<span
-											className={`${style.alert} ${
-												item.stock === item.count
-													? style.showAlert
-													: ''
-											}`}
-										>
-											Məhsulun stok sayi : {`${item.stock}`} ədəd
-										</span>
+										<div className={style.prTitleAndAlert}>
+											<h5 className={style.basketPrTitle}>
+												{item.title}
+											</h5>
+											<span
+												className={`${style.alert} ${
+													item.stock === item.count
+														? style.showAlert
+														: ''
+												}`}
+											>
+												Məhsulun stok sayi : {`${item.stock}`}{' '}
+												ədəd
+											</span>
+										</div>
 									</div>
 									<div className={style.quantityPriceDelete}>
 										<div className={style.prCountWrapper}>
@@ -129,49 +132,49 @@ export default function Basket() {
 										</div>
 										<div className={style.oldAndNewpriceAndBPprice}>
 											{bpUser ? (
-												// login olub ve user-in rolu BPuser olduqda 
-							<div className={style.bpPriceWrapper}>
-								{item.oldPrice !== 0 ? (
-									<span className={style.oldPrice}>
-										{(
-											item.count * item.oldPrice
-										).toFixed(2)}
-										₼
-									</span>
-								) : (
-									<span
-										className={style.noOldPrice}
-									>
-										{(
-											item.count * item.price
-										).toFixed(2)}
-										₼
-									</span>
-								)}
-								<span className={style.bpPrice}>
-									{item.bp_total?.toFixed(2)}
-								</span>
-							</div>
-						) : (
-							// bura mehsulun endirime dusubse evvelki qiymetini gosterir
-							<div className={style.priceOldPrice}>
-								{item.oldPrice !== 0 && (
-									<span className={style.oldPrice}>
-										{(
-											item.count * item.oldPrice
-										).toFixed(2)}
-										₼
-									</span>
-								)}
-								<span className={style.price}>
-									{(isLogin
-										? item.total
-										: item.price * item.count
-									).toFixed(2)}
-								</span>
-							</div>
-						)}
-					</div>
+												// login olub ve user-in rolu BPuser olduqda
+												<div className={style.bpPriceWrapper}>
+													{item.oldPrice !== 0 ? (
+														<span className={style.oldPrice}>
+															{(
+																item.count * item.oldPrice
+															).toFixed(2)}
+															₼
+														</span>
+													) : (
+														<span
+															className={style.noOldPrice}
+														>
+															{(
+																item.count * item.price
+															).toFixed(2)}
+															₼
+														</span>
+													)}
+													<span className={style.bpPrice}>
+														{item.bp_total?.toFixed(2)}
+													</span>
+												</div>
+											) : (
+												// bura mehsulun endirime dusubse evvelki qiymetini gosterir
+												<div className={style.priceOldPrice}>
+													{item.oldPrice !== 0 && (
+														<span className={style.oldPrice}>
+															{(
+																item.count * item.oldPrice
+															).toFixed(2)}
+															₼
+														</span>
+													)}
+													<span className={style.price}>
+														{(isLogin
+															? item.total
+															: item.price * item.count
+														).toFixed(2)}
+													</span>
+												</div>
+											)}
+										</div>
 										<span
 											onClick={() =>
 												isLogin

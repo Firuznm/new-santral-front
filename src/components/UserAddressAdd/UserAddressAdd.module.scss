@@ -1,13 +1,26 @@
 .UserAddressAddForm{
-    width: calc(100% - 780px);
-    height: 484px;
+    // width: calc(100% - 600px);
+    width: 100%;
+    height: 580px;
     position: sticky;
-    top: 190px;
+    top: 60px;
     .userNameSurname{
         display: flex;
-        justify-content: space-between;
+       justify-content: space-between;
+       gap: 10px;
     }
-    .userPhoneCityAddress{
-        margin-top: -8px;
+    // .userPhoneCityAddress{
+    //     margin-top: -8px;
+    // }
+}
+
+
+// myAddressesPage title responsive
+@media screen and (max-width: 1350px){
+    .UserAddressAddForm{
+        .userNameSurname{
+           flex-direction: column;
+        }
+    
     }
 }

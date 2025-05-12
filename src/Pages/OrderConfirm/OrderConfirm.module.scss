@@ -13,9 +13,10 @@
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-		}
+			gap: 20px;
+		} 
 		textarea {
-			width: 90%;
+			width: 98.5%;
 			resize: none;
 			outline: none;
 			border: none;
@@ -23,13 +24,14 @@
 			background-color: #ebebeb;
 			border-radius: 16px;
 			margin-top: 10px;
-			padding: 17px 45px 17px 10px;
+			padding: 17px 0;
 			font-size: 1.2rem;
 			&:focus {
 				border: 1px solid #ffd23f;
 			}
 			&::placeholder {
 				color: #00000061;
+				padding-left: 10px;
 			}
 		}
 		.paymet{
@@ -55,3 +57,36 @@
 		}
 	}
 }
+
+// OrderConfirmPage responsive
+@media screen and (max-width: 1100px){
+	.OrderConfirmPage {
+		.formGroup {
+			.userNameSurname,
+			.phoneEmail,
+			.cityAddress {
+				flex-direction: column;
+				gap: 0;
+			} 
+			.btnList {
+				.doorPayment,.onlinePaymet {
+					font-size: 1rem;
+				}
+			}
+		}
+	}
+}
+
+
+// OrderConfirmPage responsive
+@media screen and (max-width: 750px){
+	.OrderConfirmPage {
+		flex-direction: column;
+		.formGroup {
+			width: 100%;
+			margin-bottom: 15px;
+			padding: 5px;
+		}
+	}
+}
+

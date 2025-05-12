@@ -106,7 +106,7 @@ export default function ModalUserAddressUpdate({ selectedAddress, closeModal,del
 					<span onClick={closeModal} className={style.closeIcon}>
 						<CloseIcon />
 					</span>
-					<h3 className="sectionMiniTitle">Ünvana düzəliş etib əlavə edin</h3>
+					<h3 className={style.sectionTitle}>Ünvana düzəliş etib əlavə edin</h3>
 					<p>Dəyişikliyi yadda saxlaya və ya ünvanı silə bilərsiniz</p>
 
 					<form onSubmit={handleSubmit}>
@@ -115,7 +115,7 @@ export default function ModalUserAddressUpdate({ selectedAddress, closeModal,del
 								<Input
 									key={inputData.id}
 									inputInfo={inputData}
-									inpAreaWidth={'48%'}
+									
 								/>
 							))}
 						</div>

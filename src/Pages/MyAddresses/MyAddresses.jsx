@@ -16,7 +16,7 @@ export default function MyAddresses() {
 	const [selectedAddress, setSelectedAddress] = useState(null);
 	const [deleteAddressId, setDeleteAddressId] = useState(null);
 	const [showHiddenDeleteModal, setShowHiddenDeleteModal] = useState(false);
-	
+	  
 	// istifadekinin daxil etdiyi unvanlar getirib istifadekiye gostermek
 	const getAddressData = async () => {
 		try { 
@@ -81,8 +81,9 @@ export default function MyAddresses() {
 						/>
 					)}
 				</div>
-
-				<UserAccoundAndOtherDetailName />
+				<div className={style.UserAccoundAndOtherDetailNameWrapper}>
+					<UserAccoundAndOtherDetailName />
+				</div>
 				<div className={style.userAdersses}>
 					<h3 className="sectionMiniTitle">Mənim ünvanlarım</h3>
 					{userAddressData?.map((address) => (
@@ -97,7 +98,7 @@ export default function MyAddresses() {
 									<span className={style.value}>
 										{cityOptions[address.city]}
 									</span>
-								</div> 
+								</div>
 								<div className={style.userSurnamePhone}>
 									<h6 className={style.title}>Soyad</h6>
 									<span className={style.value}>
@@ -116,7 +117,7 @@ export default function MyAddresses() {
 										<EditIcon />
 									</span>
 									<span
-									onClick={() => deleteModalShowHidden(address.id)}
+										onClick={() => deleteModalShowHidden(address.id)}
 										className={style.delete}
 									>
 										<DeleteIcon />
@@ -127,9 +128,11 @@ export default function MyAddresses() {
 										showHiddenDeleteModal ? style.showModal : ''
 									}`}
 								>
-						<ModalAddressDelete
-				yesDeleteAddress={() =>deleteUserAddress(deleteAddressId)}
-				noDeleteAddress={deleteModalClose}
+									<ModalAddressDelete
+										yesDeleteAddress={() =>
+											deleteUserAddress(deleteAddressId)
+										}
+										noDeleteAddress={deleteModalClose}
 									/>
 								</div>
 							</div>
@@ -140,7 +143,7 @@ export default function MyAddresses() {
 						</div>
 					))}
 				</div>
-				<UserAddressAdd getAddressData={getAddressData} /> 
+				<UserAddressAdd getAddressData={getAddressData} />
 			</div>
 		</div>
 	);

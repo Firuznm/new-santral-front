@@ -46,7 +46,7 @@
 					margin: 5px;
 					.titleQuantity {
 						.prName {
-							width: 240px;
+							width: 225px;
 							padding-right: 12px;
 							font-size: 14px;
 							font-weight: 400;
@@ -157,6 +157,14 @@
 					border-radius: 8px;
 				}
 			}
+		}
+	}
+}
+
+@media screen and (max-width: 750px) {
+	.wrapperBasketContent {
+		.basketContentList {
+			width: 100%;
 		}
 	}
 }

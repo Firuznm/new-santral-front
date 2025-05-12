@@ -4,7 +4,7 @@ import googlePay from '../../assets/Images/Google Pay Button.png';
 import { useSelector } from 'react-redux';
 import ButtonAndArrow from '../ButtonAndArrow/ButtonAndArrow';
 import bpPriceImg from "../../assets/Images/bpQiymeti.png"
-import { useState } from 'react';
+import { useState } from 'react'; 
 
 export default function BasketPrNamePriceTotal({ onclick, title }) {
 	  const [isChecked, setIsChecked] = useState(false);

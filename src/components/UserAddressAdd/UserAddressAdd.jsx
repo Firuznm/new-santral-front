@@ -54,7 +54,7 @@ export default function UserAddressAdd({ getAddressData }) {
 				placeholder: 'Soyad',
 				inputType: 'text',
 				value: values.lastname,
-				errorMessage: errors.lastname,
+				errorMessage: errors.lastname,  
 				handleChange: handleChange,
 			},
 		],
