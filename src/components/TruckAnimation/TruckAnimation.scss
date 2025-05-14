@@ -38,7 +38,7 @@
         padding: 0 7px 5px 7px;
         border-radius: 5px;
        position: absolute;
-       left: 0;
+       left: -100px;
        z-index: 11;
        font-weight: 500;
        background-color: #FFD23F;
@@ -46,6 +46,18 @@
     }
   }
   
+
+  @media screen and (max-width: 850px) {
+    .header-top {
+      .header-wrapper {
+        .content{
+         left: -110px;
+        }
+      }
+    }
+  }
+
+
   @keyframes truck {
     40%, 70% {
       margin-left: 60%;

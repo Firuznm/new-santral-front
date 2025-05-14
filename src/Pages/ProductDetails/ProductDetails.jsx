@@ -19,7 +19,6 @@ import HeaderPhoneIcon from '../../assets/Icons/HeaderPhoneIcon';
 import TruckAnimation from '../../components/TruckAnimation/TruckAnimation';
 import santral from '../../Helpers/Helpers';
 import urls from '../../ApiUrls/Urls';
-import { prDetailsDataTest } from '../../MyDatas/MyDatas';
 // import ProductCartSlider from '../../components/ProductCartSlider/ProductCartSlider';
 import whatsappImg from '../../assets/Images/whatsapp.png';
 import instagramImg from '../../assets/Images/instagram.png';
@@ -31,15 +30,18 @@ import * as Yup from 'yup';
 import PrDetailsPagePrImgSlider from '../../components/PrDetailsPagePrImgSlider/PrDetailsPagePrImgSlider';
 import PrDetailsPageSimilarPrAndPrFeatures from '../../components/PrDetailsPageSimilarPrAndPrFeatures/PrDetailsPageSimilarPrAndPrFeatures';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToBasket } from '../../redux/BasketSlice';
+import { addToBasket, apiAddToBasket, GetAllApiBaskets } from '../../redux/BasketSlice';
 import { toggleFavoriteItem } from '../../redux/FavoriteItemsSlice';
 import FullRedHeartIcon from '../../assets/Icons/FullRedHeartIcon';
+import BasketIconBlack from '../../assets/Icons/BasketIconBlack';
+import bpImg from '../../assets/Images/bpQiymeti.png';
+import reklamVideo from "../../assets/Images/reklamVideo.mp4"
 
 export default function ProductDetails() {
 	const { name } = useParams();
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const [quantity, setQuantity] = useState(1);
+	const [count, setCount] = useState(1);
 	const socialAreaRef = useRef(null);
 	const [relatedDatas, setRelatedDatas] = useState();
 	const [prDetailsData, setPrDetailsData] = useState({});
@@ -47,31 +49,41 @@ export default function ProductDetails() {
 	const [showCreditMonthPayment, setShowCreditMonthPayment] = useState(true);
 	const [oneClickBuyModal, setOneClickBuyModal] = useState(false);
 	const [url, setUrl] = useState('');
-	const { localBaskets } = useSelector((store) => store.basketData);
+	const { isLogin, bpUser } = useSelector((state) => state.userInfo);
+	const { localBaskets, apiBaskets } = useSelector((store) => store.basketData);
 	const { favoriteItemsList } = useSelector((state) => state.favoriteItemsData);
 
 	const isFavorite = favoriteItemsList.some((fav) => fav.id === prDetailsData.id);
-	const prInBasket = localBaskets.some((item) => item.id === prDetailsData.id);
+	const prInLocalBasket = localBaskets.some((product) => product.id === prDetailsData.id);
+	const prInApiBasket = apiBaskets?.some((product) => product.id === prDetailsData.id);
+	const prIsInBasket = isLogin ? prInApiBasket : prInLocalBasket;
 
 	const decrement = () => {
-		if (quantity > 1) {
-			setQuantity(quantity - 1);
+		if (count > 1) {
+			setCount(count - 1);
 		}
 	};
 
 	const increment = () => {
-		if (quantity < prDetailsData?.stock) {
-			setQuantity(quantity + 1);
+		if (count < prDetailsData?.stock) {
+			setCount(count + 1);
 		}
 	};
 
-	const handlePrAddBasket = () => {
-		if (prInBasket) {
-			navigate('/basket');
-			return;
-		}
-		dispatch(addToBasket({ ...prDetailsData, quantity }));
-	};
+		const handlePrAddBasket = async () => {
+			if (prIsInBasket) {
+				navigate('/basket');
+				return;
+			}
+			if (isLogin) {
+				await dispatch(
+					apiAddToBasket({ productId: prDetailsData.id, count: prDetailsData.count || 1 }),
+				).unwrap();
+				await dispatch(GetAllApiBaskets()).unwrap();
+			} else {
+				dispatch(addToBasket(prDetailsData));
+			}
+		};
 
 	const { values, handleChange, handleSubmit, resetForm, errors } = useFormik({
 		initialValues: {
@@ -91,20 +103,23 @@ export default function ProductDetails() {
 		},
 	});
 
-	const prPriceDifference = (prDetailsData.oldPrice - prDetailsData.price).toFixed(2);
+	// const prPriceDifference = (prDetailsData.oldPrice - prDetailsData.price).toFixed(2);
 	const discountRate = (
 		100 -
 		(prDetailsData.price * 100) / prDetailsData.oldPrice
 	).toFixed(0);
+
+	const prOldPrice = count * prDetailsData?.oldPrice;
+	const prPrice = count * prDetailsData?.price;
+	const bpPrice = count * prDetailsData?.bp_price;
+
 	const threeMonths =
-		prDetailsData.oldPrice > 0
-			? (prDetailsData.oldPrice / 3).toFixed(2)
-			: (prDetailsData.price / 3).toFixed(2);
+		prOldPrice > 0
+			? (prOldPrice / 3).toFixed(2)
+			: (prPrice / 3).toFixed(2);
 
 	const sixMonths =
-		prDetailsData.oldPrice > 0
-			? (prDetailsData.oldPrice / 6).toFixed(2)
-			: (prDetailsData.price / 6).toFixed(2);
+		prOldPrice > 0 ? (prOldPrice / 6).toFixed(2) : (prPrice / 6).toFixed(2);
 
 	const handleStateCreditMonth = () => {
 		setShowCreditMonthPayment(!showCreditMonthPayment);
@@ -173,8 +188,8 @@ export default function ProductDetails() {
 			getRelatedData(prId);
 		}
 	}, [prId]);
+
 	console.log("pr details data=", prDetailsData);
-	
 
 	return (
 		<section id={style.prDetailsWrapper}>
@@ -231,7 +246,6 @@ export default function ProductDetails() {
 					</div>
 					{/* məhsulun səkillərinin slider- i (sag tərəf) */}
 					<PrDetailsPagePrImgSlider
-						data={prDetailsDataTest}
 						prDetailsData={prDetailsData}
 						discountRate={discountRate}
 					/>
@@ -244,7 +258,9 @@ export default function ProductDetails() {
 									onClick={() =>
 										dispatch(toggleFavoriteItem(prDetailsData))
 									}
-									className={`${style.favorite} ${isFavorite ? style.prInFavoriteList : ""}`}
+									className={`${style.favorite} ${
+										isFavorite ? style.prInFavoriteList : ''
+									}`}
 								>
 									{isFavorite ? (
 										<FullRedHeartIcon />
@@ -300,14 +316,14 @@ export default function ProductDetails() {
 						</div>
 						<div className={style.prAvailableAndPrCod}>
 							<span className={style.prAvailable}>
-								Məhsul mövcuddur :{' '}
+								Məhsul mövcuddur :
 								<span className={style.productCount}>
 									{prDetailsData.stock}
-								</span>{' '}
+								</span>
 							</span>
 							{prDetailsData.brandCode && (
 								<span className={style.prCode}>
-									Məhsulun Codu:{' '}
+									Məhsulun Codu:
 									<span className={style.code}>
 										{prDetailsData.brandCode}
 									</span>
@@ -323,7 +339,7 @@ export default function ProductDetails() {
 								>
 									<MinusIcon />
 								</span>
-								<span className={style.count}>{quantity}</span>
+								<span className={style.count}>{count}</span>
 								<span
 									onClick={() => increment()}
 									className={style.increase}
@@ -332,106 +348,146 @@ export default function ProductDetails() {
 								</span>
 							</div>
 							<div className={style.priceWrapper}>
-								<span className={style.newPrice}>
-									{prDetailsData?.price?.toFixed(2)} ₼
-								</span>
-								{prDetailsData?.oldPrice > 0 && (
-									<span className={style.prOldPrice}>
-										{prDetailsData?.oldPrice?.toFixed(2)} ₼
-									</span>
+								{bpUser && (
+									<img
+										className={style.bpPriceImg}
+										src={bpImg}
+										alt=""
+									/>
 								)}
-								{prPriceDifference > 0 && (
-									<span className={style.prDiscount}>
-										-{prPriceDifference} ₼
-									</span>
+								{bpUser ? (
+									// login olub ve user-in rolu BPuser olduqda
+									<div className={style.bpPriceWrapper}>
+										{prDetailsData.oldPrice !== 0 ? (
+											<span className={style.oldPrice}>
+												{prOldPrice?.toFixed(2)}₼
+											</span>
+										) : (
+											<span className={style.noOldPrice}>
+												{prPrice?.toFixed(2)}₼
+											</span>
+										)}
+										<span className={style.bpPrice}>
+											{bpPrice?.toFixed(2)}₼
+										</span>
+									</div>
+								) : (
+									// bura mehsulun endirime dusubse evvelki qiymetini gosterir
+									<div className={style.priceOldPrice}>
+										{prDetailsData.oldPrice !== 0 && (
+											<span className={style.oldPrice}>
+												{prOldPrice?.toFixed(2)} ₼
+											</span>
+										)}
+										<span className={style.price}>
+											{prPrice?.toFixed(2)} ₼
+										</span>
+									</div>
 								)}
 							</div>
 						</div>
 						<hr className={style.line} />
-						<div className={style.paymentCartInfoAndSlider}>
-							<div className={style.paymentCartInfo}>
-								<h5 className={style.title}>Hissə-hissə alış</h5>
-								<p className={style.info}>
-									Şərtlər endirimsiz qiymətə tətbiq olunur
-								</p>
+						{!bpUser && (
+							<div className={style.paymentCartInfoAndSlider}>
+								<div className={style.paymentCartInfo}>
+									<h5 className={style.title}>Hissə-hissə alış</h5>
+									<p className={style.info}>
+										Şərtlər endirimsiz qiymətə tətbiq olunur
+									</p>
+								</div>
+								<div className={style.paymentCartSlider}>
+									<Swiper
+										spaceBetween={30}
+										speed={3000}
+										autoplay={{
+											delay: 1500,
+										}}
+										loop={true}
+										modules={[Autoplay]}
+										className={style.creditCartSlider}
+									>
+										<SwiperSlide>
+											<span className={style.BirKart}>
+												<img src={birbankKartImg} />
+												<p className={style.content}>
+													BirKart ilə 3 ay fiazsiz ödə!
+												</p>
+											</span>
+										</SwiperSlide>
+										<SwiperSlide>
+											<span className={style.TamKart}>
+												<img src={tamKartImg} />
+												<p className={style.content}>
+													TamKart ilə 6 ay fiazsiz ödə!
+												</p>
+											</span>
+										</SwiperSlide>
+									</Swiper>
+								</div>
 							</div>
-							<div className={style.paymentCartSlider}>
-								<Swiper
-									spaceBetween={30}
-									speed={3000}
-									autoplay={{
-										delay: 1500,
-									}}
-									loop={true}
-									modules={[Autoplay]}
-									className={style.creditCartSlider}
-								>
-									<SwiperSlide>
-										<span className={style.BirKart}>
-											<img src={birbankKartImg} />
-											<p className={style.content}>
-												BirKart ilə 3 ay fiazsiz ödə!
-											</p>
-										</span>
-									</SwiperSlide>
-									<SwiperSlide>
-										<span className={style.TamKart}>
-											<img src={tamKartImg} />
-											<p className={style.content}>
-												TamKart ilə 6 ay fiazsiz ödə!
-											</p>
-										</span>
-									</SwiperSlide>
-								</Swiper>
+						)}
+						{!bpUser && (
+							<div className={style.paymentMonths}>
+								<div>
+									<span
+										onClick={handleStateCreditMonth}
+										className={`${style.month} ${
+											showCreditMonthPayment
+												? style.activeMonth
+												: ''
+										}`}
+									>
+										3ay
+									</span>
+									<span
+										onClick={handleStateCreditMonth}
+										className={`${style.month} ${
+											showCreditMonthPayment
+												? ''
+												: style.activeMonth
+										}`}
+									>
+										6ay
+									</span>
+								</div>
+								<div className={style.payementResuslt}>
+									Aylıq ödəniş
+									<span className={style.payment}>
+										{showCreditMonthPayment ? threeMonths : sixMonths}{' '}
+										₼
+									</span>
+								</div>
 							</div>
-						</div>
-						<div className={style.paymentMonths}>
-							<div>
-								<span
-									onClick={handleStateCreditMonth}
-									className={`${style.month} ${
-										showCreditMonthPayment ? style.activeMonth : ''
-									}`}
-								>
-									3ay
-								</span>
-								<span
-									onClick={handleStateCreditMonth}
-									className={`${style.month} ${
-										showCreditMonthPayment ? '' : style.activeMonth
-									}`}
-								>
-									6ay
-								</span>
-							</div>
-							<div className={style.payementResuslt}>
-								Aylıq ödəniş
-								<span className={style.payment}>
-									{showCreditMonthPayment ? threeMonths : sixMonths} ₼
-								</span>
-							</div>
-						</div>
+						)}
 						<div className={style.btnGroup}>
 							<button
 								onClick={handlePrAddBasket}
 								className={`${style.basketBtn} ${
-									prInBasket ? style.prInBasket : ''
+									prIsInBasket ? style.prBasket : ''
 								}`}
 							>
-								<BasketIcon color={'black'} />
-								{prInBasket ? 'Səbətdədir' : 'Səbətə at'}
+								{prIsInBasket ? 'Səbətdədir' : 'Səbətə at'}
+								{prIsInBasket ? <BasketIcon /> : <BasketIconBlack />}
 							</button>
 							<button
 								onClick={handleBuyModal}
 								className={style.oneClickByBtn}
 							>
-								icon Bir kliklə al
+								Bir kliklə al
 							</button>
 							<button className={style.callBtn}>
 								<HeaderPhoneIcon /> Zəng et
 							</button>
 						</div>
-						<div className={style.billboard}>reklam panel</div>
+						<div className={style.billboard}>
+							<video autoPlay loop muted loading="lazy">
+								<source
+									src={reklamVideo}
+									type="video/mp4"
+									loading="lazy"
+								/>
+							</video>
+						</div>
 					</div>
 				</div>
 				{/* oxşar məhsular və məhsulun xususiyyətləri */}

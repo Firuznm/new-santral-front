@@ -25,11 +25,9 @@ export default function HeaderNew() {
 	const { localBaskets, apiBaskets } = useSelector((state) => state.basketData);
 	const { favoriteItemsList } = useSelector((state) => state.favoriteItemsData);
 
-	const {
-		authMeUser,
-		showOpenEnterSiteArea,
-		isLogin,
-	} = useSelector((state) => state.userInfo);
+	const { authMeUser, showOpenEnterSiteArea, isLogin, bpUser } = useSelector(
+		(state) => state.userInfo,
+	);
 
 
 	const onClickCatalogShowHidden = () => {
@@ -123,10 +121,14 @@ export default function HeaderNew() {
 								</a>
 								<div className={style.headerEnter}>
 									{isLogin ? (
-										<div className={style.userHaveLogin}>
-											<span className={style.cashback}>
-												Keşbək : {authMeUser.cashback}₼
-											</span>
+										<div
+											className={`${style.userHaveLogin} ${!bpUser ? "" : style.bpImgEnd}`}
+										>
+											{!bpUser && (
+												<span className={style.cashback}>
+													Keşbək : {authMeUser.cashback}₼
+												</span>
+											)}
 											<span
 												onClick={() =>
 													dispatch(toggleShowEnterSiteArea())

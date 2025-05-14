@@ -5,7 +5,7 @@ import urls from '../ApiUrls/Urls';
 
 
 const initialState = {
-  user: {},
+  user: {}, 
   authMeUser:{},
   catalogDatas: [],
   userToken: localStorage.getItem("token") || null,

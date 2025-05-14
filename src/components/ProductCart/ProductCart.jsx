@@ -125,7 +125,7 @@ export default function ProductCart({ data }) {
 	const { localBaskets, apiBaskets } = useSelector((state) => state.basketData);
 	const { favoriteItemsList } = useSelector((state) => state.favoriteItemsData);
 
-	const isFavorite = favoriteItemsList.some((fav) => fav.id === data.id);
+	const isFavorite = favoriteItemsList.some((fav) => fav.id === data.id); 
 	const prInLocalBasket = localBaskets.some((product) => product.id === data.id);
 	const prInApiBasket = apiBaskets?.some((product) => product.id === data.id);
 	const prIsInBasket = isLogin ? prInApiBasket : prInLocalBasket;
@@ -220,7 +220,7 @@ export default function ProductCart({ data }) {
 					onClick={addToPrBasket}
 					className={`${style.basket} ${prIsInBasket ? style.prBasket : ''}`}
 				>
-					{prIsInBasket ? 'Səbətdədir' : 'Səbətə at'}{' '}
+					{prIsInBasket ? 'Səbətdədir' : 'Səbətə at'}
 					{prIsInBasket ? <BasketIcon /> : <BasketIconBlack />}
 				</div>
 			</div>

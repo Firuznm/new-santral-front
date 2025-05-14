@@ -65,7 +65,7 @@ export default function Basket() {
 			dispatch(decrementCount({ id }));
 		}
 	};
-
+  
 
 	const isBasketNotEmpty = isLogin ? apiBaskets?.length > 0 : localBaskets?.length > 0;
 

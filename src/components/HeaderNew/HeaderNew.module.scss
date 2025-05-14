@@ -131,6 +131,7 @@
 						margin: 0 10px;
 						text-wrap: nowrap;
 					}
+				
 					.defaultUserImg {
 						cursor: pointer;
 						width: 40px;
@@ -199,6 +200,9 @@
 							}
 						}
 					}
+				}
+				.bpImgEnd{
+					justify-content: end;
 				}
 				.enterAreaCloseBtn {
 					width: 30px;
@@ -565,7 +569,7 @@
 }
 
 // home page mobile responsive
-@media only screen and (max-width: 770px) {
+@media only screen and (max-width: 850px) {
 #hederWrapper {
 .headerDesctopAndLeptopVersion{
 	display: none;

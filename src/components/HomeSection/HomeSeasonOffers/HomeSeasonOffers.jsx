@@ -9,8 +9,6 @@ import SectionTitle from "../../SectionTitle/SectionTitle";
 
 
 export default function HomeSeasonOffers({ seasonOffersData }) {
-    console.log("test ttt=", seasonOffersData[0]?.products);
-    
     
     return (
 		<section id={style.homeSeasonOffersWrapper}>

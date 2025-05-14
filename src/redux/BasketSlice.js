@@ -62,7 +62,7 @@ export const basketSlice = createSlice({
           if (item.id === action.payload.id) {
             return {
               ...item,
-              count: item.count + quantityToAdd,
+              count: item.count + quantityToAdd,  
             };
           }
           return item;

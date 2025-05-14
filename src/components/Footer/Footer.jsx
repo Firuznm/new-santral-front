@@ -32,7 +32,7 @@ export default function Footer() {
     useEffect(() => {
         getCategoryData()
     },[])
-console.log("fot cat=", categoryNameData);
+// console.log("fot cat=", categoryNameData);
 
   return (
 		<div className={style.footerWrapper}>

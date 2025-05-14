@@ -6,13 +6,14 @@ import ScrollToTop from '../components/ScrollToTop/ScrollToTop'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { GetAllApiBaskets } from '../redux/BasketSlice';
-import { authMe } from '../redux/userSlice';
+import { authMe, logout } from '../redux/userSlice';
 
 
 
 export default function Layouts() {
+	
 		const dispatch = useDispatch();
-		const { isLogin } = useSelector((state) => state.userInfo);
+		const { isLogin, authMeUser } = useSelector((state) => state.userInfo);
 
 		useEffect(() => {
 			if (isLogin) {
@@ -27,6 +28,11 @@ export default function Layouts() {
 		}
 	}, []);
 
+	useEffect(() => {
+		if (authMeUser.error === "Invalid Token") {
+		dispatch(logout())
+	}	
+	},[])
 	
   return (
 	  <>

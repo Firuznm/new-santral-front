@@ -1,7 +1,7 @@
-#prDetailsWrapper{
+#prDetailsWrapper {
 	position: relative;
 	overflow: hidden;
-	.overlayOneByModal{
+	.overlayOneByModal {
 		cursor: pointer;
 		width: 100%;
 		height: 100vh;
@@ -11,246 +11,206 @@
 		left: 0;
 		background-color: rgba(255, 255, 255, 0.38);
 	}
-	.hiddenOverlay{
+	.hiddenOverlay {
 		display: none;
 	}
-	.modalWrapper{
-		position: fixed; 
+	.modalWrapper {
+		position: fixed;
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
-		z-index: 9999; 
+		z-index: 9999;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		height: 100vh;
-	.oneClickByModalArea{
-		width: 250px;
-		background: #EFEFEF;
-		padding: 1rem;
-		border-radius: 7px;
-		.modalHeaderAndCloseBtn{
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			.title{
-				font-size: 1.4rem;
+		.oneClickByModalArea {
+			width: 250px;
+			background: #efefef;
+			padding: 1rem;
+			border-radius: 7px;
+			.modalHeaderAndCloseBtn {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				.title {
+					font-size: 1.4rem;
+					font-weight: 300;
+				}
+				svg {
+					margin-top: 6px;
+					cursor: pointer;
+				}
+			}
+
+			.oneClickInp {
+				width: 90%;
+				margin-top: 5px;
+				border: none;
+				padding: 10px 5px;
+				background-color: transparent;
+				border: 1px solid #777777;
+				border-radius: 7px;
+				outline: none;
+			}
+			.errorMessage {
+				display: block;
+				font-size: 0.8rem;
 				font-weight: 300;
+				color: red;
+				font-style: italic;
+				margin-bottom: 5px;
 			}
-			svg{
-				margin-top: 6px;
+			.oneClickBuyBtn {
+				width: 100%;
+				padding: 10px 5px;
+				border-radius: 7px;
+				border: none;
 				cursor: pointer;
+				background-color: #ffd23f;
+				font-size: 1.2rem;
 			}
 		}
-	
-		.oneClickInp{
-			width: 90%;
-			margin-top: 5px;
-			border: none;
-			padding: 10px 5px;
-			background-color: transparent;
-			border: 1px solid #777777;
-			border-radius: 7px;
-			outline: none;
-		}
-		.errorMessage{
-        display: block;
-		font-size: .8rem;
-		font-weight: 300;
-		color: red;
-		font-style: italic;
-		margin-bottom: 5px;
-		}
-		.oneClickBuyBtn{
-            width: 100%;
-			padding: 10px 5px;
-			border-radius: 7px;
-			border: none;
-			cursor: pointer;
-			background-color: #FFD23F;
-			font-size: 1.2rem;
-		}
 	}
-	}
-	.closeModal{
+	.closeModal {
 		display: none;
 	}
-	.line{
+	.line {
 		height: 1px;
-		background-color: #FFD23F;
+		background-color: #ffd23f;
 		border: none;
 	}
-   .prImgAndPrInfo{
-	position: relative;
-	height: 600px;
-    display: flex;
-    justify-content: space-between;
-	.delivery{
-		position: absolute;
-		top: 7px;
-		left: 108px;
-		width: 100%;
-		z-index: 9;
-	}
-		.prDetailsSlider{
-			position: relative;
-			width: 600;
-			box-shadow: 0px 2px 79px 0px #0000001A;
-			padding: 10px;
-			border-radius: 7px;
-			display: flex;
-			flex-direction: row-reverse;
-			.discountRate{
-				position: absolute;
-				top: 45px;
-				right: 20px;
-				background: rgb(239 68 68);
-				font-weight: 600;
-				padding: 5px;
-				color: white;
-				border-radius: 5px;
-				padding: 7px;
-				font-size: 1.5rem;
-				z-index: 9;
-			}
-			.mySwiperSlider{
-			  position: relative;
-			  width: 600px;
-			  border-radius: 7px; 
-			  .sliderImg{
-				margin-top: 30px;
-				width: 99%;
-				height: 94%;
-				object-fit: cover;
-				border-radius: 7px;
-				border: 2px solid #EAEAEA;
-			  }
-		
-			}
-		}
-    .prInfoWrapper{
+	.prImgAndPrInfo {
 		position: relative;
-		width: calc(100% - 760px);
-		padding:  10px;
-		border-radius: 7px;
-		box-shadow: 0px 2px 79px 0px #0000001A;
-	
-  
-		.prTitleAndFavoriteSocial{
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			gap: 1rem;
-			.prTitle{
-				width: 85%;
-				font-size: 1.3rem;
-			}
-			.favoriteSocial{
+		// height: 600px;
+		display: flex;
+		justify-content: space-between;
+		.delivery {
+			position: absolute;
+			top: 7px;
+			left: 108px;
+			width: 100%;
+			z-index: 9;
+		}
+		.prInfoWrapper {
+			position: relative;
+			width: calc(100% - 570px);
+			padding: 23px 15px 10px 15px;
+			border-radius: 7px;
+			box-shadow: 0px 2px 79px 0px #0000001a;
+
+			.prTitleAndFavoriteSocial {
 				display: flex;
+				justify-content: space-between;
 				align-items: center;
 				gap: 1rem;
-				.favorite,
-				.socialWrapper{
-                 width: 50px;
-				 height: 50px;
-				 border-radius: 50%;
-				 display: flex;
-				 justify-content: center;
-				 align-items: center;
-				  background: #EFEFEF;
-				  cursor: pointer;
-				  transition: 0.5s ease;
+				.prTitle {
+					width: 85%;
+					font-size: 1.3rem;
 				}
-			.prInFavoriteList{
-					background-color: rgba(253, 219, 216, 1);
-				}
-				.btnActive{
-					background: #FFD23F !important;
-				}
-				.socialWrapper{
-					position: relative;
-					.prDeatailsSocilaLink{
-						position: absolute;
-						top: 52px;
-						box-shadow: 0px 2px 79px 0px #0000001A;
-						background-color: white;
-						border: 1px solid #EAEAEA;
-						right: -7px;
-						z-index: 9;
-						border-radius: 16px;
+				.favoriteSocial {
+					display: flex;
+					align-items: center;
+					gap: 1rem;
+					.favorite,
+					.socialWrapper {
+						width: 50px;
+						height: 50px;
+						border-radius: 50%;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						background: #efefef;
+						cursor: pointer;
 						transition: 0.5s ease;
-						transition: 300ms ease;
-						transform-origin: top;
-						transform: scaleY(1);
-					.prDetailsSocial{
-					  display: flex;
-					  align-items: center;
-					  padding: 15px 25px;
-					  border-bottom: 1px solid #EAEAEA;
-					  color: black;
-					  font-size: 1.2rem;
-					  white-space: nowrap;
-					 &:nth-child(4){
-						border-bottom: none;
-					 }
-					  img{
-						margin-right: 14px;
-					  }
-					  &:hover{
-						background-color: #EFEFEF;
-						&:nth-child(1){
-							border-radius: 16px 16px 0 0;
-						}
-						&:nth-child(4){
-							border-radius: 0 0 16px 16px;
-						}
-					  }
-						}
-					
-					}	
-					.noActive{
-						transform: scaleY(0);
 					}
-				
-				}  
-			}	
-				
-		}
-		.prAvailableAndPrCod{
-			margin-top: .5rem;
-			display: flex;
-			justify-content: space-between;
-			.prAvailable{
-				font-size: 1.2rem;
-				color: black;
-				.productCount{
-					color: black;
+					.prInFavoriteList {
+						background-color: rgba(253, 219, 216, 1);
+					}
+					.btnActive {
+						background: #ffd23f !important;
+					}
+					.socialWrapper {
+						position: relative;
+						.prDeatailsSocilaLink {
+							position: absolute;
+							top: 52px;
+							box-shadow: 0px 2px 79px 0px #0000001a;
+							background-color: white;
+							border: 1px solid #eaeaea;
+							right: -7px;
+							z-index: 9;
+							border-radius: 16px;
+							transition: 0.5s ease;
+							transition: 300ms ease;
+							transform-origin: top;
+							transform: scaleY(1);
+							.prDetailsSocial {
+								display: flex;
+								align-items: center;
+								padding: 15px 25px;
+								border-bottom: 1px solid #eaeaea;
+								color: black;
+								font-size: 1.2rem;
+								white-space: nowrap;
+								&:nth-child(4) {
+									border-bottom: none;
+								}
+								img {
+									margin-right: 14px;
+								}
+								&:hover {
+									background-color: #efefef;
+									&:nth-child(1) {
+										border-radius: 16px 16px 0 0;
+									}
+									&:nth-child(4) {
+										border-radius: 0 0 16px 16px;
+									}
+								}
+							}
+						}
+						.noActive {
+							transform: scaleY(0);
+						}
+					}
 				}
 			}
-			.prCode{
-				color: black;
-				.code{
+			.prAvailableAndPrCod {
+				margin-top: 0.5rem;
+				display: flex;
+				justify-content: space-between;
+				.prAvailable {
+					font-size: 1.2rem;
 					color: black;
+					.productCount {
+						color: black;
+					}
+				}
+				.prCode {
+					color: black;
+					.code {
+						color: black;
+					}
 				}
 			}
-		}
-		.prCountAndPrice{
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			gap: 1rem;
-			.prCountWrapper{
-				    width: 110px;
+			.prCountAndPrice {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				gap: 1rem;
+				.prCountWrapper {
+					width: 110px;
 					height: 22px;
 					display: flex;
 					justify-content: space-between;
 					align-items: center;
-					border: 1px solid #EAEAEA;
-					padding:10px;
+					border: 1px solid #eaeaea;
+					padding: 10px;
 					border-radius: 50px;
 					margin-bottom: 8px;
 					.decrease,
-					.increase{
+					.increase {
 						width: 30px;
 						height: 30px;
 						display: flex;
@@ -258,158 +218,336 @@
 						align-items: center;
 						border-radius: 50%;
 						cursor: pointer;
-						transition: .5s ease;
-						&:hover{
-							background: #FFD23F;
+						transition: 0.5s ease;
+						&:hover {
+							background: #ffd23f;
 						}
 					}
-			}
-			.priceWrapper{
-	   .newPrice{
-			font-size: 2rem;
-			font-weight: 700;
-			color: #FD8521;
-
-		}
-		.prOldPrice{
-		margin:0 1rem;
-		font-size: 1.5rem;
-		color: #00000061;
-		text-decoration: line-through;	
-		text-decoration-color: rgb(239, 68, 68);
-		}	
-		.prDiscount{
-			padding: 4px 7px;
-			border-radius: 7px;
-			font-size: 1.5rem;
-			font-weight: 700;
-			background-color: #FFD23F;
-			color: black;
-		}
-			}
-		}
-		.paymentCartInfoAndSlider{
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			.paymentCartInfo{
-				.title{
-                font-size: 1.2rem;
-				margin: 0;
 				}
-				.info{
-                 font-size: 1rem;
-				 color: #777777;
-				}
-			}
-			.paymentCartSlider{
-				width: 300px;
-				border: 1px solid #FFD23F;
-				border-radius: 10px;
-				.creditCartSlider{
-					.BirKart,
-					.TamKart{
-						padding: 15px 0;
+				.priceWrapper {
+					display: flex;
+					align-items: center;
+					.oldPrice,
+					.noOldPrice {
+						font-size: 1.2rem;
+						color: #00000061;
+						text-decoration: line-through;
+						text-decoration-color: #00000061;
+					}
+					.bpPrice,
+					.price {
+						margin: 0 15px 0 20px;
+						font-size: 1.2rem;
+						font-weight: 500;
+						color: rgba(253, 133, 33, 1);
+					}
+					.bpPriceWrapper,
+					.priceOldPrice {
 						display: flex;
-						justify-content: center;
+						flex-direction: row-reverse;
 						align-items: center;
-						img{
-							height: 28px;
-							margin-right: 10px;
-						}
-						.content{
-							font-size: 1.1rem;
-							font-weight: 400;
+					}
+				}
+			}
+			.paymentCartInfoAndSlider {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				.paymentCartInfo {
+					.title {
+						font-size: 1.2rem;
+						margin: 0;
+					}
+					.info {
+						font-size: 1rem;
+						color: #777777;
+					}
+				}
+				.paymentCartSlider {
+					width: 300px;
+					border: 1px solid #ffd23f;
+					border-radius: 10px;
+					.creditCartSlider {
+						.BirKart,
+						.TamKart {
+							padding: 15px 0;
+							display: flex;
+							justify-content: center;
+							align-items: center;
+							img {
+								height: 28px;
+								margin-right: 10px;
+							}
+							.content {
+								font-size: 1.1rem;
+								font-weight: 400;
+							}
 						}
 					}
 				}
 			}
-		}
-		.paymentMonths{
-			margin: 20px 0;
-			padding: 10px 50px;
-			border: 1px solid #EAEAEA;
-			border-radius: 10px;
-			display: flex;
-			justify-content: space-evenly;
-			align-items: center;
-			.month{
-				padding: 12px 10px;
-				margin: 0 10px;
-				background: #F3F3F3;
-    			border-radius: 50%;
-				transition: .5s ease;
-				cursor: pointer;
-				&:hover{
-					background-color: #FFD23F;
+			.paymentMonths {
+				margin: 20px 0;
+				padding: 10px 50px;
+				border: 1px solid #eaeaea;
+				border-radius: 10px;
+				display: flex;
+				justify-content: space-evenly;
+				align-items: center;
+				.month {
+					padding: 12px 10px;
+					margin: 0 10px;
+					background: #f3f3f3;
+					border-radius: 50%;
+					transition: 0.5s ease;
+					cursor: pointer;
+					&:hover {
+						background-color: #ffd23f;
+					}
+				}
 
+				.payementResuslt {
+					text-align: center;
+					border-left: 1px solid #777777;
+					padding-left: 20px;
+					font-size: 1.2rem;
+					.payment {
+						display: block;
+						font-size: 1.4rem;
+						font-weight: 600;
+						color: #323232;
+					}
+				}
+				.activeMonth {
+					background: #323232;
+					color: white;
 				}
 			}
-			
-			.payementResuslt{
-				text-align: center;
-				border-left: 1px solid #777777;
-				padding-left: 20px;
-				font-size: 1.2rem;
-				.payment{
-					display: block;
-					font-size: 1.4rem;
-					font-weight: 600;
-					color: #323232;
+
+			.btnGroup {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				gap: 1.4rem;
+				.basketBtn,
+				.oneClickByBtn,
+				.callBtn {
+					font-size: 1.2rem;
+					height: 50px;
+					padding: 0 1.5rem;
+					border-radius: 50px;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					background-color: transparent;
+					cursor: pointer;
+					transition: 0.5s ease;
+					border: 1px solid #ffd23f;
+					svg {
+						margin-left: 10px;
+					}
+				}
+				.basketBtn {
+					background-color: #ffc505;
+				}
+				.prBasket {
+					background-color: rgb(49, 48, 48);
+					color: white;
+					border: 1px solid rgb(49, 48, 48);
+				}
+				.callBtn,
+				.oneClickByBtn {
+					font-size: 1rem;
+					white-space: nowrap;
+					&:hover {
+						background-color: #ffd23f;
+					}
+					svg{
+						margin-right: 10px;
+					}
 				}
 			}
-			.activeMonth{
-				background: #323232;
-	           color: white;
+
+			.billboard {
+				margin: 15px auto 0;
+				height: 170px;
+				width: 340px;
+				border-radius: 7px;
+				border: 1px solid rgb(105, 105, 105);
+				video{
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+					border-radius: 7px;
+				}
 			}
 		}
-		
-		.btnGroup{
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			gap: 1.4rem;
-			.basketBtn,
-			.oneClickByBtn,
-			.callBtn{
-			  font-size: 1.2rem;	
-			   height: 50px;
-               padding: 0 1.5rem;
-			   border-radius: 50px;
-			   display: flex;
-			   justify-content: center;
-			   align-items: center;
-			   background-color: transparent;
-			   cursor: pointer;
-			   transition: .5s ease;
-			   border: 1px solid #FFD23F;
-			   svg{
-				margin-right: 10px;
-			   }
-			   &:hover{
-				background-color: #FFD23F;
-			   }
-			}
-			.basketBtn{
-				background-color: #ffc505;
-			}	
-			.prInBasket{
-			background-color: green;
-			&:hover{
-				background-color: green;
+	}
+}
+
+// product details page responsive
+@media screen and (max-width: 1100px) {
+	#prDetailsWrapper {
+		.prImgAndPrInfo {
+			.prInfoWrapper {
+				width: calc(100% - 470px);	
+				.prTitleAndFavoriteSocial {
+					.prTitle {
+						font-size: 1rem;
+					}
+				}
+				.prAvailableAndPrCod {
+					margin-top: 0.2rem;
+					.prAvailable {
+						font-size: 1rem;
+					}
+				}
+				.priceWrapper {
+					flex-direction: column;
+					.bpPriceWrapper,
+					.priceOldPrice {
+					   flex-direction: column !important;
+					}
+				}
+				.paymentCartInfoAndSlider {
+				     flex-direction: column;
+					 align-items: flex-start;
+					 	.paymentCartSlider {
+							width: 100%;
+							margin-top: 10px;
+						.creditCartSlider {
+							
+							.BirKart,
+							.TamKart {
+								padding: 5px 0;}}}
+					.paymentCartInfo {
+						.title {
+							font-size: 1rem;
+						}
+						.info {
+							font-size: 1rem;
+						}
+					}
+				}
+				.paymentMonths {
+					margin: 20px 0;
+					padding: 4px 50px;
+					.month {
+						padding: 8px 6px;
+					}
+	
+					.payementResuslt {
+						padding-left: 10px;
+						font-size: 1rem;
+						.payment {
+							font-size: 1rem;
+							font-weight: 500;
+						}
+					}
+				}
+				.btnGroup {
+					justify-content: space-between;
+					// flex-wrap: wrap;
+					gap: .7rem;
+					.basketBtn,
+					.oneClickByBtn,
+					.callBtn {
+						font-size: .7rem;
+						height: 35px;
+						padding: 0 1rem;
+					}
+					
+				}
+				// .billboard {
+				// 	width: 100%;
+				// 	height: 100px;
+				// }
+				
 			}
 		}
-			.callBtn{
-             font-size: 1rem;
+	}
+}
+
+
+@media screen and (max-width: 850px) {
+	#prDetailsWrapper {
+		margin-top: 30px;
+		.prImgAndPrInfo {
+			flex-direction: column;
+			.prInfoWrapper {
+				width:96%;	
+				margin-top: 1rem;
+				padding: 10px;
+				.prTitleAndFavoriteSocial {
+					.prTitle {
+						font-size: 1rem;
+					}
+				}
+				.prAvailableAndPrCod {
+					margin-top: 0.2rem;
+					.prAvailable {
+						font-size: 1rem;
+					}
+				}
+				.priceWrapper {
+					flex-direction: column;
+					.bpPriceWrapper,
+					.priceOldPrice {
+					   flex-direction: column !important;
+					}
+				}
+				.paymentCartInfoAndSlider {
+				     flex-direction: column;
+					 align-items: flex-start;
+					 	.paymentCartSlider {
+						.creditCartSlider {
+							.BirKart,
+							.TamKart {
+								padding: 5px 0;}}}
+					.paymentCartInfo {
+						.title {
+							font-size: 1rem;
+						}
+						.info {
+							font-size: 1rem;
+						}
+					}
+				}
+				.paymentMonths {
+					margin: 20px 0;
+					padding: 4px 8px;
+					.month {
+						padding: 8px 6px;
+					}
+	
+					.payementResuslt {
+						padding-left: 10px;
+						font-size: 1rem;
+						.payment {
+							font-size: 1rem;
+							font-weight: 500;
+						}
+					}
+				}
+				.btnGroup {
+					gap: .7rem;
+					flex-wrap: wrap;
+					.basketBtn,
+					.oneClickByBtn,
+					.callBtn {
+						font-size: 1rem;
+						height: 35px;
+						padding: 0 1rem;
+						width: 100px;
+					}
+					
+				}
+				.billboard {
+					width: 270px;
+					// height: 100px;
+				}
+				
 			}
 		}
-		
-		.billboard{
-			margin: 1rem 0;
-			height: 125px;
-			border: 1px solid #323232;
-			border-radius: 7px;
-		}
-	}	
-    }
-   } 
+	}
+}
