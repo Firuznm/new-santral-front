@@ -38,7 +38,7 @@ export default function HomeSeasonOffers({ seasonOffersData }) {
 					},
 				}}
 				modules={[]}
-				className="mySwiper"
+				className="homeSeasonOffers"
 			>
 				{seasonOffersData[0]?.products.map((item) => (
 					<SwiperSlide key={item.id}>

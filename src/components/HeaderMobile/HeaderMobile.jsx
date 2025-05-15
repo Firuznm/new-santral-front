@@ -1,40 +1,42 @@
-import style from "./HeaderMobile.module.scss"
-import santarlLogo from "../../assets/logos/santralLogo.png"
-import MobileHamburgerMenuIcon from "../../assets/Icons/MobileHamburgerMenuIcon";
-import { useDispatch, useSelector } from "react-redux";
-import { toggleShowEnterSiteArea } from "../../redux/userSlice";
-import santral from "../../Helpers/Helpers";
+import style from './HeaderMobile.module.scss';
+import santarlLogo from '../../assets/logos/santralLogo.png';
+import MobileHamburgerMenuIcon from '../../assets/Icons/MobileHamburgerMenuIcon';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleShowEnterSiteArea } from '../../redux/userSlice';
+import santral from '../../Helpers/Helpers';
 import defaultUserImg from '../../assets/Images/dafaultUserImg.png';
-import { Link, NavLink } from "react-router-dom";
-import EnterSiteHeader from "../../Authentication/EnterSiteHeader/EnterSiteHeader";
+import { Link, NavLink } from 'react-router-dom';
+import EnterSiteHeader from '../../Authentication/EnterSiteHeader/EnterSiteHeader';
 import CatalogIcon from '../../assets/Icons/CatalogIcon';
-import SearchIcon from "../../assets/Icons/SearchIcon";
-import MobileCatalogIcon from "../../assets/Icons/MobileCatalogIcon";
-import HeartIcon from "../../assets/Icons/HeartIcon";
-import MobileBasketIcon from "../../assets/Icons/MobileBasketIcon";
-import MobileHomePageIcon from "../../assets/Icons/MobileHomePageIcon";
-import HeaderPhoneIcon from "../../assets/Icons/HeaderPhoneIcon";
-import { useEffect, useState } from "react";
-import MobilMenuCloseIcon from "../../assets/Icons/MobilMenuCloseIcon";
+import SearchIcon from '../../assets/Icons/SearchIcon';
+import MobileCatalogIcon from '../../assets/Icons/MobileCatalogIcon';
+import HeartIcon from '../../assets/Icons/HeartIcon';
+import MobileBasketIcon from '../../assets/Icons/MobileBasketIcon';
+import MobileHomePageIcon from '../../assets/Icons/MobileHomePageIcon';
+import HeaderPhoneIcon from '../../assets/Icons/HeaderPhoneIcon';
+import { useEffect, useState } from 'react';
+import MobilMenuCloseIcon from '../../assets/Icons/MobilMenuCloseIcon';
+import MobileCatalog from '../MobileCatalog/MobileCatalog';
 
-
-export default function HeaderMobile({handleLogout}) {
+export default function HeaderMobile({ handleLogout }) {
 	const dispatch = useDispatch();
 	const [showHiddenHamburgerMenu, setShowHiddenHamburgerMenu] = useState(false);
-		const { localBaskets, apiBaskets } = useSelector((state) => state.basketData);
-		const { favoriteItemsList } = useSelector((state) => state.favoriteItemsData);
-    	const { authMeUser, showOpenEnterSiteArea, isLogin } = useSelector(
-			(state) => state.userInfo,
+	const [mobileCatalog, setMobileCatalog] = useState(false)
+	const { localBaskets, apiBaskets } = useSelector((state) => state.basketData);
+	const { favoriteItemsList } = useSelector((state) => state.favoriteItemsData);
+	const { authMeUser, showOpenEnterSiteArea, isLogin } = useSelector(
+		(state) => state.userInfo,
 	);
-	const handleHamburgerMenu = () => {
-		setShowHiddenHamburgerMenu(!showHiddenHamburgerMenu)
+	const handleMobileCatalog = () => {
+		setMobileCatalog(!mobileCatalog)
 	}
-	 useEffect(() => {
-				document.body.style.overflow = showHiddenHamburgerMenu
-					? 'hidden'
-					: 'auto';
-		}, [showHiddenHamburgerMenu]);
-  return (
+	const handleHamburgerMenu = () => {
+		setShowHiddenHamburgerMenu(!showHiddenHamburgerMenu);
+	};
+	useEffect(() => {
+		document.body.style.overflow = showHiddenHamburgerMenu ? 'hidden' : 'auto';
+	}, [showHiddenHamburgerMenu]);
+	return (
 		<div className={style.mobileHeaderWrapper}>
 			<div style={{ paddingTop: 0, paddingBottom: '5px' }} className="container">
 				<div className={style.headerMobileTop}>
@@ -153,7 +155,13 @@ export default function HeaderMobile({handleLogout}) {
 			<div className={style.mobileHeaderBottom}>
 				<div style={{ paddingTop: 0, paddingBottom: 0 }} className="container">
 					<div className={style.catalogSearchArea}>
-						<span className={style.mobileCatalog}>
+						{mobileCatalog && (
+							<MobileCatalog closeCatalog={handleMobileCatalog} />
+						)}
+						<span
+							onClick={handleMobileCatalog}
+							className={style.mobileCatalog}
+						>
 							<CatalogIcon /> Kataloq
 						</span>
 						<label htmlFor="search" className={style.SearchWrapper}>
@@ -258,6 +266,5 @@ export default function HeaderMobile({handleLogout}) {
 				</div>
 			</div>
 		</div>
-  );
+	);
 }
-

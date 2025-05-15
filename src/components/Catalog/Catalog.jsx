@@ -1,30 +1,12 @@
 import { useEffect } from "react";
 import styles from "./Catalog.module.scss";
-// import santral from "../../Helpers/Helpers";
-// import urls from "../../ApiUrls/Urls";
 import { Link } from "react-router-dom";
 import IsBigIcon from "../../assets/Icons/IsBigIcon";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllCatalogDatas } from "../../redux/userSlice";
 
 export default function Catalog() {
-  // const [catalogData, setCatalogData] = useState([]);
-
-
-  // useEffect(() => {
-  //   const getCategoryDatas = async () => {
-  //     try {
-  //       const res = await santral.api().post(urls.catalog);
-  //       setCatalogData(res.data.data);
-  //     } catch (err) {
-  //       console.error(err);
-  //     }
-  //   };
-  //   getCategoryDatas();
-  // }, []);
-
-  // console.log("cato=", catalogData);
-  // console.log("category active ");
+  
     const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -58,7 +40,7 @@ export default function Catalog() {
 			)}
 		</Link>
   );
-
+  
   return (
     <ul className={styles.catalogWrapper}>
         {catalogDatas?.map(renderCategories)}

@@ -3,16 +3,21 @@ import style from './CategoryAndSubcategoryDetails.module.scss';
 import santral from '../../Helpers/Helpers';
 import urls from '../../ApiUrls/Urls';
 import { useParams } from 'react-router-dom';
-import GoldMinusIcon from '../../assets/Icons/GoldMinusIcon';
-import GoldPlusIcon from '../../assets/Icons/GoldPlusIcon';
+
 import ProductCart from '../ProductCart/ProductCart';
+import Filter from '../Filter/Filter';
+import MobileFilterIcon from '../../assets/Icons/MobileFilterIcon';
 
 export default function CategoryAndSubcategoryDetails() {
 	const { '*': slug } = useParams();
-
+    const [mobileFilterShowHidden, setMobileFilterShowHidden] = useState(false)
 	const [categoryDetailsFilterDatas, setCategoryDetailsFilterDatas] = useState([]);
 	const [categoryDetailsData, setCategoryDetailsData] = useState([]);
 	const [categorySlugData, setCategorySlugData] = useState([]);
+
+	const handleMobileFilterArea = () => {
+		setMobileFilterShowHidden(!mobileFilterShowHidden)
+	}
 
 	const getCategoryDetailsDatas = async () => {
 		try {
@@ -32,24 +37,28 @@ export default function CategoryAndSubcategoryDetails() {
 	useEffect(() => {
 		getCategoryDetailsDatas();
 	}, [slug]);
-	console.log('filter data=', categoryDetailsFilterDatas);
+
+
+	// console.log('filter data=', categoryDetailsFilterDatas);
 	// console.log("detail=", categoryDetailsData);
 	// console.log("slug=", categorySlugData);
-    const [visibleIndicators, setVisibleIndicators] = useState({});
-    useEffect(() => {
-       window.scrollTo({
+    // const [visibleIndicators, setVisibleIndicators] = useState({});
+
+
+	// const onClickTitleShowHiddenIndicators = (id) => {
+	// 	setVisibleIndicators((prevState) => ({
+	// 		...prevState,
+	// 		[id]: !prevState[id],
+	// 	}));
+	// };
+
+	useEffect(() => {
+		window.scrollTo({
 			top: 0,
 			left: 0,
 			behavior: 'smooth',
 		});
-    },[categoryDetailsData])
-
-	const onClickTitleShowHiddenIndicators = (id) => {
-		setVisibleIndicators((prevState) => ({
-			...prevState,
-			[id]: !prevState[id],
-		}));
-	};
+	}, [categoryDetailsData]);
 	return (
 		<>
 			{categoryDetailsData?.pagination?.count === 0 ? (
@@ -67,78 +76,30 @@ export default function CategoryAndSubcategoryDetails() {
 								</span>
 							)}
 						</div>
-						<div className={style.prSort}>
+						<div className={style.prSortWeb}>
 							<span className={style.sortBtn}>A-dan Z-yə</span>
 							<span className={style.sortBtn}>Z-dən A-ya</span>
 							<span className={style.sortBtn}>Ucuzdan bahaya</span>
 							<span className={style.sortBtn}>Bahadan ucuza</span>
 						</div>
+							 <div className={`${style.mobilefilter} ${mobileFilterShowHidden ? "":style.noFilterArea}`}>
+								<Filter data={categoryDetailsFilterDatas} onClickFunk={handleMobileFilterArea} />
+							</div>
+						<div className={style.mobileSortAndMobileFilter}>
+							<select className={style.prSortMobile} name="" id="">
+								<option value="">A-dan Z-yə</option>
+								<option value="">Z-dən A-ya</option>
+								<option value="">Ucuzdan bahaya</option>
+								<option value="">Bahadan ucuza</option>
+							</select>
+							<div onClick={handleMobileFilterArea} className={style.mobileFilterBtn}>
+								<MobileFilterIcon /> Filter
+							</div>
+						</div>
 					</div>
 					<div className={style.filterAndCategoryFilterResultArea}>
-						<div className={style.filterAreaWrapper}>
-							<div
-								className={`${style.filterArea} ${
-									categoryDetailsFilterDatas.length > 10
-										? style.scrollHeight
-										: ''
-								}`}
-							>
-								{categoryDetailsFilterDatas?.map((item) => (
-									<div key={item.id}>
-										<div
-											onClick={() =>
-												onClickTitleShowHiddenIndicators(item.id)
-											}
-											className={style.titleAndIcon}
-										>
-											{item.title}
-											<span className={style.plusMinusIcon}>
-												{visibleIndicators[item.id] ? (
-													<GoldMinusIcon />
-												) : (
-													<GoldPlusIcon />
-												)}
-											</span>
-										</div>
-										{visibleIndicators[item.id] && (
-												<div
-													className={`${
-														style.categoryIndicators
-													} ${
-														item?.options?.length > 5
-															? style.optionsScroll
-															: ''
-													}`}
-												>
-													{item?.options.map((option) => (
-														<div
-															key={option.id}
-															className={
-																style.inpCheckboxWrapper
-															}
-														>
-															<input
-																type="checkbox"
-																id={option.id}
-															/>
-															<label htmlFor={option.id}>
-																{option.title}
-															</label>
-															<span
-																className={
-																	style.optionCount
-																}
-															>
-																({option.count})
-															</span>
-														</div>
-													))}
-												</div>
-											
-										)}
-									</div>
-								))}
-							</div>
+						<div className={style.webFilterAreaWrapper}>
+							<Filter data={categoryDetailsFilterDatas} />
 						</div>
 						<div className={style.productsArea}>
 							{categoryDetailsData?.data?.map((product) => (

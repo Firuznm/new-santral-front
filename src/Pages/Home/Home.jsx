@@ -87,7 +87,6 @@ export default function Home() {
 			<HomeNewComers data={categoryDatas} />
 			<HomeBrands brandsData={homeBrandsData} />
 			<HomePartners PartnersData={homePartnersData} />
-			<HomeNewComers data={categoryDatas} />
 			<OurAdvantages />
 			<HomeSeasonOffers seasonOffersData={homeSeasonOffersData} />
 		</div>

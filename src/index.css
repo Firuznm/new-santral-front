@@ -263,13 +263,21 @@ li.selected{
   .decrease:hover.icon-path,
   .increase:hover.icon-path {
     fill: red !important; 
-    fill-opacity: 1; 
+    fill-opacity: 1;   
   }
 /* .homeCategoryPartnersSlider .swiper-slide-active{
     margin-left: -26px;
   } */
+   
 @media only screen and (max-width: 850px) {
     .resultSlider .swiper-slide-active{
+        display: flex;
+        justify-content: center;
+    }
+}
+/* home homeSeasonOffers section slider response */
+@media only screen and (max-width: 850px) {
+    .homeSeasonOffers .swiper-slide-active{
         display: flex;
         justify-content: center;
     }

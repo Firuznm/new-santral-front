@@ -3,30 +3,12 @@ export default function BasketIconBlack() {
   return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
-			xmlnsXlink="http://www.w3.org/1999/xlink"
-			width="19"
-			height="19"
-			fill="none"
-			viewBox="0 0 19 19"
+			id="Layer_1"
+			version="1.1"
+			viewBox="0 0 25 24"
 		>
-			<path fill="url(#pattern0_134_499)" d="M0 0h19v19H0z"></path>
-			<defs>
-				<pattern
-					id="pattern0_134_499"
-					width="1"
-					height="1"
-					patternContentUnits="objectBoundingBox"
-				>
-					<use xlinkHref="#image0_134_499" transform="scale(.04167)"></use>
-				</pattern>
-				<image
-					xlinkHref="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAGKADAAQAAAABAAAAGAAAAADiNXWtAAACc0lEQVRIDbVUzWoTURQ+505sa+2mljS6EEORJENmQjI+g1R0JYK7YEE3rgTXvoMu1KUILnwCf0DrAygxNWkaI624qBurQqwSSJ05fjfppHEmdcZILwznzD3fOd/54xId8GEd37RKV4SoDBWCKr+Ue3u9VtvUtv89KhCAiamcEKOSTqenAraxfnsVDHtm885ZpegpSqmQyI9hW4QuCPYBCT5q1qsvfGzCVwaS5QsBhW6tQn4c3EcowqJQ/hnAnpu2c6NZf3NLu4QqMO3iOSL1mF3XWVt7W42IGzKblvMQpVyU7s9Uq9XaDs5AT3lee3UTshXyjnHhiXsfWR82jKlTGh5qEXtqnkA76bqfNSBnF5dIeEnrcQ4SnBWk6TFPa3y4AqakCG03Go1unIBBDEs/aVHGV20LVUAsSYxm0J539ZUHwOkv1slapWuK+J7LO9+0Q6gCZJBEDwcEsaIOgZTQnP7dqNV6MUIEesho0dgEouQoYrTBATGqAiK0aHwCLAQqkF57RhLg8jizN3YFmN8ccu8NeCSBMHeE+iumAf98mE4y0yffLzQDvD9VlHk5azkFHxRXmvnSTSyI5Qm99H1CT0XGthcUHXoCogyMrzGpjg/+q2Q+AfwC+r+Mx24RWFfjQwT6Mp/PT3g8UUarLsBhRt9FHqY2tm+5tVq9A6wXideAVKFwJGOfzu0HjrJrv/AMdqOZVvH8rCS2DJJmznKeBUmi7D5+XwJwX2WR75jBXWzFomkWLN+pL6Psu6g/nfb+8CJuEHMKM7iEgXc7HbW5Z8VthN3HGr4SlDPTx14Zk7SDt6mNVbi+/n6lNYyJsg9jD1T/DdQO1RlyKpsdAAAAAElFTkSuQmCC"
-					id="image0_134_499"
-					width="24"
-					height="24"
-					preserveAspectRatio="none"
-				></image>
-			</defs>
+			<path d="M18.7 17.8H8c-1 0-1.9-.4-2.6-1.1s-1-1.7-.9-2.7l.8-10c0-.3 0-.6-.3-.8s-.5-.4-.8-.4H2.5c-.4 0-.8-.3-.8-.8s.3-.8.8-.8h1.7c.7 0 1.4.3 1.9.8.3.3.5.7.6 1h12.5c1 0 1.9.4 2.6 1.1s1 1.7.9 2.7l-.5 7.5c-.1 1.8-1.7 3.3-3.5 3.3ZM6.8 4.6 6 14c0 .6.1 1.1.5 1.6.4.4.9.7 1.5.7h10.7c1 0 2-.9 2.1-1.9l.5-7.5c0-.6-.2-1.2-.5-1.6-.4-.4-.9-.7-1.5-.7zM16.8 22.8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2m0-2.6c-.3 0-.5.2-.5.5s.2.5.5.5.5-.2.5-.5-.2-.5-.5-.5M8.8 22.8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2m0-2.6c-.3 0-.5.2-.5.5s.2.5.5.5.5-.2.5-.5-.2-.5-.5-.5"></path>
+			<path d="M21.5 8.8h-12c-.4 0-.8-.3-.8-.8s.3-.8.8-.8h12c.4 0 .8.3.8.8s-.3.8-.8.8"></path>
 		</svg>
   );
 }
