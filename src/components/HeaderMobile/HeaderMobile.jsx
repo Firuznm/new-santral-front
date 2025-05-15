@@ -156,7 +156,7 @@ export default function HeaderMobile({ handleLogout }) {
 				<div style={{ paddingTop: 0, paddingBottom: 0 }} className="container">
 					<div className={style.catalogSearchArea}>
 						{mobileCatalog && (
-							<MobileCatalog closeCatalog={handleMobileCatalog} />
+							<MobileCatalog closeCatalog={handleMobileCatalog} /> 
 						)}
 						<span
 							onClick={handleMobileCatalog}
@@ -247,7 +247,7 @@ export default function HeaderMobile({ handleLogout }) {
 						<a href="/">
 							<MobileHomePageIcon />
 						</a>
-						<span>
+						<span onClick={handleMobileCatalog}>
 							<MobileCatalogIcon />
 						</span>
 						<Link to={'favorite-items'} className={style.wishList}>

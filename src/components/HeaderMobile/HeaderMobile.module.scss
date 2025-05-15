@@ -283,7 +283,7 @@
 				.wishListCount,
 				.basketCount {
 					position: absolute;
-					top: -17px;
+					top: -12px;
 					right: -15px;
 					background-color: #fd8521;
 					color: white;
@@ -294,6 +294,9 @@
 					align-items: center;
 					justify-content: center;
 					font-size: 12px;
+				}
+				.wishListCount{
+					top: -15px;
 				}
 			}
 		}
