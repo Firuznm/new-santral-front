@@ -5,7 +5,7 @@ import HeaderPhoneIcon from '../../assets/Icons/HeaderPhoneIcon';
 import defaultUserImg from '../../assets/Images/dafaultUserImg.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate} from 'react-router-dom';
 import { authMe, logout, toggleShowEnterSiteArea } from '../../redux/userSlice';
 import EnterSiteHeader from '../../Authentication/EnterSiteHeader/EnterSiteHeader';
 import HeartIcon from '../../assets/Icons/HeartIcon';
@@ -16,10 +16,13 @@ import Catalog from '../Catalog/Catalog';
 // import HeaderFreeDeliverySlider from '../HeaderFreeDeliverySlider/HeaderFreeDeliverySlider';
 import santral from '../../Helpers/Helpers';
 import HeaderMobile from '../HeaderMobile/HeaderMobile';
+import { useSearch } from '../../context/SearchContext';
        
 export default function HeaderNew() {
 	const [showHiddenCatalog, setShowHiddenCatalog] = useState(false);
 	const [scrollHeaderChange, setScrollHeaderChange] = useState(true);
+	const { searchInputValue, setSearchInputValue, searchFunc, searchResult } =
+		useSearch();
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const { localBaskets, apiBaskets } = useSelector((state) => state.basketData);
@@ -29,6 +32,40 @@ export default function HeaderNew() {
 		(state) => state.userInfo,
 	);
 
+		// useEffect(() => {
+		// 	const delayDebounce = setTimeout(() => {
+		// 		if (searchInputValue.trim() !== '') {
+		// 			searchFunc(searchInputValue);
+		// 		}
+		// 	}, 500); 
+
+		// 	return () => clearTimeout(delayDebounce);
+		// }, [searchInputValue]);
+	
+		
+	
+		useEffect(() => {
+			searchFunc(searchInputValue);
+		}, [searchInputValue]);
+	
+	console.log("header search =", searchResult);
+	
+	
+		const onKeyDownInput = (e) => {
+			if (searchInputValue !== '' && e.key === 'Enter') {
+				clearInput();
+				navigate(`/search?searchValue=${searchInputValue}`);
+			} else {
+				return false;
+			}
+	}; 
+	
+		const clearInput = () => {
+			setSearchInputValue('');
+		};
+		const onChangeSearchInput = (e) => {
+			setSearchInputValue(e.target.value);
+		};
 
 	const onClickCatalogShowHidden = () => {
 		const scrollSituation = !showHiddenCatalog;
@@ -109,6 +146,9 @@ export default function HeaderNew() {
 							<label htmlFor="search" className={style.SearchWrapper}>
 								<SearchIcon />
 								<input
+									value={searchInputValue}
+									onKeyDown={onKeyDownInput}
+									onChange={onChangeSearchInput}
 									id="search"
 									type="text"
 									placeholder="25000 müxtəlif məhsul içindən axtarın"
@@ -122,7 +162,9 @@ export default function HeaderNew() {
 								<div className={style.headerEnter}>
 									{isLogin ? (
 										<div
-											className={`${style.userHaveLogin} ${!bpUser ? "" : style.bpImgEnd}`}
+											className={`${style.userHaveLogin} ${
+												!bpUser ? '' : style.bpImgEnd
+											}`}
 										>
 											{!bpUser && (
 												<span className={style.cashback}>

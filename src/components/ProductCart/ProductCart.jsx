@@ -215,7 +215,7 @@ export default function ProductCart({ data }) {
 						)}
 						<span className={style.price}>{data?.price?.toFixed(2)}₼</span>
 					</div>
-				)}
+				)} 
 				<div
 					onClick={addToPrBasket}
 					className={`${style.basket} ${prIsInBasket ? style.prBasket : ''}`}

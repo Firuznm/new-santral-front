@@ -2,55 +2,90 @@ import { useEffect, useState } from 'react';
 import style from './CategoryAndSubcategoryDetails.module.scss';
 import santral from '../../Helpers/Helpers';
 import urls from '../../ApiUrls/Urls';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 
 import ProductCart from '../ProductCart/ProductCart';
 import Filter from '../Filter/Filter';
 import MobileFilterIcon from '../../assets/Icons/MobileFilterIcon';
+import Pagination from '../Pagination/Pagination';
 
 export default function CategoryAndSubcategoryDetails() {
 	const { '*': slug } = useParams();
-    const [mobileFilterShowHidden, setMobileFilterShowHidden] = useState(false)
+	const [mobileFilterShowHidden, setMobileFilterShowHidden] = useState(false);
 	const [categoryDetailsFilterDatas, setCategoryDetailsFilterDatas] = useState([]);
 	const [categoryDetailsData, setCategoryDetailsData] = useState([]);
 	const [categorySlugData, setCategorySlugData] = useState([]);
+	const [sortType, setSortType] = useState('');
+	const [filterBody, setFilterBody] = useState({ filter: {} });
+	const [searchParams, setSearchParams] = useSearchParams();
+	
 
 	const handleMobileFilterArea = () => {
-		setMobileFilterShowHidden(!mobileFilterShowHidden)
-	}
+		setMobileFilterShowHidden(!mobileFilterShowHidden);
+	};
 
-	const getCategoryDetailsDatas = async () => {
+	const onCheckInput = (itemId, optionId, isChecked) => {
+		const newFilter = Object.create(filterBody);
+		if (!newFilter.filter[`param_${itemId}`])
+			newFilter.filter[`param_${itemId}`] = [];
+		if (isChecked) newFilter.filter[`param_${itemId}`].push(optionId);
+		else {
+			const index = newFilter.filter[`param_${itemId}`].indexOf(optionId);
+			if (index > -1) {
+				newFilter.filter[`param_${itemId}`].splice(index, 1);
+			}
+		}
+		setFilterBody({ filter: newFilter.filter });
+	};
+
+	const getCategoryDetailsDatas = async (page = 1, sort = sortType) => {
 		try {
 			const categorySlug = await santral.api().get(urls.categorySlug(slug));
 			setCategorySlugData(categorySlug.data);
 			const lookupId = categorySlug?.data?.route?.lookupId;
+
 			const [data1, data2] = await Promise.all([
-				santral.api().post(urls.categoryDetailsFilter(lookupId)),
-				santral.api().post(urls.categoryDetails(lookupId)),
+				santral.api().post(urls.categoryDetailsFilter(lookupId), filterBody),
+				santral
+					.api()
+					.post(urls.categoryDetails(lookupId, page, sort), filterBody),
 			]);
+
 			setCategoryDetailsFilterDatas(data1.data.data);
 			setCategoryDetailsData(data2.data);
 		} catch (error) {
 			console.log(error);
 		}
 	};
+
 	useEffect(() => {
-		getCategoryDetailsDatas();
-	}, [slug]);
+		getCategoryDetailsDatas(1, sortType || searchParams.get('sort') || '');
+	}, [slug, sortType]);
+	
 
+	useEffect(() => {
+		if (Object.keys(filterBody.filter).length > 0) {
+			getCategoryDetailsDatas(1, sortType);
+		}
+	}, [filterBody]);
 
-	// console.log('filter data=', categoryDetailsFilterDatas);
-	// console.log("detail=", categoryDetailsData);
-	// console.log("slug=", categorySlugData);
-    // const [visibleIndicators, setVisibleIndicators] = useState({});
+	const handleSortChange = (value) => {
+		setSortType(value);
+		const newParams = new URLSearchParams(searchParams);
+		newParams.set('sort', value);
+		setSearchParams(newParams);
 
+		getCategoryDetailsDatas(1, value);
+	};
+	
 
-	// const onClickTitleShowHiddenIndicators = (id) => {
-	// 	setVisibleIndicators((prevState) => ({
-	// 		...prevState,
-	// 		[id]: !prevState[id],
-	// 	}));
-	// };
+	useEffect(() => {
+		const sortQuery = searchParams.get('sort');
+		if (sortQuery) {
+			setSortType(sortQuery);
+		}
+	}, [searchParams]);
+	
 
 	useEffect(() => {
 		window.scrollTo({
@@ -59,6 +94,7 @@ export default function CategoryAndSubcategoryDetails() {
 			behavior: 'smooth',
 		});
 	}, [categoryDetailsData]);
+
 	return (
 		<>
 			{categoryDetailsData?.pagination?.count === 0 ? (
@@ -77,34 +113,87 @@ export default function CategoryAndSubcategoryDetails() {
 							)}
 						</div>
 						<div className={style.prSortWeb}>
-							<span className={style.sortBtn}>A-dan Z-yə</span>
-							<span className={style.sortBtn}>Z-dən A-ya</span>
-							<span className={style.sortBtn}>Ucuzdan bahaya</span>
-							<span className={style.sortBtn}>Bahadan ucuza</span>
+							<span
+								className={`${style.sortBtn} ${
+									sortType === 'az' ? style.active : ''
+								}`}
+								onClick={() => handleSortChange('az')}
+							>
+								A-dan Z-yə
+							</span>
+							<span
+								className={`${style.sortBtn} ${
+									sortType === 'za' ? style.active : ''
+								}`}
+								onClick={() => handleSortChange('za')}
+							>
+								Z-dən A-ya
+							</span>
+							<span
+								className={`${style.sortBtn} ${
+									sortType === 'chp' ? style.active : ''
+								}`}
+								onClick={() => handleSortChange('chp')}
+							>
+								Ucuzdan bahaya
+							</span>
+							<span
+								className={`${style.sortBtn} ${
+									sortType === 'exp' ? style.active : ''
+								}`}
+								onClick={() => handleSortChange('exp')}
+							>
+								Bahadan ucuza
+							</span>
 						</div>
-							 <div className={`${style.mobilefilter} ${mobileFilterShowHidden ? "":style.noFilterArea}`}>
-								<Filter data={categoryDetailsFilterDatas} onClickFunk={handleMobileFilterArea} />
-							</div>
+
+						<div
+							className={`${style.mobilefilter} ${
+								mobileFilterShowHidden ? '' : style.noFilterArea
+							}`}
+						>
+							<Filter
+								data={categoryDetailsFilterDatas}
+								onClickFunk={handleMobileFilterArea}
+							/>
+						</div>
+
 						<div className={style.mobileSortAndMobileFilter}>
-							<select className={style.prSortMobile} name="" id="">
-								<option value="">A-dan Z-yə</option>
-								<option value="">Z-dən A-ya</option>
-								<option value="">Ucuzdan bahaya</option>
-								<option value="">Bahadan ucuza</option>
+							<select
+								className={style.prSortMobile}
+								onChange={(e) => handleSortChange(e.target.value)}
+							>
+								<option value="az">A-dan Z-yə</option>
+								<option value="za">Z-dən A-ya</option>
+								<option value="chp">Ucuzdan bahaya</option>
+								<option value="exp">Bahadan ucuza</option>
 							</select>
-							<div onClick={handleMobileFilterArea} className={style.mobileFilterBtn}>
+							<div
+								onClick={handleMobileFilterArea}
+								className={style.mobileFilterBtn}
+							>
 								<MobileFilterIcon /> Filter
 							</div>
 						</div>
 					</div>
+
 					<div className={style.filterAndCategoryFilterResultArea}>
 						<div className={style.webFilterAreaWrapper}>
-							<Filter data={categoryDetailsFilterDatas} />
+							<Filter
+								data={categoryDetailsFilterDatas}
+								onCheckInput={onCheckInput}
+							/>
 						</div>
-						<div className={style.productsArea}>
-							{categoryDetailsData?.data?.map((product) => (
-								<ProductCart data={product} key={product.id} />
-							))}
+						<div className={style.productsAndPagination}>
+							<div className={style.productsArea}>
+								{categoryDetailsData?.data?.map((product) => (
+									<ProductCart data={product} key={product.id} />
+								))}
+							</div>
+							<Pagination
+								func={(page) => getCategoryDetailsDatas(page, sortType)}
+								paginationData={categoryDetailsData.pagination}
+							/>
 						</div>
 					</div>
 				</div>

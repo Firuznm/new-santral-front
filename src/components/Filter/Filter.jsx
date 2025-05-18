@@ -1,11 +1,10 @@
-import { useState } from "react";
+import { useState } from 'react';
 import GoldMinusIcon from '../../assets/Icons/GoldMinusIcon';
 import GoldPlusIcon from '../../assets/Icons/GoldPlusIcon';
-import style from "./Filter.module.scss"
-import CloseIcon from "../../assets/Icons/CloseIcon";
+import style from './Filter.module.scss';
+import CloseIcon from '../../assets/Icons/CloseIcon';
 
-
-export default function Filter({ data, onClickFunk }) {
+export default function Filter({ data, onClickFunk, onCheckInput }) {
 	const [visibleIndicators, setVisibleIndicators] = useState({});
 	const onClickTitleShowHiddenIndicators = (id) => {
 		setVisibleIndicators((prevState) => ({
@@ -13,6 +12,9 @@ export default function Filter({ data, onClickFunk }) {
 			[id]: !prevState[id],
 		}));
 	};
+	
+
+
 
 	return (
 		<div
@@ -49,7 +51,11 @@ export default function Filter({ data, onClickFunk }) {
 						>
 							{item?.options.map((option) => (
 								<div key={option.id} className={style.inpCheckboxWrapper}>
-									<input type="checkbox" id={option.id} />
+									<input
+										onChange={(e) =>  onCheckInput(item.id, option.id, e.target.checked) }
+										type="checkbox"
+										id={option.id}
+									/>
 									<label htmlFor={option.id}>{option.title}</label>
 									<span className={style.optionCount}>
 										({option.count})

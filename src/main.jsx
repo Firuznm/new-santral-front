@@ -22,6 +22,8 @@ import News from "./Pages/News/News";
 import Projects from "./Pages/Projects/Projects";
 import OrderSuccessfull from "./Pages/OrderSuccessfull/OrderSuccessfull";
 import FavoriteItems from "./Pages/FavoriteItems/FavoriteItems";
+import { SearchProvider } from "./context/SearchContext";
+import SearchResult from "./Pages/SearchResult/SearchResult";
 
 const router = createBrowserRouter([
 	{
@@ -48,6 +50,10 @@ const router = createBrowserRouter([
 			{
 				path: 'projects',
 				element: <Projects />,
+			},
+			{
+				path: 'search',
+				element: <SearchResult />,
 			},
 			{
 				path: '/product/:name',
@@ -83,7 +89,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: 'favorite-items',
-				element: <FavoriteItems/>,
+				element: <FavoriteItems />,
 			},
 			{
 				path: 'basket',
@@ -106,8 +112,10 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-	<Provider store={store}>
+	<SearchProvider>
+		<Provider store={store}>
 			<RouterProvider router={router} />
-	</Provider>,
+		</Provider>
+	</SearchProvider>,
 );
  

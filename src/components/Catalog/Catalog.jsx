@@ -7,7 +7,8 @@ import { getAllCatalogDatas } from "../../redux/userSlice";
 
 export default function Catalog() {
   
-    const dispatch = useDispatch();
+	const dispatch = useDispatch();
+	// const navigate = useNavigate();
 
 	useEffect(() => {
 		dispatch(getAllCatalogDatas());
@@ -15,7 +16,7 @@ export default function Catalog() {
   
   const { catalogDatas } = useSelector((state) => state.userInfo);
 
-  console.log("redux catalog=",catalogDatas);
+//   console.log("redux catalog=",catalogDatas);
   
   
     
@@ -39,7 +40,9 @@ export default function Catalog() {
 				</>
 			)}
 		</Link>
-  );
+	);
+	
+	
   
   return (
     <ul className={styles.catalogWrapper}>

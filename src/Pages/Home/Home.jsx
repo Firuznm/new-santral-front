@@ -15,6 +15,7 @@ import OurAdvantages from '../../components/HomeSection/OurAdvantages/OurAdvanta
 import HomeDiscountedProducts from '../../components/HomeSection/HomeDiscountedProducts/HomeDiscountedProducts';
 import Input from '../../components/Input/Input';
 import { useSelector } from 'react-redux';
+import { useSearch } from '../../context/SearchContext';
 // import ProductCartNew from "../../components/ProductCartNew/ProductCartNew";
 
 export default function Home() {
@@ -26,6 +27,8 @@ export default function Home() {
 	const [homeBannersData, setHomeBannersData] = useState({});
 	const [homeNews, setHomeNews] = useState([]);
 	const [homeSeasonOffersData, setHomeSeasonOffersData] = useState([]);
+
+
 
 	const getHomeAllData = async () => {
 		try {

@@ -28,8 +28,15 @@ const urls = {
 	myOrdersPage: (pageNum) => `/v1/orders/history?page=${pageNum}&lang=az`,
 	changePassword: "/v1/auth/changepassword",  //-- qosulmuyub
 	categoryDetailsFilter:(id)=> `/v1/products/mobile?filters=1&category=${id}&lang=az`,
-	categoryDetails:(id)=> `/v1/products/mobile?category=${id}&limit=18&page=1&sort=az&search=&lang=az`,
-	categorySlug:(slug)=>`/v1/routes/find?domain=santral_www&location=/${slug}`,
+	categoryDetails: (id, page = 1, sort = '') =>
+		`/v1/products/mobile?category=${id}&limit=18&page=${page}&sort=${sort}&search=&lang=az`,
+	  
+	// categoryDetails: () => `/v1/products/mobile`,
+
+	
+	categorySlug: (slug) => `/v1/routes/find?domain=santral_www&location=/${slug}`,
+	search: (value) => `/v1/products/published?search=${value}&lang=az&page=1`,
+		// categoryDetails: (id) => `/v1/products/mobile?category=${id}&limit=18&page=1&sort=az&search=&lang=az`,
 };
   
 export default urls  
