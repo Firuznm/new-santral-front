@@ -3,7 +3,6 @@ import style from './CategoryAndSubcategoryDetails.module.scss';
 import santral from '../../Helpers/Helpers';
 import urls from '../../ApiUrls/Urls';
 import { useParams, useSearchParams } from 'react-router-dom';
-
 import ProductCart from '../ProductCart/ProductCart';
 import Filter from '../Filter/Filter';
 import MobileFilterIcon from '../../assets/Icons/MobileFilterIcon';
@@ -18,7 +17,6 @@ export default function CategoryAndSubcategoryDetails() {
 	const [sortType, setSortType] = useState('');
 	const [filterBody, setFilterBody] = useState({ filter: {} });
 	const [searchParams, setSearchParams] = useSearchParams();
-	
 
 	const handleMobileFilterArea = () => {
 		setMobileFilterShowHidden(!mobileFilterShowHidden);
@@ -59,9 +57,12 @@ export default function CategoryAndSubcategoryDetails() {
 	};
 
 	useEffect(() => {
-		getCategoryDetailsDatas(1, sortType || searchParams.get('sort') || '');
-	}, [slug, sortType]);
-	
+		const sortQuery = searchParams.get('sort') || '';
+		const pageQuery = parseInt(searchParams.get('page')) || 1;
+
+		setSortType(sortQuery);
+		getCategoryDetailsDatas(pageQuery, sortQuery);
+	}, [slug, searchParams]);
 
 	useEffect(() => {
 		if (Object.keys(filterBody.filter).length > 0) {
@@ -73,19 +74,11 @@ export default function CategoryAndSubcategoryDetails() {
 		setSortType(value);
 		const newParams = new URLSearchParams(searchParams);
 		newParams.set('sort', value);
+		newParams.set('page', 1);
 		setSearchParams(newParams);
 
 		getCategoryDetailsDatas(1, value);
 	};
-	
-
-	useEffect(() => {
-		const sortQuery = searchParams.get('sort');
-		if (sortQuery) {
-			setSortType(sortQuery);
-		}
-	}, [searchParams]);
-	
 
 	useEffect(() => {
 		window.scrollTo({
@@ -154,6 +147,7 @@ export default function CategoryAndSubcategoryDetails() {
 						>
 							<Filter
 								data={categoryDetailsFilterDatas}
+								onCheckInput={onCheckInput}
 								onClickFunk={handleMobileFilterArea}
 							/>
 						</div>
@@ -162,6 +156,7 @@ export default function CategoryAndSubcategoryDetails() {
 							<select
 								className={style.prSortMobile}
 								onChange={(e) => handleSortChange(e.target.value)}
+								value={sortType}
 							>
 								<option value="az">A-dan Z-yə</option>
 								<option value="za">Z-dən A-ya</option>

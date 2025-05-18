@@ -12,10 +12,6 @@ export default function Filter({ data, onClickFunk, onCheckInput }) {
 			[id]: !prevState[id],
 		}));
 	};
-	
-
-
-
 	return (
 		<div
 			className={`${style.filterArea} ${
@@ -23,7 +19,9 @@ export default function Filter({ data, onClickFunk, onCheckInput }) {
 			}`}
 		>
 			<div className={style.filterResultAndFilterArea}>
-				<span className={style.filterResultBtn}>Tətbiq edin</span>
+				<span onClick={onClickFunk} className={style.filterResultBtn}>
+					Tətbiq edin
+				</span>
 				<span onClick={onClickFunk} className={style.filterAreaCloseBtn}>
 					<CloseIcon color={'white'} />
 				</span>
@@ -52,7 +50,13 @@ export default function Filter({ data, onClickFunk, onCheckInput }) {
 							{item?.options.map((option) => (
 								<div key={option.id} className={style.inpCheckboxWrapper}>
 									<input
-										onChange={(e) =>  onCheckInput(item.id, option.id, e.target.checked) }
+										onChange={(e) =>
+											onCheckInput(
+												item.id,
+												option.id,
+												e.target.checked,
+											)
+										}
 										type="checkbox"
 										id={option.id}
 									/>

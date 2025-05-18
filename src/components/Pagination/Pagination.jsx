@@ -1,7 +1,7 @@
 import ReactPaginate from 'react-paginate';
 import { useSearchParams } from 'react-router-dom';
-import "./Pagination.css"
-import { useEffect} from 'react';
+import './Pagination.css';
+import { useEffect } from 'react';
 
 export default function Pagination({ func, paginationData }) {
 	const [searchParams, setSearchParams] = useSearchParams();
@@ -9,14 +9,16 @@ export default function Pagination({ func, paginationData }) {
 
 	const handlePageClick = (event) => {
 		const newPage = event.selected + 1;
-		setSearchParams({ page: newPage });
+		const newParams = new URLSearchParams(searchParams);
+		newParams.set('page', newPage);
+		setSearchParams(newParams);
 		window.scrollTo({ top: 0, behavior: 'smooth' });
 	};
 
 	useEffect(() => {
 		func(currentPage);
-		window.scrollTo({ top: 0, behavior: 'smooth' });
-	}, [currentPage,searchParams]);
+	}, [currentPage]);
+
 	return (
 		<div className="paginationWrapper">
 			{paginationData?.pages > 1 && (
