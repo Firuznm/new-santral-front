@@ -15,6 +15,7 @@
 		justify-content: space-between;
 		.OurAdvantagesCart {
 			width: 22%;
+			padding: 0.2rem 0.5rem 1rem 0.5rem;
 			margin: 5rem 1rem.5rem;
 			background-color: white;
 			border-radius: 14px;
@@ -28,11 +29,16 @@
 			}
 			.titleDescription{
 			.title {
+				color: black;
 				font-size: 15px;
-				margin: 0.4rem;
+				margin: 0.4rem 0;
 			}
 			.description {
-				padding: 0.2rem 0.5rem 1rem 0.5rem;
+				display: -webkit-box;
+				-webkit-box-orient: vertical;
+				-webkit-line-clamp: 2;
+				overflow: hidden;
+				
 				color: black;
 				font-size: 14px;
 			}
@@ -51,7 +57,7 @@
 		.OurAdvantagesCartWrapper {
 			flex-wrap: wrap;
 			.OurAdvantagesCart {
-				width: 43%;
+				width: 38%;
 				margin: 3rem 1rem.5rem;
 				img {
 					width: 50px;

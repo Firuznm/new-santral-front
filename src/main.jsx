@@ -24,6 +24,7 @@ import OrderSuccessfull from "./Pages/OrderSuccessfull/OrderSuccessfull";
 import FavoriteItems from "./Pages/FavoriteItems/FavoriteItems";
 import { SearchProvider } from "./context/SearchContext";
 import SearchResult from "./Pages/SearchResult/SearchResult";
+import OurAdvantagesDetails from "./components/OurAdvantagesDetails/OurAdvantagesDetails";
 
 const router = createBrowserRouter([
 	{
@@ -102,6 +103,10 @@ const router = createBrowserRouter([
 			{
 				path: 'order-success',
 				element: <OrderSuccessfull />,
+			},
+			{
+				path: '/:slug',
+				element: <OurAdvantagesDetails />,
 			},
 			{
 				path: '/*',

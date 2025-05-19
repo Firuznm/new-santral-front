@@ -14,10 +14,12 @@ import visaCartImg from "../../assets/logos/visa-electron.svg"
 import masterCartImg from "../../assets/logos/Mastercard-logo.svg";
 import santral from "../../Helpers/Helpers";
 import urls from "../../ApiUrls/Urls";
+import { OurAdvantagesMiniPageData} from "../../MyDatas/MyDatas";
 
  
 export default function Footer() {
-    const [categoryNameData, setCategoryNameData] = useState([])
+	const [categoryNameData, setCategoryNameData] = useState([]);
+	
 
     const getCategoryData = async () => {
         try {
@@ -115,10 +117,13 @@ export default function Footer() {
                                                     </NavLink>
 					</div>
 					<div className={style.footerForCustomer}>
-						<h4 className={style.footerPartTitle}>Müştəri üçün</h4>
-						<NavLink>Çatdırılma qaydaları</NavLink>
-						<NavLink>Məxfilik siyasəti</NavLink>
-						<NavLink>Blog</NavLink>
+					  <h4 className={style.footerPartTitle}>Müştəri üçün</h4>
+					  {
+						  OurAdvantagesMiniPageData.map(item=>(
+					  <NavLink to={item.slug} key={item.id}>{item.title}</NavLink>
+						  ))
+					  }
+						
 					</div>
 					<div className={style.footerCategoryWrapper}>
 						<h4 className={style.footerPartTitle}>Kateqoriyalar</h4>

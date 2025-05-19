@@ -1,8 +1,9 @@
 .prDetailsSlider{
+  border: 1px solid rgba(234, 234, 234, 1);
     position: relative;
-    box-shadow: 0px 2px 79px 0px #0000001A;
+    // box-shadow: 0px 2px 79px 0px #0000001A;
     padding: 10px;
-    border-radius: 7px;
+    border-radius: 14px;
     display: flex;
     flex-direction: row-reverse;
     height: 600px;
@@ -21,16 +22,15 @@
     }
     .mySwiperSlider{
       position: relative;
-      width: 400px;
-    
+      width: 670px;
       border-radius: 7px; 
       .sliderImg{
         margin-top: 30px;
         width: 99%;
         height: 90%;
         object-fit: contain;
-        border-radius: 7px;
-        // border: 2px solid green;
+        border-radius: 14px;
+        border: 1px solid rgba(234, 234, 234, 1);
       }
 
     }

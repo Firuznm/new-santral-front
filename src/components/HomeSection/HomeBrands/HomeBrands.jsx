@@ -9,7 +9,7 @@ export default function HomeBrands({ brandsData }) {
 	
     return (
 		<section id={style.HomeBrandsWrapper}>
-			<div className="container">
+			<div className="container"> 
 				<Swiper
 					slidesPerView={1}
 					speed={3000}

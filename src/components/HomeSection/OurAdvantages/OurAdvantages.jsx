@@ -1,6 +1,7 @@
 import style from "./OurAdvantages.module.scss"
-import { OurAdvantagesData } from "../../../MyDatas/MyDatas"
+import { OurAdvantagesMiniPageData } from "../../../MyDatas/MyDatas"
 import SectionTitle from "../../SectionTitle/SectionTitle"
+import { Link } from "react-router-dom";
 
 
 export default function OurAdvantages() {
@@ -10,14 +11,14 @@ export default function OurAdvantages() {
 				<SectionTitle title={'Üstünlüklərimiz'} />
 			</div>
 			<div className={style.OurAdvantagesCartWrapper}>
-				{OurAdvantagesData.map((item) => (
-					<div key={item.id} className={style.OurAdvantagesCart}>
-						<img src={item.img} />
+				{OurAdvantagesMiniPageData.map((item) => (
+					<Link to={item.slug} key={item.id} className={style.OurAdvantagesCart}>
+						<img src={item.icon} />
 						<div className={style.titleDescription}>
 							<h4 className={style.title}>{item.title}</h4>
 							<p className={style.description}>{item.description}</p>
 						</div>
-					</div>
+					</Link>
 				))}
 			</div>
 		</section>

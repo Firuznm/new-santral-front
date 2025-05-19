@@ -22,35 +22,45 @@ import banner21 from "../assets/Images/banner21.jpg"
 import mainSliderLeft1 from "../assets/Images/mainSliderLeft1.jfif"
 import mainSliderLeft2 from '../assets/Images/mainSliderLeft2.jfif';
 // -------------------------------------------------------------
-
+// qalasidi silinmeyecek
+export const OurAdvantagesMiniPageData = [
+	{
+		id: 1,
+		icon: '',
+		banner: banner1,
+		title: 'Rahatlıqla alın',
+		slug: 'Rahatlıqla-alın',
+		description: 'Usage Data may include information such as Your Devices Internet Protocol address (e.g. IP address), browser type, browser version, the pages of our Service that You visit, the time and date of Your visit, the timethose pages, unique device identifiers and other diagnostic data.When You access the Service by or through a mobile device, We may collect certain information automatically, including, but not limited to, the type of mobile device You use, Your mobile device unique ID, the IP address of Your mobile device, Your mobile operating system, the type of mobile Internet browser You use, unique device identifiers and other diagnostic data.',
+	},
+	{
+		id: 2,
+		banner: banner2,
+		icon: img21,
+		title: 'Qapıda rəsmiləşdirmə',
+		slug: 'Qapıda-rəsmiləşdirmə',
+		description:'Məhsulun ödənişi birbaşa sayt üzərindən online olaraq,məhsulun yerində təhvil-təslimi zamanı alıcıya təqdim olunmuş ödəmə terminalı vasitəsilə və nağd şəkildə mümkündür.Hər bir halda çek müştəriyə təqdim olunacaqdır.',
+	},
+	{
+		id: 3,
+		banner: banner3,
+		icon: img31,
+		title: 'Pulsuz Çatdırılma',
+		slug: 'Mağazadan-Pulsuz-Çatdırılma',
+		description:'Sifarişdə olan məhsulun və ya məhsulların toplam dəyəri 50 azn-dən artıq olduqda Bakı şəhəri daxilində pulsuz çatdırılma təşkil olunur.Sifarişlər binaların və ya fərdi yaşayış evlərinin girişinə qədər çatdırılır.Məhsullar fiziki yoxlama yolu ilə müştərilərə təhvil verilir.Sifariş YALNIZ Online alışedən müştərinin özünə verilə bilər.Heç bir halda digər şəxsə verilə bilməz!Sifarişlər maksimum 48 saat ərzində müştəriyə çatdırılır.',
+	},
+	{
+		id: 4,
+		banner: banner5,
+		icon: img41,
+		title: 'Bonus kartla alış veriş',
+		slug: 'Bonus-kartla-daha-çox-alış-veriş',
+		description:
+			'Interpretation and Definitions.InterpretationThe words of which the initial letter is capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.DefinitionsFor the purposes of this Privacy Policy:Account means a unique account created for You to access our Service or parts of our Service.Affiliate means an entity that controls, is controlled by or is under common control with a party, where "control" means ownership of 50% or more of the shares, equity interest or other securities entitled to vote for election of directors or other managing authority. ',
+	},
+];
 // -------------------------------------------------------------
 
-export const OurAdvantagesData=[
-    {
-        id:1,
-        img:"yoxdu",
-        title:"Rahatlıqla alın",
-        description:"xxx gün ərzində dəyişdirə və qaytara bilərsiniz"
-    },
-    {
-        id:2,
-        img:img21,
-        title:"Qapıda rəsmiləşdirmə",
-        description:"Nağd, hissə-hissə və ya qapıda ödəmə imkanı"
-    },
-{
-    id:3,
-    img:img31,
-    title:"Mağazadan Pulsuz Çatdırılma",
-    description:"30₼ və üstü sifarişlərdə  Bakı şəhəri ərazisinə ödənişsiz çatdırılma"
-},
-{
-    id:4,
-    img:img41,
-    title:"Bonus kartla daha çox alış veriş",
-    description:"Bonus karta yığılmış pullar ilə daha çox alış veriş etmək şansınız olacaq"
-}
-]
+
 
 export const mainSliderLeftData = [
 	{
