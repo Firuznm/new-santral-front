@@ -17,6 +17,8 @@ import Catalog from '../Catalog/Catalog';
 import santral from '../../Helpers/Helpers';
 import HeaderMobile from '../HeaderMobile/HeaderMobile';
 import { useSearch } from '../../context/SearchContext';
+import CloseIcon from '../../assets/Icons/CloseIcon';
+
        
 export default function HeaderNew() {
 	const [showHiddenCatalog, setShowHiddenCatalog] = useState(false);
@@ -31,25 +33,17 @@ export default function HeaderNew() {
 	const { authMeUser, showOpenEnterSiteArea, isLogin, bpUser } = useSelector(
 		(state) => state.userInfo,
 	);
+console.log("search result==", searchResult);
 
-		// useEffect(() => {
-		// 	const delayDebounce = setTimeout(() => {
-		// 		if (searchInputValue.trim() !== '') {
-		// 			searchFunc(searchInputValue);
-		// 		}
-		// 	}, 500); 
-
-		// 	return () => clearTimeout(delayDebounce);
-		// }, [searchInputValue]);
+  
+	useEffect(() => {
+			searchFunc(searchInputValue,1);
+	}, [searchInputValue]);
 	
-		
-	
-		useEffect(() => {
-			searchFunc(searchInputValue);
-		}, [searchInputValue]);
-	
-	console.log("header search =", searchResult);
-	
+	const onClickSearchReslutCart = (itemName) => {
+		clearInput();
+		navigate(`/product/${itemName}`);
+	};
 	
 		const onKeyDownInput = (e) => {
 			if (searchInputValue !== '' && e.key === 'Enter') {
@@ -59,6 +53,11 @@ export default function HeaderNew() {
 				return false;
 			}
 	}; 
+
+	const onClickMoreSearchBtn = () => {
+		clearInput();
+		navigate(`/search?searchValue=${searchInputValue}`);
+	}
 	
 		const clearInput = () => {
 			setSearchInputValue('');
@@ -143,17 +142,98 @@ export default function HeaderNew() {
 									</div>
 								)}
 							</div>
-							<label htmlFor="search" className={style.SearchWrapper}>
-								<SearchIcon />
-								<input
-									value={searchInputValue}
-									onKeyDown={onKeyDownInput}
-									onChange={onChangeSearchInput}
-									id="search"
-									type="text"
-									placeholder="25000 müxtəlif məhsul içindən axtarın"
-								/>
-							</label>
+							<div className={style.searchArea}>
+								<label htmlFor="search" className={style.SearchWrapper}>
+									<SearchIcon />
+									<input
+										value={searchInputValue}
+										onKeyDown={onKeyDownInput}
+										onChange={onChangeSearchInput}
+										id="search"
+										type="text"
+										placeholder="25000 müxtəlif məhsul içindən axtarın"
+									/>
+								</label>
+								{searchInputValue?.length > 0 && (
+									<div className={style.searchHeaderResultArea}>
+										{searchResult?.data?.length > 0 ? (
+											<div className={style.searchResultProduct}>
+												{searchResult?.data?.map((item) => (
+													<div
+														onClick={() =>
+															onClickSearchReslutCart(
+																item.name,
+															)
+														}
+														className={style.searchCart}
+														key={item.id}
+													>
+														<img
+															className={style.searchImg}
+															src={`${santral.baseUrlImage}${item.thumbnail}`}
+															alt=""
+														/>
+														<div className={style.titlePrice}>
+															<span className={style.title}>
+																{item.title}
+															</span>
+															<div className={style.priceList}>
+																{item?.discountPercent != 0 && (
+																	<span
+																		className={
+																			style.discountPercent
+																		}
+																	>{item?.discountPercent}%</span>
+																)}
+																{item?.oldPrice != 0 && (
+																	<span
+																		className={
+																			style.oldPrice
+																		}
+																	>
+																		{item?.oldPrice?.toFixed(2)}
+																	</span>
+																)}
+
+																<span
+																	className={
+																		style.price
+																	}
+																>
+																	{item?.price?.toFixed(2)}₼
+																</span>
+															</div>
+														</div>
+													</div>
+												))}
+											</div>
+										) : (
+											<div className={style.noSearchProduct}>
+												<span className={style.searchValue}>
+													{searchInputValue}
+												</span>
+												adında məhsul yoxdur
+											</div>
+										)}
+										<span
+											onClick={clearInput}
+											className={style.closeBtn}
+										>
+											<CloseIcon />
+										</span>
+										<div className={style.moreBtn}>
+											{searchResult?.data?.length > 11 && (
+												<span
+													onClick={onClickMoreSearchBtn}
+													className={style.Btn}
+												>
+													Daha cox görün
+												</span>
+											)}
+										</div>
+									</div>
+								)}
+							</div>
 							<div className={style.headerTopRight}>
 								<a className={style.shortPhone} href="tel:1410">
 									<HeaderPhoneIcon />
@@ -300,9 +380,9 @@ export default function HeaderNew() {
 									</Link>
 								</div>
 								<select className={style.lang} name="" id="">
-									<option value="">Az</option>
-									<option value="">En</option>
-									<option value="">Ru</option>
+									<option value="">AZ</option>
+									<option value="">EN</option>
+									<option value="">RU</option>
 								</select>
 							</div>
 						</div>

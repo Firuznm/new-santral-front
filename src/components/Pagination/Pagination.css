@@ -32,5 +32,6 @@
   .productsPagination>li.break,
   li.next,
   li.previous{
-    border: none;
+    background-color: transparent;
+    border: 1px solid rgb(255 210 63);
   }

@@ -6,27 +6,43 @@ const searchContext = createContext();
 
 const SearchProvider = ({ children }) => {
 	const [searchInputValue, setSearchInputValue] = useState('');
-    const [searchResult, setSearchResult] = useState();
+	const [searchResult, setSearchResult] = useState([]);
+	const [searchQueryData, setSearchQueryData] = useState([]);
+	const [searchLoading, setSearchLoading] = useState(true)
     
-      const searchFunc = async (search) => {
+      const searchFunc = async (search,page=1) => { 
 	try {
-		const trimmedSearch = search.trim();
-		if (!trimmedSearch) return;
-
-		const resData = await santral
-			.api()
-			.post(`${urls.search(trimmedSearch)}&lang=az`);
-
-		setSearchResult(resData.data.data);
+		if (!search) return;
+		const resData = await santral.api().post(urls.search(search, page));
+		setSearchResult(resData.data);
 	} catch (error) {
 		console.log("Search error:", error);
 	}
-};
+        };  
 
+		const searchQueryFunc = async (search, page = 1) => {
+			try {
+				if (!search) return;
+				const resData = await santral.api().post(urls.search(search, page));
+				setSearchQueryData(resData.data);
+				setSearchLoading(false);
+			} catch (error) {
+				console.log('Search error:', error);
+				setSearchLoading(false);
+			}
+		};  
 
 	return (
 		<searchContext.Provider
-			value={{ searchInputValue, setSearchInputValue, searchResult, searchFunc }}
+			value={{
+				searchInputValue,
+				setSearchInputValue,
+				searchResult,
+				searchQueryData,
+				searchFunc,
+				searchQueryFunc,
+				searchLoading
+			}}
 		>
 			{children}
 		</searchContext.Provider>

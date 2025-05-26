@@ -2,6 +2,7 @@ import ReactPaginate from 'react-paginate';
 import { useSearchParams } from 'react-router-dom';
 import './Pagination.css';
 import { useEffect } from 'react';
+import IsBigIcon from '../../assets/Icons/IsBigIcon';
 
 export default function Pagination({ func, paginationData }) {
 	const [searchParams, setSearchParams] = useSearchParams();
@@ -25,7 +26,7 @@ export default function Pagination({ func, paginationData }) {
 				<ReactPaginate
 					className={'productsPagination'}
 					breakLabel="..."
-					nextLabel=">"
+					nextLabel={<IsBigIcon color={"black"}/>}
 					previousLabel="<"
 					onPageChange={handlePageClick}
 					containerClassName={'pagination'}

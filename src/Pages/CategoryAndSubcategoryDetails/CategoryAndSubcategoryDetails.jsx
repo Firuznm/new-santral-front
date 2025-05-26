@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import style from './CategoryAndSubcategoryDetails.module.scss';
+import { useParams, useSearchParams } from 'react-router-dom';
+import Pagination from '../../components/Pagination/Pagination';
 import santral from '../../Helpers/Helpers';
 import urls from '../../ApiUrls/Urls';
-import { useParams, useSearchParams } from 'react-router-dom';
-import ProductCart from '../ProductCart/ProductCart';
-import Filter from '../Filter/Filter';
+import Filter from '../../components/Filter/Filter';
 import MobileFilterIcon from '../../assets/Icons/MobileFilterIcon';
-import Pagination from '../Pagination/Pagination';
+import ProductCart from '../../components/ProductCart/ProductCart';
 
 export default function CategoryAndSubcategoryDetails() {
 	const { '*': slug } = useParams();
@@ -87,6 +87,9 @@ export default function CategoryAndSubcategoryDetails() {
 			behavior: 'smooth',
 		});
 	}, [categoryDetailsData]);
+
+	console.log("category data=", categoryDetailsData);
+	
 
 	return (
 		<>

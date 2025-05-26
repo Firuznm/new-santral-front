@@ -14,7 +14,6 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import Login from "./Authentication/Login/Login";
 import ChangePassword from "./Pages/ChangePassword/ChangePassword";
-import CategoryAndSubcategoryDetails from "./components/CategoryAndSubcategoryDetails/CategoryAndSubcategoryDetails";
 import Basket from "./Pages/Basket/Basket";
 import OrderConfirm from "./Pages/OrderConfirm/OrderConfirm";
 import Branches from "./Pages/Branches/Branches";
@@ -25,6 +24,7 @@ import FavoriteItems from "./Pages/FavoriteItems/FavoriteItems";
 import { SearchProvider } from "./context/SearchContext";
 import SearchResult from "./Pages/SearchResult/SearchResult";
 import OurAdvantagesDetails from "./components/OurAdvantagesDetails/OurAdvantagesDetails";
+import CategoryAndSubcategoryDetails from "./Pages/CategoryAndSubcategoryDetails/CategoryAndSubcategoryDetails";
 
 const router = createBrowserRouter([
 	{
