@@ -1,0 +1,62 @@
+#branchesDetailePage {
+    .branchInfoAndMap,
+    .ImgVideo
+    {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .branchInfo{
+        width: 400px;
+        height: 370px;
+        border: 1px solid rgba(217, 217, 217, 1);
+        border-radius: 14px;
+        padding: 15px;
+        .backIconAndBrancName{
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            .backIcon{
+                cursor: pointer;
+                 width: 35px;
+                 height: 35px;
+                 display: flex;
+                 align-items: center;
+                 justify-content: center;
+                border-radius: 100%;
+                background-color: rgba(239, 241, 241, 1);
+                margin-right: 10px;
+            }
+            .brancName{
+                font-size: 22px;
+                font-weight: 700;
+            }
+        }
+        .address{
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        .location{
+            margin-top: 10px;
+            font-weight: 500;
+        }
+      }
+      .map{width: calc( 100% - 450px);
+          height: 400px;
+         }
+
+      .video,
+      .img   {
+        width: 49%;
+        height: 400px;
+      }
+    iframe,video,img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 14px;
+    }
+    }
+    .ImgVideo{
+     margin-top: 20px;
+    }
+}

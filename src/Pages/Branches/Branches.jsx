@@ -2,22 +2,25 @@ import { useEffect, useState } from 'react';
 import style from './Branches.module.scss';
 import santral from '../../Helpers/Helpers';
 import urls from '../../ApiUrls/Urls';
-import markerIcon from '../../assets/Images/mapLocation.webp'; 
+// import markerIcon from '../../assets/Images/map.png'; 
+import markerIcon from '../../assets/Images/mapp.png'; 
+// import markerIcon from '../../assets/Images/mappp.png'; 
 import { MapContainer, Marker, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
+import { Link } from 'react-router-dom';
 
 const icon = L.icon({
 	iconUrl: markerIcon,
-	iconSize: [40, 40],
+	iconSize: [80, 100],
 });
 
-const defaultPosition = [40.398766, 49.875762];
+const defaultPosition = [40.428180089238154, 49.89273548126221];
 
 export default function Branches() {
 	const [branchesAllDatas, setBranchesAllDatas] = useState([]);
 	const [mapCenter, setMapCenter] = useState(defaultPosition);
-	const [activeBranchIndex, setActiveBranchIndex] = useState(0);
+	const [activeBranchIndex, setActiveBranchIndex] = useState(1);
 	const [map, setMap] = useState(null);
 
 	const getAllBranchesData = async () => {
@@ -32,6 +35,7 @@ export default function Branches() {
 	useEffect(() => {
 		getAllBranchesData();
 	}, []);
+console.log("branches all data=", branchesAllDatas);
 
 	const onClickMarketAddress = (item) => {
 		setActiveBranchIndex(item.id);
@@ -51,15 +55,20 @@ export default function Branches() {
 							<div className={style.branchWrapper} key={branch.id}>
 								<div className={style.branchTitle}>
 									{branch.title}
-									<span className={style.moreBtn}>Ətraflı</span>
+									<Link
+										to={`/branches/${branch.id}`}
+										className={style.moreBtn}
+									>
+										Ətraflı
+									</Link>
 								</div>
 								<div className={style.address}>
 									{branch?.address}
 									<span
 										onClick={() => onClickMarketAddress(branch)}
-										className={style.locationBtn}
+										className={`${style.locationBtn} ${activeBranchIndex === branch.id ? style.activeIndex : ""}`}
 									>
-										Xəriytədə baxın
+										Xəritədə bax
 									</span>
 								</div>
 							</div>
@@ -67,10 +76,15 @@ export default function Branches() {
 					</div>
 					<div className={style.map}>
 						<MapContainer
-							style={{ width: '100%', height: '100%', zIndex: "5", objectFit: 'cover' }}
+							style={{
+								width: '100%',
+								height: '100%',
+								zIndex: '5',
+								objectFit: 'cover',
+								borderRadius:"10px"
+							}}
 							center={mapCenter}
-							zoom={16}
-							
+							zoom={18}
 							scrollWheelZoom={true}
 							ref={setMap}
 						>

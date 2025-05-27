@@ -6,7 +6,7 @@ import defaultUserImg from '../../assets/Images/dafaultUserImg.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { Link, NavLink, useNavigate} from 'react-router-dom';
-import { authMe, logout, toggleShowEnterSiteArea } from '../../redux/userSlice';
+import { authMe, getAllCatalogDatas, logout, toggleShowEnterSiteArea } from '../../redux/userSlice';
 import EnterSiteHeader from '../../Authentication/EnterSiteHeader/EnterSiteHeader';
 import HeartIcon from '../../assets/Icons/HeartIcon';
 import BasketIcon from '../../assets/Icons/BasketIcon';
@@ -95,6 +95,10 @@ console.log("search result==", searchResult);
 		navigate('/');
 	};
 
+	useEffect(() => {
+		dispatch(getAllCatalogDatas());
+	}, []);
+
 	return (
 		<div id={style.hederWrapper}>
 			{/* BASDA REKLAM UCUN YER OLACAQ */}
@@ -123,7 +127,7 @@ console.log("search result==", searchResult);
 								</a>
 								{scrollHeaderChange ? (
 									''
-								) : (
+								) : ( 
 									<div className={style.headerTopCatalog}>
 										<div
 											onClick={onClickCatalogShowHidden}

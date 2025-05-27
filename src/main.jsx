@@ -25,6 +25,7 @@ import { SearchProvider } from "./context/SearchContext";
 import SearchResult from "./Pages/SearchResult/SearchResult";
 import OurAdvantagesDetails from "./components/OurAdvantagesDetails/OurAdvantagesDetails";
 import CategoryAndSubcategoryDetails from "./Pages/CategoryAndSubcategoryDetails/CategoryAndSubcategoryDetails";
+import BranchesDetaile from "./Pages/BranchesDetaile/BranchesDetaile";
 
 const router = createBrowserRouter([
 	{
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
 			{
 				path: 'branches',
 				element: <Branches />,
+			},
+			{
+				path: 'branches/:id',
+				element: <BranchesDetaile />,
 			},
 			{
 				path: 'news',

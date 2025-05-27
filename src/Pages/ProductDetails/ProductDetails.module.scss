@@ -77,7 +77,7 @@
 	}
 	.line {
 		height: 1px;
-		background-color: #ffd23f;
+		background-color: rgb(234 234 234);
 		border: none;
 	}
 	.prImgAndPrInfo {
@@ -238,8 +238,8 @@
 					.bpPrice,
 					.price {
 						margin: 0 15px 0 20px;
-						font-size: 1.2rem;
-						font-weight: 500;
+						font-size: 24px;
+						font-weight: 700;
 						color: rgba(253, 133, 33, 1);
 					}
 					.bpPriceWrapper,
@@ -266,12 +266,12 @@
 				}
 				.paymentCartSlider {
 					width: 300px;
-					border: 1px solid #ffd23f;
+					border: 2px solid rgb(255 210 63);
 					border-radius: 10px;
 					.creditCartSlider {
 						.BirKart,
 						.TamKart {
-							padding: 15px 0;
+							padding: 10px 0;
 							display: flex;
 							justify-content: center;
 							align-items: center;
@@ -281,7 +281,7 @@
 							}
 							.content {
 								font-size: 1.1rem;
-								font-weight: 400;
+								font-weight: 700;
 							}
 						}
 					}

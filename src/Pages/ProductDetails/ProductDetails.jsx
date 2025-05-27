@@ -328,7 +328,7 @@ export default function ProductDetails() {
 										{prDetailsData.brandCode}
 									</span>
 								</span>
-							)}
+							)}  
 						</div>
 						<hr className={style.line} />
 						<div className={style.prCountAndPrice}>
@@ -339,7 +339,7 @@ export default function ProductDetails() {
 								>
 									<MinusIcon />
 								</span>
-								<span className={style.count}>{count}</span>
+								<span style={{fontWeight:900}} className={style.count}>{count}</span>
 								<span
 									onClick={() => increment()}
 									className={style.increase}
@@ -493,7 +493,7 @@ export default function ProductDetails() {
 				{/* oxşar məhsular və məhsulun xususiyyətləri */}
 				<PrDetailsPageSimilarPrAndPrFeatures
 					prDetailsData={prDetailsData}
-					relatedDatas={relatedDatas}
+					relatedDatas={relatedDatas} 
 				/>
 			</div>
 		</section>
