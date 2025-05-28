@@ -17,16 +17,29 @@ import HeaderPhoneIcon from '../../assets/Icons/HeaderPhoneIcon';
 import { useEffect, useState } from 'react';
 import MobilMenuCloseIcon from '../../assets/Icons/MobilMenuCloseIcon';
 import MobileCatalog from '../MobileCatalog/MobileCatalog';
+import { useSearch } from '../../context/SearchContext';
+import CloseIcon from '../../assets/Icons/CloseIcon';
 
-export default function HeaderMobile({ handleLogout }) {
+export default function HeaderMobile({ handleLogout,
+	onClickSearchReslutCart ,
+	onKeyDownInput,
+	clearInput,
+	onClickMoreSearchBtn ,
+	onChangeSearchInput}) {
 	const dispatch = useDispatch();
 	const [showHiddenHamburgerMenu, setShowHiddenHamburgerMenu] = useState(false);
 	const [mobileCatalog, setMobileCatalog] = useState(false)
 	const { localBaskets, apiBaskets } = useSelector((state) => state.basketData);
 	const { favoriteItemsList } = useSelector((state) => state.favoriteItemsData);
+	const { searchInputValue,searchFunc, searchResult } =
+		useSearch();
 	const { authMeUser, showOpenEnterSiteArea, isLogin } = useSelector(
 		(state) => state.userInfo,
 	);
+
+	useEffect(() => {
+		searchFunc(searchInputValue, 1);
+	}, [searchInputValue]);
 	const handleMobileCatalog = () => {
 		setMobileCatalog(!mobileCatalog)
 	}
@@ -156,7 +169,7 @@ export default function HeaderMobile({ handleLogout }) {
 				<div style={{ paddingTop: 0, paddingBottom: 0 }} className="container">
 					<div className={style.catalogSearchArea}>
 						{mobileCatalog && (
-							<MobileCatalog closeCatalog={handleMobileCatalog} /> 
+							<MobileCatalog closeCatalog={handleMobileCatalog} />
 						)}
 						<span
 							onClick={handleMobileCatalog}
@@ -167,11 +180,86 @@ export default function HeaderMobile({ handleLogout }) {
 						<label htmlFor="search" className={style.SearchWrapper}>
 							<SearchIcon />
 							<input
+								value={searchInputValue}
+								onKeyDown={onKeyDownInput}
+								onChange={onChangeSearchInput}
 								id="search"
 								type="text"
 								placeholder="25000 müxtəlif məhsul içindən axtarın"
 							/>
 						</label>
+						{searchInputValue?.length > 0 && (
+							<div className={style.searchHeaderResultArea}>
+								{searchResult?.data?.length > 0 ? (
+									<div className={style.searchResultProduct}>
+										{searchResult?.data?.slice(0,5).map((item) => (
+											<div
+												onClick={() =>
+													onClickSearchReslutCart(item.name)
+												}
+												className={style.searchCart}
+												key={item.id}
+											>
+												<img
+													className={style.searchImg}
+													src={`${santral.baseUrlImage}${item.thumbnail}`}
+													alt=""
+												/>
+												<div className={style.titlePrice}>
+													<span className={style.title}>
+														{item.title}
+													</span>
+													<div className={style.priceList}>
+														{item?.discountPercent != 0 && (
+															<span
+																className={
+																	style.discountPercent
+																}
+															>
+																{item?.discountPercent}%
+															</span>
+														)}
+														{item?.oldPrice != 0 && (
+															<span
+																className={style.oldPrice}
+															>
+																{item?.oldPrice?.toFixed(
+																	2,
+																)}
+															</span>
+														)}
+
+														<span className={style.price}>
+															{item?.price?.toFixed(2)}₼
+														</span>
+													</div>
+												</div>
+											</div>
+										))}
+									</div>
+								) : (
+									<div className={style.noSearchProduct}>
+										<span className={style.searchValue}>
+											{searchInputValue}
+										</span>
+										adında məhsul yoxdur
+									</div>
+								)}
+								<span onClick={clearInput} className={style.closeBtn}>
+									<CloseIcon />
+								</span>
+								<div className={style.moreBtn}>
+									{searchResult?.data?.length > 11 && (
+										<span
+											onClick={onClickMoreSearchBtn}
+											className={style.Btn}
+										>
+											Daha cox görün
+										</span>
+									)}
+								</div>
+							</div>
+						)}
 					</div>
 				</div>
 			</div>

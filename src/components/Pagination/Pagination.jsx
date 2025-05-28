@@ -2,8 +2,6 @@ import ReactPaginate from 'react-paginate';
 import { useSearchParams } from 'react-router-dom';
 import './Pagination.css';
 import { useEffect } from 'react';
-import PaginationBigIcon from '../../assets/Icons/PaginationBigIcon';
-import PaginationSmallIcon from '../../assets/Icons/PaginationSmallIcon';
 
 export default function Pagination({ func, paginationData }) {
 	const [searchParams, setSearchParams] = useSearchParams();
@@ -15,7 +13,7 @@ export default function Pagination({ func, paginationData }) {
 		newParams.set('page', newPage);
 		setSearchParams(newParams);
 		window.scrollTo({ top: 0, behavior: 'smooth' });
-	};
+	};  
 
 	useEffect(() => {
 		func(currentPage);
@@ -27,8 +25,10 @@ export default function Pagination({ func, paginationData }) {
 				<ReactPaginate
 					className={'productsPagination'}
 					breakLabel="..."
-					nextLabel={<PaginationBigIcon/>}
-					previousLabel={<PaginationSmallIcon/>}
+					// nextLabel={<PaginationBigIcon/>}
+					nextLabel=">"
+					// previousLabel={<PaginationSmallIcon />}
+					previousLabel="<"
 					onPageChange={handlePageClick}
 					containerClassName={'pagination'}
 					pageCount={paginationData?.pages}

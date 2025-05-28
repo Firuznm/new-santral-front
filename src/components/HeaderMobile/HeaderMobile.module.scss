@@ -206,25 +206,136 @@
 					background-color: transparent;
 					width: 100%;
 					font-size: 16px;
-					&::placeholder{
+					&::placeholder {
 						font-size: 10px;
 					}
+				}
+			}
+			.searchHeaderResultArea {
+				width: 94%;
+				transform: translate(0%, 0);
+				position: absolute;
+				z-index: 99;
+				padding: 32px 4px 12px;
+				top: 95px;
+				left: 7px;
+				background-color: white;
+				box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+				border-radius: 10px;
+				.searchResultProduct {
+					display: grid;
+					grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+					justify-items: center;
+					gap: 10px;
+					.searchCart {
+						position: relative;
+						cursor: pointer;
+						max-width: 212px;
+						// width: 95%;
+						height: 50px;
+						border: 1px solid rgba(0, 0, 0, 0.38);
+						border-radius: 14px;
+						padding: 5px;
+						display: flex;
+						align-items: center;
+						gap: 10px;
+						background-color: #f9f9f9;
+						.searchImg {
+							width: 50px;
+							height: 100%;
+							object-fit: contain;
+						}
+						.titlePrice {
+							.title {
+								display: -webkit-box;
+								-webkit-box-orient: vertical;
+								-webkit-line-clamp: 2;
+								overflow: hidden;
+								font-size: 12px;
+								line-height: 15px;
+								padding-right: 20px;
+							}
+							.priceList {
+								margin-top: 3px;
+								display: flex;
+								justify-content: end;
+								align-items: center;
+								// color: #ffd23f;
+								font-weight: 600;
+								border-top: 1px solid #1e1e1e;
+								.discountPercent {
+									position: absolute;
+									top: 3px;
+									right: 4px;
+									padding: 3px;
+									border-radius: 5px;
+									background-color: rgb(255, 63, 63);
+									color: white;
+									font-size: 10px;
+								}
+								.oldPrice {
+									margin: 0 10px;
+									color: rgba(0, 0, 0, 0.18);
+									text-decoration: line-through;
+									text-decoration-color: rgb(239, 68, 68);
+								}
+								.price {
+									color: rgb(253, 133, 33);
+								}
+							}
+						}
+					}
+				}
+				.noSearchProduct {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					height: 200px;
+
+					.searchValue {
+						margin-right: 10px;
+						color: red;
+						font-weight: 700;
+						font-size: 1.4rem;
+						font-style: italic;
+					}
+				}
+			}
+			.closeBtn {
+				position: absolute;
+				right: 8px;
+				top: 4px;
+				z-index: 9;
+				cursor: pointer;
+			}
+			.moreBtn {
+				display: flex;
+				justify-content: center;
+				.Btn {
+					cursor: pointer;
+					display: inline-block;
+					margin-top: 14px;
+					background-color: rgb(255, 211, 63);
+					color: black;
+					padding: 10px 25px;
+					font-weight: 500;
+					border-radius: 9px;
 				}
 			}
 		}
 	}
 	.hamburgerMenu {
-	position: fixed;
-	z-index: 5;
-	right: 0;
-	top: 0;
-	bottom: 0;
-	width: 100%;
-	background-color: rgba(255, 210, 63, 1);
-	color: #fff;
-	transition: 0.5s ease-in-out;
-	overflow-y: auto;
-		&.noMenu { 
+		position: fixed;
+		z-index: 5;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		width: 100%;
+		background-color: rgba(255, 210, 63, 1);
+		color: #fff;
+		transition: 0.5s ease-in-out;
+		overflow-y: auto;
+		&.noMenu {
 			right: -100%;
 		}
 		.hamburgerMenuHeader {
@@ -251,7 +362,7 @@
 		.pages {
 			display: flex;
 			flex-direction: column;
-			padding: 7px 0;  
+			padding: 7px 0;
 			.pageName {
 				font-size: 1rem;
 				border-bottom: 1px solid rgba(0, 0, 0, 0.47);
@@ -259,9 +370,9 @@
 				padding-bottom: 15px;
 				margin: 10px 0;
 			}
-					.active {
-					color: green;
-				}
+			.active {
+				color: green;
+			}
 		}
 	}
 
@@ -295,7 +406,7 @@
 					justify-content: center;
 					font-size: 12px;
 				}
-				.wishListCount{
+				.wishListCount {
 					top: -15px;
 				}
 			}

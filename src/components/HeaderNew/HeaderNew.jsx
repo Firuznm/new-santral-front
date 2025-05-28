@@ -33,9 +33,8 @@ export default function HeaderNew() {
 	const { authMeUser, showOpenEnterSiteArea, isLogin, bpUser } = useSelector(
 		(state) => state.userInfo,
 	);
-console.log("search result==", searchResult);
+   console.log("meeee =", authMeUser);
 
-  
 	useEffect(() => {
 			searchFunc(searchInputValue,1);
 	}, [searchInputValue]);
@@ -44,7 +43,7 @@ console.log("search result==", searchResult);
 		clearInput();
 		navigate(`/product/${itemName}`);
 	};
-	
+
 		const onKeyDownInput = (e) => {
 			if (searchInputValue !== '' && e.key === 'Enter') {
 				clearInput();
@@ -65,7 +64,7 @@ console.log("search result==", searchResult);
 		const onChangeSearchInput = (e) => {
 			setSearchInputValue(e.target.value);
 		};
-
+    
 	const onClickCatalogShowHidden = () => {
 		const scrollSituation = !showHiddenCatalog;
 		setShowHiddenCatalog(scrollSituation); 
@@ -383,11 +382,11 @@ console.log("search result==", searchResult);
 										</span>
 									</Link>
 								</div>
-								<select className={style.lang} name="" id="">
+								{/* <select className={style.lang} name="" id="">
 									<option value="">AZ</option>
 									<option value="">EN</option>
 									<option value="">RU</option>
-								</select>
+								</select> */}
 							</div>
 						</div>
 					</div>
@@ -463,7 +462,12 @@ console.log("search result==", searchResult);
 				</div>
 			</div>
 			<div className={style.mobileHeaderVersion}>
-				<HeaderMobile handleLogout={handleLogout} />
+				<HeaderMobile handleLogout={handleLogout}
+	onClickSearchReslutCart={onClickSearchReslutCart}
+	onKeyDownInput = {onKeyDownInput}
+	onClickMoreSearchBtn = {onClickMoreSearchBtn}
+	clearInput = {clearInput}
+	onChangeSearchInput={onChangeSearchInput} />
 			</div>
 		</div>
 	);

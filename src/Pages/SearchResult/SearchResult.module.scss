@@ -1,35 +1,49 @@
-#searchResultPage{
-    .searchProductTitleAndCount{
-        .searchProduct{
-            font-size: 24px;
-            font-weight: 700;
-        }
-        .searchPrCount{
-            font-size: 14px;
-            color: rgb(134, 134, 134);
-            margin-left: 7px;
-        }
-    }
-    .searchResultArea{
-        .searchResult{
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-             gap: 20px;
-        }
-       
-        .noSearchProduct{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 200px;
-        
-        .searchValue{
-            margin-right: 10px;
-            color: red;
-            font-weight: 700;
-            font-size: 1.4rem;
-            font-style: italic;
-        }}
-        }
-    }
+#searchResultPage {
+	.searchProductTitleAndCount {
+		margin-bottom: 20px;
+		.searchProduct {
+			font-size: 24px;
+			font-weight: 700;
+		}
+		.searchPrCount {
+			font-size: 14px;
+			color: rgb(134, 134, 134);
+			margin-left: 7px;
+		}
+	}
+	.searchResultArea {
+		.searchResult {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			gap: 20px;
+		}
+
+		.noSearchProduct {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 200px;
+
+			.searchValue {
+				margin-right: 10px;
+				color: red;
+				font-weight: 700;
+				font-size: 1.4rem;
+				font-style: italic;
+			}
+		}
+	}
+}
+
+// search result page  responsive
+@media only screen and (max-width: 850px) {
+	#searchResultPage {
+		margin-top: 17px;
+		.searchResultArea {
+			.searchResult {
+				justify-content: center;
+			}
+		}
+	}
+}

@@ -210,12 +210,15 @@ export default function ProductCart({ data }) {
 					<div className={style.priceDiscountPrice}>
 						{data.oldPrice !== 0 && (
 							<span className={style.oldPrice}>
-								{data?.oldPrice?.toFixed(2)}₼
+								{data?.oldPrice !== null &&
+									`${data?.oldPrice?.toFixed(2)}₼`}
 							</span>
 						)}
-						<span className={style.price}>{data?.price?.toFixed(2)}₼</span>
+						<span className={style.price}>
+							{data?.price !== null && `${data?.price?.toFixed(2)}₼`}
+						</span>
 					</div>
-				)} 
+				)}
 				<div
 					onClick={addToPrBasket}
 					className={`${style.basket} ${prIsInBasket ? style.prBasket : ''}`}
