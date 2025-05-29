@@ -15,12 +15,6 @@ export default function BasketPrNamePriceTotal({ onclick, title }) {
 			setIsChecked(e.target.checked);
 		};
 
-	// console.log('api basket', apiBaskets);
-	// console.log('local baskets=', localBaskets);
-	// console.log("login=", isLogin);
-	// console.log("bpUser=", bpUser);
-	
-
 	const allPrice = (isLogin ? apiBaskets : localBaskets)?.reduce((acm, item) => {
 		const priceToUse = item.oldPrice === 0 ? item.price : item.oldPrice;
 		return acm + priceToUse * item.count;

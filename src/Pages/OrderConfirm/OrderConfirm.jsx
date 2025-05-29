@@ -1,65 +1,93 @@
-import BasketPrNamePriceTotal from "../../components/BasketPrNamePriceTotal/BasketPrNamePriceTotal";
-import Input from "../../components/Input/Input";
+import BasketPrNamePriceTotal from '../../components/BasketPrNamePriceTotal/BasketPrNamePriceTotal';
+import Input from '../../components/Input/Input';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import SectionTitle from "../../components/SectionTitle/SectionTitle";
-import { cityOptions } from "../../constants";
-import style from "./OrderConfirm.module.scss"
+import SectionTitle from '../../components/SectionTitle/SectionTitle';
+import { cityOptions } from '../../constants';
+import style from './OrderConfirm.module.scss';
 
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { clearBaskets, GetAllApiBaskets } from "../../redux/BasketSlice";
-import santral from "../../Helpers/Helpers";
-import urls from "../../ApiUrls/Urls";   
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearBaskets, GetAllApiBaskets } from '../../redux/BasketSlice';
+import santral from '../../Helpers/Helpers';
+import urls from '../../ApiUrls/Urls';
+import withReactContent from 'sweetalert2-react-content';
+import Swal from 'sweetalert2';
 
 export default function OrderConfirm() {
 	const navigate = useNavigate();
-	const {isLogin} = useSelector(state=> state.userInfo)
+	const { isLogin } = useSelector((state) => state.userInfo);
 	const { localBaskets, apiBaskets } = useSelector((state) => state.basketData);
-	
+
 	const dispatch = useDispatch();
 
-		const FuncApiBasketAllClear = async () => {
-			try {
-				await santral.api().post(urls.apiBasketAllClear);
-				dispatch(GetAllApiBaskets());
-			} catch (error) {
-				console.log(error);
-			}
-		};
+	const FuncApiBasketAllClear = async () => {
+		try {
+			await santral.api().post(urls.apiBasketAllClear);
+			dispatch(GetAllApiBaskets());
+		} catch (error) {
+			console.log(error);
+		}
+	};
 	const { values, handleChange, handleSubmit, resetForm, errors } = useFormik({
 		initialValues: {
-			firstname: '',
-			lastname: '',
-			mobile: '',
-			email: '',
-			city: '0',
-			address: '',
-			message: '',
+			receiverFirstname: '',
+			receiverLastname: '',
+			receiverMobile: '',
+			senderEmail: '',
+			receiverCity: '0',
+			receiverAddress: '',
+			orderNote: '',
+			payment: '',
+			products: '',
 		},
 		validationSchema: Yup.object().shape({
-			firstname: Yup.string().required('Adınızı daxil edin'),
-			lastname: Yup.string().required('Soyadınızı daxil edin'),
-			mobile: Yup.string().required('Nömrənizi daxil edin'),
-			email: Yup.string()
+			receiverFirstname: Yup.string().required('Adınızı daxil edin'),
+			receiverLastname: Yup.string().required('Soyadınızı daxil edin'),
+			receiverMobile: Yup.string().required('Nömrənizi daxil edin'),
+			senderEmail: Yup.string()
 				.email('Doğru email ünvanı daxil edin')
 				.required('Emila ünvanını doldurun'),
-			city: Yup.string().notOneOf(['0'], 'Şəhər seçin').required('Şəhər seçin'),
-			address: Yup.string().required('Ünvanınızı daxil edin'),
+			receiverCity: Yup.string()
+				.notOneOf(['0'], 'Şəhər seçin')
+				.required('Şəhər seçin'),
+			receiverAddress: Yup.string().required('Ünvanınızı daxil edin'),
+			payment: Yup.string().required('Ödəniş üsulu seçin'),
 		}),
 
 		onSubmit: async (values) => {
-			console.log('order confirm data=', values);
-		
+			let data = {
+				...values,
+				senderFirstname: values.receiverFirstname,
+				senderLastname: values.receiverLastname,
+				senderMobile: values.receiverMobile,
+				address: null,
+			};
+			// console.log('qeydiyyatsiz alis=', data);
+			resetForm();
 			if (isLogin) {
-				console.log("api basket data", apiBaskets);
+				console.log('api basket data', apiBaskets);
 				FuncApiBasketAllClear();
 			} else {
-				console.log('local basket data=', localBaskets);
+				try {
+					data.products = JSON.stringify(localBaskets); 
+					await santral.api().post(urls.order, JSON.stringify(data));
+					const MySwal = withReactContent(Swal);
+					MySwal.fire({
+						title: <strong>Sifariş göndərildi</strong>,
+						html: <i>Təşəkkür edirik!</i>,
+						icon: 'success',
+					});
 					dispatch(clearBaskets());
+					resetForm();
+					navigate('/order-success');
+				} catch (error) {
+					console.log(error);
+					alert('Xəta baş verdi (local basket)!');
+				}
+				dispatch(clearBaskets());
 			}
 			resetForm();
-			navigate('/order-success');
 		},
 	});
 
@@ -67,66 +95,66 @@ export default function OrderConfirm() {
 		nameSurname: [
 			{
 				id: 1,
-				name: 'firstname',
+				name: 'receiverFirstname',
 				labelName: 'Ad',
 				placeholder: 'Ad',
 				inputType: 'text',
-				value: values.firstname,
-				errorMessage: errors.firstname,
+				value: values.receiverFirstname,
+				errorMessage: errors.receiverFirstname,
 				handleChange: handleChange,
 			},
 			{
 				id: 2,
-				name: 'lastname',
+				name: 'receiverLastname',
 				labelName: 'Soyad',
 				placeholder: 'Soyad',
 				inputType: 'text',
-				value: values.lastname,
-				errorMessage: errors.lastname,
+				value: values.receiverLastname,
+				errorMessage: errors.receiverLastname,
 				handleChange: handleChange,
 			},
 		],
 		phoneEmail: [
 			{
 				id: 3,
-				name: 'mobile',
+				name: 'receiverMobile',
 				labelName: 'Mobil nömrə',
 				placeholder: 'Mobbil nömrə daxil edin',
 				inputType: 'tel',
-				value: values.mobile,
-				errorMessage: errors.mobile,
+				value: values.receiverMobile,
+				errorMessage: errors.receiverMobile,
 				handleChange: handleChange,
 			},
 			{
 				id: 4,
-				name: 'email',
+				name: 'senderEmail',
 				labelName: 'E-mail',
 				placeholder: 'E-mail daxil edin',
 				inputType: 'email',
-				value: values.email,
-				errorMessage: errors.email,
+				value: values.senderEmail,
+				errorMessage: errors.senderEmail,
 				handleChange: handleChange,
 			},
 		],
 		cityAddress: [
 			{
 				id: 5,
-				name: 'city',
+				name: 'receiverCity',
 				labelName: 'Şəhər *',
 				inputType: 'select',
 				options: cityOptions,
-				value: values.city,
-				errorMessage: errors.city,
+				value: values.receiverCity,
+				errorMessage: errors.receiverCity,
 				handleChange: handleChange,
 			},
 			{
 				id: 6,
-				name: 'address',
+				name: 'receiverAddress',
 				labelName: 'Ünvan *',
 				placeholder: 'Ünvan',
 				inputType: 'text',
-				value: values.address,
-				errorMessage: errors.address,
+				value: values.receiverAddress,
+				errorMessage: errors.receiverAddress,
 				handleChange: handleChange,
 			},
 		],
@@ -134,12 +162,11 @@ export default function OrderConfirm() {
 			value: values.message,
 			handleChange: handleChange,
 		},
-	}; 
-	
-  return (
+	};
+
+	return (
 		<div className="container">
 			<SectionTitle
-				// marginTop={'0'}
 				marginBottom={'0'}
 				title={'Sifarişin rəsmiləşdirilməsi'}
 			/>
@@ -149,27 +176,18 @@ export default function OrderConfirm() {
 					<form onSubmit={handleSubmit}>
 						<div className={style.userNameSurname}>
 							{orderConfirmFormInputData.nameSurname.map((inputData) => (
-								<Input
-									key={inputData.id}
-									inputInfo={inputData}
-								/>
+								<Input key={inputData.id} inputInfo={inputData} />
 							))}
 						</div>
 						<div className={style.phoneEmail}>
 							{orderConfirmFormInputData.phoneEmail.map((inputData) => (
-								<Input
-									key={inputData.id}
-									inputInfo={inputData}
-								/>
+								<Input key={inputData.id} inputInfo={inputData} />
 							))}
 						</div>
 						<h3 className="sectionMiniTitle">Çatdırılma ünvanı</h3>
 						<div className={style.cityAddress}>
 							{orderConfirmFormInputData.cityAddress.map((inputData) => (
-								<Input
-									key={inputData.id}
-									inputInfo={inputData}
-								/>
+								<Input key={inputData.id} inputInfo={inputData} />
 							))}
 						</div>
 
@@ -184,13 +202,38 @@ export default function OrderConfirm() {
 					</form>
 					<h5 className={style.paymet}>Ödəniş üsulu *</h5>
 					<div className={style.btnList}>
-						<Link className={style.doorPayment} to="/">
-							Nağd
-						</Link>
-						<Link className={style.onlinePaymet} to="/">
-							Onlayn
-						</Link>
+						<div
+							className={`${style.doorPayment} ${
+								values.payment === 'cash' ? style.active : ''
+							}`}
+						>
+							<label htmlFor="doorPayment">Nağd</label>
+							<input
+								type="radio"
+								id="doorPayment"
+								name="payment"
+								value="cash"
+								onChange={handleChange}
+							/>
+						</div>
+						<div
+							className={`${style.onlinePaymet} ${
+								values.payment === 'card' ? style.active : ''
+							}`}
+						>
+							<label htmlFor="onlinePaymet">Onlayn</label>
+							<input
+								type="radio"
+								id="onlinePaymet"
+								name="payment"
+								value="card"
+								onChange={handleChange}
+							/>
+						</div>
 					</div>
+					{errors.payment && (
+						<p className={style.error}>{errors.payment}</p>
+					)}
 				</div>
 
 				<BasketPrNamePriceTotal
@@ -199,6 +242,5 @@ export default function OrderConfirm() {
 				/>
 			</div>
 		</div>
-  );
+	);
 }
- 

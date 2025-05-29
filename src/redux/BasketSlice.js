@@ -10,7 +10,7 @@ const basketFromLocalStorage = () => {
     return [];
   }   
 };
-
+    
 const storeInLocalStorage = (data) => {
   localStorage.setItem("basket", JSON.stringify(data));
 };

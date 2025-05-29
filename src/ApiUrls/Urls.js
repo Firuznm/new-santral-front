@@ -33,8 +33,12 @@ const urls = {
 	categorySlug: (slug) => `/v1/routes/find?domain=santral_www&location=/${slug}`,
 	search: (value, pageCount) => `/v1/products/published?search=${value}&lang=az&page=${pageCount}`,
 	branches: "v1/stores/published?lang=az",
-	branchesDetaile:(id)=>`/v1/stores/info/${id}?lang=az`
+	branchesDetaile: (id) => `/v1/stores/info/${id}?lang=az`,
+	order:"/v1/orders/create"
+
+	
 		// categoryDetails: (id) => `/v1/products/mobile?category=${id}&limit=18&page=1&sort=az&search=&lang=az`,
 };
   
 export default urls  
+

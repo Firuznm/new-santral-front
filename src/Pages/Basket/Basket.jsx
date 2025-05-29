@@ -10,7 +10,7 @@ import {
 	clearBaskets,
 	decrementCount,
 	GetAllApiBaskets,
-	incrementCount,
+	incrementCount,  
 	removeFromCart,
 } from '../../redux/BasketSlice';
 import { useNavigate } from 'react-router-dom';

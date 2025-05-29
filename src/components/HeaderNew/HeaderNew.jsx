@@ -33,7 +33,8 @@ export default function HeaderNew() {
 	const { authMeUser, showOpenEnterSiteArea, isLogin, bpUser } = useSelector(
 		(state) => state.userInfo,
 	);
-   console.log("meeee =", authMeUser);
+	// console.log("meeee =", authMeUser);
+	// console.log('error= ', authMe?.error);
 
 	useEffect(() => {
 			searchFunc(searchInputValue,1);

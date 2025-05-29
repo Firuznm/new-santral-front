@@ -219,13 +219,13 @@ export default function ProductCart({ data }) {
 						</span>
 					</div>
 				)}
-				<div
+				{data?.price !== null && <div
 					onClick={addToPrBasket}
 					className={`${style.basket} ${prIsInBasket ? style.prBasket : ''}`}
 				>
 					{prIsInBasket ? 'Səbətdədir' : 'Səbətə at'}
 					{prIsInBasket ? <BasketIcon /> : <BasketIconBlack />}
-				</div>
+				</div>}
 			</div>
 		</div>
 	);
