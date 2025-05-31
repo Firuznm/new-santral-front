@@ -6,13 +6,13 @@ import style from './ModalUserAddressUpdate.module.scss';
 import CloseIcon from '../../assets/Icons/CloseIcon';
 import { useState } from 'react';
 
-export default function ModalUserAddressUpdate({ selectedAddress, closeModal,del}) {
-   const[deleteNoDelete, setDeleteNoDelete]= useState(true)
+export default function ModalUserAddressUpdate({ selectedAddress, closeModal, del }) {
+	const [deleteNoDelete, setDeleteNoDelete] = useState(true);
 
 	const onClickDeleteAndNoDelete = () => {
-		setDeleteNoDelete(!deleteNoDelete)
-	}
-	
+		setDeleteNoDelete(!deleteNoDelete);
+	};
+
 	const handleDelete = async () => {
 		// Silir
 		await del(selectedAddress.id);
@@ -39,7 +39,6 @@ export default function ModalUserAddressUpdate({ selectedAddress, closeModal,del
 
 		onSubmit: (values) => {
 			console.log('update value=', values);
-
 			resetForm();
 		},
 	});
@@ -112,11 +111,7 @@ export default function ModalUserAddressUpdate({ selectedAddress, closeModal,del
 					<form onSubmit={handleSubmit}>
 						<div className={style.userNameSurname}>
 							{userAddressFormInputData.nameSurname.map((inputData) => (
-								<Input
-									key={inputData.id}
-									inputInfo={inputData}
-									
-								/>
+								<Input key={inputData.id} inputInfo={inputData} />
 							))}
 						</div>
 						<div className={style.userPhoneCityAddress}>
@@ -140,18 +135,24 @@ export default function ModalUserAddressUpdate({ selectedAddress, closeModal,del
 				</div>
 			) : (
 				<div className={style.addressDeleteModal}>
-				<div className={style.deleteAddressModal}>
-							<h3 className="sectionMiniTitle">Ünvan silinsin?</h3>
-							<p>Ünvanınız silinəcək. Bu əməliyyatı etmək istədiyinizə əminsiniz?</p>
-							<div className={style.btnList}>
-								<button onClick={onClickDeleteAndNoDelete} className={style.noBtn}>
-									Xeyr
-								</button>
-								<button onClick={handleDelete} className={style.yesBtn}>
-									Bəli, Sil
-								</button>
-							</div>
-						</div> 
+					<div className={style.deleteAddressModal}>
+						<h3 className="sectionMiniTitle">Ünvan silinsin?</h3>
+						<p>
+							Ünvanınız silinəcək. Bu əməliyyatı etmək istədiyinizə
+							əminsiniz?
+						</p>
+						<div className={style.btnList}>
+							<button
+								onClick={onClickDeleteAndNoDelete}
+								className={style.noBtn}
+							>
+								Xeyr
+							</button>
+							<button onClick={handleDelete} className={style.yesBtn}>
+								Bəli, Sil
+							</button>
+						</div>
+					</div>
 				</div>
 			)}
 		</div>

@@ -13,6 +13,7 @@ import ImgAddIcon from '../../assets/Icons/ImgAddIcon';
 import withReactContent from 'sweetalert2-react-content';
 import Swal from 'sweetalert2';
 import Button from '../../components/Button/Button';
+import HelmetAsync from '../../components/HelmetAsync/HelmetAsync';
 
 export default function UserPersonalInformation() {
 	const { authMeUser } = useSelector((state) => state.userInfo);
@@ -125,43 +126,61 @@ export default function UserPersonalInformation() {
 		],
 	};
 	return (
-		<div className="container">
-			<div className={style.userPersonalInformationPage}>
-				<UserAccoundAndOtherDetailName />
-				<div className={style.userInfo}>
-					<h3 className="sectionMiniTitle">Şəxsi məlumatlar</h3>
-					<form onSubmit={handleSubmit} className={style.userInfoForm}>
-						<label htmlFor="imgAddInp" className={style.userPhotoAddWrapper}>
-							<img
-								className={style.userImg}
-								src={values.photo ? `${santral.baseUrlImage}${values.photo}` : defaultImg}
-								alt="User photo"
-							/>
-							<span className={style.photoAddIcon}>
-								<ImgAddIcon />
-							</span>
-							<input
-								id="imgAddInp"
-								className={style.fileInput}
-								type="file"
-								name="photo"
-								onChange={handleChangeImg}
-							/>
-						</label>
-						<div className={style.nameSurname}>
-							{userInfoInputData.nameSurname.map((userData) => (
-								<Input key={userData.id} inputInfo={userData} inpAreaWidth={'50%'} />
-							))}
-						</div>
-						<div className={style.emailPhone}>
-							{userInfoInputData.emailPhone.map((userData) => (
-								<Input key={userData.id} inputInfo={userData} inpAreaWidth={'50%'} />
-							))}
-						</div>
-						<Button title={'Yadd saxla'} />
-					</form>
+		<>
+			<HelmetAsync title={'Şəxsi məlumatlar'} />
+			<div className="container">
+				<div className={style.userPersonalInformationPage}>
+					<UserAccoundAndOtherDetailName />
+					<div className={style.userInfo}>
+						<h3 className="sectionMiniTitle">Şəxsi məlumatlar</h3>
+						<form onSubmit={handleSubmit} className={style.userInfoForm}>
+							<label
+								htmlFor="imgAddInp"
+								className={style.userPhotoAddWrapper}
+							>
+								<img
+									className={style.userImg}
+									src={
+										values.photo
+											? `${santral.baseUrlImage}${values.photo}`
+											: defaultImg
+									}
+									alt="User photo"
+								/>
+								<span className={style.photoAddIcon}>
+									<ImgAddIcon />
+								</span>
+								<input
+									id="imgAddInp"
+									className={style.fileInput}
+									type="file"
+									name="photo"
+									onChange={handleChangeImg}
+								/>
+							</label>
+							<div className={style.nameSurname}>
+								{userInfoInputData.nameSurname.map((userData) => (
+									<Input
+										key={userData.id}
+										inputInfo={userData}
+										inpAreaWidth={'50%'}
+									/>
+								))}
+							</div>
+							<div className={style.emailPhone}>
+								{userInfoInputData.emailPhone.map((userData) => (
+									<Input
+										key={userData.id}
+										inputInfo={userData}
+										inpAreaWidth={'50%'}
+									/>
+								))}
+							</div>
+							<Button title={'Yadd saxla'} />
+						</form>
+					</div>
 				</div>
 			</div>
-		</div>
+		</>
 	);
 }

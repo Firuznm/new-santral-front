@@ -9,6 +9,7 @@ import { MapContainer, Marker, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { Link } from 'react-router-dom';
+import HelmetAsync from '../../components/HelmetAsync/HelmetAsync';
 
 const icon = L.icon({
 	iconUrl: markerIcon,
@@ -47,57 +48,64 @@ console.log("branches all data=", branchesAllDatas);
 	};  
 
 	return (
-		<section id={style.branchesPage}>
-			<div className="container">
-				<div className={style.branchesAndMap}>
-					<div className={style.branches}>
-						{branchesAllDatas?.data?.map((branch) => (
-							<div className={style.branchWrapper} key={branch.id}>
-								<div className={style.branchTitle}>
-									{branch.title}
-									<Link
-										to={`/branches/${branch.id}`}
-										className={style.moreBtn}
-									>
-										Ətraflı
-									</Link>
+		<>
+			<HelmetAsync title={"Filiallar"}/>
+			<section id={style.branchesPage}>
+				<div className="container">
+					<div className={style.branchesAndMap}>
+						<div className={style.branches}>
+							{branchesAllDatas?.data?.map((branch) => (
+								<div className={style.branchWrapper} key={branch.id}>
+									<div className={style.branchTitle}>
+										{branch.title}
+										<Link
+											to={`/branches/${branch.id}`}
+											className={style.moreBtn}
+										>
+											Ətraflı
+										</Link>
+									</div>
+									<div className={style.address}>
+										{branch?.address}
+										<span
+											onClick={() => onClickMarketAddress(branch)}
+											className={`${style.locationBtn} ${
+												activeBranchIndex === branch.id
+													? style.activeIndex
+													: ''
+											}`}
+										>
+											Xəritədə bax
+										</span>
+									</div>
 								</div>
-								<div className={style.address}>
-									{branch?.address}
-									<span
-										onClick={() => onClickMarketAddress(branch)}
-										className={`${style.locationBtn} ${activeBranchIndex === branch.id ? style.activeIndex : ""}`}
-									>
-										Xəritədə bax
-									</span>
-								</div>
-							</div>
-						))}
-					</div>
-					<div className={style.map}>
-						<MapContainer
-							style={{
-								width: '100%',
-								height: '100%',
-								zIndex: '5',
-								objectFit: 'cover',
-								borderRadius:"10px"
-							}}
-							center={mapCenter}
-							zoom={18}
-							scrollWheelZoom={true}
-							ref={setMap}
-						>
-							<TileLayer
-								attribution='&copy;
+							))}
+						</div>
+						<div className={style.map}>
+							<MapContainer
+								style={{
+									width: '100%',
+									height: '100%',
+									zIndex: '5',
+									objectFit: 'cover',
+									borderRadius: '10px',
+								}}
+								center={mapCenter}
+								zoom={18}
+								scrollWheelZoom={true}
+								ref={setMap}
+							>
+								<TileLayer
+									attribution='&copy;
                      <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-								url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-							/>
-							<Marker position={mapCenter} icon={icon}></Marker>
-						</MapContainer>
+									url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+								/>
+								<Marker position={mapCenter} icon={icon}></Marker>
+							</MapContainer>
+						</div>
 					</div>
 				</div>
-			</div>
-		</section>
+			</section>
+		</>
 	);
 }

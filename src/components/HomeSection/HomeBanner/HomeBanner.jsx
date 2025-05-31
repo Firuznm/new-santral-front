@@ -1,17 +1,16 @@
-import style from "./HomeBanner.module.scss"
+import style from './HomeBanner.module.scss';
 // Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-import "swiper/css/effect-fade";
-import { Autoplay, Pagination, EffectFade } from "swiper/modules";
-import { Link } from "react-router-dom";
-import santral from "../../../Helpers/Helpers";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import 'swiper/css/effect-fade';
+import { Autoplay, Pagination, EffectFade } from 'swiper/modules';
+import { Link } from 'react-router-dom';
+import santral from '../../../Helpers/Helpers';
 
 export default function HomeBanner({ data }) {
-    // console.log("data=", data);
-  return (
+	return (
 		<section id={style.bannerWrapper}>
 			<div style={{ paddingLeft: 0, paddingRight: 0 }} className="container">
 				<div className={style.banner}>
@@ -87,7 +86,10 @@ export default function HomeBanner({ data }) {
 						>
 							{/* {data.map((item) => ( */}
 							<SwiperSlide>
-								<Link to={data?.firstbannerright2?.route} className={style.bottomNarrowBannerCart}>
+								<Link
+									to={data?.firstbannerright2?.route}
+									className={style.bottomNarrowBannerCart}
+								>
 									<img
 										src={`${santral.baseUrlImage}${data?.firstbannerright2?.thumbnail}`}
 									/>
@@ -99,5 +101,5 @@ export default function HomeBanner({ data }) {
 				</div>
 			</div>
 		</section>
-  );
+	);
 }

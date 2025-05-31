@@ -16,6 +16,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import urls from '../../ApiUrls/Urls';
 import { useEffect } from 'react';
+import HelmetAsync from '../../components/HelmetAsync/HelmetAsync';
 
 export default function Basket() {
 	const navigate = useNavigate();
@@ -70,139 +71,159 @@ export default function Basket() {
 	const isBasketNotEmpty = isLogin ? apiBaskets?.length > 0 : localBaskets?.length > 0;
 
 	return (
-		<section id={style.Basket}>
-			<div className="container">
-				{isBasketNotEmpty ? (
-					<div className={style.basketContent}>
-						<div className={style.basketContentLeft}>
-							<div className={style.basketLeftHeader}>
-								<h3 className="sectionMiniTitle">Səbət</h3>
-								<div
-									onClick={
-										isLogin
-											? FuncApiBasketAllClear
-											: () => dispatch(clearBaskets())
-									}
-									className={style.allBasketPrDelete}
-								>
-									<TrashIconBasket /> Hamısını sil
+		<>
+			<HelmetAsync title={"Səbət"}/>
+			<section id={style.Basket}>
+				<div className="container">
+					{isBasketNotEmpty ? (
+						<div className={style.basketContent}>
+							<div className={style.basketContentLeft}>
+								<div className={style.basketLeftHeader}>
+									<h3 className="sectionMiniTitle">Səbət</h3>
+									<div
+										onClick={
+											isLogin
+												? FuncApiBasketAllClear
+												: () => dispatch(clearBaskets())
+										}
+										className={style.allBasketPrDelete}
+									>
+										<TrashIconBasket /> Hamısını sil
+									</div>
 								</div>
+								{(isLogin ? apiBaskets : localBaskets)?.map((item) => (
+									<div key={item.id} className={style.basketPrList}>
+										<div className={style.prImgAndTitle}>
+											<img
+												className={style.basketPrImg}
+												src={`${santral.baseUrlImage}${item.thumbnail}`}
+											/>
+
+											<div className={style.prTitleAndAlert}>
+												<h5 className={style.basketPrTitle}>
+													{item.title}
+												</h5>
+												<span
+													className={`${style.alert} ${
+														item.stock === item.count
+															? style.showAlert
+															: ''
+													}`}
+												>
+													Məhsulun stok sayi : {`${item.stock}`}{' '}
+													ədəd
+												</span>
+											</div>
+										</div>
+										<div className={style.quantityPriceDelete}>
+											<div className={style.prCountWrapper}>
+												<span
+													onClick={() =>
+														handleDecrement(item.id)
+													}
+													className={style.decrease}
+												>
+													<MinusIcon />
+												</span>
+												<span className={style.count}>
+													{item.count}
+												</span>
+												<span
+													onClick={() =>
+														handleIncrement(item.id)
+													}
+													className={style.increase}
+												>
+													<PlusIcon />
+												</span>
+											</div>
+											<div
+												className={style.oldAndNewpriceAndBPprice}
+											>
+												{bpUser ? (
+													// login olub ve user-in rolu BPuser olduqda
+													<div className={style.bpPriceWrapper}>
+														{item.oldPrice !== 0 ? (
+															<span
+																className={style.oldPrice}
+															>
+																{(
+																	item.count *
+																	item.oldPrice
+																).toFixed(2)}
+																₼
+															</span>
+														) : (
+															<span
+																className={
+																	style.noOldPrice
+																}
+															>
+																{(
+																	item.count *
+																	item.price
+																).toFixed(2)}
+																₼
+															</span>
+														)}
+														<span className={style.bpPrice}>
+															{item.bp_total?.toFixed(2)}
+														</span>
+													</div>
+												) : (
+													// bura mehsulun endirime dusubse evvelki qiymetini gosterir
+													<div className={style.priceOldPrice}>
+														{item.oldPrice !== 0 && (
+															<span
+																className={style.oldPrice}
+															>
+																{(
+																	item.count *
+																	item.oldPrice
+																).toFixed(2)}
+																₼
+															</span>
+														)}
+														<span className={style.price}>
+															{(isLogin
+																? item.total
+																: item.price * item.count
+															).toFixed(2)}
+														</span>
+													</div>
+												)}
+											</div>
+											<span
+												onClick={() =>
+													isLogin
+														? FuncApiRemoveBasketProduct(
+																item.id,
+														  )
+														: dispatch(
+																removeFromCart({
+																	id: item.id,
+																}),
+														  )
+												}
+												className={style.deleteIcon}
+											>
+												<DeleteRedIcon />
+											</span>
+										</div>
+									</div>
+								))}
 							</div>
-							{(isLogin ? apiBaskets : localBaskets)?.map((item) => (
-								<div key={item.id} className={style.basketPrList}>
-									<div className={style.prImgAndTitle}>
-										<img
-											className={style.basketPrImg}
-											src={`${santral.baseUrlImage}${item.thumbnail}`}
-										/>
 
-										<div className={style.prTitleAndAlert}>
-											<h5 className={style.basketPrTitle}>
-												{item.title}
-											</h5>
-											<span
-												className={`${style.alert} ${
-													item.stock === item.count
-														? style.showAlert
-														: ''
-												}`}
-											>
-												Məhsulun stok sayi : {`${item.stock}`}{' '}
-												ədəd
-											</span>
-										</div>
-									</div>
-									<div className={style.quantityPriceDelete}>
-										<div className={style.prCountWrapper}>
-											<span
-												onClick={() => handleDecrement(item.id)}
-												className={style.decrease}
-											>
-												<MinusIcon />
-											</span>
-											<span className={style.count}>
-												{item.count}
-											</span>
-											<span
-												onClick={() => handleIncrement(item.id)}
-												className={style.increase}
-											>
-												<PlusIcon />
-											</span>
-										</div>
-										<div className={style.oldAndNewpriceAndBPprice}>
-											{bpUser ? (
-												// login olub ve user-in rolu BPuser olduqda
-												<div className={style.bpPriceWrapper}>
-													{item.oldPrice !== 0 ? (
-														<span className={style.oldPrice}>
-															{(
-																item.count * item.oldPrice
-															).toFixed(2)}
-															₼
-														</span>
-													) : (
-														<span
-															className={style.noOldPrice}
-														>
-															{(
-																item.count * item.price
-															).toFixed(2)}
-															₼
-														</span>
-													)}
-													<span className={style.bpPrice}>
-														{item.bp_total?.toFixed(2)}
-													</span>
-												</div>
-											) : (
-												// bura mehsulun endirime dusubse evvelki qiymetini gosterir
-												<div className={style.priceOldPrice}>
-													{item.oldPrice !== 0 && (
-														<span className={style.oldPrice}>
-															{(
-																item.count * item.oldPrice
-															).toFixed(2)}
-															₼
-														</span>
-													)}
-													<span className={style.price}>
-														{(isLogin
-															? item.total
-															: item.price * item.count
-														).toFixed(2)}
-													</span>
-												</div>
-											)}
-										</div>
-										<span
-											onClick={() =>
-												isLogin
-													? FuncApiRemoveBasketProduct(item.id)
-													: dispatch(
-															removeFromCart({
-																id: item.id,
-															}),
-													  )
-											}
-											className={style.deleteIcon}
-										>
-											<DeleteRedIcon />
-										</span>
-									</div>
-								</div>
-							))}
+							<BasketPrNamePriceTotal
+								onclick={() => navigate('/order-confirm')}
+								title={'Sifarişi rəsmiləşdir'}
+							/>
 						</div>
-
-						<BasketPrNamePriceTotal
-							onclick={() => navigate('/order-confirm')}
-							title={'Sifarişi rəsmiləşdir'}
-						/>
-					</div>
-				) : (
-					<div className={style.freeBasket}>Səbətdə məhsul yoxdu</div>
-				)}
-			</div>
-		</section>
+					) : (
+						<div className={style.freeBasket}>Səbətdə məhsul yoxdu</div>
+					)}
+				</div>
+			</section>
+		</>
 	);
 }

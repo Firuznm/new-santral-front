@@ -35,7 +35,6 @@ const urls = {
 	branches: "v1/stores/published?lang=az",
 	branchesDetaile: (id) => `/v1/stores/info/${id}?lang=az`,
 	order:"/v1/orders/create"
-
 	
 		// categoryDetails: (id) => `/v1/products/mobile?category=${id}&limit=18&page=1&sort=az&search=&lang=az`,
 };

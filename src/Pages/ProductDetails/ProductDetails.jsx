@@ -36,6 +36,7 @@ import FullRedHeartIcon from '../../assets/Icons/FullRedHeartIcon';
 import BasketIconBlack from '../../assets/Icons/BasketIconBlack';
 import bpImg from '../../assets/Images/bpQiymeti.png';
 import reklamVideo from "../../assets/Images/reklamVideo.mp4"
+import HelmetAsync from '../../components/HelmetAsync/HelmetAsync';
 
 export default function ProductDetails() {
 	const { name } = useParams();
@@ -192,310 +193,322 @@ export default function ProductDetails() {
 	console.log("pr details data=", prDetailsData);
 
 	return (
-		<section id={style.prDetailsWrapper}>
-			<div style={{ paddingTop: '1rem' }} className="container">
-				{/* bir kliklə al modali */}
-				<div
-					onClick={handleBuyModal}
-					className={`${style.overlayOneByModal}${
-						oneClickBuyModal ? '' : style.hiddenOverlay
-					}`}
-				></div>
-				<div
-					className={`${style.modalWrapper} ${
-						oneClickBuyModal ? '' : style.closeModal
-					}`}
-				>
-					<div className={style.oneClickByModalArea}>
-						<div className={style.modalHeaderAndCloseBtn}>
-							<h6 className={style.title}>1 kliklə məhsulu alın</h6>
-							<span onClick={handleBuyModal}>
-								<CloseIcon />
-							</span>
-						</div>
-						<hr className={style.line} />
-						<form onSubmit={handleSubmit}>
-							<label htmlFor="">Adınızı daxil edin</label>
-							<input
-								className={style.oneClickInp}
-								onChange={handleChange}
-								name="name"
-								value={values.name}
-								type="text"
-								placeholder="Ad"
-							/>
-							<span className={style.errorMessage}>{errors.name}</span>
-							<label htmlFor="">Nömrənizi daxil edin</label>
-							<input
-								className={style.oneClickInp}
-								onChange={handleChange}
-								name="phone"
-								value={values.phone}
-								type="number"
-								placeholder="phone"
-							/>
-							<span className={style.errorMessage}>{errors.phone}</span>
-							<button className={style.oneClickBuyBtn}>Bir klikə al</button>
-						</form>
-					</div>
-				</div>
-				<div className={style.prImgAndPrInfo}>
-					{/* pulsuz catdirilma animasiyasi masinin hərəkəti */}
-					<div className={style.delivery}>
-						<TruckAnimation />
-					</div>
-					{/* məhsulun səkillərinin slider- i (sag tərəf) */}
-					<PrDetailsPagePrImgSlider
-						prDetailsData={prDetailsData}
-						discountRate={discountRate}
-					/>
-					{/* məhsul haqqinda məlumatlar (sol tərəfdəki) */}
-					<div className={style.prInfoWrapper}>
-						<div className={style.prTitleAndFavoriteSocial}>
-							<h4 className={style.prTitle}>{prDetailsData.title}</h4>
-							<div className={style.favoriteSocial}>
-								<span
-									onClick={() =>
-										dispatch(toggleFavoriteItem(prDetailsData))
-									}
-									className={`${style.favorite} ${
-										isFavorite ? style.prInFavoriteList : ''
-									}`}
-								>
-									{isFavorite ? (
-										<FullRedHeartIcon />
-									) : (
-										<HeartIcon color={'black'} />
-									)}
-								</span>
-								<span
-									ref={socialAreaRef}
-									onClick={onClickSocialBtn}
-									className={`${style.socialWrapper} ${
-										prDetailsSocial ? style.btnActive : ''
-									}`}
-								>
-									<LinkIcon />
-									<div
-										className={`${style.prDeatailsSocilaLink} ${
-											prDetailsSocial ? '' : style.noActive
-										}`}
-									>
-										<a
-											className={style.prDetailsSocial}
-											href=""
-											target="_blank"
-										>
-											<img src={whatsappImg} /> Whatsapp
-										</a>
-										<a
-											className={style.prDetailsSocial}
-											href=""
-											target="_blank"
-										>
-											<img src={instagramImg} /> Instagram
-										</a>
-										<a
-											className={style.prDetailsSocial}
-											href=""
-											target="_blank"
-										>
-											<img src={facebookImg} /> Facebook
-										</a>
-										<div
-											onClick={copyFunc}
-											className={style.prDetailsSocial}
-											href=""
-											target="_blank"
-										>
-											<img src={copyImg} /> Linki Kopyala
-										</div>
-									</div>
+		<>
+			<HelmetAsync title={prDetailsData?.title}/>
+			<section id={style.prDetailsWrapper}>
+				<div style={{ paddingTop: '1rem' }} className="container">
+					{/* bir kliklə al modali */}
+					<div
+						onClick={handleBuyModal}
+						className={`${style.overlayOneByModal}${
+							oneClickBuyModal ? '' : style.hiddenOverlay
+						}`}
+					></div>
+					<div
+						className={`${style.modalWrapper} ${
+							oneClickBuyModal ? '' : style.closeModal
+						}`}
+					>
+						<div className={style.oneClickByModalArea}>
+							<div className={style.modalHeaderAndCloseBtn}>
+								<h6 className={style.title}>1 kliklə məhsulu alın</h6>
+								<span onClick={handleBuyModal}>
+									<CloseIcon />
 								</span>
 							</div>
-						</div>
-						<div className={style.prAvailableAndPrCod}>
-							<span className={style.prAvailable}>
-								Məhsul mövcuddur :
-								<span className={style.productCount}>
-									{prDetailsData.stock}
-								</span>
-							</span>
-							{prDetailsData.brandCode && (
-								<span className={style.prCode}>
-									Məhsulun Codu:
-									<span className={style.code}>
-										{prDetailsData.brandCode}
-									</span>
-								</span>
-							)}  
-						</div>
-						<hr className={style.line} />
-						<div className={style.prCountAndPrice}>
-							<div className={style.prCountWrapper}>
-								<span
-									onClick={() => decrement()}
-									className={style.decrease}
-								>
-									<MinusIcon />
-								</span>
-								<span style={{fontWeight:900}} className={style.count}>{count}</span>
-								<span
-									onClick={() => increment()}
-									className={style.increase}
-								>
-									<PlusIcon />
-								</span>
-							</div>
-							<div className={style.priceWrapper}>
-								{bpUser && (
-									<img
-										className={style.bpPriceImg}
-										src={bpImg}
-										alt=""
-									/>
-								)}
-								{bpUser ? (
-									// login olub ve user-in rolu BPuser olduqda
-									<div className={style.bpPriceWrapper}>
-										{prDetailsData.oldPrice !== 0 ? (
-											<span className={style.oldPrice}>
-												{prOldPrice?.toFixed(2)}₼
-											</span>
-										) : (
-											<span className={style.noOldPrice}>
-												{prPrice?.toFixed(2)}₼
-											</span>
-										)}
-										<span className={style.bpPrice}>
-											{bpPrice?.toFixed(2)}₼
-										</span>
-									</div>
-								) : (
-									// bura mehsulun endirime dusubse evvelki qiymetini gosterir
-									<div className={style.priceOldPrice}>
-										{prDetailsData.oldPrice !== 0 && (
-											<span className={style.oldPrice}>
-												{prOldPrice?.toFixed(2)} ₼
-											</span>
-										)}
-										<span className={style.price}>
-											{prPrice?.toFixed(2)} ₼
-										</span>
-									</div>
-								)}
-							</div>
-						</div>
-						<hr className={style.line} />
-						{!bpUser && (
-							<div className={style.paymentCartInfoAndSlider}>
-								<div className={style.paymentCartInfo}>
-									<h5 className={style.title}>Hissə-hissə alış</h5>
-									<p className={style.info}>
-										Şərtlər endirimsiz qiymətə tətbiq olunur
-									</p>
-								</div>
-								<div className={style.paymentCartSlider}>
-									<Swiper
-										spaceBetween={30}
-										speed={3000}
-										autoplay={{
-											delay: 1500,
-										}}
-										loop={true}
-										modules={[Autoplay]}
-										className={style.creditCartSlider}
-									>
-										<SwiperSlide>
-											<span className={style.BirKart}>
-												<img src={birbankKartImg} />
-												<p className={style.content}>
-													BirKart ilə 3 ay fiazsiz ödə!
-												</p>
-											</span>
-										</SwiperSlide>
-										<SwiperSlide>
-											<span className={style.TamKart}>
-												<img src={tamKartImg} />
-												<p className={style.content}>
-													TamKart ilə 6 ay fiazsiz ödə!
-												</p>
-											</span>
-										</SwiperSlide>
-									</Swiper>
-								</div>
-							</div>
-						)}
-						{!bpUser && (
-							<div className={style.paymentMonths}>
-								<div>
-									<span
-										onClick={handleStateCreditMonth}
-										className={`${style.month} ${
-											showCreditMonthPayment
-												? style.activeMonth
-												: ''
-										}`}
-									>
-										3ay
-									</span>
-									<span
-										onClick={handleStateCreditMonth}
-										className={`${style.month} ${
-											showCreditMonthPayment
-												? ''
-												: style.activeMonth
-										}`}
-									>
-										6ay
-									</span>
-								</div>
-								<div className={style.payementResuslt}>
-									Aylıq ödəniş
-									<span className={style.payment}>
-										{showCreditMonthPayment ? threeMonths : sixMonths}{' '}
-										₼
-									</span>
-								</div>
-							</div>
-						)}
-						<div className={style.btnGroup}>
-							<button
-								onClick={handlePrAddBasket}
-								className={`${style.basketBtn} ${
-									prIsInBasket ? style.prBasket : ''
-								}`}
-							>
-								{prIsInBasket ? 'Səbətdədir' : 'Səbətə at'}
-								{prIsInBasket ? <BasketIcon /> : <BasketIconBlack />}
-							</button>
-							<button
-								onClick={handleBuyModal}
-								className={style.oneClickByBtn}
-							>
-								Bir kliklə al
-							</button>
-							<button className={style.callBtn}>
-								<HeaderPhoneIcon /> Zəng et
-							</button>
-						</div>
-						<div className={style.billboard}>
-							<video autoPlay loop muted loading="lazy">
-								<source
-									src={reklamVideo}
-									type="video/mp4"
-									loading="lazy"
+							<hr className={style.line} />
+							<form onSubmit={handleSubmit}>
+								<label htmlFor="">Adınızı daxil edin</label>
+								<input
+									className={style.oneClickInp}
+									onChange={handleChange}
+									name="name"
+									value={values.name}
+									type="text"
+									placeholder="Ad"
 								/>
-							</video>
+								<span className={style.errorMessage}>{errors.name}</span>
+								<label htmlFor="">Nömrənizi daxil edin</label>
+								<input
+									className={style.oneClickInp}
+									onChange={handleChange}
+									name="phone"
+									value={values.phone}
+									type="number"
+									placeholder="phone"
+								/>
+								<span className={style.errorMessage}>{errors.phone}</span>
+								<button className={style.oneClickBuyBtn}>
+									Bir klikə al
+								</button>
+							</form>
 						</div>
 					</div>
+					<div className={style.prImgAndPrInfo}>
+						{/* pulsuz catdirilma animasiyasi masinin hərəkəti */}
+						<div className={style.delivery}>
+							<TruckAnimation />
+						</div>
+						{/* məhsulun səkillərinin slider- i (sag tərəf) */}
+						<PrDetailsPagePrImgSlider
+							prDetailsData={prDetailsData}
+							discountRate={discountRate}
+						/>
+						{/* məhsul haqqinda məlumatlar (sol tərəfdəki) */}
+						<div className={style.prInfoWrapper}>
+							<div className={style.prTitleAndFavoriteSocial}>
+								<h4 className={style.prTitle}>{prDetailsData.title}</h4>
+								<div className={style.favoriteSocial}>
+									<span
+										onClick={() =>
+											dispatch(toggleFavoriteItem(prDetailsData))
+										}
+										className={`${style.favorite} ${
+											isFavorite ? style.prInFavoriteList : ''
+										}`}
+									>
+										{isFavorite ? (
+											<FullRedHeartIcon />
+										) : (
+											<HeartIcon color={'black'} />
+										)}
+									</span>
+									<span
+										ref={socialAreaRef}
+										onClick={onClickSocialBtn}
+										className={`${style.socialWrapper} ${
+											prDetailsSocial ? style.btnActive : ''
+										}`}
+									>
+										<LinkIcon />
+										<div
+											className={`${style.prDeatailsSocilaLink} ${
+												prDetailsSocial ? '' : style.noActive
+											}`}
+										>
+											<a
+												className={style.prDetailsSocial}
+												href=""
+												target="_blank"
+											>
+												<img src={whatsappImg} /> Whatsapp
+											</a>
+											<a
+												className={style.prDetailsSocial}
+												href=""
+												target="_blank"
+											>
+												<img src={instagramImg} /> Instagram
+											</a>
+											<a
+												className={style.prDetailsSocial}
+												href=""
+												target="_blank"
+											>
+												<img src={facebookImg} /> Facebook
+											</a>
+											<div
+												onClick={copyFunc}
+												className={style.prDetailsSocial}
+												href=""
+												target="_blank"
+											>
+												<img src={copyImg} /> Linki Kopyala
+											</div>
+										</div>
+									</span>
+								</div>
+							</div>
+							<div className={style.prAvailableAndPrCod}>
+								<span className={style.prAvailable}>
+									Məhsul mövcuddur :
+									<span className={style.productCount}>
+										{prDetailsData.stock}
+									</span>
+								</span>
+								{prDetailsData.brandCode && (
+									<span className={style.prCode}>
+										Məhsulun Codu:
+										<span className={style.code}>
+											{prDetailsData.brandCode}
+										</span>
+									</span>
+								)}
+							</div>
+							<hr className={style.line} />
+							<div className={style.prCountAndPrice}>
+								<div className={style.prCountWrapper}>
+									<span
+										onClick={() => decrement()}
+										className={style.decrease}
+									>
+										<MinusIcon />
+									</span>
+									<span
+										style={{ fontWeight: 900 }}
+										className={style.count}
+									>
+										{count}
+									</span>
+									<span
+										onClick={() => increment()}
+										className={style.increase}
+									>
+										<PlusIcon />
+									</span>
+								</div>
+								<div className={style.priceWrapper}>
+									{bpUser && (
+										<img
+											className={style.bpPriceImg}
+											src={bpImg}
+											alt=""
+										/>
+									)}
+									{bpUser ? (
+										// login olub ve user-in rolu BPuser olduqda
+										<div className={style.bpPriceWrapper}>
+											{prDetailsData.oldPrice !== 0 ? (
+												<span className={style.oldPrice}>
+													{prOldPrice?.toFixed(2)}₼
+												</span>
+											) : (
+												<span className={style.noOldPrice}>
+													{prPrice?.toFixed(2)}₼
+												</span>
+											)}
+											<span className={style.bpPrice}>
+												{bpPrice?.toFixed(2)}₼
+											</span>
+										</div>
+									) : (
+										// bura mehsulun endirime dusubse evvelki qiymetini gosterir
+										<div className={style.priceOldPrice}>
+											{prDetailsData.oldPrice !== 0 && (
+												<span className={style.oldPrice}>
+													{prOldPrice?.toFixed(2)} ₼
+												</span>
+											)}
+											<span className={style.price}>
+												{prPrice?.toFixed(2)} ₼
+											</span>
+										</div>
+									)}
+								</div>
+							</div>
+							<hr className={style.line} />
+							{!bpUser && (
+								<div className={style.paymentCartInfoAndSlider}>
+									<div className={style.paymentCartInfo}>
+										<h5 className={style.title}>Hissə-hissə alış</h5>
+										<p className={style.info}>
+											Şərtlər endirimsiz qiymətə tətbiq olunur
+										</p>
+									</div>
+									<div className={style.paymentCartSlider}>
+										<Swiper
+											spaceBetween={30}
+											speed={3000}
+											autoplay={{
+												delay: 1500,
+											}}
+											loop={true}
+											modules={[Autoplay]}
+											className={style.creditCartSlider}
+										>
+											<SwiperSlide>
+												<span className={style.BirKart}>
+													<img src={birbankKartImg} />
+													<p className={style.content}>
+														BirKart ilə 3 ay fiazsiz ödə!
+													</p>
+												</span>
+											</SwiperSlide>
+											<SwiperSlide>
+												<span className={style.TamKart}>
+													<img src={tamKartImg} />
+													<p className={style.content}>
+														TamKart ilə 6 ay fiazsiz ödə!
+													</p>
+												</span>
+											</SwiperSlide>
+										</Swiper>
+									</div>
+								</div>
+							)}
+							{!bpUser && (
+								<div className={style.paymentMonths}>
+									<div>
+										<span
+											onClick={handleStateCreditMonth}
+											className={`${style.month} ${
+												showCreditMonthPayment
+													? style.activeMonth
+													: ''
+											}`}
+										>
+											3ay
+										</span>
+										<span
+											onClick={handleStateCreditMonth}
+											className={`${style.month} ${
+												showCreditMonthPayment
+													? ''
+													: style.activeMonth
+											}`}
+										>
+											6ay
+										</span>
+									</div>
+									<div className={style.payementResuslt}>
+										Aylıq ödəniş
+										<span className={style.payment}>
+											{showCreditMonthPayment
+												? threeMonths
+												: sixMonths}{' '}
+											₼
+										</span>
+									</div>
+								</div>
+							)}
+							<div className={style.btnGroup}>
+								<button
+									onClick={handlePrAddBasket}
+									className={`${style.basketBtn} ${
+										prIsInBasket ? style.prBasket : ''
+									}`}
+								>
+									{prIsInBasket ? 'Səbətdədir' : 'Səbətə at'}
+									{prIsInBasket ? <BasketIcon /> : <BasketIconBlack />}
+								</button>
+								<button
+									onClick={handleBuyModal}
+									className={style.oneClickByBtn}
+								>
+									Bir kliklə al
+								</button>
+								<button className={style.callBtn}>
+									<HeaderPhoneIcon /> Zəng et
+								</button>
+							</div>
+							<div className={style.billboard}>
+								<video autoPlay loop muted loading="lazy">
+									<source
+										src={reklamVideo}
+										type="video/mp4"
+										loading="lazy"
+									/>
+								</video>
+							</div>
+						</div>
+					</div>
+					{/* oxşar məhsular və məhsulun xususiyyətləri */}
+					<PrDetailsPageSimilarPrAndPrFeatures
+						prDetailsData={prDetailsData}
+						relatedDatas={relatedDatas}
+					/>
 				</div>
-				{/* oxşar məhsular və məhsulun xususiyyətləri */}
-				<PrDetailsPageSimilarPrAndPrFeatures
-					prDetailsData={prDetailsData}
-					relatedDatas={relatedDatas} 
-				/>
-			</div>
-		</section>
+			</section>
+		</>
 	);
 }

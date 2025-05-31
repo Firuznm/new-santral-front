@@ -130,7 +130,6 @@ export default function Registration() {
 		],
 	};
 
-//   console.log("regiter user=", user)
 	return (
 		<div className={style.registrationPage}>
 			<div className={style.registrationArea}>

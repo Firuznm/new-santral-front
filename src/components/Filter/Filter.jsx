@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import GoldMinusIcon from '../../assets/Icons/GoldMinusIcon';
 import GoldPlusIcon from '../../assets/Icons/GoldPlusIcon';
 import style from './Filter.module.scss';
 import CloseIcon from '../../assets/Icons/CloseIcon';
 
-export default function Filter({ data, onClickFunk, onCheckInput }) {
+export default function Filter({ data, onClickFunk, onCheckInput, slug }) {
 	const [visibleIndicators, setVisibleIndicators] = useState({});
 	const onClickTitleShowHiddenIndicators = (id) => {
 		setVisibleIndicators((prevState) => ({
@@ -12,6 +12,12 @@ export default function Filter({ data, onClickFunk, onCheckInput }) {
 			[id]: !prevState[id],
 		}));
 	};
+
+	useEffect(() => {
+		setVisibleIndicators({});
+		console.log('slug deyisdi filter temizlendi. Hemise temizlikde');
+	}, [slug]);
+
 	return (
 		<div
 			className={`${style.filterArea} ${
@@ -61,9 +67,9 @@ export default function Filter({ data, onClickFunk, onCheckInput }) {
 										id={option.id}
 									/>
 									<label htmlFor={option.id}>{option.title}</label>
-									<span className={style.optionCount}>
+									{/* <span className={style.optionCount}>
 										({option.count})
-									</span>
+									</span> */}
 								</div>
 							))}
 						</div>

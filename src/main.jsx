@@ -26,6 +26,7 @@ import SearchResult from "./Pages/SearchResult/SearchResult";
 import OurAdvantagesDetails from "./components/OurAdvantagesDetails/OurAdvantagesDetails";
 import CategoryAndSubcategoryDetails from "./Pages/CategoryAndSubcategoryDetails/CategoryAndSubcategoryDetails";
 import BranchesDetaile from "./Pages/BranchesDetaile/BranchesDetaile";
+import { HelmetProvider } from "react-helmet-async";
 
 const router = createBrowserRouter([
 	{
@@ -122,10 +123,12 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-	<SearchProvider>
-		<Provider store={store}>
-			<RouterProvider router={router} />
-		</Provider>
-	</SearchProvider>,
+	<HelmetProvider>
+		<SearchProvider>
+			<Provider store={store}>
+				<RouterProvider router={router} />
+			</Provider>
+		</SearchProvider>
+	</HelmetProvider>,
 );
  

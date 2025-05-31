@@ -7,11 +7,13 @@ import urls from '../../ApiUrls/Urls';
 import Filter from '../../components/Filter/Filter';
 import MobileFilterIcon from '../../assets/Icons/MobileFilterIcon';
 import ProductCart from '../../components/ProductCart/ProductCart';
+import HelmetAsync from '../../components/HelmetAsync/HelmetAsync';
 
 export default function CategoryAndSubcategoryDetails() {
 	const { '*': slug } = useParams();
 	const [mobileFilterShowHidden, setMobileFilterShowHidden] = useState(false);
 	const [categoryDetailsFilterDatas, setCategoryDetailsFilterDatas] = useState([]);
+	const [isCalled, setIsCalled] = useState(false);
 	const [categoryDetailsData, setCategoryDetailsData] = useState([]);
 	const [categorySlugData, setCategorySlugData] = useState([]);
 	const [sortType, setSortType] = useState('');
@@ -36,33 +38,60 @@ export default function CategoryAndSubcategoryDetails() {
 		setFilterBody({ filter: newFilter.filter });
 	};
 
-	const getCategoryDetailsDatas = async (page = 1, sort = sortType) => {
+	const getCategoryDetailsDatas = async (
+		page = 1,
+		sort = sortType,
+		isSlugChanged = false,
+	) => {
 		try {
 			const categorySlug = await santral.api().get(urls.categorySlug(slug));
 			setCategorySlugData(categorySlug.data);
 			const lookupId = categorySlug?.data?.route?.lookupId;
 
-			const [data1, data2] = await Promise.all([
-				santral.api().post(urls.categoryDetailsFilter(lookupId), filterBody),
+			const promises = [];
+			let newFilterBody = isSlugChanged ? { filter: {} } : filterBody;
+			promises.push(
 				santral
 					.api()
-					.post(urls.categoryDetails(lookupId, page, sort), filterBody),
-			]);
+					.post(urls.categoryDetails(lookupId, page, sort), newFilterBody),
+			);
+			if (!isCalled || isSlugChanged) {
+				console.log('bu filter body-e sorgu atildi -- ', newFilterBody);
+				promises.push(
+					santral
+						.api()
+						.post(urls.categoryDetailsFilter(lookupId), newFilterBody),
+				);
+			}
+			const [data1, data2] = await Promise.all(promises);
 
-			setCategoryDetailsFilterDatas(data1.data.data);
-			setCategoryDetailsData(data2.data);
+			setCategoryDetailsData(data1.data);
+			if (!isCalled || isSlugChanged) {
+				setCategoryDetailsFilterDatas(data2.data.data);
+				setIsCalled(true);
+			}
 		} catch (error) {
 			console.log(error);
 		}
 	};
 
+	// sort page deyisende
 	useEffect(() => {
 		const sortQuery = searchParams.get('sort') || '';
 		const pageQuery = parseInt(searchParams.get('page')) || 1;
 
 		setSortType(sortQuery);
 		getCategoryDetailsDatas(pageQuery, sortQuery);
-	}, [slug, searchParams]);
+	}, [searchParams]);
+
+	// slug deyisende
+	useEffect(() => {
+		const sortQuery = searchParams.get('sort') || '';
+		const pageQuery = parseInt(searchParams.get('page')) || 1;
+
+		setSortType(sortQuery);
+		getCategoryDetailsDatas(pageQuery, sortQuery, true);
+	}, [slug]);
 
 	useEffect(() => {
 		if (Object.keys(filterBody.filter).length > 0) {
@@ -88,15 +117,11 @@ export default function CategoryAndSubcategoryDetails() {
 		});
 	}, [categoryDetailsData]);
 
-	console.log("category data=", categoryDetailsData);
-	
-
 	return (
 		<>
-			{categoryDetailsData?.pagination?.count === 0 ? (
-				<div className={style.noProduct}>Məhsul yoxdu</div>
-			) : (
-				<div style={{ paddingTop: '1rem' }} className="container">
+			<HelmetAsync title={categorySlugData?.route?.title} />
+			<div style={{ paddingTop: '1rem' }} className="container">
+				{categoryDetailsData?.pagination?.count !== 0 && (
 					<div className={style.categoryTitlePrSort}>
 						<div className={style.categoryTitleAndPrCount}>
 							<h4 className={style.categoryTitle}>
@@ -152,6 +177,7 @@ export default function CategoryAndSubcategoryDetails() {
 								data={categoryDetailsFilterDatas}
 								onCheckInput={onCheckInput}
 								onClickFunk={handleMobileFilterArea}
+								slug={slug}
 							/>
 						</div>
 
@@ -174,14 +200,19 @@ export default function CategoryAndSubcategoryDetails() {
 							</div>
 						</div>
 					</div>
+				)}
 
-					<div className={style.filterAndCategoryFilterResultArea}>
-						<div className={style.webFilterAreaWrapper}>
-							<Filter
-								data={categoryDetailsFilterDatas}
-								onCheckInput={onCheckInput}
-							/>
-						</div>
+				<div className={style.filterAndCategoryFilterResultArea}>
+					<div className={style.webFilterAreaWrapper}>
+						<Filter
+							data={categoryDetailsFilterDatas}
+							onCheckInput={onCheckInput}
+							slug={slug}
+						/>
+					</div>
+					{categoryDetailsData?.pagination?.count === 0 ? (
+						<div className={style.noProduct}>Məhsul yoxdu</div>
+					) : (
 						<div className={style.productsAndPagination}>
 							<div className={style.productsArea}>
 								{categoryDetailsData?.data?.map((product) => (
@@ -193,9 +224,10 @@ export default function CategoryAndSubcategoryDetails() {
 								paginationData={categoryDetailsData.pagination}
 							/>
 						</div>
-					</div>
+					)}
 				</div>
-			)}
+			</div>
+			{/* )} */}
 		</>
 	);
 }

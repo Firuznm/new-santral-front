@@ -9,6 +9,7 @@ import style from './MyAddresses.module.scss';
 import { cityOptions } from '../../constants';
 import ModalUserAddressUpdate from '../../components/ModalUserAddressUpdate/ModalUserAddressUpdate';
 import ModalAddressDelete from '../../components/ModalAddressDelete/ModalAddressDelete';
+import HelmetAsync from '../../components/HelmetAsync/HelmetAsync';
 
 export default function MyAddresses() {
 	const [userAddressData, setUserAddressData] = useState([]);
@@ -64,88 +65,95 @@ export default function MyAddresses() {
 
 	
 	return (
-		<div className="container">
-			<div className={style.myAddressesPageWrapper}>
-				<div
-					onClick={handleModalAndUserAddressData}
-					className={`${style.modalBgOverlay} ${
-						showHiddenModal ? style.showOverlay : ''
-					}`}
-				></div>
-				<div className={style.modal}>
-					{showHiddenModal && (
-						<ModalUserAddressUpdate
-							closeModal={handleModalAndUserAddressData}
-							selectedAddress={selectedAddress}
-							del={deleteUserAddress}
-						/>
-					)}
-				</div>
-				<div className={style.UserAccoundAndOtherDetailNameWrapper}>
-					<UserAccoundAndOtherDetailName />
-				</div>
-				<div className={style.userAdersses}>
-					<h3 className="sectionMiniTitle">Mənim ünvanlarım</h3>
-					{userAddressData?.map((address) => (
-						<div key={address.id} className={style.userOneAddress}>
-							<div className={style.userNameSurnamePhoneCity}>
-								<div className={style.userNameCity}>
-									<h6 className={style.title}>Ad</h6>
-									<span className={style.value}>
-										{address.firstname}
-									</span>
-									<h6 className={style.title}>Şəhər</h6>
-									<span className={style.value}>
-										{cityOptions[address.city]}
-									</span>
-								</div>
-								<div className={style.userSurnamePhone}>
-									<h6 className={style.title}>Soyad</h6>
-									<span className={style.value}>
-										{address.lastname}
-									</span>
-									<h6 className={style.title}>Nömrə</h6>
-									<span className={style.value}>{address.mobile}</span>
-								</div>
-								<div className={style.icons}>
-									<span
-										onClick={() =>
-											handleModalAndUserAddressData(address.id)
-										}
-										className={style.edit}
+		<>
+			<HelmetAsync title={"Ünvanlarım"}/>
+			<div className="container">
+				<div className={style.myAddressesPageWrapper}>
+					<div
+						onClick={handleModalAndUserAddressData}
+						className={`${style.modalBgOverlay} ${
+							showHiddenModal ? style.showOverlay : ''
+						}`}
+					></div>
+					<div className={style.modal}>
+						{showHiddenModal && (
+							<ModalUserAddressUpdate
+								closeModal={handleModalAndUserAddressData}
+								selectedAddress={selectedAddress}
+								del={deleteUserAddress}
+							/>
+						)}
+					</div>
+					<div className={style.UserAccoundAndOtherDetailNameWrapper}>
+						<UserAccoundAndOtherDetailName />
+					</div>
+					<div className={style.userAdersses}>
+						<h3 className="sectionMiniTitle">Mənim ünvanlarım</h3>
+						{userAddressData?.map((address) => (
+							<div key={address.id} className={style.userOneAddress}>
+								<div className={style.userNameSurnamePhoneCity}>
+									<div className={style.userNameCity}>
+										<h6 className={style.title}>Ad</h6>
+										<span className={style.value}>
+											{address.firstname}
+										</span>
+										<h6 className={style.title}>Şəhər</h6>
+										<span className={style.value}>
+											{cityOptions[address.city]}
+										</span>
+									</div>
+									<div className={style.userSurnamePhone}>
+										<h6 className={style.title}>Soyad</h6>
+										<span className={style.value}>
+											{address.lastname}
+										</span>
+										<h6 className={style.title}>Nömrə</h6>
+										<span className={style.value}>
+											{address.mobile}
+										</span>
+									</div>
+									<div className={style.icons}>
+										<span
+											onClick={() =>
+												handleModalAndUserAddressData(address.id)
+											}
+											className={style.edit}
+										>
+											<EditIcon />
+										</span>
+										<span
+											onClick={() =>
+												deleteModalShowHidden(address.id)
+											}
+											className={style.delete}
+										>
+											<DeleteIcon />
+										</span>
+									</div>
+									<div
+										className={`${style.modalAddressDelete} ${
+											showHiddenDeleteModal ? style.showModal : ''
+										}`}
 									>
-										<EditIcon />
-									</span>
-									<span
-										onClick={() => deleteModalShowHidden(address.id)}
-										className={style.delete}
-									>
-										<DeleteIcon />
-									</span>
+										<ModalAddressDelete
+											yesDeleteAddress={() =>
+												deleteUserAddress(deleteAddressId)
+											}
+											noDeleteAddress={deleteModalClose}
+										/>
+									</div>
 								</div>
-								<div
-									className={`${style.modalAddressDelete} ${
-										showHiddenDeleteModal ? style.showModal : ''
-									}`}
-								>
-									<ModalAddressDelete
-										yesDeleteAddress={() =>
-											deleteUserAddress(deleteAddressId)
-										}
-										noDeleteAddress={deleteModalClose}
-									/>
-								</div>
+								<span className={style.userAddress}>
+									<h6 className={style.title}>Ünvan</h6>
+									<span className={style.value}>{address.address}</span>
+								</span>
 							</div>
-							<span className={style.userAddress}>
-								<h6 className={style.title}>Ünvan</h6>
-								<span className={style.value}>{address.address}</span>
-							</span>
-						</div>
-					))}
+						))}
+					</div>
+					<UserAddressAdd getAddressData={getAddressData} />
 				</div>
-				<UserAddressAdd getAddressData={getAddressData} />
 			</div>
-		</div>
+		</>
 	);
 }
 

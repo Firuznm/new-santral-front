@@ -28,8 +28,6 @@ export default function Home() {
 	const [homeNews, setHomeNews] = useState([]);
 	const [homeSeasonOffersData, setHomeSeasonOffersData] = useState([]);
 
-
-
 	const getHomeAllData = async () => {
 		try {
 			const [
@@ -68,17 +66,6 @@ export default function Home() {
 		getHomeAllData();
 	}, []);
 
-	// console.log("partners data=", homePartnersData);
-	// console.log("brands =", homeBrandsData);
-	// console.log("categoryData-", categoryDatas);
-	// console.log("main slider=", homeMainSliderDatas);
-	// console.log("home banner=",homeDiscountedDatas);
-	// console.log("homeBannerData-", homeBannersData);
-	// console.log("news", homeNews);
-	// console.log("seasonOffers-", homeSeasonOffersData);
-	// const baskets = useSelector(state => state.baskets)
-	//  const { baskets } = useSelector((state) => state.basketData);
-	//  console.log('home basket=', baskets);
 	return (
 		<div className="container">
 			<HomeMainSlider />

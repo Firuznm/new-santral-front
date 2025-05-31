@@ -1,19 +1,17 @@
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import "swiper/css/navigation";
+import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import { Navigation} from "swiper/modules";
-import styles from "./HomeDiscountedProducts.module.scss"
+import { Navigation } from 'swiper/modules';
+import styles from './HomeDiscountedProducts.module.scss';
 import ProductCart from '../../ProductCart/ProductCart';
 import ArrowLeftIcon from '../../../assets/Icons/ArrowLeftIcon';
 import ArrowRightIcon from '../../../assets/Icons/ArrowRightIcon';
 import SectionTitle from '../../SectionTitle/SectionTitle';
 
-
-export default function HomeDiscountedProducts({discountData}) {
-  // console.log("discountdata=", discountData);
-  return (
+export default function HomeDiscountedProducts({ discountData }) {
+	return (
 		discountData.length > 0 && (
 			<section id={styles.DiscountedProducts}>
 				<SectionTitle title={'Endirimdə olan məhsullar'} />
@@ -62,5 +60,5 @@ export default function HomeDiscountedProducts({discountData}) {
 				</div>
 			</section>
 		)
-  );
+	);
 }

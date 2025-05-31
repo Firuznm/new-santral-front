@@ -1,42 +1,38 @@
-import style from "./Footer.module.scss"
-import logo from "../../assets/logos/santralLogo.png"
-import FacebookIcon from "../../assets/Icons/FacebookIcon";
-import InstagramIcon from "../../assets/Icons/InstagramIcon";
-import WhatsappIcon from "../../assets/Icons/WhatsappIcon";
-import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
-import looptechLogo from "../../assets/logos/looptech-logo-animated.svg"
-import FooterCallPhoneIcon from "../../assets/Icons/FooterCallPhoneIcon";
-import FooterHomeCallIcon from "../../assets/Icons/FooterHomeCallIcon";
-import EmailIcon from "../../assets/Icons/EmailIcon";
-import LocationIcon from "../../assets/Icons/LocationIcon";
-import visaCartImg from "../../assets/logos/visa-electron.svg"
-import masterCartImg from "../../assets/logos/Mastercard-logo.svg";
-import santral from "../../Helpers/Helpers";
-import urls from "../../ApiUrls/Urls";
-import { OurAdvantagesMiniPageData} from "../../MyDatas/MyDatas";
+import style from './Footer.module.scss';
+import logo from '../../assets/logos/santralLogo.png';
+import FacebookIcon from '../../assets/Icons/FacebookIcon';
+import InstagramIcon from '../../assets/Icons/InstagramIcon';
+import WhatsappIcon from '../../assets/Icons/WhatsappIcon';
+import { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import looptechLogo from '../../assets/logos/looptech-logo-animated.svg';
+import FooterCallPhoneIcon from '../../assets/Icons/FooterCallPhoneIcon';
+import FooterHomeCallIcon from '../../assets/Icons/FooterHomeCallIcon';
+import EmailIcon from '../../assets/Icons/EmailIcon';
+import LocationIcon from '../../assets/Icons/LocationIcon';
+import visaCartImg from '../../assets/logos/visa-electron.svg';
+import masterCartImg from '../../assets/logos/Mastercard-logo.svg';
+import santral from '../../Helpers/Helpers';
+import urls from '../../ApiUrls/Urls';
+import { OurAdvantagesMiniPageData } from '../../MyDatas/MyDatas';
 
- 
 export default function Footer() {
 	const [categoryNameData, setCategoryNameData] = useState([]);
-	
 
-    const getCategoryData = async () => {
-        try {
-            const resData = await santral.api().post(urls.catalog);
-              setCategoryNameData(resData.data.data)
-        } catch (error) {
-            console.log(error);
-            
-        }
-    }
+	const getCategoryData = async () => {
+		try {
+			const resData = await santral.api().post(urls.catalog);
+			setCategoryNameData(resData.data.data);
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
-    useEffect(() => {
-        getCategoryData()
-    },[])
-// console.log("fot cat=", categoryNameData);
+	useEffect(() => {
+		getCategoryData();
+	}, []);
 
-  return (
+	return (
 		<div className={style.footerWrapper}>
 			<div className="container">
 				<div className={style.footerTop}>
@@ -75,55 +71,46 @@ export default function Footer() {
 				<div className={style.footerBottom}>
 					<div className={style.footerPage}>
 						<h4 className={style.footerPartTitle}>Şirkət</h4>
-					                                <NavLink
-                                                        className={({ isActive }) =>
-                                                            `${style.pageName} ${
-                                                                isActive ? style.active : ''
-                                                            }`
-                                                        }
-                                                        to="/about"
-                                                    >
-                                                        Haqqımızda
-                                                    </NavLink>
-                                                    <NavLink
-                                                        className={({ isActive }) =>
-                                                            `${style.pageName} ${
-                                                                isActive ? style.active : ''
-                                                            }`
-                                                        }
-                                                        to="/branches"
-                                                    >
-                                                        Filiallar
-                                                    </NavLink>
-                                                    <NavLink
-                                                        className={({ isActive }) =>
-                                                            `${style.pageName} ${
-                                                                isActive ? style.active : ''
-                                                            }`
-                                                        }
-                                                        to="/news"
-                                                    >
-                                                        Xəbərlər
-                                                    </NavLink>
-                                                    <NavLink
-                                                        className={({ isActive }) =>
-                                                            `${style.pageName} ${
-                                                                isActive ? style.active : ''
-                                                            }`
-                                                        }
-                                                        to="/projects"
-                                                    >
-                                                        Layihələr
-                                                    </NavLink>
+						<NavLink
+							className={({ isActive }) =>
+								`${style.pageName} ${isActive ? style.active : ''}`
+							}
+							to="/about"
+						>
+							Haqqımızda
+						</NavLink>
+						<NavLink
+							className={({ isActive }) =>
+								`${style.pageName} ${isActive ? style.active : ''}`
+							}
+							to="/branches"
+						>
+							Filiallar
+						</NavLink>
+						<NavLink
+							className={({ isActive }) =>
+								`${style.pageName} ${isActive ? style.active : ''}`
+							}
+							to="/news"
+						>
+							Xəbərlər
+						</NavLink>
+						<NavLink
+							className={({ isActive }) =>
+								`${style.pageName} ${isActive ? style.active : ''}`
+							}
+							to="/projects"
+						>
+							Layihələr
+						</NavLink>
 					</div>
 					<div className={style.footerForCustomer}>
-					  <h4 className={style.footerPartTitle}>Müştəri üçün</h4>
-					  {
-						  OurAdvantagesMiniPageData.map(item=>(
-					  <NavLink to={item.slug} key={item.id}>{item.title}</NavLink>
-						  ))
-					  }
-						
+						<h4 className={style.footerPartTitle}>Müştəri üçün</h4>
+						{OurAdvantagesMiniPageData.map((item) => (
+							<NavLink to={item.slug} key={item.id}>
+								{item.title}
+							</NavLink>
+						))}
 					</div>
 					<div className={style.footerCategoryWrapper}>
 						<h4 className={style.footerPartTitle}>Kateqoriyalar</h4>
@@ -180,5 +167,5 @@ export default function Footer() {
 				<object className={style.looptechLogo} data={looptechLogo} />
 			</a>
 		</div>
-  );
+	);
 }

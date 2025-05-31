@@ -5,14 +5,15 @@ import santral from '../../Helpers/Helpers';
 import urls from '../../ApiUrls/Urls';
 import IsSmallIcon from '../../assets/Icons/IsSmallIcon';
 import { MapContainer, Marker, TileLayer } from 'react-leaflet';
-import markerIcon from "../../assets/Images/map.png";
-// import markerIcon from '../../assets/Images/mapp.png';
+// import markerIcon from "../../assets/Images/map.png";
+import markerIcon from '../../assets/Images/mapp.png';
 // import markerIcon from '../../assets/Images/mappp.png';
 import L from 'leaflet';
+import HelmetAsync from '../../components/HelmetAsync/HelmetAsync';
     
     const icon = L.icon({
         iconUrl: markerIcon,
-        iconSize: [40, 40],
+        iconSize: [50, 90],
     });
 
 export default function BranchesDetaile() {
@@ -52,93 +53,104 @@ export default function BranchesDetaile() {
 		return txt.value;
 	}
 	return (
-		<div id={style.branchesDetailePage}>
-			<div className="container">
-				<div className={style.branchInfoAndMap}>
-					<div className={style.branchInfo}>
-						<div className={style.backIconAndBrancName}>
-							<span
-								onClick={() => navigate('/branches')}
-								className={style.backIcon}
-							>
-								<IsSmallIcon />
-							</span>
-							<h4 className={style.brancName}>{branchDetailData?.title}</h4>
-						</div>
-						{branchDetailData?.desc &&
-							(() => {
-								const parts = branchDetailData.desc
-									.split(/<\/?p>/)
-									.filter(Boolean)
-									.map((item) => item.trim())
-									.filter((item) => item !== '&nbsp;' && item !== '');
+		<>
+			<HelmetAsync title={branchDetailData?.title} />
+			<div id={style.branchesDetailePage}>
+				<div className="container">
+					<div className={style.branchInfoAndMap}>
+						<div className={style.branchInfo}>
+							<div className={style.backIconAndBrancName}>
+								<span
+									onClick={() => navigate('/branches')}
+									className={style.backIcon}
+								>
+									<IsSmallIcon />
+								</span>
+								<h4 className={style.brancName}>
+									{branchDetailData?.title}
+								</h4>
+							</div>
+							{branchDetailData?.desc &&
+								(() => {
+									const parts = branchDetailData.desc
+										.split(/<\/?p>/)
+										.filter(Boolean)
+										.map((item) => item.trim())
+										.filter(
+											(item) => item !== '&nbsp;' && item !== '',
+										);
 
-								return (
-									<>
-										<div className={style.address}>{decodeHTMLEntities(parts[0])}</div>
+									return (
+										<>
+											<div className={style.address}>
+												{decodeHTMLEntities(parts[0])}
+											</div>
 
-										{parts.slice(1).map((text, idx) => (
-											<p key={idx}>{decodeHTMLEntities(text)}</p>
-										))}
-									</>
-								);
-							})()}
-						<div className={style.location}>
-							<b>Ünvan:</b> {branchDetailData?.address}
+											{parts.slice(1).map((text, idx) => (
+												<p key={idx}>
+													{decodeHTMLEntities(text)}
+												</p>
+											))}
+										</>
+									);
+								})()}
+							<div className={style.location}>
+								<b>Ünvan:</b> {branchDetailData?.address}
+							</div>
 						</div>
-					</div>
-					{branchDetailData?.lat && branchDetailData?.lng && (
-						<div className={style.map}>
-							<MapContainer
-								style={{
-									width: '100%',
-									height: '100%',
-									zIndex: '5',
-                                    objectFit: 'cover',
-                                    borderRadius:"14px"
-								}}
-								center={[branchDetailData.lat, branchDetailData.lng]}
-								zoom={18}
-								scrollWheelZoom={true}
-							>
-								<TileLayer
-									attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-									url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-								/>
-								<Marker
-									position={[
-										branchDetailData.lat,
-										branchDetailData.lng,
-									]}
-									icon={icon}
-								/>
-							</MapContainer>
-						</div>
-					)}
-				</div>
-				<div className={style.ImgVideo}>
-					<div className={style.video}>
-						{isYouTube ? (
-							<iframe
-								src={getYouTubeEmbedUrl(videoUrl)}
-								frameBorder="0"
-								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-								allowFullScreen
-							></iframe>
-						) : (
-							<video  controls>
-								<source src={videoUrl} type="video/mp4" />
-							</video>
+						{branchDetailData?.lat && branchDetailData?.lng && (
+							<div className={style.map}>
+								<MapContainer
+									style={{
+										width: '100%',
+										height: '100%',
+										zIndex: '5',
+										objectFit: 'cover',
+										borderRadius: '14px',
+									}}
+									center={[branchDetailData.lat, branchDetailData.lng]}
+									zoom={18}
+									scrollWheelZoom={true}
+								>
+									<TileLayer
+										attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+										url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+									/>
+									<Marker
+										position={[
+											branchDetailData.lat,
+											branchDetailData.lng,
+										]}
+										icon={icon}
+									/>
+								</MapContainer>
+							</div>
 						)}
 					</div>
-					<div className={style.img}>
-						<img
-							src={`${santral.baseUrlImage}${branchDetailData?.image}`}
-							alt=""
-						/>
+					<div className={style.ImgVideo}>
+						<div className={style.video}>
+							{isYouTube ? (
+								<iframe
+									src={getYouTubeEmbedUrl(videoUrl)}
+									frameBorder="0"
+									allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+									allowFullScreen
+								></iframe>
+							) : (
+								<video controls>
+									<source src={videoUrl} type="video/mp4" />
+								</video>
+							)}
+						</div>
+						<div className={style.img}>
+							<img
+								src={`${santral.baseUrlImage}${branchDetailData?.image}`}
+								alt=""
+							/>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</>
 	);
 }

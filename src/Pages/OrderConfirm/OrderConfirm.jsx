@@ -13,6 +13,7 @@ import santral from '../../Helpers/Helpers';
 import urls from '../../ApiUrls/Urls';
 import withReactContent from 'sweetalert2-react-content';
 import Swal from 'sweetalert2';
+import HelmetAsync from '../../components/HelmetAsync/HelmetAsync';
 
 export default function OrderConfirm() {
 	const navigate = useNavigate();
@@ -40,6 +41,7 @@ export default function OrderConfirm() {
 			orderNote: '',
 			payment: '',
 			products: '',
+			cashback: false,
 		},
 		validationSchema: Yup.object().shape({
 			receiverFirstname: Yup.string().required('Adınızı daxil edin'),
@@ -56,21 +58,17 @@ export default function OrderConfirm() {
 		}),
 
 		onSubmit: async (values) => {
-			let data = {
-				...values,
-				senderFirstname: values.receiverFirstname,
-				senderLastname: values.receiverLastname,
-				senderMobile: values.receiverMobile,
-				address: null,
-			};
-			// console.log('qeydiyyatsiz alis=', data);
-			resetForm();
 			if (isLogin) {
-				console.log('api basket data', apiBaskets);
-				FuncApiBasketAllClear();
-			} else {
+				let data = {
+					...values,
+					senderFirstname: values.receiverFirstname,
+					senderLastname: values.receiverLastname,
+					senderMobile: values.receiverMobile,
+					cashback: values.cashback,
+					address: null,
+				};
 				try {
-					data.products = JSON.stringify(localBaskets); 
+					data.products = JSON.stringify(apiBaskets);
 					await santral.api().post(urls.order, JSON.stringify(data));
 					const MySwal = withReactContent(Swal);
 					MySwal.fire({
@@ -85,9 +83,34 @@ export default function OrderConfirm() {
 					console.log(error);
 					alert('Xəta baş verdi (local basket)!');
 				}
-				dispatch(clearBaskets());
+				FuncApiBasketAllClear();
+			} else {
+				let data = {
+					...values,
+					senderFirstname: values.receiverFirstname,
+					senderLastname: values.receiverLastname,
+					senderMobile: values.receiverMobile,
+					address: null,
+				};
+				try {
+					data.products = JSON.stringify(localBaskets);
+					await santral.api().post(urls.order, JSON.stringify(data));
+					const MySwal = withReactContent(Swal);
+					MySwal.fire({
+						title: <strong>Sifariş göndərildi</strong>,
+						html: <i>Təşəkkür edirik!</i>,
+						icon: 'success',
+					});
+					dispatch(clearBaskets());
+					resetForm();
+					navigate('/order-success');
+				} catch (error) {
+					console.log(error);
+					alert('Xəta baş verdi (local basket)!');
+				}
 			}
 			resetForm();
+			dispatch(clearBaskets());
 		},
 	});
 
@@ -159,88 +182,92 @@ export default function OrderConfirm() {
 			},
 		],
 		textArea: {
-			value: values.message,
+			value: values.orderNote,
 			handleChange: handleChange,
 		},
 	};
 
 	return (
-		<div className="container">
-			<SectionTitle
-				marginBottom={'0'}
-				title={'Sifarişin rəsmiləşdirilməsi'}
-			/>
-			<div className={style.OrderConfirmPage}>
-				<div className={style.formGroup}>
-					<h3 className="sectionMiniTitle">Yeni ünvan əlavə et</h3>
-					<form onSubmit={handleSubmit}>
-						<div className={style.userNameSurname}>
-							{orderConfirmFormInputData.nameSurname.map((inputData) => (
-								<Input key={inputData.id} inputInfo={inputData} />
-							))}
-						</div>
-						<div className={style.phoneEmail}>
-							{orderConfirmFormInputData.phoneEmail.map((inputData) => (
-								<Input key={inputData.id} inputInfo={inputData} />
-							))}
-						</div>
-						<h3 className="sectionMiniTitle">Çatdırılma ünvanı</h3>
-						<div className={style.cityAddress}>
-							{orderConfirmFormInputData.cityAddress.map((inputData) => (
-								<Input key={inputData.id} inputInfo={inputData} />
-							))}
-						</div>
+		<>
+			<HelmetAsync title={"Sifarişi tamamla"}/>
+			<div className="container">
+				<SectionTitle marginBottom={'0'} title={'Sifarişin rəsmiləşdirilməsi'} />
+				<div className={style.OrderConfirmPage}>
+					<div className={style.formGroup}>
+						<h3 className="sectionMiniTitle">Yeni ünvan əlavə et</h3>
+						<form onSubmit={handleSubmit}>
+							<div className={style.userNameSurname}>
+								{orderConfirmFormInputData.nameSurname.map(
+									(inputData) => (
+										<Input key={inputData.id} inputInfo={inputData} />
+									),
+								)}
+							</div>
+							<div className={style.phoneEmail}>
+								{orderConfirmFormInputData.phoneEmail.map((inputData) => (
+									<Input key={inputData.id} inputInfo={inputData} />
+								))}
+							</div>
+							<h3 className="sectionMiniTitle">Çatdırılma ünvanı</h3>
+							<div className={style.cityAddress}>
+								{orderConfirmFormInputData.cityAddress.map(
+									(inputData) => (
+										<Input key={inputData.id} inputInfo={inputData} />
+									),
+								)}
+							</div>
 
-						<label htmlFor="Əlavə qeydləriniz">Əlavə qeydləriniz</label>
-						<textarea
-							name="message"
-							placeholder="Qeydiniz..."
-							rows="3"
-							value={values.message}
-							onChange={handleChange}
-						></textarea>
-					</form>
-					<h5 className={style.paymet}>Ödəniş üsulu *</h5>
-					<div className={style.btnList}>
-						<div
-							className={`${style.doorPayment} ${
-								values.payment === 'cash' ? style.active : ''
-							}`}
-						>
-							<label htmlFor="doorPayment">Nağd</label>
-							<input
-								type="radio"
-								id="doorPayment"
-								name="payment"
-								value="cash"
+							<label htmlFor="Əlavə qeydləriniz">Əlavə qeydləriniz</label>
+							<textarea
+								name="orderNote"
+								placeholder="Qeydiniz..."
+								rows="3"
+								value={values.orderNote}
 								onChange={handleChange}
-							/>
+							></textarea>
+						</form>
+						<h5 className={style.paymet}>Ödəniş üsulu *</h5>
+						<div className={style.btnList}>
+							<div
+								className={`${style.doorPayment} ${
+									values.payment === 'cash' ? style.active : ''
+								}`}
+							>
+								<label htmlFor="doorPayment">Nağd</label>
+								<input
+									type="radio"
+									id="doorPayment"
+									name="payment"
+									value="cash"
+									onChange={handleChange}
+								/>
+							</div>
+							<div
+								className={`${style.onlinePaymet} ${
+									values.payment === 'card' ? style.active : ''
+								}`}
+							>
+								<label htmlFor="onlinePaymet">Onlayn</label>
+								<input
+									type="radio"
+									id="onlinePaymet"
+									name="payment"
+									value="card"
+									onChange={handleChange}
+								/>
+							</div>
 						</div>
-						<div
-							className={`${style.onlinePaymet} ${
-								values.payment === 'card' ? style.active : ''
-							}`}
-						>
-							<label htmlFor="onlinePaymet">Onlayn</label>
-							<input
-								type="radio"
-								id="onlinePaymet"
-								name="payment"
-								value="card"
-								onChange={handleChange}
-							/>
-						</div>
+						{errors.payment && (
+							<p className={style.error}>{errors.payment}</p>
+						)}
 					</div>
-					{errors.payment && (
-						<p className={style.error}>{errors.payment}</p>
-					)}
-				</div>
 
-				<BasketPrNamePriceTotal
-					onclick={handleSubmit}
-					title={'Sifarisi tamamla'}
-				/>
+					<BasketPrNamePriceTotal
+						onclick={handleSubmit}
+						title={'Sifarişi tamamla'}
+					/>
+				</div>
 			</div>
-		</div>
+		</>
 	);
 }

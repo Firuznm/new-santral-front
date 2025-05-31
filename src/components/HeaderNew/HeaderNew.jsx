@@ -5,8 +5,13 @@ import HeaderPhoneIcon from '../../assets/Icons/HeaderPhoneIcon';
 import defaultUserImg from '../../assets/Images/dafaultUserImg.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { Link, NavLink, useNavigate} from 'react-router-dom';
-import { authMe, getAllCatalogDatas, logout, toggleShowEnterSiteArea } from '../../redux/userSlice';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
+import {
+	authMe,
+	getAllCatalogDatas,
+	logout,
+	toggleShowEnterSiteArea,
+} from '../../redux/userSlice';
 import EnterSiteHeader from '../../Authentication/EnterSiteHeader/EnterSiteHeader';
 import HeartIcon from '../../assets/Icons/HeartIcon';
 import BasketIcon from '../../assets/Icons/BasketIcon';
@@ -19,7 +24,6 @@ import HeaderMobile from '../HeaderMobile/HeaderMobile';
 import { useSearch } from '../../context/SearchContext';
 import CloseIcon from '../../assets/Icons/CloseIcon';
 
-       
 export default function HeaderNew() {
 	const [showHiddenCatalog, setShowHiddenCatalog] = useState(false);
 	const [scrollHeaderChange, setScrollHeaderChange] = useState(true);
@@ -33,44 +37,42 @@ export default function HeaderNew() {
 	const { authMeUser, showOpenEnterSiteArea, isLogin, bpUser } = useSelector(
 		(state) => state.userInfo,
 	);
-	// console.log("meeee =", authMeUser);
-	// console.log('error= ', authMe?.error);
 
 	useEffect(() => {
-			searchFunc(searchInputValue,1);
+		searchFunc(searchInputValue, 1);
 	}, [searchInputValue]);
-	
+
 	const onClickSearchReslutCart = (itemName) => {
 		clearInput();
 		navigate(`/product/${itemName}`);
 	};
 
-		const onKeyDownInput = (e) => {
-			if (searchInputValue !== '' && e.key === 'Enter') {
-				clearInput();
-				navigate(`/search?searchValue=${searchInputValue}`);
-			} else {
-				return false;
-			}
-	}; 
+	const onKeyDownInput = (e) => {
+		if (searchInputValue !== '' && e.key === 'Enter') {
+			clearInput();
+			navigate(`/search?searchValue=${searchInputValue}`);
+		} else {
+			return false;
+		}
+	};
 
 	const onClickMoreSearchBtn = () => {
 		clearInput();
 		navigate(`/search?searchValue=${searchInputValue}`);
-	}
-	
-		const clearInput = () => {
-			setSearchInputValue('');
-		};
-		const onChangeSearchInput = (e) => {
-			setSearchInputValue(e.target.value);
-		};
-    
+	};
+
+	const clearInput = () => {
+		setSearchInputValue('');
+	};
+	const onChangeSearchInput = (e) => {
+		setSearchInputValue(e.target.value);
+	};
+
 	const onClickCatalogShowHidden = () => {
 		const scrollSituation = !showHiddenCatalog;
-		setShowHiddenCatalog(scrollSituation); 
+		setShowHiddenCatalog(scrollSituation);
 		document.body.style.overflow = scrollSituation ? 'hidden' : 'auto';
-	}; 
+	};
 
 	const handleScroll = () => {
 		if (window.scrollY > 10) {
@@ -87,8 +89,6 @@ export default function HeaderNew() {
 			dispatch(authMe());
 		}
 	}, [isLogin, dispatch]);
-
-	
 
 	const handleLogout = () => {
 		dispatch(logout());
@@ -127,7 +127,7 @@ export default function HeaderNew() {
 								</a>
 								{scrollHeaderChange ? (
 									''
-								) : ( 
+								) : (
 									<div className={style.headerTopCatalog}>
 										<div
 											onClick={onClickCatalogShowHidden}
@@ -181,13 +181,23 @@ export default function HeaderNew() {
 															<span className={style.title}>
 																{item.title}
 															</span>
-															<div className={style.priceList}>
-																{item?.discountPercent != 0 && (
+															<div
+																className={
+																	style.priceList
+																}
+															>
+																{item?.discountPercent !=
+																	0 && (
 																	<span
 																		className={
 																			style.discountPercent
 																		}
-																	>{item?.discountPercent}%</span>
+																	>
+																		{
+																			item?.discountPercent
+																		}
+																		%
+																	</span>
 																)}
 																{item?.oldPrice != 0 && (
 																	<span
@@ -195,7 +205,9 @@ export default function HeaderNew() {
 																			style.oldPrice
 																		}
 																	>
-																		{item?.oldPrice?.toFixed(2)}
+																		{item?.oldPrice?.toFixed(
+																			2,
+																		)}
 																	</span>
 																)}
 
@@ -204,7 +216,10 @@ export default function HeaderNew() {
 																		style.price
 																	}
 																>
-																	{item?.price?.toFixed(2)}₼
+																	{item?.price?.toFixed(
+																		2,
+																	)}
+																	₼
 																</span>
 															</div>
 														</div>
@@ -463,12 +478,14 @@ export default function HeaderNew() {
 				</div>
 			</div>
 			<div className={style.mobileHeaderVersion}>
-				<HeaderMobile handleLogout={handleLogout}
-	onClickSearchReslutCart={onClickSearchReslutCart}
-	onKeyDownInput = {onKeyDownInput}
-	onClickMoreSearchBtn = {onClickMoreSearchBtn}
-	clearInput = {clearInput}
-	onChangeSearchInput={onChangeSearchInput} />
+				<HeaderMobile
+					handleLogout={handleLogout}
+					onClickSearchReslutCart={onClickSearchReslutCart}
+					onKeyDownInput={onKeyDownInput}
+					onClickMoreSearchBtn={onClickMoreSearchBtn}
+					clearInput={clearInput}
+					onChangeSearchInput={onChangeSearchInput}
+				/>
 			</div>
 		</div>
 	);

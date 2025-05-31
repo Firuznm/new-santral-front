@@ -9,6 +9,7 @@ import urls from "../../ApiUrls/Urls";
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import HelmetAsync from "../../components/HelmetAsync/HelmetAsync";
 
 export default function ChangePassword() {
 	const navigate = useNavigate();
@@ -85,20 +86,23 @@ export default function ChangePassword() {
 		},
 	];
 
-  return (
-		<div className="container">
-			<div className={style.changePasswordPage}>
-				<UserAccoundAndOtherDetailName />
-				<div className={style.changePasswordForm}>
-					<h3 className="sectionMiniTitle">Şifrəni dəyiş</h3>
-					<form onSubmit={handleSubmit}>
-						{changePasswordInputsData.map((inputData) => (
-							<Input key={inputData.id} inputInfo={inputData} />
-						))}
-						<Button title={'Yadd saxla'} />
-					</form>
+	return (
+		<>
+			<HelmetAsync title={"Şifrəni dəyiş"}/>
+			<div className="container">
+				<div className={style.changePasswordPage}>
+					<UserAccoundAndOtherDetailName />
+					<div className={style.changePasswordForm}>
+						<h3 className="sectionMiniTitle">Şifrəni dəyiş</h3>
+						<form onSubmit={handleSubmit}>
+							{changePasswordInputsData.map((inputData) => (
+								<Input key={inputData.id} inputInfo={inputData} />
+							))}
+							<Button title={'Yadd saxla'} />
+						</form>
+					</div>
 				</div>
 			</div>
-		</div>
-  );
+		</>
+	);
 }

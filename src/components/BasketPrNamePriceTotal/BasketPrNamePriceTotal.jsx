@@ -19,7 +19,7 @@ export default function BasketPrNamePriceTotal({ onclick, title }) {
 		const priceToUse = item.oldPrice === 0 ? item.price : item.oldPrice;
 		return acm + priceToUse * item.count;
 	}, 0);
-
+  
 	const Price = (isLogin ? apiBaskets : localBaskets)?.reduce((acm, item) => {
 		return (acm += item.price * item.count);
 	}, 0);
@@ -32,12 +32,6 @@ export default function BasketPrNamePriceTotal({ onclick, title }) {
 	}, 0);
 
 	const discountBPprice = allPrice - BPprice;
-
-	// console.log('allprice=', allPrice);
-	// console.log('discount price=', discountPrice);
-	// console.log('discount price=', Price);
-	// console.log('discount bp price=', discountBPprice);
-	// console.log('bpPrice= ', BPprice);
 
 	return (
 		<div className={style.wrapperBasketContent}>
@@ -113,10 +107,12 @@ export default function BasketPrNamePriceTotal({ onclick, title }) {
 							{(bpUser ? discountBPprice : discountPrice).toFixed(2)}₼
 						</span>
 					</div>
-					{isChecked && <div className={style.paymendCashback}>
-						<span className={style.key}>Cashback:</span>
-						<span className={style.value}>{authMeUser?.cashback}₼</span>
-					</div>}
+					{isChecked && (
+						<div className={style.paymendCashback}>
+							<span className={style.key}>Cashback:</span>
+							<span className={style.value}>{authMeUser?.cashback}₼</span>
+						</div>
+					)}
 					<div className={style.amountPayEnd}>
 						{bpUser ? (
 							<img className={style.bpPriceImg} src={bpPriceImg} alt="" />
@@ -134,6 +130,7 @@ export default function BasketPrNamePriceTotal({ onclick, title }) {
 						bilərsiniz. Hər uğurlu sifarişdə(1₼ və üzəri) sifariş məbləğinin
 						1%-i qədər cashback qazanın.
 					</p>
+					{/* bu display none oldu duzelis olmalidi acilacaq */}
 					{isLogin && !bpUser && (
 						<div className={style.cashback}>
 							<input
@@ -143,7 +140,7 @@ export default function BasketPrNamePriceTotal({ onclick, title }) {
 								id="cashback"
 							/>
 							<label htmlFor="cashback">
-								Cashbackdən istifadə et:  {authMeUser?.cashback}₼
+								Cashbackdən istifadə et: {authMeUser?.cashback}₼
 							</label>
 						</div>
 					)}

@@ -1,22 +1,21 @@
-import style from "./PrDetailsPagePrImgSlider.module.scss"
+import style from './PrDetailsPagePrImgSlider.module.scss';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
-import {  FreeMode, Navigation,Thumbs } from 'swiper/modules';
-import {  useState } from "react";
-import santral from "../../Helpers/Helpers";
-import { useSelector } from "react-redux";
+import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
+import { useState } from 'react';
+import santral from '../../Helpers/Helpers';
+import { useSelector } from 'react-redux';
 
-export default function PrDetailsPagePrImgSlider({prDetailsData,discountRate }) {
-  const [thumbsSwiper, setThumbsSwiper] = useState(null);
-  const { bpUser } = useSelector((state) => state.userInfo);
-// console.log("slider data-", prDetailsData);
+export default function PrDetailsPagePrImgSlider({ prDetailsData, discountRate }) {
+	const [thumbsSwiper, setThumbsSwiper] = useState(null);
+	const { bpUser } = useSelector((state) => state.userInfo);
 
-  return (
-		<div className={`${style.prDetailsSlider} ${bpUser ? style.BPheight : ""}`}>
+	return (
+		<div className={`${style.prDetailsSlider} ${bpUser ? style.BPheight : ''}`}>
 			{prDetailsData.oldPrice > 0 && (
 				<div className={style.discountRate}>-{discountRate}%</div>
 			)}
@@ -68,5 +67,5 @@ export default function PrDetailsPagePrImgSlider({prDetailsData,discountRate }) 
     } */}
 			</Swiper>
 		</div>
-  );
+	);
 }

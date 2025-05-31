@@ -1,4 +1,5 @@
 #Basket {
+	min-height: 100vh;
 	.basketContent {
 		display: flex;
 		gap: 1rem;
@@ -126,6 +127,7 @@
 		}
 	}
 	.freeBasket {
+		margin-top: 200px;
 		color: red;
 		display: flex;
 		justify-content: center;

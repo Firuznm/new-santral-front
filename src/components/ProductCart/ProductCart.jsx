@@ -113,24 +113,19 @@ import { addToBasket, apiAddToBasket, GetAllApiBaskets } from '../../redux/Baske
 import bpPriceImg from '../../assets/Images/bpQiymeti.png';
 import { toggleFavoriteItem } from '../../redux/FavoriteItemsSlice';
 import FullRedHeartIcon from '../../assets/Icons/FullRedHeartIcon';
-// import { useEffect } from 'react';
 
 export default function ProductCart({ data }) {
-	// console.log("pr data=", data);
-
-	
-	const dispatch = useDispatch();   
+	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const { isLogin, bpUser } = useSelector((state) => state.userInfo);
 	const { localBaskets, apiBaskets } = useSelector((state) => state.basketData);
 	const { favoriteItemsList } = useSelector((state) => state.favoriteItemsData);
 
-	const isFavorite = favoriteItemsList.some((fav) => fav.id === data.id); 
+	const isFavorite = favoriteItemsList.some((fav) => fav.id === data.id);
 	const prInLocalBasket = localBaskets.some((product) => product.id === data.id);
 	const prInApiBasket = apiBaskets?.some((product) => product.id === data.id);
 	const prIsInBasket = isLogin ? prInApiBasket : prInLocalBasket;
-	// console.log("bp-user=", bpUser);
-	
+
 	const addToPrBasket = async () => {
 		if (prIsInBasket) {
 			navigate('/basket');
@@ -219,13 +214,17 @@ export default function ProductCart({ data }) {
 						</span>
 					</div>
 				)}
-				{data?.price !== null && <div
-					onClick={addToPrBasket}
-					className={`${style.basket} ${prIsInBasket ? style.prBasket : ''}`}
-				>
-					{prIsInBasket ? 'Səbətdədir' : 'Səbətə at'}
-					{prIsInBasket ? <BasketIcon /> : <BasketIconBlack />}
-				</div>}
+				{data?.price !== null && (
+					<div
+						onClick={addToPrBasket}
+						className={`${style.basket} ${
+							prIsInBasket ? style.prBasket : ''
+						}`}
+					>
+						{prIsInBasket ? 'Səbətdədir' : 'Səbətə at'}
+						{prIsInBasket ? <BasketIcon /> : <BasketIconBlack />}
+					</div>
+				)}
 			</div>
 		</div>
 	);
