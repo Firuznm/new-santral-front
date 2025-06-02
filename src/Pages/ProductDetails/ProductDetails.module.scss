@@ -9,7 +9,7 @@
 		z-index: 999;
 		top: 0;
 		left: 0;
-		background-color: rgba(255, 255, 255, 0.38);
+		background-color: rgba(255, 255, 255, 0.38);             
 	}
 	.hiddenOverlay {
 		display: none;
@@ -82,23 +82,14 @@
 	}
 	.prImgAndPrInfo {
 		position: relative;
-		// height: 600px;
 		display: flex;
 		justify-content: space-between;
-	     gap: 2rem;
-		.delivery {
-			position: absolute;
-			top: 7px;
-			left: 108px;
-			width: 100%;
-			z-index: 9;
-		}
+	     gap: 10px;
 		.prInfoWrapper {
 			position: relative;
-			width: calc(100% - 700px);
+			width: 47%;
 			padding: 23px 15px 10px 15px;
 			border-radius: 14px;
-			// box-shadow: 0px 2px 79px 0px rgba(0, 0, 0, 0.1);
 			border: 1px solid rgba(234, 234, 234, 1);
 			.prTitleAndFavoriteSocial {
 				display: flex;
@@ -183,9 +174,9 @@
 				justify-content: space-between;
 				.prAvailable {
 					font-size: 1.2rem;
-					color: black;
+					color: rgba(23, 165, 57, 1);
 					.productCount {
-						color: black;
+						color: rgba(23, 165, 57, 1);
 					}
 				}
 				.prCode {
@@ -265,7 +256,7 @@
 					}
 				}
 				.paymentCartSlider {
-					width: 300px;
+					width: 350px;
 					border: 2px solid rgb(255 210 63);
 					border-radius: 10px;
 					.creditCartSlider {
@@ -327,15 +318,15 @@
 
 			.btnGroup {
 				display: flex;
-				justify-content: center;
+				justify-content: space-between;
 				align-items: center;
-				gap: 1.4rem;
+				gap: 20px;
 				.basketBtn,
 				.oneClickByBtn,
 				.callBtn {
 					font-size: 1.2rem;
 					height: 50px;
-					padding: 0 1.5rem;
+					padding: 0 1rem;
 					border-radius: 50px;
 					display: flex;
 					justify-content: center;
@@ -346,15 +337,24 @@
 					border: 1px solid #ffd23f;
 					svg {
 						margin-left: 10px;
+						height: 25px;
 					}
 				}
 				.basketBtn {
 					background-color: #ffc505;
+					white-space: nowrap;
+					width: 40%;
 				}
 				.prBasket {
 					background-color: rgb(49, 48, 48);
 					color: white;
 					border: 1px solid rgb(49, 48, 48);
+				}
+				.callBtn{
+					width: 30%;
+				}
+				.oneClickByBtn{
+					width: 30%;
 				}
 				.callBtn,
 				.oneClickByBtn {
@@ -372,7 +372,7 @@
 			.billboard {
 				margin: 15px auto 0;
 				height: 170px;
-				width: 340px;
+				width: 100%;
 				border-radius: 7px;
 				border: 1px solid rgb(105, 105, 105);
 				video{
@@ -387,83 +387,387 @@
 }
 
 // product details page responsive
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 1300px) {
 	#prDetailsWrapper {
+		// .overlayOneByModal {
+		// 	cursor: pointer;
+		// 	width: 100%;
+		// 	height: 100vh;
+		// 	position: fixed;
+		// 	z-index: 999;
+		// 	top: 0;
+		// 	left: 0;
+		// 	background-color: rgba(255, 255, 255, 0.38);             
+		// }
+		// .hiddenOverlay {
+		// 	display: none;
+		// }
+		// .modalWrapper {
+		// 	position: fixed;
+		// 	top: 50%;
+		// 	left: 50%;
+		// 	transform: translate(-50%, -50%);
+		// 	z-index: 9999;
+		// 	display: flex;
+		// 	justify-content: center;
+		// 	align-items: center;
+		// 	height: 100vh;
+		// 	.oneClickByModalArea {
+		// 		width: 250px;
+		// 		background: #efefef;
+		// 		padding: 1rem;
+		// 		border-radius: 7px;
+		// 		.modalHeaderAndCloseBtn {
+		// 			display: flex;
+		// 			justify-content: space-between;
+		// 			align-items: center;
+		// 			.title {
+		// 				font-size: 1.4rem;
+		// 				font-weight: 300;
+		// 			}
+		// 			svg {
+		// 				margin-top: 6px;
+		// 				cursor: pointer;
+		// 			}
+		// 		}
+	
+		// 		.oneClickInp {
+		// 			width: 90%;
+		// 			margin-top: 5px;
+		// 			border: none;
+		// 			padding: 10px 5px;
+		// 			background-color: transparent;
+		// 			border: 1px solid #777777;
+		// 			border-radius: 7px;
+		// 			outline: none;
+		// 		}
+		// 		.errorMessage {
+		// 			display: block;
+		// 			font-size: 0.8rem;
+		// 			font-weight: 300;
+		// 			color: red;
+		// 			font-style: italic;
+		// 			margin-bottom: 5px;
+		// 		}
+		// 		.oneClickBuyBtn {
+		// 			width: 100%;
+		// 			padding: 10px 5px;
+		// 			border-radius: 7px;
+		// 			border: none;
+		// 			cursor: pointer;
+		// 			background-color: #ffd23f;
+		// 			font-size: 1.2rem;
+		// 		}
+		// 	}
+		// }
+		// .closeModal {
+		// 	display: none;
+		// }
+		// .line {
+		// 	height: 1px;
+		// 	background-color: rgb(234 234 234);
+		// 	border: none;
+		// }
 		.prImgAndPrInfo {
 			.prInfoWrapper {
-				width: calc(100% - 470px);	
+				// position: relative;
+				// width: 50%;
+				padding: 5px 15px 10px 15px;
+				// border-radius: 14px;
+				// box-shadow: 0px 2px 79px 0px rgba(0, 0, 0, 0.1);
+				border: 1px solid rgba(234, 234, 234, 1);
 				.prTitleAndFavoriteSocial {
+					// display: flex;
+					// justify-content: space-between;
+					// align-items: center;
+					// gap: 1rem;
 					.prTitle {
 						font-size: 1rem;
 					}
+					// .favoriteSocial {
+					// 	display: flex;
+					// 	align-items: center;
+					// 	gap: 1rem;
+					// 	.favorite,
+					// 	.socialWrapper {
+					// 		width: 50px;
+					// 		height: 50px;
+					// 		border-radius: 50%;
+					// 		display: flex;
+					// 		justify-content: center;
+					// 		align-items: center;
+					// 		background: #efefef;
+					// 		cursor: pointer;
+					// 		transition: 0.5s ease;
+					// 	}
+					// 	.prInFavoriteList {
+					// 		background-color: rgba(253, 219, 216, 1);
+					// 	}
+					// 	.btnActive {
+					// 		background: #ffd23f !important;
+					// 	}
+					// 	.socialWrapper {
+					// 		position: relative;
+					// 		.prDeatailsSocilaLink {
+					// 			position: absolute;
+					// 			top: 52px;
+					// 			box-shadow: 0px 2px 79px 0px #0000001a;
+					// 			background-color: white;
+					// 			border: 1px solid #eaeaea;
+					// 			right: -7px;
+					// 			z-index: 9;
+					// 			border-radius: 16px;
+					// 			transition: 0.5s ease;
+					// 			transition: 300ms ease;
+					// 			transform-origin: top;
+					// 			transform: scaleY(1);
+					// 			.prDetailsSocial {
+					// 				display: flex;
+					// 				align-items: center;
+					// 				padding: 15px 25px;
+					// 				border-bottom: 1px solid #eaeaea;
+					// 				color: black;
+					// 				font-size: 1.2rem;
+					// 				white-space: nowrap;
+					// 				&:nth-child(4) {
+					// 					border-bottom: none;
+					// 				}
+					// 				img {
+					// 					margin-right: 14px;
+					// 				}
+					// 				&:hover {
+					// 					background-color: #efefef;
+					// 					&:nth-child(1) {
+					// 						border-radius: 16px 16px 0 0;
+					// 					}
+					// 					&:nth-child(4) {
+					// 						border-radius: 0 0 16px 16px;
+					// 					}
+					// 				}
+					// 			}
+					// 		}
+					// 		.noActive {
+					// 			transform: scaleY(0);
+					// 		}
+					// 	}
+					// }
 				}
 				.prAvailableAndPrCod {
-					margin-top: 0.2rem;
-					.prAvailable {
-						font-size: 1rem;
-					}
+					margin-top: 0;
+					// display: flex;
+					// justify-content: space-between;
+					// .prAvailable {
+					// 	font-size: 1.2rem;
+					// 	color: rgba(23, 165, 57, 1);
+					// 	.productCount {
+					// 		color: rgba(23, 165, 57, 1);
+					// 	}
+					// }
+					// .prCode {
+					// 	color: black;
+					// 	.code {
+					// 		color: black;
+					// 	}
+					// }
 				}
-				.priceWrapper {
-					flex-direction: column;
-					.bpPriceWrapper,
-					.priceOldPrice {
-					   flex-direction: column !important;
+				.prCountAndPrice {
+					// display: flex;
+					// justify-content: space-between;
+					// align-items: center;
+					// gap: 1rem;
+					.prCountWrapper {
+						// width: 110px;
+						height: 15px;
+						// display: flex;
+						// justify-content: space-between;
+						// align-items: center;
+						// border: 1px solid #eaeaea;
+						// padding: 10px;
+						// border-radius: 50px;
+						// margin-bottom: 8px;
+						// .decrease,
+						// .increase {
+						// 	width: 30px;
+						// 	height: 30px;
+						// 	display: flex;
+						// 	justify-content: center;
+						// 	align-items: center;
+						// 	border-radius: 50%;
+						// 	cursor: pointer;
+						// 	transition: 0.5s ease;
+						// 	&:hover {
+						// 		background: #ffd23f;
+						// 	}
+						// }
 					}
+					// .priceWrapper {
+					// 	display: flex;
+					// 	align-items: center;
+					// 	.oldPrice,
+					// 	.noOldPrice {
+					// 		font-size: 1.2rem;
+					// 		color: #00000061;
+					// 		text-decoration: line-through;
+					// 		text-decoration-color: #00000061;
+					// 	}
+					// 	.bpPrice,
+					// 	.price {
+					// 		margin: 0 15px 0 20px;
+					// 		font-size: 24px;
+					// 		font-weight: 700;
+					// 		color: rgba(253, 133, 33, 1);
+					// 	}
+					// 	.bpPriceWrapper,
+					// 	.priceOldPrice {
+					// 		display: flex;
+					// 		flex-direction: row-reverse;
+					// 		align-items: center;
+					// 	}
+					// }
 				}
 				.paymentCartInfoAndSlider {
-				     flex-direction: column;
-					 align-items: flex-start;
-					 	.paymentCartSlider {
-							width: 100%;
-							margin-top: 10px;
-						.creditCartSlider {
-							
-							.BirKart,
-							.TamKart {
-								padding: 5px 0;}}}
+					// display: flex;
+					// justify-content: space-between;
+					// align-items: center;
+					flex-direction: column;
 					.paymentCartInfo {
+						display: flex;
+						align-items: center;
+					     margin:  0 auto 5px;
 						.title {
 							font-size: 1rem;
 						}
 						.info {
-							font-size: 1rem;
+							font-size: .7rem;
+						}
+					}
+					.paymentCartSlider {
+						width: 99%;
+						// border: 2px solid rgb(255 210 63);
+						// border-radius: 10px;
+						.creditCartSlider {
+							.BirKart,
+							.TamKart {
+								padding: 10px 0;
+								display: flex;
+								justify-content: center;
+								align-items: center;
+								img {
+									height: 28px;
+									margin-right: 10px;
+								}
+								.content {
+									font-size: 1.1rem;
+									font-weight: 700;
+								}
+							}
 						}
 					}
 				}
-				.paymentMonths {
-					margin: 20px 0;
-					padding: 4px 50px;
-					.month {
-						padding: 8px 6px;
-					}
+				// .paymentMonths {
+				// 	margin: 20px 0;
+				// 	padding: 10px 50px;
+				// 	border: 1px solid #eaeaea;
+				// 	border-radius: 10px;
+				// 	display: flex;
+				// 	justify-content: space-evenly;
+				// 	align-items: center;
+				// 	.month {
+				// 		padding: 12px 10px;
+				// 		margin: 0 10px;
+				// 		background: #f3f3f3;
+				// 		border-radius: 50%;
+				// 		transition: 0.5s ease;
+				// 		cursor: pointer;
+				// 		&:hover {
+				// 			background-color: #ffd23f;
+				// 		}
+				// 	}
 	
-					.payementResuslt {
-						padding-left: 10px;
-						font-size: 1rem;
-						.payment {
-							font-size: 1rem;
-							font-weight: 500;
-						}
-					}
-				}
+				// 	.payementResuslt {
+				// 		text-align: center;
+				// 		border-left: 1px solid #777777;
+				// 		padding-left: 20px;
+				// 		font-size: 1.2rem;
+				// 		.payment {
+				// 			display: block;
+				// 			font-size: 1.4rem;
+				// 			font-weight: 600;
+				// 			color: #323232;
+				// 		}
+				// 	}
+				// 	.activeMonth {
+				// 		background: #323232;
+				// 		color: white;
+				// 	}
+				// }
+	
 				.btnGroup {
-					justify-content: space-between;
-					// flex-wrap: wrap;
-					gap: .7rem;
+					// display: flex;
+					// justify-content: space-between;
+					// align-items: center;
+					// gap: 20px;
 					.basketBtn,
 					.oneClickByBtn,
 					.callBtn {
-						font-size: .7rem;
-						height: 35px;
-						padding: 0 1rem;
+						font-size: 1rem;
+						// height: 50px;
+						padding: 0 .5rem;
+						// border-radius: 50px;
+						// display: flex;
+						// justify-content: center;
+						// align-items: center;
+						// background-color: transparent;
+						// cursor: pointer;
+						// transition: 0.5s ease;
+						// border: 1px solid #ffd23f;
+						svg {
+							margin-left: 5px;
+							height: 15px;
+						}
 					}
-					
+					// .basketBtn {
+					// 	background-color: #ffc505;
+					// 	white-space: nowrap;
+					// 	width: 40%;
+					// }
+					// .prBasket {
+					// 	background-color: rgb(49, 48, 48);
+					// 	color: white;
+					// 	border: 1px solid rgb(49, 48, 48);
+					// }
+					// .callBtn{
+					// 	width: 30%;
+					// }
+					// .oneClickByBtn{
+					// 	width: 30%;
+					// }
+					// .callBtn,
+					// .oneClickByBtn {
+					// 	font-size: 1rem;
+					// 	white-space: nowrap;
+					// 	&:hover {
+					// 		background-color: #ffd23f;
+					// 	}
+					// 	svg{
+					// 		margin-right: 10px;
+					// 	}
+					// }
 				}
+	
 				// .billboard {
+				// 	margin: 15px auto 0;
+				// 	height: 170px;
 				// 	width: 100%;
-				// 	height: 100px;
+				// 	border-radius: 7px;
+				// 	border: 1px solid rgb(105, 105, 105);
+				// 	video{
+				// 		width: 100%;
+				// 		height: 100%;
+				// 		object-fit: cover;
+				// 		border-radius: 7px;
+				// 	}
 				// }
-				
 			}
 		}
 	}
@@ -475,6 +779,7 @@
 		margin-top: 30px;
 		.prImgAndPrInfo {
 			flex-direction: column;
+			align-items: center;
 			.prInfoWrapper {
 				width:96%;	
 				margin-top: 1rem;
@@ -501,11 +806,17 @@
 				     flex-direction: column;
 					 align-items: flex-start;
 					 	.paymentCartSlider {
+							
 						.creditCartSlider {
 							.BirKart,
 							.TamKart {
-								padding: 5px 0;}}}
+								padding: 5px 0;
+								.content {
+									font-size: 1rem;
+									font-weight: 500;
+								}}}}
 					.paymentCartInfo {
+						flex-direction: column;
 						.title {
 							font-size: 1rem;
 						}
@@ -514,6 +825,7 @@
 						}
 					}
 				}
+				
 				.paymentMonths {
 					margin: 20px 0;
 					padding: 4px 8px;
@@ -531,21 +843,20 @@
 					}
 				}
 				.btnGroup {
-					gap: .7rem;
-					flex-wrap: wrap;
 					.basketBtn,
 					.oneClickByBtn,
 					.callBtn {
-						font-size: 1rem;
+						font-size: 12px;
 						height: 35px;
-						padding: 0 1rem;
-						width: 100px;
+						padding: 0 3px;
+						width: 32%;
 					}
-					
+					.callBtn{
+						padding-right: 12px;
+					}
 				}
 				.billboard {
-					width: 270px;
-					// height: 100px;
+					width: 100%;
 				}
 				
 			}

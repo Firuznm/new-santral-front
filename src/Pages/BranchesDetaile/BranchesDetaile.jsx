@@ -15,7 +15,7 @@ import HelmetAsync from '../../components/HelmetAsync/HelmetAsync';
         iconUrl: markerIcon,
         iconSize: [50, 90],
     });
-
+  
 export default function BranchesDetaile() {
 	const [branchDetailData, setBranchDetailData] = useState();
 	const navigate = useNavigate();

@@ -49,7 +49,7 @@ console.log("branches all data=", branchesAllDatas);
 
 	return (
 		<>
-			<HelmetAsync title={"Filiallar"}/>
+			<HelmetAsync title={'Filiallar'} />
 			<section id={style.branchesPage}>
 				<div className="container">
 					<div className={style.branchesAndMap}>
@@ -69,7 +69,7 @@ console.log("branches all data=", branchesAllDatas);
 										{branch?.address}
 										<span
 											onClick={() => onClickMarketAddress(branch)}
-											className={`${style.locationBtn} ${
+											className={`${style.locationBtnWeb} ${
 												activeBranchIndex === branch.id
 													? style.activeIndex
 													: ''
@@ -77,6 +77,14 @@ console.log("branches all data=", branchesAllDatas);
 										>
 											Xəritədə bax
 										</span>
+										<a
+											className={style.locationBtnMobile}
+											href={`https://www.google.com/maps?q=${branch.lat},${branch.lng}`}
+											target="_blank"
+											rel="noopener noreferrer"
+										>
+											Xəritədə bax
+										</a>
 									</div>
 								</div>
 							))}

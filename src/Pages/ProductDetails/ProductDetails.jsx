@@ -16,10 +16,8 @@ import birbankKartImg from '../../assets/Images/birbank.png';
 import tamKartImg from '../../assets/Images/tamkart.jfif';
 import BasketIcon from '../../assets/Icons/BasketIcon';
 import HeaderPhoneIcon from '../../assets/Icons/HeaderPhoneIcon';
-import TruckAnimation from '../../components/TruckAnimation/TruckAnimation';
 import santral from '../../Helpers/Helpers';
 import urls from '../../ApiUrls/Urls';
-// import ProductCartSlider from '../../components/ProductCartSlider/ProductCartSlider';
 import whatsappImg from '../../assets/Images/whatsapp.png';
 import instagramImg from '../../assets/Images/instagram.png';
 import facebookImg from '../../assets/Images/facebook.png';
@@ -194,7 +192,7 @@ export default function ProductDetails() {
 
 	return (
 		<>
-			<HelmetAsync title={prDetailsData?.title}/>
+			<HelmetAsync title={prDetailsData?.title} />
 			<section id={style.prDetailsWrapper}>
 				<div style={{ paddingTop: '1rem' }} className="container">
 					{/* bir kliklə al modali */}
@@ -245,10 +243,6 @@ export default function ProductDetails() {
 						</div>
 					</div>
 					<div className={style.prImgAndPrInfo}>
-						{/* pulsuz catdirilma animasiyasi masinin hərəkəti */}
-						<div className={style.delivery}>
-							<TruckAnimation />
-						</div>
 						{/* məhsulun səkillərinin slider- i (sag tərəf) */}
 						<PrDetailsPagePrImgSlider
 							prDetailsData={prDetailsData}
@@ -400,7 +394,7 @@ export default function ProductDetails() {
 							{!bpUser && (
 								<div className={style.paymentCartInfoAndSlider}>
 									<div className={style.paymentCartInfo}>
-										<h5 className={style.title}>Hissə-hissə alış</h5>
+										<h5 className={style.title}>Hissə-hissə alış :</h5>
 										<p className={style.info}>
 											Şərtlər endirimsiz qiymətə tətbiq olunur
 										</p>

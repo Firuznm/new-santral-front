@@ -19,8 +19,8 @@ export default function PrDetailsPagePrImgSlider({ prDetailsData, discountRate }
 			{prDetailsData.oldPrice > 0 && (
 				<div className={style.discountRate}>-{discountRate}%</div>
 			)}
-
-			<Swiper
+			<div className={style.advertisingBanner}> reklam olacaq </div>
+			<Swiper 
 				style={{
 					'--swiper-navigation-color': 'gold',
 				}}
