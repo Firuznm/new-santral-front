@@ -3,21 +3,43 @@ import Input from "../../components/Input/Input";
 import style from "./ForgotYourPassword.module.scss"
 import * as Yup from 'yup';
 import ButtonAndArrow from "../../components/ButtonAndArrow/ButtonAndArrow";
+import santral from "../../Helpers/Helpers";
+import urls from "../../ApiUrls/Urls";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "sweetalert2";
   
 export default function ForgotYourPassword() {
 
-       const {values,handleChange,handleSubmit,resetForm, errors}= useFormik({
-            initialValues: {
-              email: ''
-            },
-            validationSchema:Yup.object().shape({
-                email:Yup.string().email("Doğru email unvanı daxil edin").required("Emila ünvanını doldurun"),
-            }),
-            onSubmit: values => {
-              alert("istifadekinin melumatlari= " + JSON.stringify(values, null, 2));
-            resetForm()
-            },
-          });
+       const { values, handleChange, handleSubmit, resetForm, errors } = useFormik({
+			initialValues: {
+				email: '',
+			},
+			validationSchema: Yup.object().shape({
+				email: Yup.string()
+					.email('Doğru email unvanı daxil edin')
+					.required('Emila ünvanını doldurun'),
+			}),
+
+			onSubmit: async (values) => {
+				try {
+          await santral.api().post(urls.forgotYourPassword, JSON.stringify(values));
+					const MySwal = withReactContent(Swal);
+					MySwal.fire({
+						title: <strong>{'Daxil etdiyiniz məlumatlar göndərildi'}</strong>,
+						html: <i>{'Təşəkkür edirik'}</i>,
+						icon: 'success',
+					});
+					resetForm();
+				} catch (error) {
+					console.log(error);
+					  Swal.fire({
+                      icon: 'error',
+                      title: 'Oops...',
+                      text: 'Xəta baş verdi !!!',
+                    });
+				}
+			},
+		});
 
           const ForgotYourPasswordInpData={
             id:1,
@@ -41,6 +63,6 @@ export default function ForgotYourPassword() {
       <ButtonAndArrow title={"Göndər"}/>
       </form>
     </div>
-    </div>
+    </div>  
   )
 }

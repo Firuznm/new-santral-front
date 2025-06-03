@@ -35,7 +35,7 @@ export default function ChangePassword() {
 			onSubmit: async (values) => {
 				try {
 					await santral.api().post(urls.changePassword, JSON.stringify(values));
-					const MySwal = withReactContent(Swal);
+					const MySwal = withReactContent(Swal); 
 					MySwal.fire({
 						title: <strong>{'Şifrəniz dəyişdirildi'}</strong>,
 						html: <i>{'Təşəkkür edirik'}</i>,

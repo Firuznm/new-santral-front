@@ -107,7 +107,7 @@ export default function Footer() {
 					<div className={style.footerForCustomer}>
 						<h4 className={style.footerPartTitle}>Müştəri üçün</h4>
 						{OurAdvantagesMiniPageData.map((item) => (
-							<NavLink to={item.slug} key={item.id}>
+							<NavLink  key={item.id}>
 								{item.title}
 							</NavLink>
 						))}

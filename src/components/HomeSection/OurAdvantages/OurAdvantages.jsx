@@ -5,14 +5,14 @@ import { Link } from "react-router-dom";
 
 
 export default function OurAdvantages() {
-  return (
+  return ( 
 		<section id={style.OurAdvantages}>
 			<div className={style.OurAdvantagesTitle}>
 				<SectionTitle title={'Üstünlüklərimiz'} />
 			</div>
 			<div className={style.OurAdvantagesCartWrapper}>
 				{OurAdvantagesMiniPageData.map((item) => (
-					<Link to={item.slug} key={item.id} className={style.OurAdvantagesCart}>
+					<Link  key={item.id} className={style.OurAdvantagesCart}>
 						<img src={item.icon} />
 						<div className={style.titleDescription}>
 							<h4 className={style.title}>{item.title}</h4>

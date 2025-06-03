@@ -154,7 +154,7 @@ export default function ProductCart({ data }) {
 			<span
 				onClick={() => dispatch(toggleFavoriteItem(data))}
 				className={`${style.heartIcon} ${
-					isFavorite ? style.prInFavoriteItems : ''
+					isFavorite ? style.prInFavoriteItems : ''   
 				}`}
 			>
 				{isFavorite ? <FullRedHeartIcon /> : <HeartIcon color={'black'} />}
@@ -226,6 +226,6 @@ export default function ProductCart({ data }) {
 					</div>
 				)}
 			</div>
-		</div>
+		</div>   
 	);
 }

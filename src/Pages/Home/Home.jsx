@@ -5,17 +5,17 @@ import HomeSeasonOffers from '../../components/HomeSection/HomeSeasonOffers/Home
 import HomeBanner from '../../components/HomeSection/HomeBanner/HomeBanner';
 import santral from '../../Helpers/Helpers';
 import urls from '../../ApiUrls/Urls';
-import NewsCart from '../../components/NewsCart/NewsCart';
+// import NewsCart from '../../components/NewsCart/NewsCart';
 import HomePartners from '../../components/HomeSection/HomeParners/HomePartners';
-import HomeNews from '../../components/HomeSection/HomeNews/HomeNews';
+// import HomeNews from '../../components/HomeSection/HomeNews/HomeNews';
 import HomeBrands from '../../components/HomeSection/HomeBrands/HomeBrands';
 import HomeMainSlider from '../../components/HomeSection/HomeMainSlider/HomeMainSlider';
 import HomeNewComers from '../../components/HomeSection/HomeNewComers/HomeNewComers';
 import OurAdvantages from '../../components/HomeSection/OurAdvantages/OurAdvantages';
 import HomeDiscountedProducts from '../../components/HomeSection/HomeDiscountedProducts/HomeDiscountedProducts';
-import Input from '../../components/Input/Input';
-import { useSelector } from 'react-redux';
-import { useSearch } from '../../context/SearchContext';
+// import Input from '../../components/Input/Input';
+// import { useSelector } from 'react-redux';
+// import { useSearch } from '../../context/SearchContext';
 // import ProductCartNew from "../../components/ProductCartNew/ProductCartNew";
 
 export default function Home() {

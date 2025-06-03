@@ -33,7 +33,7 @@ export default function Login() {
 						html: <i>{'Təşəkkür edirik'}</i>,
 						icon: 'success',
 					});
-					resetForm();
+					resetForm();  
 					navigate('/');
 				} else {
 					await MySwal.fire({

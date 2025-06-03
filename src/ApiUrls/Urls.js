@@ -20,10 +20,11 @@ const urls = {
 	register: '/v1/auth/signup',
 	login: '/v1/auth/login',
 	authMe: '/v1/auth/me',
-	userPhoto: '/v1/file/upload/photo',
+	userPhoto: '/v1/file/upload/photo',   
 	userPersonalInfo: '/v1/auth/profile',
 	userAddressCreate: "/v1/customers/address/create",
 	userAddressData: "/v1/customers/address/",
+	forgotYourPassword:"/v1/auth/remind-me",
 	deletedUserAddress: (id) => `/v1/customers/address/delete/${id}`,
 	myOrdersPage: (pageNum) => `/v1/orders/history?page=${pageNum}&lang=az`,
 	changePassword: "/v1/auth/changepassword",  //-- qosulmuyub

@@ -57,6 +57,9 @@ export default function ProductDetails() {
 	const prInApiBasket = apiBaskets?.some((product) => product.id === prDetailsData.id);
 	const prIsInBasket = isLogin ? prInApiBasket : prInLocalBasket;
 
+	console.log("pr detail data=", prDetailsData);
+	
+
 	const decrement = () => {
 		if (count > 1) {
 			setCount(count - 1);
@@ -390,7 +393,7 @@ export default function ProductDetails() {
 									)}
 								</div>
 							</div>
-							<hr className={style.line} />
+							<hr className={style.line} />  
 							{!bpUser && (
 								<div className={style.paymentCartInfoAndSlider}>
 									<div className={style.paymentCartInfo}>
@@ -466,15 +469,14 @@ export default function ProductDetails() {
 								</div>
 							)}
 							<div className={style.btnGroup}>
-								<button
+								{prDetailsData.price !== 0 && <button
 									onClick={handlePrAddBasket}
-									className={`${style.basketBtn} ${
-										prIsInBasket ? style.prBasket : ''
-									}`}
+									className={`${style.basketBtn} ${prIsInBasket ? style.prBasket : ''
+										}`}
 								>
 									{prIsInBasket ? 'Səbətdədir' : 'Səbətə at'}
 									{prIsInBasket ? <BasketIcon /> : <BasketIconBlack />}
-								</button>
+								</button>}
 								<button
 									onClick={handleBuyModal}
 									className={style.oneClickByBtn}
