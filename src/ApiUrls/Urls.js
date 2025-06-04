@@ -1,6 +1,6 @@
 
 const urls = {
-	homeMainSlider: '/v1/sliders/main/published?page=1&lang=az',
+	homeMainSliderLeft: '/v1/sliders/main/published?page=1&lang=az',
 	homeDiscounted: '/v1/sliders/bottom/published?page=1&lang=az',
 	homePartners: '/v1/partners/',
 	homeBrands: '/v1/brands/published?lang=az',

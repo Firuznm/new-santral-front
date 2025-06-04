@@ -20,7 +20,7 @@ import HomeDiscountedProducts from '../../components/HomeSection/HomeDiscountedP
 
 export default function Home() {
 	const [homeDiscountedDatas, setHomeDiscountedDatas] = useState([]);
-	const [homeMainSliderDatas, setHomeMainSliderDatas] = useState([]);
+	const [homeMainSliderLeftDatas, setHomeMainSliderLeftDatas] = useState([]);
 	const [homeBrandsData, setHomeBrandsData] = useState([]);
 	const [homePartnersData, setHomePartnersData] = useState();
 	const [categoryDatas, setCategoryDatas] = useState([]);
@@ -31,7 +31,7 @@ export default function Home() {
 	const getHomeAllData = async () => {
 		try {
 			const [
-				homeMainSlider,
+				homeMainSliderLeft,
 				homeDiscountedDatas,
 				homePartnersData,
 				homeBrandsData,
@@ -40,7 +40,7 @@ export default function Home() {
 				homeNews,
 				homeSeasonOffersData,
 			] = await Promise.all([
-				santral.api().post(urls.homeMainSlider),
+				santral.api().post(urls.homeMainSliderLeft),
 				santral.api().post(urls.homeDiscounted),
 				santral.api().post(urls.homePartners),
 				santral.api().post(urls.homeBrands),
@@ -49,7 +49,7 @@ export default function Home() {
 				santral.api().post(urls.news),
 				santral.api().post(urls.homeSeasonOffers),
 			]);
-			setHomeMainSliderDatas(homeMainSlider.data.data);
+			setHomeMainSliderLeftDatas(homeMainSliderLeft.data.data);
 			setHomeDiscountedDatas(homeDiscountedDatas.data.data);
 			setHomePartnersData(homePartnersData.data.data);
 			setHomeBrandsData(homeBrandsData.data.data);
@@ -66,9 +66,10 @@ export default function Home() {
 		getHomeAllData();
 	}, []);
 
+
 	return (
 		<div className="container">
-			<HomeMainSlider />
+			<HomeMainSlider leftData={homeMainSliderLeftDatas} rightData={homeBannersData} />
 			<HomeDiscountedProducts discountData={homeDiscountedDatas} />
 			<HomeBanner data={homeBannersData} />
 

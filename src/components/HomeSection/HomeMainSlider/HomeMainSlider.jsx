@@ -5,29 +5,30 @@ import 'swiper/css/navigation';
 import 'swiper/css/effect-fade';
 import { Autoplay, Navigation, EffectFade } from 'swiper/modules';
 import { Link } from 'react-router-dom';
-import { mainSliderLeftData } from '../../../MyDatas/MyDatas';
 import mainSliderRightTopImg from "../../../assets/Images/Comp-1_1.gif"
 import mainSliderBottomRightImg from "../../../assets/Images/mainSliderBottomRight.jpg"
 import mainSliderBottomLeftImg from "../../../assets/Images/mainSliderBottomLeft.jpg"
+import santral from '../../../Helpers/Helpers';
 
-export default function HomeMainSlider() {
-
+export default function HomeMainSlider({ leftData, rightData }) {
+	console.log('left data=', leftData);
+	console.log('right data=', rightData);
 	return (
 		<div id={styles.homeMainSliderWrapper}>
 			<div className={styles.mainSlider}>
 				<Swiper
 					spaceBetween={20}
-					effect={'fade'} 
-					// autoplay={{
-					// 	delay: 1500,
-					// }}
+					effect={'fade'}
+					autoplay={{
+						delay: 1500,
+					}}
 					modules={[Autoplay, Navigation, EffectFade]}
 					className={styles.mainSliderLeft}
 				>
-					{mainSliderLeftData.map((item) => (
+					{leftData?.map((item) => (
 						<SwiperSlide key={item.id}>
-							<Link to="/braches">
-								<img src={item.img} />
+							<Link to={`${item.route ? item.route : ''}`}>
+								<img src={`${santral.baseUrlImage}${item.image}`} />
 							</Link>
 						</SwiperSlide>
 					))}
